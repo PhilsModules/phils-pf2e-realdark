@@ -80,7 +80,7 @@
 }
 
 /* Chat Buttons - Softened */
-body.realdark-theme-active .chat-message button {
+html body .chat-message button {
     background: var(--realdark-input-bg) !important;
     color: var(--realdark-gold) !important;
     border: 1px solid rgba(130, 130, 130, 0.2) !important;
@@ -88,7 +88,7 @@ body.realdark-theme-active .chat-message button {
     box-shadow: none !important;
 }
 
-body.realdark-theme-active .chat-message button:hover {
+html body .chat-message button:hover {
     background: var(--realdark-gold-dim) !important;
     color: #000 !important;
     text-shadow: none !important;
@@ -139,7 +139,8 @@ body.realdark-theme-active .chat-message button:hover {
 /* ======================================================================== */
 
 /* Target Chat Messages - SOFTENED */
-body.realdark-theme-active .chat-message {
+/* Target Chat Messages - SOFTENED */
+html body .chat-message {
     background: rgba(10, 10, 10, 0.95) !important;
     background-image: none !important;
     backdrop-filter: blur(5px);
@@ -150,14 +151,14 @@ body.realdark-theme-active .chat-message {
 }
 
 /* Chat Buttons */
-body.realdark-theme-active .chat-message button {
+html body .chat-message button {
     background: var(--realdark-input-bg) !important;
     color: var(--realdark-gold) !important;
     border: 1px solid rgba(130, 130, 130, 0.2) !important;
     box-shadow: none !important;
 }
 
-body.realdark-theme-active .chat-message button:hover {
+html body .chat-message button:hover {
     background: var(--realdark-gold-dim) !important;
     color: #000 !important;
     text-shadow: none !important;
@@ -166,36 +167,39 @@ body.realdark-theme-active .chat-message button:hover {
 }
 
 /* Chat Header */
-body.realdark-theme-active .chat-message .message-header {
+/* Chat Header */
+html body .chat-message .message-header {
     color: var(--realdark-gold-dim) !important;
     border-bottom: 1px solid rgba(130, 130, 130, 0.2);
 }
 
-body.realdark-theme-active .chat-message .message-sender {
+html body .chat-message .message-sender {
     color: var(--realdark-gold) !important;
     text-shadow: 0 0 2px black;
 }
 
-body.realdark-theme-active .chat-message .message-metadata {
+html body .chat-message .message-metadata {
     color: #888 !important;
 }
 
 /* Chat Content & Rolls */
-body.realdark-theme-active .chat-message .message-content,
-body.realdark-theme-active .chat-message .card-content {
+/* Chat Content & Rolls */
+html body .chat-message .message-content,
+html body .chat-message .card-content {
     color: var(--realdark-text-light) !important;
 }
 
 /* Dice Rolls */
-body.realdark-theme-active .chat-message .dice-roll .dice-total {
+/* Dice Rolls */
+html body .chat-message .dice-roll .dice-total {
     background: var(--realdark-input-bg) !important;
     color: var(--realdark-gold) !important;
     border: 1px solid rgba(130, 130, 130, 0.2);
     text-shadow: 0 0 5px black;
 }
 
-body.realdark-theme-active .chat-message .dice-roll .dice-formula,
-body.realdark-theme-active .chat-message .dice-roll .dice-tooltip {
+html body .chat-message .dice-roll .dice-formula,
+html body .chat-message .dice-roll .dice-tooltip {
     background: var(--realdark-input-bg) !important;
     color: var(--realdark-gold) !important;
     border: 1px solid rgba(130, 130, 130, 0.2);
@@ -203,19 +207,67 @@ body.realdark-theme-active .chat-message .dice-roll .dice-tooltip {
 }
 
 /* Remove flavor backgrounds */
-body.realdark-theme-active .chat-message .flavor-text,
-body.realdark-theme-active .chat-message .tags .tag {
+/* Remove flavor backgrounds */
+html body .chat-message .flavor-text,
+html body .chat-message .tags .tag,
+html body .chat-message p span,
+html body .chat-message div span[style*="background"] {
     background: transparent !important;
+    background-color: transparent !important;
     color: var(--realdark-gold) !important;
+    border-color: rgba(130, 130, 130, 0.2) !important;
 }
 
 /* Fix Inner Chat Card Headers (Black text issue) */
-body.realdark-theme-active .chat-message header,
-body.realdark-theme-active .chat-message h3,
-body.realdark-theme-active .chat-message h4,
-body.realdark-theme-active .chat-message .card-header h3 {
+/* Fix Inner Chat Card Headers (Black text issue) */
+html body .chat-message header,
+html body .chat-message h3,
+html body .chat-message h4,
+html body .chat-message .card-header h3 {
     color: var(--realdark-gold) !important;
     text-shadow: 0 0 2px black !important;
+}
+
+/* FIX INLINE ROLLS & LINKS (Bright Spots) */
+html body .chat-message a.inline-roll,
+html body .chat-message a.inline-check,
+html body .chat-message a.content-link,
+html body .chat-message a.entity-link,
+html body .chat-message span.damage-roll,
+html body .chat-message button[data-action] {
+    background: var(--realdark-input-bg) !important;
+    background-color: var(--realdark-input-bg) !important;
+    color: var(--realdark-gold) !important;
+    border: 1px solid rgba(130, 130, 130, 0.3) !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    border-radius: 3px;
+    padding: 1px 4px;
+}
+
+/* NUCLEAR FIX FOR NESTED SPANS INSIDE INLINE ROLLS */
+html body .chat-message a.inline-roll *,
+html body .chat-message a.inline-check *,
+html body .chat-message a.content-link *,
+html body .chat-message a.entity-link *,
+html body .chat-message button[data-action] *,
+html body .chat-message p span *,
+html body .chat-message div span[style*="background"] * {
+    background: transparent !important;
+    color: inherit !important;
+    text-shadow: inherit !important;
+    box-shadow: none !important;
+}
+
+html body .chat-message a.inline-roll:hover,
+html body .chat-message a.inline-check:hover,
+html body .chat-message a.content-link:hover,
+html body .chat-message a.entity-link:hover,
+html body .chat-message button[data-action]:hover {
+    background: var(--realdark-gold-dim) !important;
+    color: #000 !important;
+    text-shadow: none !important;
+    border-color: var(--realdark-gold) !important;
 }
 
 /* ======================================================================== */
