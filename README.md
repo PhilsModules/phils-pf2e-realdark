@@ -16,7 +16,7 @@
 
 <br>
 
-<img src="https://raw.githubusercontent.com/PhilsModules/phils-pf2e-realdark/main/assets/preview_main.png" alt="RealDark Preview" width="400">
+<img src="https://raw.githubusercontent.com/PhilsModules/phils-pf2e-realdark/main/assets/preview_main.png" alt="RealDark Preview" width="600">
 
 </div>
 
@@ -85,5 +85,6 @@ Phil's PF2e RealDark ist eine umfassende Design-Überarbeitung für das Pathfind
     <br><br>
     <p><i>Made with ❤️ for the Foundry VTT Community</i></p>
 </div>
+
 
 
