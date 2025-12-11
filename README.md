@@ -3,6 +3,7 @@
 # Phil's PF2e RealDark
 
 ![Foundry v12 Compatible](https://img.shields.io/badge/Foundry-v12-green)
+![Foundry v13 Compatible](https://img.shields.io/badge/Foundry-v13-brightgreen)
 ![System](https://img.shields.io/badge/System-PF2e-blue)
 ![License](https://img.shields.io/badge/License-GPLv3-blue)
 [![Version](https://img.shields.io/badge/Version-1.0.0-orange)](https://github.com/PhilsModules/phils-pf2e-realdark/releases)
@@ -37,6 +38,17 @@ Phil's PF2e RealDark is a comprehensive theme overhaul for the Pathfinder 2e sys
 *   **🔧 Deep Customization**: Tweak primary colors, accent colors, sidebar opacity, and input field darkness to your detailed preferences.
 *   **📜 Journal Fixes**: Eliminates the "white flash" when opening journals and ensures consistent dark backgrounds for all text content.
 
+## 📦 Installation
+
+1.  Open Foundry VTT.
+2.  Go to **Add-on Modules**.
+3.  Click **Install Module**.
+4.  Paste the following **Manifest URL** at the bottom:
+    ```text
+    https://github.com/PhilsModules/phils-pf2e-realdark/releases/latest/download/module.json
+    ```
+5.  Click **Install**.
+
 ## 📖 How to Use
 
 1.  **Open Config**: Go to `Game Settings` -> `Phil's PF2e RealDark` -> `Theme Configuration`.
@@ -64,6 +76,17 @@ Phil's PF2e RealDark ist eine umfassende Design-Überarbeitung für das Pathfind
 *   **🔧 Tiefgreifende Anpassung**: Stelle Primärfarben, Akzentfarben, Sidebar-Transparenz und die Dunkelheit der Eingabefelder genau nach deinen Wünschen ein.
 *   **📜 Journal Fixes**: Eliminiert das "weiße Aufblitzen" beim Öffnen von Journalen und sorgt für konsistent dunkle Hintergründe.
 
+## 📦 Installation
+
+1.  Öffne Foundry VTT.
+2.  Gehe zum Reiter **Add-on Modules**.
+3.  Klicke auf **Install Module**.
+4.  Füge die folgende **Manifest URL** unten ein:
+    ```text
+    https://github.com/PhilsModules/phils-pf2e-realdark/releases/latest/download/module.json
+    ```
+5.  Klicke auf **Install**.
+
 ## 📖 Bedienung
 
 1.  **Konfiguration öffnen**: Gehe zu `Einstellungen` -> `Phil's PF2e RealDark` -> `Theme Konfiguration`.
@@ -85,6 +108,3 @@ Phil's PF2e RealDark ist eine umfassende Design-Überarbeitung für das Pathfind
     <br><br>
     <p><i>Made with ❤️ for the Foundry VTT Community</i></p>
 </div>
-
-
-
