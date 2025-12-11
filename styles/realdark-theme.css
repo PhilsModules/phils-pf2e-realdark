@@ -318,10 +318,10 @@ body.realdark-theme-active .chat-message .card-header h3 {
 
 /* 1. SHIELDS (AC, HP, ETC) */
 /* Targeted removal of shield-red.webp, shield-blue.webp, etc. */
-.armor-class .shield .shield-plate,
-.hit-points .hp-section .hp-value,
-.defense-list .defense .defense-value,
-.pf2e.sheet.character .window-content .sheet-body .sheet-content .tab[data-tab='character'] .health-section .hp-value {
+.window-app.realdark-theme-window .armor-class .shield .shield-plate,
+.window-app.realdark-theme-window .hit-points .hp-section .hp-value,
+.window-app.realdark-theme-window .defense-list .defense .defense-value,
+.window-app.realdark-theme-window .pf2e.sheet.character .window-content .sheet-body .sheet-content .tab[data-tab='character'] .health-section .hp-value {
     background-image: none !important;
     background: rgba(0, 0, 0, 0.4) !important;
     border: 2px solid var(--realdark-red-bright) !important;
@@ -331,7 +331,7 @@ body.realdark-theme-active .chat-message .card-header h3 {
 }
 
 /* Fix text alignment and shape for the new 'Digital Shield' */
-.armor-class .shield .shield-plate {
+.window-app.realdark-theme-window .armor-class .shield .shield-plate {
     width: 100% !important;
     height: 100% !important;
     display: flex;
@@ -341,8 +341,8 @@ body.realdark-theme-active .chat-message .card-header h3 {
 
 /* 2. NAVIGATION TABS */
 /* Removing nav-item.webp and nav-item-inactive.webp */
-.sheet-navigation .item,
-nav.sheet-tabs .item {
+.window-app.realdark-theme-window .sheet-navigation .item,
+.window-app.realdark-theme-window nav.sheet-tabs .item {
     background-image: none !important;
     background: transparent !important;
     border: none !important;
@@ -352,8 +352,8 @@ nav.sheet-tabs .item {
     padding: 5px 10px !important;
 }
 
-.sheet-navigation .item.active,
-nav.sheet-tabs .item.active {
+.window-app.realdark-theme-window .sheet-navigation .item.active,
+.window-app.realdark-theme-window nav.sheet-tabs .item.active {
     background-image: none !important;
     border-bottom: 2px solid var(--realdark-gold) !important;
     color: var(--realdark-gold) !important;
@@ -361,18 +361,18 @@ nav.sheet-tabs .item.active {
     box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.5);
 }
 
-.sheet-navigation .item:hover,
-nav.sheet-tabs .item:hover {
+.window-app.realdark-theme-window .sheet-navigation .item:hover,
+.window-app.realdark-theme-window nav.sheet-tabs .item:hover {
     color: #fff !important;
     text-shadow: 0 0 5px #fff;
 }
 
 /* 3. HEADERS & BANNERS */
 /* Removing header.webp, banner-bg.webp */
-header .frame,
-.sheet-header,
-.summary-header,
-.tab[data-tab='actions'] .actions-container .actions-header {
+.window-app.realdark-theme-window header .frame,
+.window-app.realdark-theme-window .sheet-header,
+.window-app.realdark-theme-window .summary-header,
+.window-app.realdark-theme-window .tab[data-tab='actions'] .actions-container .actions-header {
     background-image: none !important;
     background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.6), transparent) !important;
     border-bottom: 1px solid var(--realdark-gold-dim) !important;
@@ -380,27 +380,27 @@ header .frame,
 
 /* 4. DECORATIONS */
 /* Hiding miscellaneous textures clearly */
-.sidebar_top,
-.sidebar_bottom,
-.accent-decoration,
-.corner-box,
-[src*='accent-decoration.webp'],
-[src*='corner-box.webp'],
-[style*='corner-box.webp'] {
+.window-app.realdark-theme-window .sidebar_top,
+.window-app.realdark-theme-window .sidebar_bottom,
+.window-app.realdark-theme-window .accent-decoration,
+.window-app.realdark-theme-window .corner-box,
+.window-app.realdark-theme-window [src*='accent-decoration.webp'],
+.window-app.realdark-theme-window [src*='corner-box.webp'],
+.window-app.realdark-theme-window [style*='corner-box.webp'] {
     display: none !important;
 }
 
 /* 5. SIDEBAR CLEANUP - SUPER SPECIFIC TARGETING */
-.sidebar::before,
-.sidebar::after,
-aside.sidebar::before,
-aside.sidebar::after,
-.crb-style aside::before,
-.crb-style aside::after,
-form.crb-style aside::before,
-form.crb-style aside::after,
-.crb-style .sidebar::before,
-.crb-style .sidebar::after,
+.window-app.realdark-theme-window .sidebar::before,
+.window-app.realdark-theme-window .sidebar::after,
+.window-app.realdark-theme-window aside.sidebar::before,
+.window-app.realdark-theme-window aside.sidebar::after,
+.window-app.realdark-theme-window .crb-style aside::before,
+.window-app.realdark-theme-window .crb-style aside::after,
+.window-app.realdark-theme-window form.crb-style aside::before,
+.window-app.realdark-theme-window form.crb-style aside::after,
+.window-app.realdark-theme-window .crb-style .sidebar::before,
+.window-app.realdark-theme-window .crb-style .sidebar::after,
 /* Target Specific System Path (0,6,1 vs 0,5,2) */
 .window-app.realdark-theme-window.actor.sheet.character .crb-style aside,
 .window-app.realdark-theme-window.actor.sheet.character .crb-style .sidebar {
@@ -412,17 +412,19 @@ form.crb-style aside::after,
 
 /* 6. INPUT UNDERLINES */
 /* Remove the 'stroke.svg' underlines if they exist as images */
-input {
+/* 6. INPUT UNDERLINES */
+/* Remove the 'stroke.svg' underlines if they exist as images */
+.window-app.realdark-theme-window input {
     background-image: none !important;
 }
 
 /* 7. LOGO REPLACEMENT */
 /* Swap Pathfinder Logo with Custom Module Logo */
 /* Swap Pathfinder Logo with Custom Module Logo */
-.sheet-header .logo:not(.realdark-logo),
-header .logo:not(.realdark-logo),
-header img[src*="Pathfinder"]:not(.realdark-logo),
-header img[src*="logo"]:not(.realdark-logo) {
+.window-app.realdark-theme-window .sheet-header .logo:not(.realdark-logo),
+.window-app.realdark-theme-window header .logo:not(.realdark-logo),
+.window-app.realdark-theme-window header img[src*="Pathfinder"]:not(.realdark-logo),
+.window-app.realdark-theme-window header img[src*="logo"]:not(.realdark-logo) {
     display: none !important;
     opacity: 0 !important;
     visibility: hidden !important;
@@ -444,7 +446,8 @@ header img[src*="logo"]:not(.realdark-logo) {
 }
 
 /* Ensure Charname image is NOT hidden if it was caught before (likely token art) */
-.charname img {
+/* Ensure Charname image is NOT hidden if it was caught before (likely token art) */
+.window-app.realdark-theme-window .charname img {
     display: block !important;
     opacity: 1 !important;
     visibility: visible !important;
@@ -455,13 +458,14 @@ header img[src*="logo"]:not(.realdark-logo) {
 /* Removed aggressive sidebar image hiding */
 
 /* Targeted Background Elements that might be masquerading as content */
-.sidebar_top,
-.sidebar_bottom,
-.sheet-sidebar .sidebar_top,
-.sheet-sidebar .sidebar_bottom,
-aside.sidebar .sidebar_top,
-aside.sidebar .sidebar_bottom,
-[style*="red_sidebar"] {
+/* Targeted Background Elements that might be masquerading as content */
+.window-app.realdark-theme-window .sidebar_top,
+.window-app.realdark-theme-window .sidebar_bottom,
+.window-app.realdark-theme-window .sheet-sidebar .sidebar_top,
+.window-app.realdark-theme-window .sheet-sidebar .sidebar_bottom,
+.window-app.realdark-theme-window aside.sidebar .sidebar_top,
+.window-app.realdark-theme-window aside.sidebar .sidebar_bottom,
+.window-app.realdark-theme-window [style*="red_sidebar"] {
     display: none !important;
     background: none !important;
     width: 0 !important;
@@ -471,11 +475,12 @@ aside.sidebar .sidebar_bottom,
 }
 
 /* Ensure Logo Area Collapse */
-header h1 {
+/* Ensure Logo Area Collapse */
+.window-app.realdark-theme-window header h1 {
     background: transparent !important;
 }
 
-.charname {
+.window-app.realdark-theme-window .charname {
     margin: 0 !important;
 }
 
@@ -485,20 +490,20 @@ header h1 {
 /* ======================================================================== */
 
 /* 1. Sidebar & Backgrounds */
-[src*='blue_sidebar_top.webp'],
-[style*='blue_sidebar_top.webp'],
-[src*='blue_sidebar_bottom.webp'],
-[style*='blue_sidebar_bottom.webp'],
-[src*='banner-bg.webp'],
-[style*='banner-bg.webp'],
-[src*='banner-bg2.webp'],
-[style*='banner-bg2.webp'],
-[src*='background.webp'],
-[style*='background.webp'],
-[src*='parchment.webp'],
-[style*='parchment.webp'],
-[src*='red_sidebar'],
-[style*='red_sidebar'] {
+.window-app.realdark-theme-window [src*='blue_sidebar_top.webp'],
+.window-app.realdark-theme-window [style*='blue_sidebar_top.webp'],
+.window-app.realdark-theme-window [src*='blue_sidebar_bottom.webp'],
+.window-app.realdark-theme-window [style*='blue_sidebar_bottom.webp'],
+.window-app.realdark-theme-window [src*='banner-bg.webp'],
+.window-app.realdark-theme-window [style*='banner-bg.webp'],
+.window-app.realdark-theme-window [src*='banner-bg2.webp'],
+.window-app.realdark-theme-window [style*='banner-bg2.webp'],
+.window-app.realdark-theme-window [src*='background.webp'],
+.window-app.realdark-theme-window [style*='background.webp'],
+.window-app.realdark-theme-window [src*='parchment.webp'],
+.window-app.realdark-theme-window [style*='parchment.webp'],
+.window-app.realdark-theme-window [src*='red_sidebar'],
+.window-app.realdark-theme-window [style*='red_sidebar'] {
     display: none !important;
     background-image: none !important;
     visibility: hidden !important;
@@ -507,26 +512,26 @@ header h1 {
 }
 
 /* 2. Headers & Decorations */
-[src*='accent-decoration.webp'],
-[style*='accent-decoration.webp'],
-[src*='header.webp'],
-[style*='header.webp'],
-[src*='header-bw.webp'],
-[style*='header-bw.webp'],
-[src*='gold.webp'],
-[style*='gold.webp'],
-[src*='frame-elegant.svg'],
-[style*='frame-elegant.svg'],
-[src*='deity.svg'],
-[style*='deity.svg'],
-[src*='deity.webp'],
-[style*='deity.webp'],
-[src*='corner-box.webp'],
-[style*='corner-box.webp'],
-[src*='corner-box.svg'],
-[style*='corner-box.svg'],
-[src*='border-pattern.webp'],
-[style*='border-pattern.webp'] {
+.window-app.realdark-theme-window [src*='accent-decoration.webp'],
+.window-app.realdark-theme-window [style*='accent-decoration.webp'],
+.window-app.realdark-theme-window [src*='header.webp'],
+.window-app.realdark-theme-window [style*='header.webp'],
+.window-app.realdark-theme-window [src*='header-bw.webp'],
+.window-app.realdark-theme-window [style*='header-bw.webp'],
+.window-app.realdark-theme-window [src*='gold.webp'],
+.window-app.realdark-theme-window [style*='gold.webp'],
+.window-app.realdark-theme-window [src*='frame-elegant.svg'],
+.window-app.realdark-theme-window [style*='frame-elegant.svg'],
+.window-app.realdark-theme-window [src*='deity.svg'],
+.window-app.realdark-theme-window [style*='deity.svg'],
+.window-app.realdark-theme-window [src*='deity.webp'],
+.window-app.realdark-theme-window [style*='deity.webp'],
+.window-app.realdark-theme-window [src*='corner-box.webp'],
+.window-app.realdark-theme-window [style*='corner-box.webp'],
+.window-app.realdark-theme-window [src*='corner-box.svg'],
+.window-app.realdark-theme-window [style*='corner-box.svg'],
+.window-app.realdark-theme-window [src*='border-pattern.webp'],
+.window-app.realdark-theme-window [style*='border-pattern.webp'] {
     display: none !important;
     background-image: none !important;
 }
@@ -555,16 +560,16 @@ header h1 {
 /* ======================================================================== */
 
 /* Remove standard pseudo-elements and potential images */
-.sidebar::before,
-.sidebar::after,
-aside.sidebar::before,
-aside.sidebar::after,
-.crb-style aside::before,
-.crb-style aside::after,
-form.crb-style aside::before,
-form.crb-style aside::after,
-.crb-style .sidebar::before,
-.crb-style .sidebar::after {
+.window-app.realdark-theme-window .sidebar::before,
+.window-app.realdark-theme-window .sidebar::after,
+.window-app.realdark-theme-window aside.sidebar::before,
+.window-app.realdark-theme-window aside.sidebar::after,
+.window-app.realdark-theme-window .crb-style aside::before,
+.window-app.realdark-theme-window .crb-style aside::after,
+.window-app.realdark-theme-window form.crb-style aside::before,
+.window-app.realdark-theme-window form.crb-style aside::after,
+.window-app.realdark-theme-window .crb-style .sidebar::before,
+.window-app.realdark-theme-window .crb-style .sidebar::after {
     background-image: none !important;
     content: none !important;
     display: none !important;
@@ -581,7 +586,7 @@ form.crb-style aside::after,
 
 /* Removed aggressive sidebar image hiding */
 
-aside {
+.window-app.realdark-theme-window aside {
     background-color: transparent !important;
 }
 
@@ -798,7 +803,7 @@ header h1 {
 /* Re-assert Background Colors where images were removed */
 .sidebar,
 .sheet-sidebar,
-aside {
+.window-app.realdark-theme-window aside {
     background-color: transparent !important;
 }
 
@@ -1151,19 +1156,32 @@ html body .window-app.realdark-theme-window .sheet-sidebar {
 /* ANTI-FLASH: PREEMPTIVE STYLING (Direct Body Targeting)                   */
 /* ======================================================================== */
 /* This catches the window BEFORE 'realdark-theme-window' class is added by JS */
-body.realdark-theme-active .journal-sheet .window-content,
-body.realdark-theme-active .journal-sheet .sheet-body,
-body.realdark-theme-active .journal-sheet article,
-body.realdark-theme-active .journal-sheet .journal-entry-page,
-body.realdark-theme-active .journal-sheet .journal-entry-content {
+html .journal-sheet,
+html .journal-sheet .window-content,
+html .journal-sheet .sheet-body,
+html .journal-sheet article,
+html .journal-sheet .journal-entry-page,
+html .journal-sheet .journal-entry-content {
     background: transparent !important;
     background-image: none !important;
     background-color: transparent !important;
 }
 
-body.realdark-theme-active .journal-sheet .window-content {
-    background-color: var(--realdark-sheet-bg) !important;
-    /* Use theme bg immediately */
+/* Kill the parchment image specifically and globally within journals immediately */
+html .journal-sheet [src*='parchment.webp'],
+html .journal-sheet [style*='parchment.webp'] {
+    background-image: none !important;
+    display: none !important;
+}
+
+/* FORCE BACKGROUND ON ALL LAYERS TO ENSURE VISIBILITY */
+html body .journal-sheet,
+html body .journal-sheet .window-content,
+html body .journal-sheet .sheet-body,
+html body .journal-sheet .journal-entry-page {
+    background: rgba(15, 15, 15, 0.92) !important;
+    background-image: none !important;
+    /* ensure no parchment */
 }
 
 /* Original Rules */
@@ -1176,6 +1194,47 @@ body.realdark-theme-active .journal-sheet .window-content {
     color: var(--realdark-text-light) !important;
     border: none !important;
     box-shadow: none !important;
+}
+
+/* ======================================================================== */
+/* NUCLEAR CHARACTER SHEET ANTI-FLASH                                       */
+/* ======================================================================== */
+
+/* Force immediate dark background on character sheets */
+html body .pf2e.sheet.character .window-content,
+html body .actor.sheet.character .window-content,
+html body .pf2e.sheet.character .sheet-body,
+html body .actor.sheet.character .sheet-body {
+    background-color: var(--realdark-sheet-bg) !important;
+    background-image:
+        radial-gradient(circle at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 60%, rgba(0, 0, 0, 0.6) 100%),
+        var(--realdark-bg-url) !important;
+    background-repeat: no-repeat, repeat;
+    background-size: cover, var(--realdark-bg-size, auto) !important;
+    background-position: center !important;
+    background-blend-mode: normal !important;
+}
+
+/* Kill specific assets immediately */
+html body .pf2e.sheet.character [src*='blue_sidebar_top.webp'],
+html body .actor.sheet.character [src*='blue_sidebar_top.webp'],
+html body .pf2e.sheet.character [src*='blue_sidebar_bottom.webp'],
+html body .actor.sheet.character [src*='blue_sidebar_bottom.webp'],
+html body .pf2e.sheet.character [src*='banner-bg.webp'],
+html body .actor.sheet.character [src*='banner-bg.webp'],
+html body .pf2e.sheet.character [src*='banner-bg2.webp'],
+html body .actor.sheet.character [src*='banner-bg2.webp'],
+html body .pf2e.sheet.character [src*='background.webp'],
+html body .actor.sheet.character [src*='background.webp'],
+html body .pf2e.sheet.character [src*='parchment.webp'],
+html body .actor.sheet.character [src*='parchment.webp'],
+html body .pf2e.sheet.character [src*='red_sidebar'],
+html body .actor.sheet.character [src*='red_sidebar'] {
+    display: none !important;
+    background-image: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
 }
 
 /* Force specific header/bg fixes */
@@ -1195,18 +1254,18 @@ body.realdark-theme-active .journal-sheet .window-content {
 }
 
 /* Specific fix for "light" styled journals if PF2e forces class */
-.journal-entry-page.light {
+.window-app.realdark-theme-window .journal-entry-page.light {
     filter: invert(0.9) hue-rotate(180deg) !important;
     background: #111 !important;
 }
 
 /* Re-invert images so they look normal */
-.journal-entry-page.light img {
+.window-app.realdark-theme-window .journal-entry-page.light img {
     filter: invert(1) hue-rotate(180deg) !important;
 }
 
 /* HIDE LOGO IN JOURNAL SHEETS */
-.journal-sheet .realdark-logo {
+.window-app.realdark-theme-window.journal-sheet .realdark-logo {
     display: none !important;
 }
 

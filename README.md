@@ -17,7 +17,7 @@
 
 <br>
 
-<img src="https://raw.githubusercontent.com/PhilsModules/phils-pf2e-realdark/main/assets/preview_main.png" alt="RealDark Preview" width="600">
+<img src="https://raw.githubusercontent.com/PhilsModules/phils-pf2e-realdark/main/assets/preview_main.png" alt="RealDark Preview" width="800">
 
 </div>
 

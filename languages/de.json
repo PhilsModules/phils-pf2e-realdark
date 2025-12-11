@@ -1,4 +1,7 @@
 {
+    "REALDARK.Settings.Menu.Name": "Theme Konfiguration",
+    "REALDARK.Settings.Menu.Label": "Wizard Öffnen",
+    "REALDARK.Settings.Menu.Hint": "Öffne das visuelle RealDark Konfigurationstool, um dein Theme anzupassen.",
     "REALDARK.Wizard.Title": "RealDark Konfiguration",
     "REALDARK.Wizard.Subtitle": "Ultimativer Customizer",
     "REALDARK.Wizard.Section.Colors": "Farben",

@@ -4,11 +4,21 @@ const MODULE_ID = "phils-pf2e-realdark";
 
 Hooks.once("init", () => {
     console.error("PHIL THEME: INIT HOOK FIRED!");
-    document.body.classList.add("realdark-theme-active");
+    // document.body.classList.add("realdark-theme-active"); // REMOVED GLOBAL TOGGLE
 
     // ========================================================================
     // REGISTER SETTINGS
     // ========================================================================
+
+    // 0. Wizard Menu Button
+    game.settings.registerMenu(MODULE_ID, "wizardMenu", {
+        name: "REALDARK.Settings.Menu.Name",
+        label: "REALDARK.Settings.Menu.Label",
+        hint: "REALDARK.Settings.Menu.Hint",
+        icon: "fas fa-magic",
+        type: RealDarkSettingsShim,
+        restricted: false
+    });
 
     // 0. Wizard State
     game.settings.register(MODULE_ID, "wizardShown", {
@@ -24,7 +34,7 @@ Hooks.once("init", () => {
         name: "REALDARK.Settings.BackgroundImage.Name",
         hint: "REALDARK.Settings.BackgroundImage.Hint",
         scope: "client",
-        config: true,
+        config: false,
         type: String,
         filePicker: "image",
         default: "",
@@ -36,7 +46,7 @@ Hooks.once("init", () => {
         name: "REALDARK.Settings.ColorBackground.Name",
         hint: "REALDARK.Settings.ColorBackground.Hint",
         scope: "client",
-        config: true,
+        config: false,
         type: new foundry.data.fields.ColorField(),
         default: "#111111",
         onChange: () => updateTheme()
@@ -47,7 +57,7 @@ Hooks.once("init", () => {
         name: "REALDARK.Settings.BgSize.Name",
         hint: "REALDARK.Settings.BgSize.Hint",
         scope: "client",
-        config: true,
+        config: false,
         type: String,
         default: "cover",
         onChange: () => updateTheme()
@@ -58,7 +68,7 @@ Hooks.once("init", () => {
         name: "REALDARK.Settings.PlaqueImage.Name",
         hint: "REALDARK.Settings.PlaqueImage.Hint",
         scope: "client",
-        config: true,
+        config: false,
         type: String,
         filePicker: "image",
         default: "",
@@ -70,7 +80,7 @@ Hooks.once("init", () => {
         name: "REALDARK.Settings.ColorGold.Name",
         hint: "REALDARK.Settings.ColorGold.Hint",
         scope: "client",
-        config: true,
+        config: false,
         type: new foundry.data.fields.ColorField(),
         default: "#ffbd4a",
         onChange: () => updateTheme()
@@ -81,7 +91,7 @@ Hooks.once("init", () => {
         name: "REALDARK.Settings.ColorGoldDim.Name",
         hint: "REALDARK.Settings.ColorGoldDim.Hint",
         scope: "client",
-        config: true,
+        config: false,
         type: new foundry.data.fields.ColorField(),
         default: "#b8860b",
         onChange: () => updateTheme()
@@ -92,7 +102,7 @@ Hooks.once("init", () => {
         name: "REALDARK.Settings.ColorAccent.Name",
         hint: "REALDARK.Settings.ColorAccent.Hint",
         scope: "client",
-        config: true,
+        config: false,
         type: new foundry.data.fields.ColorField(),
         default: "#ff3333",
         onChange: () => updateTheme()
@@ -104,7 +114,7 @@ Hooks.once("init", () => {
         name: "REALDARK.Settings.ColorLight.Name",
         hint: "REALDARK.Settings.ColorLight.Hint",
         scope: "client",
-        config: true,
+        config: false,
         type: new foundry.data.fields.ColorField(),
         default: "#fff0d4",
         onChange: () => updateTheme()
@@ -115,7 +125,7 @@ Hooks.once("init", () => {
         name: "REALDARK.Settings.InputBg.Name",
         hint: "REALDARK.Settings.InputBg.Hint",
         scope: "client",
-        config: true,
+        config: false,
         type: String,
         default: "rgba(0, 0, 0, 0.7)",
         onChange: () => updateTheme()
@@ -126,7 +136,7 @@ Hooks.once("init", () => {
         name: "REALDARK.Settings.SidebarOpacity.Name",
         hint: "REALDARK.Settings.SidebarOpacity.Hint",
         scope: "client",
-        config: true,
+        config: false,
         type: Number,
         default: 0.8,
         onChange: () => updateTheme()
@@ -137,7 +147,7 @@ Hooks.once("init", () => {
         name: "REALDARK.Settings.ColorBanner.Name",
         hint: "REALDARK.Settings.ColorBanner.Hint",
         scope: "client",
-        config: true,
+        config: false,
         type: new foundry.data.fields.ColorField(),
         default: "#7a0000",
         onChange: () => updateTheme()
@@ -146,7 +156,6 @@ Hooks.once("init", () => {
     // INITIALIZE THEME
     updateTheme();
 
-    ui.notifications.info(game.i18n.localize("REALDARK.Notify.Loaded"));
 });
 
 // ========================================================================
@@ -156,9 +165,36 @@ Hooks.once("ready", () => {
     if (!game.settings.get(MODULE_ID, "wizardShown")) {
         new RealDarkWizard().render(true);
     }
+    ui.notifications.info(game.i18n.localize("REALDARK.Notify.Loaded"));
 });
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
+
+// ========================================================================
+// SETTINGS SHIM (For V12 Menu Compatibility)
+// ========================================================================
+class RealDarkSettingsShim extends FormApplication {
+    static get defaultOptions() {
+        return foundry.utils.mergeObject(super.defaultOptions, {
+            id: "realdark-shim",
+            title: "RealDark Config",
+            template: "modules/phils-pf2e-realdark/templates/settings-shim.hbs",
+            width: 400,
+            height: 200,
+            minimizable: false,
+            resizable: false
+        });
+    }
+
+    render() {
+        // Just open the actual wizard and close this shim (or don't render it at all)
+        new RealDarkWizard().render(true);
+        // We don't actually need to render this shim's window.
+        return this;
+    }
+
+    _updateObject() { }
+}
 
 class RealDarkWizard extends HandlebarsApplicationMixin(ApplicationV2) {
     static DEFAULT_OPTIONS = {
@@ -298,6 +334,24 @@ class RealDarkWizard extends HandlebarsApplicationMixin(ApplicationV2) {
 
         // Trigger initial color inputs for swatch updates
         this.element.querySelectorAll(".rd-hex-input").forEach(el => el.dispatchEvent(new Event('input')));
+
+        // MANUAL BINDING FOR SAVE BUTTON TO PREVENT RELOAD
+        const saveBtn = this.element.querySelector(".rd-submit-btn");
+        if (saveBtn) {
+            saveBtn.type = "button"; // Force it to be a button
+            saveBtn.onclick = (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                // Gather data manually because form submission is unreliable here
+                const form = this.element.querySelector("form.rd-form-body");
+                const formData = new FormData(form);
+                const data = {};
+                formData.forEach((value, key) => data[key] = value);
+
+                // Call static submit handler manually
+                RealDarkWizard.onSubmit(e, form, { object: data });
+            };
+        }
     }
 
     static async onApplyPreset(event, target) {
@@ -379,24 +433,40 @@ class RealDarkWizard extends HandlebarsApplicationMixin(ApplicationV2) {
     }
 
     static async onSubmit(event, form, formData) {
-        const object = formData.object;
-        await game.settings.set(MODULE_ID, "colorGold", object.colorGold);
-        await game.settings.set(MODULE_ID, "colorGoldDim", object.colorGoldDim);
-        await game.settings.set(MODULE_ID, "colorAccent", object.colorAccent);
-        await game.settings.set(MODULE_ID, "colorLight", object.colorLight);
-        await game.settings.set(MODULE_ID, "colorBanner", object.colorBanner);
-        await game.settings.set(MODULE_ID, "colorBackground", object.colorBackground);
+        event.preventDefault();
+        event.stopImmediatePropagation();
 
+        try {
+            // AppV2 passes the processed data object as the 3rd argument (formData).
+            // We use this directly which is more reliable than manual FormData extraction.
+            const data = formData.object;
 
-        await game.settings.set(MODULE_ID, "inputBg", object.inputBg);
-        await game.settings.set(MODULE_ID, "backgroundImage", object.backgroundImage);
-        await game.settings.set(MODULE_ID, "bgSize", object.bgSize);
-        await game.settings.set(MODULE_ID, "sidebarOpacity", parseFloat(object.sidebarOpacity));
+            console.log("RealDark | Saving Data:", data);
 
-        await game.settings.set(MODULE_ID, "wizardShown", true);
+            await game.settings.set(MODULE_ID, "colorGold", data.colorGold);
+            await game.settings.set(MODULE_ID, "colorGoldDim", data.colorGoldDim);
+            await game.settings.set(MODULE_ID, "colorAccent", data.colorAccent);
+            await game.settings.set(MODULE_ID, "colorLight", data.colorLight);
+            await game.settings.set(MODULE_ID, "colorBanner", data.colorBanner);
+            await game.settings.set(MODULE_ID, "colorBackground", data.colorBackground);
 
-        updateTheme();
-        ui.notifications.info(game.i18n.localize("REALDARK.Notify.Saved"));
+            // Handle hidden input for inputBg if it wasn't captured correctly (sometimes hidden fields are tricky)
+            // But usually formData.object has it. 
+            await game.settings.set(MODULE_ID, "inputBg", data.inputBg);
+
+            await game.settings.set(MODULE_ID, "backgroundImage", data.backgroundImage);
+            await game.settings.set(MODULE_ID, "bgSize", data.bgSize);
+            await game.settings.set(MODULE_ID, "sidebarOpacity", Number(data.sidebarOpacity));
+
+            await game.settings.set(MODULE_ID, "wizardShown", true);
+
+            updateTheme();
+            ui.notifications.info(game.i18n.localize("REALDARK.Notify.Saved"));
+
+        } catch (err) {
+            console.error("RealDark | Save Error:", err);
+            ui.notifications.error("RealDark Save Failed! Check Console.");
+        }
     }
 }
 
@@ -423,37 +493,43 @@ function isColorDark(hexColor) {
 function updateTheme() {
     const root = document.documentElement;
 
+    // Helper to safely get string settings
+    const getSetting = (key, fallback) => {
+        const val = game.settings.get(MODULE_ID, key);
+        return (val === null || val === undefined) ? fallback : val;
+    };
+
     // Ensure paths are absolute to avoid CSS relative path issues (404s)
-    let bgUrl = game.settings.get(MODULE_ID, "backgroundImage");
+    let bgUrl = getSetting("backgroundImage", "");
     if (bgUrl && !bgUrl.startsWith("/") && !bgUrl.startsWith("http")) {
         bgUrl = "/" + bgUrl;
     }
 
-    let plaqueUrl = game.settings.get(MODULE_ID, "plaqueImage");
+    let plaqueUrl = getSetting("plaqueImage", "");
     if (plaqueUrl && !plaqueUrl.startsWith("/") && !plaqueUrl.startsWith("http")) {
         plaqueUrl = "/" + plaqueUrl;
     }
 
-    const primaryColor = game.settings.get(MODULE_ID, "colorGold");
+    const primaryColor = getSetting("colorGold", "#ffbd4a");
 
     root.style.setProperty("--realdark-bg-url", bgUrl ? `url('${bgUrl}')` : 'none');
     root.style.setProperty("--realdark-plaque-url", plaqueUrl ? `url('${plaqueUrl}')` : 'none');
 
-    root.style.setProperty("--realdark-sheet-bg", game.settings.get(MODULE_ID, "colorBackground"));
+    root.style.setProperty("--realdark-sheet-bg", getSetting("colorBackground", "#111111"));
     root.style.setProperty("--realdark-gold", primaryColor);
-    root.style.setProperty("--realdark-gold-dim", game.settings.get(MODULE_ID, "colorGoldDim"));
-    root.style.setProperty("--realdark-red-bright", game.settings.get(MODULE_ID, "colorAccent"));
-    root.style.setProperty("--realdark-text-light", game.settings.get(MODULE_ID, "colorLight"));
-    root.style.setProperty("--realdark-input-bg", game.settings.get(MODULE_ID, "inputBg"));
-    root.style.setProperty("--realdark-banner-color", game.settings.get(MODULE_ID, "colorBanner"));
-    root.style.setProperty("--realdark-bg-size", game.settings.get(MODULE_ID, "bgSize"));
+    root.style.setProperty("--realdark-gold-dim", getSetting("colorGoldDim", "#b8860b"));
+    root.style.setProperty("--realdark-red-bright", getSetting("colorAccent", "#ff3333"));
+    root.style.setProperty("--realdark-text-light", getSetting("colorLight", "#fff0d4"));
+    root.style.setProperty("--realdark-input-bg", getSetting("inputBg", "rgba(0, 0, 0, 0.7)"));
+    root.style.setProperty("--realdark-banner-color", getSetting("colorBanner", "#7a0000"));
+    root.style.setProperty("--realdark-bg-size", getSetting("bgSize", "cover"));
 
     // CALCULATE SIDEBAR RGBA
-    const bannerHex = game.settings.get(MODULE_ID, "colorBanner") || "#7a0000";
-    let sidebarOp = game.settings.get(MODULE_ID, "sidebarOpacity");
+    const bannerHex = getSetting("colorBanner", "#7a0000");
+    let sidebarOp = getSetting("sidebarOpacity", 0.8);
 
     // Safety check for opacity
-    if (sidebarOp === null || sidebarOp === undefined) sidebarOp = 0.8;
+    if (sidebarOp === null || sidebarOp === undefined || isNaN(sidebarOp)) sidebarOp = 0.8;
 
     // Robust Hex Parsing
     let hex = String(bannerHex).replace(/^#/, '');

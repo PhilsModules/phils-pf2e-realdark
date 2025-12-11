@@ -396,15 +396,15 @@
                     <input type="hidden" name="inputBg" id="inputBgHidden" value="{{inputVal}}">
                 </div>
                 <!-- HIDDEN FIELDS FOR PRESETS TO FILL IF NEEDED -->
+                <!-- HIDDEN FIELDS FOR PRESETS -->
                 <input type="hidden" name="backgroundImage" value="{{bgImgVal}}">
                 <input type="hidden" name="bgSize" value="{{bgSizeVal}}">
                 <input type="hidden" name="colorBackground" value="{{bgVal}}">
 
+                <div class="rd-footer">
+                    <button type="submit" class="rd-submit-btn">{{localize 'REALDARK.Wizard.Button.Save'}}</button>
+                </div>
             </form>
-
-            <div class="rd-footer">
-                <button type="submit" class="rd-submit-btn">{{localize 'REALDARK.Wizard.Button.Save'}}</button>
-            </div>
         </div>
 
         <!-- RIGHT COLUMN: LIVE PREVIEW -->
