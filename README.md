@@ -85,3 +85,4 @@ Phil's PF2e RealDark ist eine umfassende Design-Überarbeitung für das Pathfind
     <br><br>
     <p><i>Made with ❤️ for the Foundry VTT Community</i></p>
 </div>
+
