@@ -1,2 +1,87 @@
-# phils-pf2e-realdark
-A dark, immersive parchment theme for the Pathfinder 2e system
+<div align="center">
+
+# Phil's PF2e RealDark
+
+![Foundry v12 Compatible](https://img.shields.io/badge/Foundry-v12-green)
+![System](https://img.shields.io/badge/System-PF2e-blue)
+![License](https://img.shields.io/badge/License-GPLv3-blue)
+[![Version](https://img.shields.io/badge/Version-1.0.0-orange)](https://github.com/PhilsModules/phils-pf2e-realdark/releases)
+[![Patreon](https://img.shields.io/badge/SUPPORT-Patreon-ff424d?logo=patreon)](https://www.patreon.com/PhilsModules)
+
+<br>
+
+**A true dark mode for Pathfinder 2e on Foundry VTT.**
+<br>
+*Ein echter Dark Mode für Pathfinder 2e auf Foundry VTT.*
+
+<br>
+
+<img src="https://raw.githubusercontent.com/PhilsModules/phils-pf2e-realdark/main/assets/preview_main.png" alt="RealDark Preview" width="800">
+
+</div>
+
+<br>
+
+# <img src="https://flagcdn.com/48x36/gb.png" width="28" height="21" alt="EN"> English Instructions
+
+**Get rid of the parchment. Embrace the darkness.**
+
+Phil's PF2e RealDark is a comprehensive theme overhaul for the Pathfinder 2e system in Foundry VTT. It replaces the default bright parchment textures with high-quality dark backgrounds, softens harsh borders, and improves readability for long night sessions.
+
+## 🚀 Key Features
+
+*   **🌑 True Dark Mode**: Replaces all system journals, character sheets, and item sheets with dark, eye-friendly textures.
+*   **✨ Live Preview Wizard**: A powerful configuration tool with a real-time preview of your changes. See exactly how your theme looks before you save.
+*   **🎨 12+ Professional Presets**: Comes with built-in themes like **Leather, Wood, Stone, Dragon, Stars, Moon, Bamboo**, and the new **Perry** (Teal/Orange) theme.
+*   **👁️ Softened UI**: Aggressively removes standard hard gold/red borders and replaces them with soft, translucent edges for a modern look.
+*   **🔧 Deep Customization**: Tweak primary colors, accent colors, sidebar opacity, and input field darkness to your detailed preferences.
+*   **📜 Journal Fixes**: Eliminates the "white flash" when opening journals and ensures consistent dark backgrounds for all text content.
+
+## 📖 How to Use
+
+1.  **Open Config**: Go to `Game Settings` -> `Phil's PF2e RealDark` -> `Theme Configuration`.
+2.  **Choose a Preset**: Click on one of the presets (e.g., **STONE** or **DRAGON**) at the top to instantly load a curated look.
+3.  **Customize**:
+    *   **Colors**: Adjust the Sidebar, Gold elements, Dim accents, and Text colors.
+    *   **Opacity**: Use the slider to control how transparent your sidebar background is.
+    *   **Live Preview**: Watch the right side of the window! It updates instantly to show you a mock character sheet with your new settings.
+4.  **Save**: Click "Save Changes" to apply the theme globally.
+
+---
+
+# <img src="https://flagcdn.com/48x36/de.png" width="28" height="21" alt="DE"> Deutsche Anleitung
+
+**Weg mit dem Pergament. Her mit der Dunkelheit.**
+
+Phil's PF2e RealDark ist eine umfassende Design-Überarbeitung für das Pathfinder 2e System in Foundry VTT. Es ersetzt die hellen Standard-Pergament-Texturen durch hochwertige dunkle Hintergründe, weicht harte Kanten auf und verbessert die Lesbarkeit für lange Nächte.
+
+## 🚀 Funktionen
+
+*   **🌑 Echter Dark Mode**: Ersetzt alle System-Journale, Charakterbögen und Item-Sheets durch dunkle, augenfreundliche Texturen.
+*   **✨ Live Preview Wizard**: Ein mächtiges Konfigurationstool mit Echtzeit-Vorschau. Sieh genau, wie dein Theme aussieht, bevor du speicherst.
+*   **🎨 12+ Profi-Presets**: Kommt mit eingebauten Themes wie **Leder, Holz, Stein, Drache, Sterne, Mond, Bambus** und dem neuen **Perry** (Teal/Orange) Theme.
+*   **👁️ Sanftes UI**: Entfernt aggressiv die harten Gold/Rot-Ränder des Standardsystems und ersetzt sie durch weiche, transluzente Kanten.
+*   **🔧 Tiefgreifende Anpassung**: Stelle Primärfarben, Akzentfarben, Sidebar-Transparenz und die Dunkelheit der Eingabefelder genau nach deinen Wünschen ein.
+*   **📜 Journal Fixes**: Eliminiert das "weiße Aufblitzen" beim Öffnen von Journalen und sorgt für konsistent dunkle Hintergründe.
+
+## 📖 Bedienung
+
+1.  **Konfiguration öffnen**: Gehe zu `Einstellungen` -> `Phil's PF2e RealDark` -> `Theme Konfiguration`.
+2.  **Preset wählen**: Klicke oben auf ein Preset (z.B. **STONE** oder **DRAGON**), um sofort einen kuratierten Look zu laden.
+3.  **Anpassen**:
+    *   **Farben**: Passe Sidebar, Gold-Elemente, Dim-Akzente und Textfarben an.
+    *   **Deckkraft**: Nutze den Slider, um die Transparenz der Sidebar zu steuern.
+    *   **Live Vorschau**: Schau auf die rechte Seite! Sie aktualisiert sich sofort und zeigt dir einen Beispiel-Charakterbogen mit deinen neuen Einstellungen.
+4.  **Speichern**: Klicke auf "Save Changes", um das Theme global anzuwenden.
+
+<br>
+
+<div align="center">
+    <h2>❤️ Support the Development</h2>
+    <p>If you enjoy this module and want to support open-source development for Foundry VTT, check out my Patreon!</p>
+    <a href="https://www.patreon.com/PhilsModules">
+        <img src="https://c5.patreon.com/external/logo/become_a_patron_button.png" alt="Become a Patron" width="200" />
+    </a>
+    <br><br>
+    <p><i>Made with ❤️ for the Foundry VTT Community</i></p>
+</div>

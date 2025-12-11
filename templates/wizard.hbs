@@ -1,0 +1,496 @@
+<div class="realdark-wizard-wrapper">
+    <style>
+        /* RESET & BASE */
+        .realdark-wizard-window.window-app {
+            background: transparent !important;
+            box-shadow: none !important;
+            border: none !important;
+            width: 1300px !important;
+            /* Wider for Preview */
+        }
+
+        .realdark-wizard-window .window-content {
+            background: rgba(10, 10, 10, 0.95) !important;
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--realdark-gold-dim);
+            border-radius: 12px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 1);
+            color: var(--realdark-gold);
+            font-family: 'Signika', sans-serif;
+            padding: 0 !important;
+            overflow: hidden;
+            display: flex;
+            flex-direction: row;
+            /* Side by side */
+            height: 600px;
+        }
+
+        .realdark-wizard-left {
+            flex: 0 0 260px;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.3);
+            overflow-y: hidden;
+            /* No scrolling */
+        }
+
+        .realdark-wizard-right {
+            flex: 1;
+            position: relative;
+            /* This container will reflect the theme variables live! */
+            background-color: var(--realdark-sheet-bg);
+            background-image:
+                radial-gradient(circle at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 60%, rgba(0, 0, 0, 0.6) 100%),
+                var(--realdark-bg-url);
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        /* HEADER SECTION - COMPACT */
+        .rd-header-panel {
+            padding: 8px;
+            /* EXTRA COMPACT */
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+        }
+
+        .rd-title {
+            font-size: 1.1em;
+            /* EXTRA COMPACT */
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0;
+            background: linear-gradient(45deg, var(--realdark-gold), white, var(--realdark-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .rd-subtitle {
+            font-size: 0.6em;
+            /* EXTRA COMPACT */
+            opacity: 0.6;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 1px;
+        }
+
+        /* PRESET BAR - COMPACT */
+        .rd-preset-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 3px;
+            /* EXTRA COMPACT */
+            padding: 5px;
+            /* EXTRA COMPACT */
+            background: rgba(255, 255, 255, 0.02);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .rd-preset-btn {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--realdark-gold-dim);
+            color: #888;
+            padding: 3px 8px;
+            /* EXTRA COMPACT */
+            font-size: 0.7em;
+            /* EXTRA COMPACT */
+            text-transform: uppercase;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .rd-preset-btn:hover {
+            color: white;
+            border-color: var(--realdark-gold);
+            transform: translateY(-1px);
+        }
+
+        /* MAIN FORM AREA */
+        .rd-form-body {
+            padding: 8px;
+            /* EXTRA COMPACT */
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            /* EXTRA COMPACT */
+            flex: 1;
+            /* Take remaining space */
+            overflow: hidden;
+            /* Prevent body scroll if possible, specific sections might scroll? No, goal is no scroll */
+        }
+
+        .rd-section-title {
+            font-size: 0.7em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.5;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 1px;
+            margin-top: 2px;
+            margin-bottom: 2px;
+        }
+
+        /* CONTROL GROUPS - COMPACT */
+        .rd-control-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 5px;
+            padding: 3px 6px;
+            /* EXTRA COMPACT */
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 4px;
+        }
+
+        .rd-label-main {
+            font-size: 0.85em;
+            /* EXTRA COMPACT */
+            font-weight: 600;
+            color: #eee;
+        }
+
+        .rd-hex-input {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid #444;
+            border-radius: 3px;
+            color: white;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            width: 60px;
+            font-size: 0.85em;
+            padding: 4px;
+        }
+
+        .rd-swatch {
+            position: relative;
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .rd-swatch input[type="color"] {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        /* FOOTER */
+        .rd-footer {
+            padding: 10px;
+            /* EXTRA COMPACT */
+            background: rgba(0, 0, 0, 0.4);
+            text-align: center;
+            margin-top: auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .rd-submit-btn {
+            background: linear-gradient(135deg, var(--realdark-gold), var(--realdark-gold-dim));
+            border: none;
+            color: #111;
+            padding: 8px 30px;
+            /* EXTRA COMPACT */
+            font-size: 0.9em;
+            border-radius: 30px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            width: 100%;
+        }
+
+        /* PREVIEW STYLES (Mini Character Sheet) */
+        .rd-preview-sheet {
+            display: flex;
+            height: 100%;
+            gap: 10px;
+            color: var(--realdark-gold);
+            text-shadow: var(--realdark-text-shadow);
+        }
+
+        .rd-preview-sidebar {
+            flex: 0 0 120px;
+            background: linear-gradient(to bottom, var(--realdark-sidebar-rgba-top) 0%, var(--realdark-sidebar-rgba-bottom) 100%);
+            border-right: 1px solid rgba(130, 130, 130, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            gap: 10px;
+        }
+
+        .rd-preview-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .rd-preview-header {
+            border-bottom: 1px solid rgba(130, 130, 130, 0.2);
+            padding-bottom: 5px;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .rd-preview-input {
+            background: var(--realdark-input-bg);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 5px;
+            border-radius: 4px;
+            width: 100%;
+            font-family: inherit;
+        }
+
+        .rd-preview-box {
+            border: 1px solid rgba(130, 130, 130, 0.3);
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 4px;
+        }
+    </style>
+
+    <div class="window-content realdark-wizard-window">
+        <!-- LEFT COLUMN: CONTROLS -->
+        <div class="realdark-wizard-left">
+            <div class="rd-header-panel">
+                <h1 class="rd-title">{{localize 'REALDARK.Wizard.Title'}}</h1>
+                <div class="rd-subtitle">{{localize 'REALDARK.Wizard.Subtitle'}}</div>
+            </div>
+
+            <div class="rd-preset-bar">
+                <div class="rd-preset-btn" data-action="applyPreset" data-preset="leather">{{localize
+                    'REALDARK.Preset.Leather'}}</div>
+                <div class="rd-preset-btn" data-action="applyPreset" data-preset="wood">{{localize
+                    'REALDARK.Preset.Wood'}}</div>
+                <div class="rd-preset-btn" data-action="applyPreset" data-preset="stone">{{localize
+                    'REALDARK.Preset.Stone'}}</div>
+                <div class="rd-preset-btn" data-action="applyPreset" data-preset="paper">{{localize
+                    'REALDARK.Preset.Paper'}}</div>
+                <div class="rd-preset-btn" data-action="applyPreset" data-preset="dragon">{{localize
+                    'REALDARK.Preset.Dragon'}}</div>
+                <div class="rd-preset-btn" data-action="applyPreset" data-preset="croc">{{localize
+                    'REALDARK.Preset.Croc'}}</div>
+                <div class="rd-preset-btn" data-action="applyPreset" data-preset="bamboo">{{localize
+                    'REALDARK.Preset.Bamboo'}}</div>
+                <div class="rd-preset-btn" data-action="applyPreset" data-preset="moss">{{localize
+                    'REALDARK.Preset.Moss'}}</div>
+                <div class="rd-preset-btn" data-action="applyPreset" data-preset="moon">{{localize
+                    'REALDARK.Preset.Moon'}}</div>
+                <div class="rd-preset-btn" data-action="applyPreset" data-preset="stars">{{localize
+                    'REALDARK.Preset.Stars'}}</div>
+                <div class="rd-preset-btn" data-action="applyPreset" data-preset="roses">{{localize
+                    'REALDARK.Preset.Roses'}}</div>
+                <div class="rd-preset-btn" data-action="applyPreset" data-preset="perry">{{localize
+                    'REALDARK.Preset.Perry'}}</div>
+            </div>
+
+            <form class="rd-form-body"> <!-- Form wrapper -->
+                <div class="rd-section-title">{{localize 'REALDARK.Wizard.Section.Colors'}}</div>
+
+                <!-- REMOVED BACKGROUND COLOR PICKER -->
+
+                <div class="rd-control-group">
+                    <span class="rd-label-main">{{localize 'REALDARK.Wizard.Label.Banner'}}</span>
+                    <div style="display:flex; gap:5px;">
+                        <input type="text" name="colorBanner" value="{{bannerVal}}" class="rd-hex-input"
+                            oninput="this.parentElement.querySelector('.rd-swatch').style.background = this.value; updatePreview('colorBanner', this.value);">
+                        <div class="rd-swatch" style="background: {{bannerVal}}">
+                            <input type="color" name="colorBannerPicker" value="{{bannerVal}}"
+                                oninput="this.parentElement.style.background = this.value; this.parentElement.previousElementSibling.value = this.value; updatePreview('colorBanner', this.value);">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rd-control-group">
+                    <span class="rd-label-main">{{localize 'REALDARK.Wizard.Label.Gold'}}</span>
+                    <div style="display:flex; gap:5px;">
+                        <input type="text" name="colorGold" value="{{goldVal}}" class="rd-hex-input"
+                            oninput="this.parentElement.querySelector('.rd-swatch').style.background = this.value; updatePreview('colorGold', this.value);">
+                        <div class="rd-swatch" style="background: {{goldVal}}">
+                            <input type="color" name="colorGoldPicker" value="{{goldVal}}"
+                                oninput="this.parentElement.style.background = this.value; this.parentElement.previousElementSibling.value = this.value; updatePreview('colorGold', this.value);">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rd-control-group">
+                    <span class="rd-label-main">{{localize 'REALDARK.Wizard.Label.Dim'}}</span>
+                    <div style="display:flex; gap:5px;">
+                        <input type="text" name="colorGoldDim" value="{{dimVal}}" class="rd-hex-input"
+                            oninput="this.parentElement.querySelector('.rd-swatch').style.background = this.value; updatePreview('colorGoldDim', this.value);">
+                        <div class="rd-swatch" style="background: {{dimVal}}">
+                            <input type="color" name="colorGoldDimPicker" value="{{dimVal}}"
+                                oninput="this.parentElement.style.background = this.value; this.parentElement.previousElementSibling.value = this.value; updatePreview('colorGoldDim', this.value);">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rd-control-group">
+                    <span class="rd-label-main">{{localize 'REALDARK.Wizard.Label.Accent'}}</span>
+                    <div style="display:flex; gap:5px;">
+                        <input type="text" name="colorAccent" value="{{accVal}}" class="rd-hex-input"
+                            oninput="this.parentElement.querySelector('.rd-swatch').style.background = this.value; updatePreview('colorAccent', this.value);">
+                        <div class="rd-swatch" style="background: {{accVal}}">
+                            <input type="color" name="colorAccentPicker" value="{{accVal}}"
+                                oninput="this.parentElement.style.background = this.value; this.parentElement.previousElementSibling.value = this.value; updatePreview('colorAccent', this.value);">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rd-control-group">
+                    <span class="rd-label-main">{{localize 'REALDARK.Wizard.Label.Text'}}</span>
+                    <div style="display:flex; gap:5px;">
+                        <input type="text" name="colorLight" value="{{textVal}}" class="rd-hex-input"
+                            oninput="this.parentElement.querySelector('.rd-swatch').style.background = this.value; updatePreview('colorLight', this.value);">
+                        <div class="rd-swatch" style="background: {{textVal}}">
+                            <input type="color" name="colorLightPicker" value="{{textVal}}"
+                                oninput="this.parentElement.style.background = this.value; this.parentElement.previousElementSibling.value = this.value; updatePreview('colorLight', this.value);">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rd-section-title">{{localize 'REALDARK.Wizard.Section.Opacity'}}</div>
+
+                <div class="rd-control-group" style="display:block;">
+                    <div style="display:flex; justify-content:space-between; font-size:0.9em;">
+                        <span>{{localize 'REALDARK.Wizard.Label.SidebarOpacity'}}</span>
+                        <span id="rd-sidebar-op-val">{{sidebarOpVal}}</span>
+                    </div>
+                    <input type="range" name="sidebarOpacity" min="0" max="1" step="0.05" value="{{sidebarOpVal}}"
+                        style="width:100%; margin-top:5px;" oninput="
+                            document.getElementById('rd-sidebar-op-val').innerText = this.value;
+                            updatePreview('sidebarOpacity', this.value);
+                            updatePreview('colorBanner', document.querySelector('input[name=\'colorBanner\']').value); 
+                        ">
+                </div>
+
+                <div class="rd-control-group" style="display:block;">
+                    <div style="display:flex; justify-content:space-between; font-size:0.9em;">
+                        <span>{{localize 'REALDARK.Wizard.Label.InputDarkness'}}</span>
+                        <span id="rd-slider-val">{{sliderVal}}</span>
+                    </div>
+                    <input type="range" min="0" max="1" step="0.05" value="{{sliderVal}}"
+                        style="width:100%; margin-top:5px;" oninput="
+                            let val = 'rgba(0, 0, 0, ' + this.value + ')';
+                            document.getElementById('inputBgHidden').value = val;
+                            document.getElementById('rd-slider-val').innerText = this.value;
+                            document.documentElement.style.setProperty('--realdark-input-bg', val);
+                        ">
+                    <input type="hidden" name="inputBg" id="inputBgHidden" value="{{inputVal}}">
+                </div>
+                <!-- HIDDEN FIELDS FOR PRESETS TO FILL IF NEEDED -->
+                <input type="hidden" name="backgroundImage" value="{{bgImgVal}}">
+                <input type="hidden" name="bgSize" value="{{bgSizeVal}}">
+                <input type="hidden" name="colorBackground" value="{{bgVal}}">
+
+            </form>
+
+            <div class="rd-footer">
+                <button type="submit" class="rd-submit-btn">{{localize 'REALDARK.Wizard.Button.Save'}}</button>
+            </div>
+        </div>
+
+        <!-- RIGHT COLUMN: LIVE PREVIEW -->
+        <div class="realdark-wizard-right">
+            <div class="rd-preview-sheet">
+                <!-- PREVIEW SIDEBAR -->
+                <div class="rd-preview-sidebar">
+                    <img src="modules/phils-pf2e-realdark/assets/Logo.webp" style="width:100%; margin-bottom: 20px;">
+
+                    <div
+                        style="width:40px; height:40px; border-radius:50%; border: 1px solid rgba(255,255,255,0.2); background:var(--realdark-input-bg); display:flex; align-items:center; justify-content:center;">
+                        <i class="fas fa-dice-d20" style="color:var(--realdark-gold);"></i>
+                    </div>
+                    <div
+                        style="width:40px; height:40px; border-radius:50%; border: 1px solid rgba(255,255,255,0.2); background:var(--realdark-input-bg); display:flex; align-items:center; justify-content:center;">
+                        <i class="fas fa-suitcase" style="color:var(--realdark-gold);"></i>
+                    </div>
+                    <div style="text-align:center; margin-top:auto;">
+                        <div style="font-size:0.8em; color:var(--realdark-red-bright);">{{localize
+                            'REALDARK.Wizard.Preview.HP'}}</div>
+                        <div style="font-size:1.2em; font-weight:bold;">42</div>
+                    </div>
+                </div>
+
+                <!-- PREVIEW CONTENT -->
+                <div class="rd-preview-content">
+                    <div class="rd-preview-header">
+                        Valeros
+                        <span style="float:right; font-size:0.6em; opacity:0.5; margin-top:10px;">{{localize
+                            'REALDARK.Wizard.Preview.Level'}} 1</span>
+                    </div>
+
+                    <div style="display:flex; gap:10px;">
+                        <input type="text" class="rd-preview-input" value="{{localize 'REALDARK.Wizard.Preview.Human'}}"
+                            readonly>
+                        <input type="text" class="rd-preview-input"
+                            value="{{localize 'REALDARK.Wizard.Preview.Fighter'}}" readonly>
+                    </div>
+
+                    <div class="rd-preview-box">
+                        <div style="font-weight:bold; margin-bottom:5px; color:var(--realdark-gold);">{{localize
+                            'REALDARK.Wizard.Preview.Attributes'}}</div>
+                        <div style="display:flex; justify-content:space-between; text-align:center;">
+                            <div>
+                                <div style="font-size:0.8em; opacity:0.7;">STR</div>
+                                <div style="font-weight:bold;">+4</div>
+                            </div>
+                            <div>
+                                <div style="font-size:0.8em; opacity:0.7;">DEX</div>
+                                <div style="font-weight:bold;">+2</div>
+                            </div>
+                            <div>
+                                <div style="font-size:0.8em; opacity:0.7;">CON</div>
+                                <div style="font-weight:bold;">+3</div>
+                            </div>
+                            <div>
+                                <div style="font-size:0.8em; opacity:0.7;">INT</div>
+                                <div style="font-weight:bold;">+0</div>
+                            </div>
+                            <div>
+                                <div style="font-size:0.8em; opacity:0.7;">WIS</div>
+                                <div style="font-weight:bold;">+1</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="flex:1;">
+                        <div style="font-weight:bold; margin-bottom:5px; color:var(--realdark-gold);">{{localize
+                            'REALDARK.Wizard.Preview.Inventory'}}</div>
+                        <div
+                            style="display:flex; justify-content:space-between; border-bottom:1px solid rgba(130,130,130,0.3); padding:4px;">
+                            <span>{{localize 'REALDARK.Wizard.Preview.Longsword'}}</span>
+                            <span>1</span>
+                        </div>
+                        <div
+                            style="display:flex; justify-content:space-between; border-bottom:1px solid rgba(130,130,130,0.3); padding:4px;">
+                            <span>{{localize 'REALDARK.Wizard.Preview.Shield'}}</span>
+                            <span>1</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div style="position:absolute; bottom:10px; right:10px; opacity:0.3; font-size:0.8em;">{{localize
+                'REALDARK.Wizard.Preview.Live'}}</div>
+        </div>
+    </div>
+</div>
