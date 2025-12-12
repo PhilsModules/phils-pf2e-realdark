@@ -299,12 +299,24 @@
                     'REALDARK.Preset.Roses'}}</div>
                 <div class="rd-preset-btn" data-action="applyPreset" data-preset="perry">{{localize
                     'REALDARK.Preset.Perry'}}</div>
+                <div class="rd-preset-btn" data-action="applyPreset" data-preset="void">{{localize
+                    'REALDARK.Preset.Void'}}</div>
             </div>
 
             <form class="rd-form-body"> <!-- Form wrapper -->
                 <div class="rd-section-title">{{localize 'REALDARK.Wizard.Section.Colors'}}</div>
 
-                <!-- REMOVED BACKGROUND COLOR PICKER -->
+                <div class="rd-control-group">
+                    <span class="rd-label-main">{{localize 'REALDARK.Wizard.Label.BgColor'}}</span>
+                    <div style="display:flex; gap:5px;">
+                        <input type="text" name="colorBackground" value="{{bgVal}}" class="rd-hex-input"
+                            oninput="this.parentElement.querySelector('.rd-swatch').style.background = this.value; updatePreview('colorBackground', this.value);">
+                        <div class="rd-swatch" style="background: {{bgVal}}">
+                            <input type="color" name="colorBackgroundPicker" value="{{bgVal}}"
+                                oninput="this.parentElement.style.background = this.value; this.parentElement.previousElementSibling.value = this.value; updatePreview('colorBackground', this.value);">
+                        </div>
+                    </div>
+                </div>
 
                 <div class="rd-control-group">
                     <span class="rd-label-main">{{localize 'REALDARK.Wizard.Label.Banner'}}</span>

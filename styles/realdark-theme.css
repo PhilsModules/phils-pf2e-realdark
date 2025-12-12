@@ -34,7 +34,7 @@
 }
 
 /* ======================================================================== */
-/* TEXT & CONTRAST (Scorched Earth)                                         */
+/* TEXT & CONTRAST                                                          */
 /* ======================================================================== */
 
 /* Force COLOR Variables */
@@ -141,7 +141,7 @@ html body .chat-message button:hover {
 /* Target Chat Messages - SOFTENED */
 /* Target Chat Messages - SOFTENED */
 html body .chat-message {
-    background: rgba(10, 10, 10, 0.95) !important;
+    background: var(--realdark-sheet-bg) !important;
     background-image: none !important;
     backdrop-filter: blur(5px);
     border: 1px solid rgba(130, 130, 130, 0.3) !important;
@@ -741,80 +741,8 @@ header h1 {
     margin: 0 !important;
 }
 
-/* ======================================================================== */
-/* TARGETED ASSET NULLIFICATION (USER LIST)                                 */
-/* Explicitly catching every file requested by user                         */
-/* ======================================================================== */
 
-/* 1. Sidebar & Backgrounds */
-[src*='blue_sidebar_top.webp'],
-[style*='blue_sidebar_top.webp'],
-[src*='blue_sidebar_bottom.webp'],
-[style*='blue_sidebar_bottom.webp'],
-[src*='banner-bg.webp'],
-[style*='banner-bg.webp'],
-[src*='banner-bg2.webp'],
-[style*='banner-bg2.webp'],
-[src*='background.webp'],
-[style*='background.webp'],
-[src*='parchment.webp'],
-[style*='parchment.webp'],
-[src*='red_sidebar'],
-[style*='red_sidebar'] {
-    display: none !important;
-    background-image: none !important;
-    visibility: hidden !important;
-    width: 0 !important;
-    height: 0 !important;
-}
-
-/* 2. Headers & Decorations */
-[src*='accent-decoration.webp'],
-[style*='accent-decoration.webp'],
-[src*='header.webp'],
-[style*='header.webp'],
-[src*='header-bw.webp'],
-[style*='header-bw.webp'],
-[src*='gold.webp'],
-[style*='gold.webp'],
-[src*='frame-elegant.svg'],
-[style*='frame-elegant.svg'],
-[src*='deity.svg'],
-[style*='deity.svg'],
-[src*='deity.webp'],
-[style*='deity.webp'],
-[src*='corner-box.webp'],
-[style*='corner-box.webp'],
-[src*='corner-box.svg'],
-[style*='corner-box.svg'],
-[src*='border-pattern.webp'],
-[style*='border-pattern.webp'] {
-    display: none !important;
-    background-image: none !important;
-}
-
-/* 3. Navigation & Badges */
-[src*='nav-item.webp'],
-[style*='nav-item.webp'],
-[src*='nav-item-inactive.webp'],
-[style*='nav-item-inactive.webp'],
-[src*='level-badge.webp'],
-[style*='level-badge.webp'] {
-    display: none !important;
-    background-image: none !important;
-}
-
-/* 4. Item Frames */
-[src*='item-frame.svg'],
-[style*='item-frame.svg'] {
-    /* We often want to KEEP the item frame but remove the image */
-    /* So we hide duplicate images but force CSS borders on containers instead */
-    display: none !important;
-}
-
-/* Re-assert Background Colors where images were removed */
-/* ======================================================================== */
-/* 5. UNIVERSAL SIDEBAR NULLIFIER (THE NUCLEAR OPTION V2)                   */
+/* 5. SIDEBAR BACKGROUND RESET                                              */
 /* ======================================================================== */
 /* Force the container to hold the gradient */
 .window-app.realdark-theme-window aside.sidebar,
@@ -860,7 +788,7 @@ header h1 {
 }
 
 /* ======================================================================== */
-/* 7. THE FINAL STAND (MAXIMUM SPECIFICITY OVERRIDE)                        */
+/* 7. HIGH SPECIFICITY OVERRIDES                                            */
 /* ======================================================================== */
 /* 
    If this doesn't work, nothing will.
@@ -1231,7 +1159,7 @@ html body .journal-sheet,
 html body .journal-sheet .window-content,
 html body .journal-sheet .sheet-body,
 html body .journal-sheet .journal-entry-page {
-    background: rgba(15, 15, 15, 0.92) !important;
+    background: var(--realdark-sheet-bg) !important;
     background-image: none !important;
     /* ensure no parchment */
 }

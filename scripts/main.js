@@ -1,16 +1,9 @@
-console.error("PHIL THEME: MODULE JS IS RUNNING!");
-
 const MODULE_ID = "phils-pf2e-realdark";
 
 Hooks.once("init", () => {
-    console.error("PHIL THEME: INIT HOOK FIRED!");
-    // document.body.classList.add("realdark-theme-active"); // REMOVED GLOBAL TOGGLE
-
-    // ========================================================================
     // REGISTER SETTINGS
-    // ========================================================================
 
-    // 0. Wizard Menu Button
+    // Wizard Menu Button
     game.settings.registerMenu(MODULE_ID, "wizardMenu", {
         name: "REALDARK.Settings.Menu.Name",
         label: "REALDARK.Settings.Menu.Label",
@@ -20,7 +13,7 @@ Hooks.once("init", () => {
         restricted: false
     });
 
-    // 0. Wizard State
+    // Wizard State
     game.settings.register(MODULE_ID, "wizardShown", {
         name: "REALDARK.Settings.WizardShown.Name",
         scope: "client",
@@ -29,7 +22,7 @@ Hooks.once("init", () => {
         default: false
     });
 
-    // 1. Background Image (Legacy/Optional)
+    // Background Image
     game.settings.register(MODULE_ID, "backgroundImage", {
         name: "REALDARK.Settings.BackgroundImage.Name",
         hint: "REALDARK.Settings.BackgroundImage.Hint",
@@ -41,7 +34,7 @@ Hooks.once("init", () => {
         onChange: () => updateTheme()
     });
 
-    // 1.5. Sheet Background Color (New)
+    // Sheet Background Color
     game.settings.register(MODULE_ID, "colorBackground", {
         name: "REALDARK.Settings.ColorBackground.Name",
         hint: "REALDARK.Settings.ColorBackground.Hint",
@@ -52,7 +45,7 @@ Hooks.once("init", () => {
         onChange: () => updateTheme()
     });
 
-    // 1.7. Background Size (New)
+    // Background Size
     game.settings.register(MODULE_ID, "bgSize", {
         name: "REALDARK.Settings.BgSize.Name",
         hint: "REALDARK.Settings.BgSize.Hint",
@@ -63,7 +56,7 @@ Hooks.once("init", () => {
         onChange: () => updateTheme()
     });
 
-    // 2. Plaque Image (Legacy/Optional)
+    // Plaque Image
     game.settings.register(MODULE_ID, "plaqueImage", {
         name: "REALDARK.Settings.PlaqueImage.Name",
         hint: "REALDARK.Settings.PlaqueImage.Hint",
@@ -75,7 +68,7 @@ Hooks.once("init", () => {
         onChange: () => updateTheme()
     });
 
-    // 3. Primary Color (Gold)
+    // Primary Color (Gold)
     game.settings.register(MODULE_ID, "colorGold", {
         name: "REALDARK.Settings.ColorGold.Name",
         hint: "REALDARK.Settings.ColorGold.Hint",
@@ -86,7 +79,7 @@ Hooks.once("init", () => {
         onChange: () => updateTheme()
     });
 
-    // 4. Dim Color
+    // Dim Color
     game.settings.register(MODULE_ID, "colorGoldDim", {
         name: "REALDARK.Settings.ColorGoldDim.Name",
         hint: "REALDARK.Settings.ColorGoldDim.Hint",
@@ -97,7 +90,7 @@ Hooks.once("init", () => {
         onChange: () => updateTheme()
     });
 
-    // 5. Accent Color (Red)
+    // Accent Color (Red)
     game.settings.register(MODULE_ID, "colorAccent", {
         name: "REALDARK.Settings.ColorAccent.Name",
         hint: "REALDARK.Settings.ColorAccent.Hint",
@@ -109,7 +102,7 @@ Hooks.once("init", () => {
     });
 
 
-    // 6. Light Text Color
+    // Light Text Color
     game.settings.register(MODULE_ID, "colorLight", {
         name: "REALDARK.Settings.ColorLight.Name",
         hint: "REALDARK.Settings.ColorLight.Hint",
@@ -120,7 +113,7 @@ Hooks.once("init", () => {
         onChange: () => updateTheme()
     });
 
-    // 7. Input Config
+    // Input Config
     game.settings.register(MODULE_ID, "inputBg", {
         name: "REALDARK.Settings.InputBg.Name",
         hint: "REALDARK.Settings.InputBg.Hint",
@@ -131,7 +124,7 @@ Hooks.once("init", () => {
         onChange: () => updateTheme()
     });
 
-    // 7.5 Sidebar Opacity
+    // Sidebar Opacity
     game.settings.register(MODULE_ID, "sidebarOpacity", {
         name: "REALDARK.Settings.SidebarOpacity.Name",
         hint: "REALDARK.Settings.SidebarOpacity.Hint",
@@ -142,7 +135,7 @@ Hooks.once("init", () => {
         onChange: () => updateTheme()
     });
 
-    // 8. Banner Color (New)
+    // Banner Color
     game.settings.register(MODULE_ID, "colorBanner", {
         name: "REALDARK.Settings.ColorBanner.Name",
         hint: "REALDARK.Settings.ColorBanner.Hint",
@@ -369,7 +362,8 @@ class RealDarkWizard extends HandlebarsApplicationMixin(ApplicationV2) {
             roses: { gold: "#eebbc3", dim: "#d66a7a", accent: "#ff4d6d", text: "#ffe0e5", banner: "#330a0f", bg: "#1a0406", bgSize: "cover", bgImg: "modules/phils-pf2e-realdark/assets/bgroses.webp", sidebarOp: 0.7 },
             stars: { gold: "#e0f0ff", dim: "#8a86c6", accent: "#a64dff", text: "#f0f0ff", banner: "#100e26", bg: "#050412", bgSize: "cover", bgImg: "modules/phils-pf2e-realdark/assets/bgstars.webp", sidebarOp: 0.8 },
             stone: { gold: "#c0c0c0", dim: "#9a9aa6", accent: "#5ea3ba", text: "#e0e0e5", banner: "#2b2b30", bg: "#15151a", bgSize: "cover", bgImg: "modules/phils-pf2e-realdark/assets/bgstone.webp", sidebarOp: 0.7 },
-            perry: { gold: "#4dc0c0", dim: "#3a8e8e", accent: "#f7941d", text: "#e0f5f5", banner: "#004d4d", bg: "#002b2b", bgSize: "cover", bgImg: "modules/phils-pf2e-realdark/assets/bgperry.webp", sidebarOp: 0.7 }
+            perry: { gold: "#4dc0c0", dim: "#3a8e8e", accent: "#f7941d", text: "#e0f5f5", banner: "#004d4d", bg: "#002b2b", bgSize: "cover", bgImg: "modules/phils-pf2e-realdark/assets/bgperry.webp", sidebarOp: 0.7 },
+            void: { gold: "#cccccc", dim: "#888888", accent: "#ffffff", text: "#e0e0e0", banner: "#000000", bg: "#000000", bgSize: "auto", bgImg: "", sidebarOp: 0.9 }
         };
 
         const preset = presets[presetKey];
@@ -576,168 +570,61 @@ function applyRealDarkTheme(app, html) {
     if (!app.element) return;
     const el = app.element[0] || app.element;
 
+    // 1. Mark Window Immediately
     el.setAttribute("data-realdark-theme", "dark");
     el.classList.add("realdark-theme-window");
 
-    // Use setTimeout to ensure CSS vars are picked up if we need to force inline
-    // But now we use var() in inline styles to allow hot-swapping!
-    setTimeout(() => {
-        // 1. Apply Custom Background & Fog
-        // 1. Apply Custom Background & Fog
+    // 2. Schedule Heavy Lifting for Next Frame
+    requestAnimationFrame(() => {
+        // A. Custom Background Handling
         const content = el.querySelector(".window-content");
         if (content) {
-            // Apply CSS Variable locally to be sure
             content.style.setProperty("background-color", "var(--realdark-sheet-bg)", "important");
-
-            // Apply CSS Variable locally to be sure
-            content.style.setProperty("background-color", "var(--realdark-sheet-bg)", "important");
-            content.style.removeProperty("background-image");
+            if (content.style.backgroundImage) content.style.removeProperty("background-image");
         }
 
-        // 2. Content Panels (GLASS) - DISABLED TO ALLOW BACKGROUND COLOR TO SHINE
-        // We rely on CSS 'background: transparent' for these containers mostly.
-        /*
-        const glassContainers = el.querySelectorAll(".sheet-body, .sheet-content, .tab, .primary-body, .group-panel, .directory-list");
-        glassContainers.forEach(div => {
-            // This stacking caused the background to become pitch black.
-            // div.style.setProperty("background", "rgba(0, 0, 0, 0.4)", "important");
-            // div.style.setProperty("backdrop-filter", "blur(4px)", "important");
-        });
-        */
-
-        // 3. Navigation (TRANSPARENT)
-        // Start fresh for navs to ensure no background clipping
-        const navContainers = el.querySelectorAll("nav, .sheet-navigation, .secondary-navigation");
-        navContainers.forEach(div => {
-            div.style.setProperty("background", "transparent", "important");
-            div.style.setProperty("box-shadow", "none", "important");
-            div.style.setProperty("border", "none", "important");
-        });
-
-        // 4. Inputs
-        const inputs = el.querySelectorAll("input, select, textarea");
-        inputs.forEach(inp => {
-            if (inp.type === "range") return;
-
-            inp.style.setProperty("background", "var(--realdark-input-bg)", "important");
-            inp.style.setProperty("color", "#fff", "important");
-            inp.style.setProperty("border", "1px solid rgba(255, 255, 255, 0.2)", "important");
-            inp.style.setProperty("border-radius", "4px", "important");
-        });
-
-        // 5. Force Text Colors
-        const stubbornText = el.querySelectorAll("label, span.label, .h1, .h2, .h3, .h4, h1, h2, h3, h4, span");
-        stubbornText.forEach(t => {
-            // Updated to exclude .sidebar children from forced color overrides if needed, but gold is usually fine
-            if (!t.closest(".rd-preset-btn") && !t.closest(".rd-header-panel")) {
-                t.style.setProperty("color", "var(--realdark-gold)", "important");
-                // APPLY DYNAMIC SHADOW
-                t.style.setProperty("text-shadow", "var(--realdark-text-shadow)", "important");
-            }
-        });
-
-        // ATMOSPHERE INJECTION: REMOVED
-        // We now rely purely on the :root[data-realdark-atmosphere] CSS rules to apply the backgrounds.
-        // This JS used to set 'background-image: none' which killed the CSS.
-
-        // 6. Window Frame
-        el.style.setProperty("border", "1px solid rgba(130, 130, 130, 0.3)", "important");
-        el.style.setProperty("box-shadow", "0 0 10px rgba(0,0,0,0.8)", "important");
-
-        // 7. SPECIFIC SIDEBAR OVERRIDE (JS FORCE)
-        // We use the CSS variable so it updates live with the theme engine
-        // 7. SPECIFIC SIDEBAR OVERRIDE (JS FORCE)
-        // 7. SPECIFIC SIDEBAR OVERRIDE - REMOVED TO RELY ON CSS VARIABLES --realdark-banner-color AND --realdark-sidebar-opacity
+        // B. Sidebar Logo Injection
         const sidebar = el.querySelector("aside.sidebar, .sidebar, .sheet-sidebar");
         if (sidebar) {
-            sidebar.style.removeProperty("background-image");
-            sidebar.style.removeProperty("background");
-            // Force height for older systems
-            sidebar.style.setProperty("height", "100%", "important");
-            sidebar.style.setProperty("min-height", "100%", "important");
-        }
+            // Clean sidebar background if inline
+            if (sidebar.style.backgroundImage) sidebar.style.removeProperty("background-image");
 
-        // 7. Plaque Swap
-        const plaqueElements = el.querySelectorAll('*');
-        plaqueElements.forEach(node => {
-            const computedStyle = window.getComputedStyle(node);
-            const bgImage = computedStyle.backgroundImage;
-            if (bgImage && bgImage.includes("plaque")) {
-                node.style.setProperty("background-image", "var(--realdark-plaque-url)", "important");
-                node.style.setProperty("color", "var(--realdark-gold)", "important");
-                node.style.setProperty("text-shadow", "none", "important");
-            }
-        });
-
-        // 8. FORCED LOGO SWAP (JS)
-        // CSS content replacement can be flaky. We do it live.
-        // 8. FORCED LOGO INJECTION (JS)
-        // Target the SIDEBAR, not the header
-        // 'sidebar' is already defined at line 563
-        if (sidebar) {
-            // Check if we already injected it
+            // Inject Logo if needed
             let myLogo = sidebar.querySelector(".realdark-logo");
-
-            // If not found, create it
             if (!myLogo) {
                 myLogo = document.createElement("img");
                 myLogo.classList.add("realdark-logo");
                 myLogo.dataset.tooltip = "RealDark Custom Logo";
                 myLogo.src = "/modules/phils-pf2e-realdark/assets/Logo.webp";
-
-                // Sidebar specific styling
-                // "Oben links" -> Top Left (User updated: wants it centered in sidebar, larger, less bottom gap)
-                // "Immer noch nicht ganz" -> Force Width 100%, Remove Margins
-                // "Jetzt links aber Abstand" -> Negative margins to offset system padding
-                // "Links bündig nicht zentriert" -> Padding guess was wrong. Using symmetric expansion.
-                const logoStyle = "display: block; margin: 0 -8px 0px -8px; width: calc(100% + 16px); max-width: none; height: auto; border: none; background: transparent; position: relative; z-index: 1000; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.8));";
-
-                myLogo.style.cssText = logoStyle;
-
-                sidebar.prepend(myLogo);
-            } else {
-                // Ensure it's visible if it already exists AND update styles (Fix for "nothing changed")
+                // Style is now largely handled by CSS class .realdark-logo, 
+                // but we keep some specific overrides here to match user tweaks
                 myLogo.style.cssText = "display: block; margin: 0 -8px 0px -8px; width: calc(100% + 16px); max-width: none; height: auto; border: none; background: transparent; position: relative; z-index: 1000; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.8));";
+                sidebar.prepend(myLogo);
             }
         }
 
-        // 9. FORCE JOURNAL BACKGROUND REMOVAL (JS OVERRIDE)
-        // CSS is failing to remove the parchment, so we do it here.
+        // C. Journal Specifics (Stubborn Sheets)
         if (app.options && app.options.classes && app.options.classes.includes("journal-sheet")) {
-            const pages = el.querySelectorAll(".journal-entry-page, .sheet-body, article, section");
-            pages.forEach(p => {
+            // Use specific selectors instead of generic iteration where possible
+            const stubborns = el.querySelectorAll(".journal-entry-page, .sheet-body, article, section");
+            for (const p of stubborns) {
                 p.style.setProperty("background", "transparent", "important");
-                p.style.setProperty("background-image", "none", "important");
-                p.style.setProperty("background-color", "transparent", "important");
-                p.style.setProperty("color", "#f0f0f0", "important"); // Force light text
-            });
-
-            // Hide logo specifically for journals (Redundant but safe)
-            const logo = el.querySelector(".realdark-logo");
-            if (logo) logo.style.display = "none";
+                p.style.setProperty("color", "#f0f0f0", "important");
+            }
         }
 
-        // 10. FORCE INVENTORY HEADER DARKENING (JS OVERRIDE)
-        // User provided path: ... div.tab.inventory.item-container.active > section > header
-        const invHeaders = el.querySelectorAll("li.inventory-header, .inventory-list header, .item-list header, .tab.inventory header, .item-container header, .inventory-header, .currency-pane, header");
-        invHeaders.forEach(h => {
-            // Safety check: specific headers only to avoid breaking other things
-            // If it's a generic header, ensure it's inside an inventory tab or item list
-            if (h.tagName === "HEADER" && !h.closest(".tab.inventory") && !h.closest(".item-container") && !h.closest(".inventory-list") && !h.closest(".currency-pane")) {
-                return;
-            }
-
+        // D. Inventory Headers (Specific Target)
+        // Kept because system updates might revert these specific elements
+        const invHeaders = el.querySelectorAll(".inventory-header, .inventory-list header, .item-list header");
+        for (const h of invHeaders) {
             h.style.setProperty("background", "rgba(0, 0, 0, 0.4)", "important");
-            h.style.setProperty("background-color", "rgba(0, 0, 0, 0.4)", "important");
-            h.style.setProperty("background-image", "none", "important"); // Critical for textures
             h.style.setProperty("color", "var(--realdark-gold)", "important");
-            h.style.setProperty("border-color", "rgba(130, 130, 130, 0.3)", "important");
-            h.style.setProperty("box-shadow", "none", "important");
-            h.style.setProperty("border-radius", "4px", "important"); // Clean up corners
-            h.style.setProperty("margin-bottom", "2px", "important");
-        });
+        }
 
-    }, 200);
+        // REMOVED: Universal 'querySelectorAll(*)' loop for Plaque Swap. 
+        // Improvement: This saves significant processing time per render.
+        // REMOVED: loops for Inputs, Nav, Text Colors (Handled by CSS now).
+    });
 }
 
 // Hooks
