@@ -56,6 +56,30 @@
             background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             text-align: center;
+            position: relative;
+            /* For absolute positioning of actions */
+        }
+
+        .rd-header-actions {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            display: flex;
+            gap: 5px;
+        }
+
+        .rd-action-btn {
+            background: transparent;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 0.9em;
+            padding: 2px 5px;
+            transition: color 0.2s;
+        }
+
+        .rd-action-btn:hover {
+            color: var(--realdark-gold);
         }
 
         .rd-title {

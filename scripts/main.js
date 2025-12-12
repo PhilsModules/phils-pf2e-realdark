@@ -1,4 +1,4 @@
-const MODULE_ID = "phils-pf2e-realdark";
+﻿const MODULE_ID = "phils-pf2e-realdark";
 
 Hooks.once("init", () => {
     // REGISTER SETTINGS
@@ -190,6 +190,22 @@ class RealDarkSettingsShim extends FormApplication {
 }
 
 class RealDarkWizard extends HandlebarsApplicationMixin(ApplicationV2) {
+    constructor(options = {}) {
+        super(options);
+        this.options.window.controls = [
+            {
+                icon: "fas fa-file-import",
+                label: game.i18n.localize("REALDARK.Wizard.Button.Import"),
+                action: "importTheme"
+            },
+            {
+                icon: "fas fa-file-export",
+                label: game.i18n.localize("REALDARK.Wizard.Button.Export"),
+                action: "exportTheme"
+            }
+        ];
+    }
+
     static DEFAULT_OPTIONS = {
         id: "realdark-wizard",
         tag: "form",
@@ -204,7 +220,9 @@ class RealDarkWizard extends HandlebarsApplicationMixin(ApplicationV2) {
         },
         classes: ["realdark-wizard-window"],
         actions: {
-            applyPreset: RealDarkWizard.onApplyPreset
+            applyPreset: RealDarkWizard.onApplyPreset,
+            exportTheme: RealDarkWizard.onExportTheme,
+            importTheme: RealDarkWizard.onImportTheme
         },
         form: {
             handler: RealDarkWizard.onSubmit,
@@ -462,7 +480,95 @@ class RealDarkWizard extends HandlebarsApplicationMixin(ApplicationV2) {
             ui.notifications.error("RealDark Save Failed! Check Console.");
         }
     }
+
+    static async onExportTheme(event, target) {
+        // Collect current form data
+        const form = this.element.querySelector("form.rd-form-body");
+        const formData = new FormData(form);
+        const data = {};
+        formData.forEach((value, key) => data[key] = value);
+
+        // Sanitize data
+        delete data.inputBg;
+
+        // Create JSON
+        const json = JSON.stringify(data, null, 2);
+        const blob = new Blob([json], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+
+        // Trigger Download
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "realdark-theme.json";
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+
+    static async onImportTheme(event, target) {
+        const input = document.createElement("input");
+        input.type = "file";
+        input.accept = ".json";
+
+        input.onchange = async () => {
+            if (input.files.length === 0) return;
+            const file = input.files[0];
+            try {
+                const text = await file.text();
+                const json = JSON.parse(text);
+                await RealDarkWizard.applyThemeData(this, json);
+            } catch (err) {
+                ui.notifications.error(game.i18n.localize("REALDARK.Notify.ImportError"));
+                console.error(err);
+            }
+        };
+
+        input.click();
+    }
+
+    static async applyThemeData(wizard, data) {
+        // Helper to set value on the wizard
+        const setVal = (name, val) => {
+            const el = wizard.element.querySelector(`input[name='${name}']`);
+            if (el) {
+                el.value = val;
+                el.dispatchEvent(new Event('input'));
+                el.dispatchEvent(new Event('change'));
+            }
+            const picker = wizard.element.querySelector(`input[name='${name}Picker']`);
+            if (picker) {
+                picker.value = val;
+                picker.dispatchEvent(new Event('input'));
+            }
+        };
+
+        if (data.colorGold) setVal("colorGold", data.colorGold);
+        if (data.colorGoldDim) setVal("colorGoldDim", data.colorGoldDim);
+        if (data.colorAccent) setVal("colorAccent", data.colorAccent);
+        if (data.colorLight) setVal("colorLight", data.colorLight);
+        if (data.colorBanner) setVal("colorBanner", data.colorBanner);
+        if (data.colorBackground) setVal("colorBackground", data.colorBackground);
+
+        if (data.bgSize) {
+            const bgSizeSelect = wizard.element.querySelector("select[name='bgSize']");
+            if (bgSizeSelect) { bgSizeSelect.value = data.bgSize; bgSizeSelect.dispatchEvent(new Event('change')); }
+        }
+
+        if (data.backgroundImage) setVal("backgroundImage", data.backgroundImage || "");
+
+        if (data.sidebarOpacity) {
+            const slider = wizard.element.querySelector("input[name='sidebarOpacity']");
+            if (slider) {
+                slider.value = data.sidebarOpacity;
+                slider.dispatchEvent(new Event('input'));
+            }
+        }
+
+        ui.notifications.info(game.i18n.localize("REALDARK.Notify.ImportSuccess"));
+    }
 }
+
+
+
 
 
 // ========================================================================
@@ -537,7 +643,7 @@ function updateTheme() {
     const fullRGBA = `rgba(${r}, ${g}, ${b}, ${sidebarOp})`;
     const bottomRGBA = `rgba(0, 0, 0, ${sidebarOp})`;
 
-    // console.log(`PHIL THEME: Updating Sidebar RGBA | Hex: ${hex} | Opacity: ${sidebarOp} | Result: ${fullRGBA}`);
+    // console.log(`PHIL THEME: Updating Sidebar RGBA | Hex: ${ hex } | Opacity: ${ sidebarOp } | Result: ${ fullRGBA }`);
 
     root.style.setProperty("--realdark-sidebar-rgba-top", fullRGBA);
     root.style.setProperty("--realdark-sidebar-rgba-bottom", bottomRGBA);

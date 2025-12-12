@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0] - 2025-12-12
+### AppV2 & File Picker Update
+- **Native Import**: Theme Import now uses your operating system's native file picker for a faster workflow.
+- **ApplicationV2**: Migrated the Import Dialog to Foundry's V2 API, resolving "deprecated" warnings.
+- **Localization**: Added missing translations for Import/Export buttons in English and German.
+- **Bug Fixes**: General stability improvements for the Wizard.
+
 ## [1.1.1] - 2025-12-12
 ### Bug Fix: Tag Styling
 - **Tag Fixes**: Correctly styles all tags (languages, traits, etc.) with a dark background and correct text color.

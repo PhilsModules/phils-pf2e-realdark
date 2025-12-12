@@ -15,6 +15,8 @@
     "REALDARK.Wizard.Label.InputDarkness": "Input Darkness",
     "REALDARK.Wizard.Label.BgColor": "Background Color",
     "REALDARK.Wizard.Button.Save": "Save Changes",
+    "REALDARK.Wizard.Button.Import": "Import Theme",
+    "REALDARK.Wizard.Button.Export": "Export Theme",
     "REALDARK.Wizard.Preview.Live": "LIVE PREVIEW",
     "REALDARK.Wizard.Preview.HP": "HP",
     "REALDARK.Wizard.Preview.Attributes": "Attributes",
@@ -61,5 +63,11 @@
     "REALDARK.Settings.ColorBanner.Name": "Banner/Sidebar Color",
     "REALDARK.Settings.ColorBanner.Hint": "Background color for the sidebar header (replaces image).",
     "REALDARK.Notify.Loaded": "Phil's RealDark Loaded!",
-    "REALDARK.Notify.Saved": "RealDark Theme Saved!"
+    "REALDARK.Notify.Saved": "RealDark Theme Saved!",
+    "REALDARK.Import.Title": "Import RealDark Theme",
+    "REALDARK.Import.Instruction": "Select a JSON file to import:",
+    "REALDARK.Import.Button": "Import",
+    "REALDARK.Notify.ImportSuccess": "Theme Imported Successfully!",
+    "REALDARK.Notify.ImportError": "Invalid JSON!",
+    "REALDARK.Notify.NoFile": "No file selected."
 }
