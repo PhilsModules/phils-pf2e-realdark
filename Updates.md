@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.1.1] - 2025-12-12
+### Bug Fix: Tag Styling
+- **Tag Fixes**: Correctly styles all tags (languages, traits, etc.) with a dark background and correct text color.
+- **Dynamic Detection**: Implemented robust detection for lazily-loaded tags to ensure they are always styled correctly.
+
 ## [1.1.0] - 2025-12-12
 ### Performance & Polish Update
 - **Optimized Performance**: Significant improvements to rendering speed by removing heavy DOM scanning and implementing smoother frame scheduling.

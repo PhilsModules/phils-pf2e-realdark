@@ -652,4 +652,63 @@ Hooks.once('ready', async () => {
 
     // Initial Apply
     updateTheme();
+
+    // Start observing for dynamic tags
+    setupTagObserver();
 });
+
+/**
+ * Nuclear option unique to RealDark:
+ * Watch for ANY changes in the DOM and if a tag appears, force it to behave.
+ * This handles lazy-loaded content in PF2e character sheets.
+ */
+function setupTagObserver() {
+    const observer = new MutationObserver((mutations) => {
+        for (const mutation of mutations) {
+            if (mutation.type === "childList" && mutation.addedNodes.length > 0) {
+                mutation.addedNodes.forEach((node) => {
+                    // Check if node is an element (nodeType 1)
+                    if (node.nodeType === 1) {
+                        const el = $(node);
+                        // Check if the element itself is a tag or contains tags
+                        if (el.hasClass("tag") || el.hasClass("trait")) {
+                            applyTagStyles(el);
+                        }
+                        // Check for tags inside the added node
+                        else {
+                            const tags = el.find(".tag, .trait");
+                            if (tags.length > 0) {
+                                applyTagStyles(tags);
+                            }
+                        }
+                    }
+                });
+            }
+        }
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+    console.log("RealDark | Tag Observer Active");
+}
+
+function applyTagStyles(elements) {
+    // Force styles directly on the element's style attribute
+    // This cannot be overridden by class specificity
+    $(elements).each((i, el) => {
+        el.style.setProperty("background", "rgba(0, 0, 0, 0.8)", "important");
+        el.style.setProperty("background-color", "rgba(0, 0, 0, 0.8)", "important");
+        el.style.setProperty("background-image", "none", "important");
+        el.style.setProperty("color", "var(--realdark-text-light)", "important");
+        el.style.setProperty("border", "1px solid rgba(255, 255, 255, 0.2)", "important");
+        el.style.setProperty("box-shadow", "none", "important");
+        el.style.setProperty("text-shadow", "none", "important");
+        el.style.setProperty("border-radius", "3px", "important");
+
+        // Ensure inner spans also comply
+        const spans = el.querySelectorAll("span");
+        spans.forEach(span => {
+            span.style.setProperty("color", "var(--realdark-text-light)", "important");
+            span.style.setProperty("background", "transparent", "important");
+        });
+    });
+}

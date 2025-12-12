@@ -1303,3 +1303,39 @@ html body .window-app.realdark-theme-window .item-summary {
     padding: 5px !important;
     border-radius: 4px !important;
 }
+
+/* ======================================================================== */
+/* 14. TAG STYLING OVERRIDES (Language, Traits, Etc)                        */
+/* ======================================================================== */
+/* Force dark background for language fields and other tags */
+html body .sheet.actor li.tag,
+html body .sheet.actor span.tag,
+html body .sheet.actor div.tag,
+html body .sheet.actor .tags .tag,
+html body .sheet.actor .subsection.languages ul li,
+html body .sheet.actor .trait {
+    background: rgba(0, 0, 0, 0.8) !important;
+    background-color: rgba(0, 0, 0, 0.8) !important;
+    background-image: none !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: var(--realdark-text-light) !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
+
+html body .sheet.actor li.tag span,
+html body .sheet.actor .tag span {
+    color: var(--realdark-text-light) !important;
+    background: transparent !important;
+}
+
+/* Specific rarity/trait colors override */
+html body .sheet.actor .tag.common,
+html body .sheet.actor .tag.uncommon,
+html body .sheet.actor .tag.rare,
+html body .sheet.actor .tag.unique,
+html body .sheet.actor .tag.secondary,
+html body .sheet.actor .tag.nephilim,
+html body .sheet.actor .tag.feenling {
+    background-color: rgba(0, 0, 0, 0.8) !important;
+}
