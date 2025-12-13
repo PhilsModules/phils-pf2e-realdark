@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.2.4] - 2025-12-13
+### Bug Fix
+- **Persistent Backgrounds**: Fixed an issue where the dark theme background would persist on Actor and Journal sheets even when the theme was disabled for those scopes in the wizard.
+
 ## 1.2.3
 - **Fix:** Fixed custom logo centering on NPC and Monster sheets.
 - **Polish:** Added standard `appearance` property for better CSS compatibility.

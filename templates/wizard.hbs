@@ -146,11 +146,33 @@
             /* EXTRA COMPACT */
             flex: 1;
             /* Take remaining space */
-            overflow: hidden;
-            /* Prevent body scroll if possible, specific sections might scroll? No, goal is no scroll */
+            overflow-y: auto;
+            /* Enable scrolling */
+            scrollbar-width: thin;
         }
 
-        .rd-section-title {
+        /* ... existing css ... */
+
+        .rd-footer {
+            padding: 10px;
+            /* EXTRA COMPACT */
+            background: rgba(0, 0, 0, 0.4);
+            text-align: center;
+            /* margin-top: auto; Remove auto margin as it is now fixed at bottom via flex */
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            flex: 0 0 auto;
+            /* Don't shrink */
+        }
+
+        /* ... */
+
+        <form class="rd-form-body">< !-- Form wrapper -->< !-- ... controls ... -->< !-- HIDDEN FIELDS FOR PRESETS TO FILL IF NEEDED -->< !-- HIDDEN FIELDS FOR PRESETS --><input type="hidden" name="backgroundImage" value="{{bgImgVal}}"><input type="hidden" name="bgSize" value="{{bgSizeVal}}"><input type="hidden" name="colorBackground" value="{{bgVal}}"></form><div class="rd-footer"><button type="submit" class="rd-submit-btn"> {
+                {
+                localize 'REALDARK.Wizard.Button.Save'
+            }
+        }
+
+        </button></div></div>.rd-section-title {
             font-size: 0.7em;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -218,8 +240,9 @@
             /* EXTRA COMPACT */
             background: rgba(0, 0, 0, 0.4);
             text-align: center;
-            margin-top: auto;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
+            flex: 0 0 auto;
+            /* Don't shrink */
         }
 
         .rd-submit-btn {
@@ -431,16 +454,31 @@
                         ">
                     <input type="hidden" name="inputBg" id="inputBgHidden" value="{{inputVal}}">
                 </div>
+                <div class="rd-section-title">{{localize 'REALDARK.Wizard.Section.Scopes'}}</div>
+                <div class="rd-control-group">
+                    <span class="rd-label-main">{{localize 'REALDARK.Wizard.Label.ScopeActor'}}</span>
+                    <input type="checkbox" name="themeEnabledActor" {{checked toggleActor}}>
+                </div>
+                <div class="rd-control-group">
+                    <span class="rd-label-main">{{localize 'REALDARK.Wizard.Label.ScopeItem'}}</span>
+                    <input type="checkbox" name="themeEnabledItem" {{checked toggleItem}}>
+                </div>
+                <div class="rd-control-group">
+                    <span class="rd-label-main">{{localize 'REALDARK.Wizard.Label.ScopeJournal'}}</span>
+                    <input type="checkbox" name="themeEnabledJournal" {{checked toggleJournal}}>
+                </div>
+
                 <!-- HIDDEN FIELDS FOR PRESETS TO FILL IF NEEDED -->
                 <!-- HIDDEN FIELDS FOR PRESETS -->
                 <input type="hidden" name="backgroundImage" value="{{bgImgVal}}">
                 <input type="hidden" name="bgSize" value="{{bgSizeVal}}">
                 <input type="hidden" name="colorBackground" value="{{bgVal}}">
 
-                <div class="rd-footer">
-                    <button type="submit" class="rd-submit-btn">{{localize 'REALDARK.Wizard.Button.Save'}}</button>
-                </div>
             </form>
+
+            <div class="rd-footer">
+                <button type="submit" class="rd-submit-btn">{{localize 'REALDARK.Wizard.Button.Save'}}</button>
+            </div>
         </div>
 
         <!-- RIGHT COLUMN: LIVE PREVIEW -->

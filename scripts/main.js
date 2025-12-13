@@ -146,6 +146,34 @@ Hooks.once("init", () => {
         onChange: () => updateTheme()
     });
 
+    // MODULE SCOPES (Modular Settings)
+    game.settings.register(MODULE_ID, "themeEnabledActor", {
+        name: "REALDARK.Settings.ThemeEnabledActor.Name",
+        scope: "client",
+        config: false,
+        type: Boolean,
+        default: true,
+        onChange: () => updateTheme()
+    });
+
+    game.settings.register(MODULE_ID, "themeEnabledJournal", {
+        name: "REALDARK.Settings.ThemeEnabledJournal.Name",
+        scope: "client",
+        config: false,
+        type: Boolean,
+        default: true,
+        onChange: () => updateTheme()
+    });
+
+    game.settings.register(MODULE_ID, "themeEnabledItem", {
+        name: "REALDARK.Settings.ThemeEnabledItem.Name",
+        scope: "client",
+        config: false,
+        type: Boolean,
+        default: true,
+        onChange: () => updateTheme()
+    });
+
     // INITIALIZE THEME
     updateTheme();
 
@@ -259,6 +287,9 @@ class RealDarkWizard extends HandlebarsApplicationMixin(ApplicationV2) {
         return {
             goldVal, dimVal, accVal, textVal, bannerVal, bgVal,
             bgImgVal, bgSizeVal, sidebarOpVal, inputVal, sliderVal,
+            toggleActor: game.settings.get(MODULE_ID, "themeEnabledActor"),
+            toggleJournal: game.settings.get(MODULE_ID, "themeEnabledJournal"),
+            toggleItem: game.settings.get(MODULE_ID, "themeEnabledItem"),
             bgSizeOptions: {
                 "cover": "Cover (Scale to Fit)",
                 "contain": "Contain (Full Image)",
@@ -358,6 +389,11 @@ class RealDarkWizard extends HandlebarsApplicationMixin(ApplicationV2) {
                 const formData = new FormData(form);
                 const data = {};
                 formData.forEach((value, key) => data[key] = value);
+
+                // FIX: Manually handle checkboxes because FormData ignores unchecked ones
+                form.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+                    data[cb.name] = cb.checked;
+                });
 
                 // Call static submit handler manually
                 RealDarkWizard.onSubmit(e, form, { object: data });
@@ -470,6 +506,10 @@ class RealDarkWizard extends HandlebarsApplicationMixin(ApplicationV2) {
             await game.settings.set(MODULE_ID, "bgSize", data.bgSize);
             await game.settings.set(MODULE_ID, "sidebarOpacity", Number(data.sidebarOpacity));
 
+            await game.settings.set(MODULE_ID, "themeEnabledActor", data.themeEnabledActor);
+            await game.settings.set(MODULE_ID, "themeEnabledJournal", data.themeEnabledJournal);
+            await game.settings.set(MODULE_ID, "themeEnabledItem", data.themeEnabledItem);
+
             await game.settings.set(MODULE_ID, "wizardShown", true);
 
             updateTheme();
@@ -562,6 +602,15 @@ class RealDarkWizard extends HandlebarsApplicationMixin(ApplicationV2) {
                 slider.dispatchEvent(new Event('input'));
             }
         }
+
+        const setCheck = (name, val) => {
+            const el = wizard.element.querySelector(`input[name='${name}']`);
+            if (el) el.checked = val;
+        };
+
+        if (data.themeEnabledActor !== undefined) setCheck("themeEnabledActor", data.themeEnabledActor);
+        if (data.themeEnabledJournal !== undefined) setCheck("themeEnabledJournal", data.themeEnabledJournal);
+        if (data.themeEnabledItem !== undefined) setCheck("themeEnabledItem", data.themeEnabledItem);
 
         ui.notifications.info(game.i18n.localize("REALDARK.Notify.ImportSuccess"));
     }
@@ -672,11 +721,94 @@ function updateTheme() {
     console.log("PHIL THEME: Settings Updated & Applied");
 }
 
-function applyRealDarkTheme(app, html) {
+function applyRealDarkTheme(app, html, forcedType = null) {
     if (!app.element) return;
     const el = app.element[0] || app.element;
 
-    // 1. Mark Window Immediately
+    // 1. CHECK SCOPES & DETOX
+    // ----------------------
+    const docName = app.document?.documentName || app.object?.documentName;
+
+    // Determine type: Trust ForcedType > DOM Classes > Fallback Property
+    let isActor = forcedType === "Actor";
+    let isItem = forcedType === "Item";
+    let isJournal = forcedType === "JournalEntry";
+
+    if (!forcedType) {
+        // USE DOM CLASSES AS TRUTH (More reliable than app options)
+        isActor = el.classList.contains("actor-sheet");
+        isItem = el.classList.contains("item-sheet");
+        isJournal = el.classList.contains("journal-sheet") || el.classList.contains("journal-entry-page");
+    }
+
+    let isDisabled = false;
+
+    // Check Settings against determined type
+    if (isActor && !game.settings.get(MODULE_ID, "themeEnabledActor")) isDisabled = true;
+    if (isItem && !game.settings.get(MODULE_ID, "themeEnabledItem")) isDisabled = true;
+    if (isJournal && !game.settings.get(MODULE_ID, "themeEnabledJournal")) isDisabled = true;
+
+    // Fallback if classes missing (rare) and no forcedType
+    if (!forcedType && !isDisabled && !isActor && !isItem && !isJournal) {
+        if (docName === "Actor" && !game.settings.get(MODULE_ID, "themeEnabledActor")) isDisabled = true;
+        if (docName === "Item" && !game.settings.get(MODULE_ID, "themeEnabledItem")) isDisabled = true;
+        if ((docName === "JournalEntry" || docName === "JournalEntryPage") && !game.settings.get(MODULE_ID, "themeEnabledJournal")) isDisabled = true;
+    }
+
+    if (isDisabled) {
+        console.log(`RealDark: Theme Disabled for ${docName} - Performing Cleanup`);
+
+        // A. Remove Main Markers
+        el.removeAttribute("data-realdark-theme");
+        el.classList.remove("realdark-theme-window");
+
+        // B. Remove Custom Logo
+        const customLogo = el.querySelector(".realdark-logo");
+        if (customLogo) customLogo.remove();
+
+        const logoCont = el.querySelector(".realdark-logo-container");
+        if (logoCont) {
+            logoCont.classList.remove("realdark-logo-container");
+            logoCont.innerHTML = ""; // Clear our logo
+            logoCont.style = ""; // Reset inline styles
+        }
+
+        // C. Clean Content Styles
+        // Remove the style attribute completely to reset to stylesheet defaults
+        const content = el.querySelector(".window-content");
+        if (content) {
+            content.style.removeProperty("background-color");
+            content.style.removeProperty("background-image");
+            content.style.removeProperty("background");
+        }
+
+        // D. Clean Stubborn Elements (Journals/Sheets)
+        // We look for elements that might have been forced transparent
+        const stubborns = el.querySelectorAll(".journal-entry-page, .sheet-body, article, section, .editor-content");
+        for (const p of stubborns) {
+            p.style.removeProperty("background");
+            p.style.removeProperty("background-color");
+            p.style.removeProperty("color");
+        }
+
+        // E. Clean Inventory Headers
+        const invHeaders = el.querySelectorAll(".inventory-header, .inventory-list header, .item-list header");
+        for (const h of invHeaders) {
+            h.style.removeProperty("background");
+            h.style.removeProperty("color");
+        }
+
+        // F. Clean Initiative Select
+        const initSelect = el.querySelector('select[name="system.initiative.statistic"]');
+        if (initSelect) {
+            initSelect.style = "";
+            initSelect.querySelectorAll("option").forEach(o => o.style = "");
+        }
+
+        return;
+    }
+
+    // 2. Mark Window Immediately
     el.setAttribute("data-realdark-theme", "dark");
     el.classList.add("realdark-theme-window");
 
@@ -691,11 +823,12 @@ function applyRealDarkTheme(app, html) {
 
         // B. Sidebar Logo Injection
         // B. Sidebar Logo Injection
-        // SKIP FOR ITEMS/SPELLS/FEATS - It breaks the layout
+        // SKIP FOR ITEMS/SPELLS/FEATS & JOURNALS
         const isItem = (app.document && app.document.documentName === "Item") || (app.object && app.object.documentName === "Item");
+        const isJournal = (app.document && app.document.documentName === "JournalEntry") || (app.object && app.object.documentName === "JournalEntry");
 
         const sidebar = el.querySelector("aside.sidebar, .sidebar, .sheet-sidebar");
-        if (sidebar && !isItem) {
+        if (sidebar && !isItem && !isJournal) {
             // Clean sidebar background if inline
             if (sidebar.style.backgroundImage) sidebar.style.removeProperty("background-image");
 
@@ -745,6 +878,9 @@ function applyRealDarkTheme(app, html) {
 
         // C. Journal Specifics (Stubborn Sheets)
         if (app.options && app.options.classes && app.options.classes.includes("journal-sheet")) {
+            // CHECK SETTING
+            if (!game.settings.get(MODULE_ID, "themeEnabledJournal")) return;
+
             // Use specific selectors instead of generic iteration where possible
             const stubborns = el.querySelectorAll(".journal-entry-page, .sheet-body, article, section");
             for (const p of stubborns) {
@@ -786,9 +922,9 @@ function applyRealDarkTheme(app, html) {
 }
 
 // Hooks
-Hooks.on("renderActorSheet", (app, html, data) => applyRealDarkTheme(app, html));
-Hooks.on("renderItemSheet", (app, html, data) => applyRealDarkTheme(app, html));
-Hooks.on("renderJournalSheet", (app, html, data) => applyRealDarkTheme(app, html));
+Hooks.on("renderActorSheet", (app, html, data) => applyRealDarkTheme(app, html, "Actor"));
+Hooks.on("renderItemSheet", (app, html, data) => applyRealDarkTheme(app, html, "Item"));
+Hooks.on("renderJournalSheet", (app, html, data) => applyRealDarkTheme(app, html, "JournalEntry"));
 Hooks.on("renderDialog", (app, html, data) => applyRealDarkTheme(app, html));
 Hooks.on("renderCheckModifiersDialog", (app, html, data) => applyRealDarkTheme(app, html));
 
@@ -850,9 +986,17 @@ function setupTagObserver() {
 }
 
 function applyTagStyles(elements) {
+    // SECURITY CHECK: Only apply if the CONTAINER is actually themed!
+    // This prevents the observer from forcing styles on disabled windows.
+    // We check if the element is inside a .realdark-theme-window
+    const $els = $(elements);
+    const isThemed = $els.closest(".realdark-theme-window").length > 0;
+
+    if (!isThemed) return;
+
     // Force styles directly on the element's style attribute
     // This cannot be overridden by class specificity
-    $(elements).each((i, el) => {
+    $els.each((i, el) => {
         el.style.setProperty("background", "rgba(0, 0, 0, 0.8)", "important");
         el.style.setProperty("background-color", "rgba(0, 0, 0, 0.8)", "important");
         el.style.setProperty("background-image", "none", "important");

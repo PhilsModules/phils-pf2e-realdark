@@ -695,19 +695,19 @@ html body .chat-message button[data-action]:hover {
 }
 
 /* 3. Navigation & Badges */
-[src*='nav-item.webp'],
-[style*='nav-item.webp'],
-[src*='nav-item-inactive.webp'],
-[style*='nav-item-inactive.webp'],
-[src*='level-badge.webp'],
-[style*='level-badge.webp'] {
+.window-app.realdark-theme-window [src*='nav-item.webp'],
+.window-app.realdark-theme-window [style*='nav-item.webp'],
+.window-app.realdark-theme-window [src*='nav-item-inactive.webp'],
+.window-app.realdark-theme-window [style*='nav-item-inactive.webp'],
+.window-app.realdark-theme-window [src*='level-badge.webp'],
+.window-app.realdark-theme-window [style*='level-badge.webp'] {
     display: none !important;
     background-image: none !important;
 }
 
 /* 4. Item Frames */
-[src*='item-frame.svg'],
-[style*='item-frame.svg'] {
+.window-app.realdark-theme-window [src*='item-frame.svg'],
+.window-app.realdark-theme-window [style*='item-frame.svg'] {
     /* We often want to KEEP the item frame but remove the image */
     /* So we hide duplicate images but force CSS borders on containers instead */
     display: none !important;
@@ -1114,10 +1114,24 @@ html body .window-app.realdark-theme-window .tagify__tag__removeBtn:hover {
 /* General Catch-All for any stubborn Inputs/Textareas */
 html body .window-app.realdark-theme-window input[type="text"],
 html body .window-app.realdark-theme-window input[type="number"],
-html body .window-app.realdark-theme-window textarea {
+html body .window-app.realdark-theme-window textarea,
+html body .window-app.realdark-theme-window select {
     background-color: var(--realdark-input-bg) !important;
     color: var(--realdark-text-light) !important;
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color-scheme: dark !important;
+}
+
+html body .window-app.realdark-theme-window select option {
+    background-color: #050505 !important;
+    color: var(--realdark-gold) !important;
+}
+
+/* Aggressive Select Fix for generic system fields */
+html body .window-app.realdark-theme-window select {
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    background-image: none !important;
 }
 
 html body .window-app.realdark-theme-window input::placeholder,
@@ -1126,14 +1140,15 @@ html body .window-app.realdark-theme-window textarea::placeholder {
 }
 
 /* Previous IWR Specifics (Retained but redundant now) */
-.window-app.iwr-editor button,
-.window-app.iwr-editor .form-action {
+.window-app.realdark-theme-window .window-app.iwr-editor button,
+.window-app.realdark-theme-window .window-app.iwr-editor .form-action {
     color: var(--realdark-gold) !important;
 
 }
 
 /* Override light theme wrapper */
-.window-app.iwr-editor.theme-light {
+.window-app.realdark-theme-window .window-app.iwr-editor.theme-light,
+.window-app.realdark-theme-window.iwr-editor.theme-light {
     background-image: none !important;
     background: var(--realdark-sheet-bg) !important;
 }
@@ -1493,32 +1508,36 @@ html body .window-app.realdark-theme-window .sheet-sidebar {
 .window-app.realdark-theme-active .journal-sheet .sheet-body,
 .window-app.realdark-theme-active .journal-sheet .journal-entry-page,
 /* ======================================================================== */
-/* ANTI-FLASH: PREEMPTIVE STYLING (Direct Body Targeting)                   */
+/* ANTI-FLASH: PREEMPTIVE STYLING (Scoped to Active Theme Only)             */
 /* ======================================================================== */
-/* This catches the window BEFORE 'realdark-theme-window' class is added by JS */
-html .journal-sheet,
-html .journal-sheet .window-content,
-html .journal-sheet .sheet-body,
-html .journal-sheet article,
-html .journal-sheet .journal-entry-page,
-html .journal-sheet .journal-entry-content {
+/* 
+   CHANGED: Scoped to .realdark-theme-window to preventing persisting on disabled sheets.
+   Note: This may slightly reduce anti-flash effectiveness on first load before JS attaches the class,
+   but it is necessary for the "Disable" feature to function correctly.
+*/
+html .realdark-theme-window.journal-sheet,
+html .realdark-theme-window.journal-sheet .window-content,
+html .realdark-theme-window.journal-sheet .sheet-body,
+html .realdark-theme-window.journal-sheet article,
+html .realdark-theme-window.journal-sheet .journal-entry-page,
+html .realdark-theme-window.journal-sheet .journal-entry-content {
     background: transparent !important;
     background-image: none !important;
     background-color: transparent !important;
 }
 
 /* Kill the parchment image specifically and globally within journals immediately */
-html .journal-sheet [src*='parchment.webp'],
-html .journal-sheet [style*='parchment.webp'] {
+html .realdark-theme-window.journal-sheet [src*='parchment.webp'],
+html .realdark-theme-window.journal-sheet [style*='parchment.webp'] {
     background-image: none !important;
     display: none !important;
 }
 
 /* FORCE BACKGROUND ON ALL LAYERS TO ENSURE VISIBILITY */
-html body .journal-sheet,
-html body .journal-sheet .window-content,
-html body .journal-sheet .sheet-body,
-html body .journal-sheet .journal-entry-page {
+html body .realdark-theme-window.journal-sheet,
+html body .realdark-theme-window.journal-sheet .window-content,
+html body .realdark-theme-window.journal-sheet .sheet-body,
+html body .realdark-theme-window.journal-sheet .journal-entry-page {
     background: var(--realdark-sheet-bg) !important;
     background-image: none !important;
     /* ensure no parchment */
@@ -1537,14 +1556,14 @@ html body .journal-sheet .journal-entry-page {
 }
 
 /* ======================================================================== */
-/* NUCLEAR CHARACTER SHEET ANTI-FLASH                                       */
+/* NUCLEAR CHARACTER SHEET ANTI-FLASH (Scoped)                              */
 /* ======================================================================== */
 
 /* Force immediate dark background on character sheets */
-html body .pf2e.sheet.character .window-content,
-html body .actor.sheet.character .window-content,
-html body .pf2e.sheet.character .sheet-body,
-html body .actor.sheet.character .sheet-body {
+html body .realdark-theme-window.pf2e.sheet.character .window-content,
+html body .realdark-theme-window.actor.sheet.character .window-content,
+html body .realdark-theme-window.pf2e.sheet.character .sheet-body,
+html body .realdark-theme-window.actor.sheet.character .sheet-body {
     background-color: var(--realdark-sheet-bg) !important;
     background-image:
         radial-gradient(circle at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 60%, rgba(0, 0, 0, 0.6) 100%),
@@ -1556,20 +1575,20 @@ html body .actor.sheet.character .sheet-body {
 }
 
 /* Kill specific assets immediately */
-html body .pf2e.sheet.character [src*='blue_sidebar_top.webp'],
-html body .actor.sheet.character [src*='blue_sidebar_top.webp'],
-html body .pf2e.sheet.character [src*='blue_sidebar_bottom.webp'],
-html body .actor.sheet.character [src*='blue_sidebar_bottom.webp'],
-html body .pf2e.sheet.character [src*='banner-bg.webp'],
-html body .actor.sheet.character [src*='banner-bg.webp'],
-html body .pf2e.sheet.character [src*='banner-bg2.webp'],
-html body .actor.sheet.character [src*='banner-bg2.webp'],
-html body .pf2e.sheet.character [src*='background.webp'],
-html body .actor.sheet.character [src*='background.webp'],
-html body .pf2e.sheet.character [src*='parchment.webp'],
-html body .actor.sheet.character [src*='parchment.webp'],
-html body .pf2e.sheet.character [src*='red_sidebar'],
-html body .actor.sheet.character [src*='red_sidebar'] {
+html body .realdark-theme-window.pf2e.sheet.character [src*='blue_sidebar_top.webp'],
+html body .realdark-theme-window.actor.sheet.character [src*='blue_sidebar_top.webp'],
+html body .realdark-theme-window.pf2e.sheet.character [src*='blue_sidebar_bottom.webp'],
+html body .realdark-theme-window.actor.sheet.character [src*='blue_sidebar_bottom.webp'],
+html body .realdark-theme-window.pf2e.sheet.character [src*='banner-bg.webp'],
+html body .realdark-theme-window.actor.sheet.character [src*='banner-bg.webp'],
+html body .realdark-theme-window.pf2e.sheet.character [src*='banner-bg2.webp'],
+html body .realdark-theme-window.actor.sheet.character [src*='banner-bg2.webp'],
+html body .realdark-theme-window.pf2e.sheet.character [src*='background.webp'],
+html body .realdark-theme-window.actor.sheet.character [src*='background.webp'],
+html body .realdark-theme-window.pf2e.sheet.character [src*='parchment.webp'],
+html body .realdark-theme-window.actor.sheet.character [src*='parchment.webp'],
+html body .realdark-theme-window.pf2e.sheet.character [src*='red_sidebar'],
+html body .realdark-theme-window.actor.sheet.character [src*='red_sidebar'] {
     display: none !important;
     background-image: none !important;
     visibility: hidden !important;
