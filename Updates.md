@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.2.6] - 2025-12-13
+### Bug Fix
+- **External Consistency**: Fixed an issue where "Attribute Builder" and "Language Selector" windows appeared light on external connections/browsers.
+- **Explicit Hooks**: Added specific code hooks for `AttributeBuilder`, `TagSelector`, `DamageDialog`, and `RollModifiersDialog` to guarantee theme application.
+
 ## [1.2.5] - 2025-12-13
 ### Improvements
 - **Invested Icon**: Fixed visibility of the "Invested" (Gem) icon on the dark background. It is now Light Gray when inactive and Theme Gold when active, ensuring it doesn't disappear into the void.

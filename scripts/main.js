@@ -928,6 +928,12 @@ Hooks.on("renderJournalSheet", (app, html, data) => applyRealDarkTheme(app, html
 Hooks.on("renderDialog", (app, html, data) => applyRealDarkTheme(app, html));
 Hooks.on("renderCheckModifiersDialog", (app, html, data) => applyRealDarkTheme(app, html));
 
+// EXPLICIT PF2E HOOKS (Fixes 'External Browser' consistency issues)
+Hooks.on("renderAttributeBuilder", (app, html, data) => applyRealDarkTheme(app, html, "Actor"));
+Hooks.on("renderTagSelector", (app, html, data) => applyRealDarkTheme(app, html, "Actor")); // Treat as Actor mostly
+Hooks.on("renderDamageDialog", (app, html, data) => applyRealDarkTheme(app, html));
+Hooks.on("renderRollModifiersDialog", (app, html, data) => applyRealDarkTheme(app, html));
+
 // Universal Trap for System Utilities that default to 'theme-light'
 // We hook renderApplication to catch things that might not have their own precise hook or use sub-classes
 Hooks.on("renderApplication", (app, html, data) => {
