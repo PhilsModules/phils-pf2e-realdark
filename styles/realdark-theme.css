@@ -270,6 +270,31 @@ html body .chat-message button[data-action]:hover {
     border-color: var(--realdark-gold) !important;
 }
 
+/* GENERAL WINDOW CONTENT LINKS (Fixing bright fields) */
+.window-app.realdark-theme-window a.content-link,
+.window-app.realdark-theme-window a.entity-link,
+.window-app.realdark-theme-window a.inline-check,
+.window-app.realdark-theme-window a.inline-roll,
+.window-app.realdark-theme-window span.inline-check,
+.window-app.realdark-theme-window span.inline-roll,
+.window-app.realdark-theme-window span[data-pf2-check],
+.window-app.realdark-theme-window span[data-pf2-saving-throw],
+.window-app.realdark-theme-window span[data-pf2-dc],
+.window-app.realdark-theme-window [data-visibility="gm"] {
+    background: var(--realdark-input-bg) !important;
+    color: var(--realdark-gold) !important;
+    border: 1px solid rgba(130, 130, 130, 0.3) !important;
+    text-shadow: none !important;
+    border-radius: 3px;
+    padding: 1px 4px;
+    text-decoration: none;
+}
+
+.window-app.realdark-theme-window a.content-link i,
+.window-app.realdark-theme-window a.entity-link i {
+    color: var(--realdark-gold) !important;
+}
+
 /* ======================================================================== */
 /* STUBBORN PF2E SPECIFIC OVERRIDES                                         */
 /* ======================================================================== */
@@ -797,7 +822,43 @@ header h1 {
 */
 
 html body .window-app.realdark-theme-window .crb-style aside div,
-html body .window-app.realdark-theme-window .crb-style aside section,
+
+/* ======================================================================== */
+/* 8. PF2E REMASTER TABLES                                                  */
+/* ======================================================================== */
+
+.window-app.realdark-theme-window table.pf2e.remaster,
+.window-app.realdark-theme-window table.pf2e.remaster thead,
+.window-app.realdark-theme-window table.pf2e.remaster tbody,
+.window-app.realdark-theme-window table.pf2e.remaster tr,
+.window-app.realdark-theme-window table.pf2e.remaster th,
+.window-app.realdark-theme-window table.pf2e.remaster td {
+    background: transparent !important;
+    background-color: transparent !important;
+    color: var(--realdark-text-light) !important;
+    border-color: rgba(130, 130, 130, 0.2) !important;
+}
+
+/* Fix alternating rows or distinct headers if needed */
+.window-app.realdark-theme-window table.pf2e.remaster th {
+    background: rgba(0, 0, 0, 0.4) !important;
+    color: var(--realdark-gold) !important;
+}
+
+.window-app.realdark-theme-window table.pf2e.remaster tbody tr:nth-child(odd) {
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.window-app.realdark-theme-window table.pf2e.remaster tbody tr:nth-child(even) {
+    background: rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Fix strong/bold text inside tables */
+.window-app.realdark-theme-window table.pf2e.remaster strong,
+.window-app.realdark-theme-window table.pf2e.remaster b {
+    color: var(--realdark-gold) !important;
+}
+
 html body .window-app.realdark-theme-window .crb-style aside header,
 html body .window-app.realdark-theme-window .crb-style aside nav,
 html body .window-app.realdark-theme-window .crb-style aside form,

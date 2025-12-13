@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2.1] - 2025-12-13
+### UI Polish & Remaster Support
+- **Remaster Tables**: Fixed styling for new PF2e Remaster-style tables to match the dark theme (removed white backgrounds).
+- **Item Sheets**: Removed the large custom logo from Item/Spell/Feat sheets to fix layout and scaling issues. Special thanks to Tiatan for reporting this!
+- **Dark Content Links**: Fixed "bright field" issues for dragged content links, inline checks, and GM-visibility elements.
+
 ## [1.2.0] - 2025-12-12
 ### AppV2 & File Picker Update
 - **Native Import**: Theme Import now uses your operating system's native file picker for a faster workflow.

@@ -690,8 +690,12 @@ function applyRealDarkTheme(app, html) {
         }
 
         // B. Sidebar Logo Injection
+        // B. Sidebar Logo Injection
+        // SKIP FOR ITEMS/SPELLS/FEATS - It breaks the layout
+        const isItem = (app.document && app.document.documentName === "Item") || (app.object && app.object.documentName === "Item");
+
         const sidebar = el.querySelector("aside.sidebar, .sidebar, .sheet-sidebar");
-        if (sidebar) {
+        if (sidebar && !isItem) {
             // Clean sidebar background if inline
             if (sidebar.style.backgroundImage) sidebar.style.removeProperty("background-image");
 
