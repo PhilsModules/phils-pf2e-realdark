@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.2.2
+* Theme Anpassungen ;-p
+
 ## [1.2.1] - 2025-12-13
 ### UI Polish & Remaster Support
 - **Remaster Tables**: Fixed styling for new PF2e Remaster-style tables to match the dark theme (removed white backgrounds).

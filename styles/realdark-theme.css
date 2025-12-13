@@ -14,6 +14,8 @@
     --realdark-sidebar-rgba-top: rgba(122, 0, 0, 0.8);
     --realdark-sidebar-rgba-bottom: rgba(0, 0, 0, 0.8);
     /* Image vars are set by JS */
+    color-scheme: dark;
+    /* Force global dark mode for native controls */
 }
 
 /* ======================================================================== */
@@ -38,10 +40,13 @@
 /* ======================================================================== */
 
 /* Force COLOR Variables */
+.window-app.realdark-theme-window,
 .window-app.realdark-theme-window .window-content,
 .window-app.realdark-theme-window .window-content * {
     color: var(--realdark-gold) !important;
     text-shadow: var(--realdark-text-shadow) !important;
+    color-scheme: dark !important;
+    /* Force native controls to dark */
 }
 
 /* ...EXCEPT INPUTS */
@@ -54,6 +59,27 @@
     background-color: var(--realdark-input-bg) !important;
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
     box-shadow: none !important;
+}
+
+/* Fix Checkboxes & Radio Buttons */
+.window-app.realdark-theme-window input[type="checkbox"],
+.window-app.realdark-theme-window input[type="radio"] {
+    -webkit-appearance: auto !important;
+    /* Force standard OS look but dark */
+    appearance: auto !important;
+    color-scheme: dark !important;
+    accent-color: var(--realdark-gold) !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* Fix Dropdown Options (Browser dependent, but helps where supported) */
+.window-app.realdark-theme-window select option,
+.window-app.realdark-theme-window select optgroup {
+    background-color: var(--realdark-sheet-bg) !important;
+    background: var(--realdark-sheet-bg) !important;
+    color: var(--realdark-gold) !important;
 }
 
 /* ...AND ICONS */
@@ -122,6 +148,19 @@ html body .chat-message button:hover {
 /* Header & Borders - SOFTENED */
 .window-app.realdark-theme-window .sheet-header {
     border-bottom: 1px solid rgba(130, 130, 130, 0.2) !important;
+    display: flex !important;
+    flex-wrap: wrap;
+    /* Safety for small widths */
+    align-items: flex-end;
+    /* Align items to bottom */
+    padding-bottom: 0 !important;
+}
+
+/* Force Nav to lift items up */
+.window-app.realdark-theme-window nav.sheet-navigation {
+    margin-bottom: 5px !important;
+    /* Larger gap */
+    align-items: flex-end !important;
 }
 
 .window-app.realdark-theme-window nav.sheet-navigation .item.active {
@@ -417,16 +456,44 @@ html body .chat-message button[data-action]:hover {
 }
 
 /* 2. NAVIGATION TABS */
+/* Generic Input Styling - Fix for Dropdowns (Initiative etc) */
+.window-app.realdark-theme-window select {
+    background: var(--realdark-input-bg) !important;
+    color: var(--realdark-gold-dim) !important;
+    border: 1px solid rgba(130, 130, 130, 0.4) !important;
+    border-radius: 4px;
+    color-scheme: dark;
+    /* CRITICAL: Forces native dropdown to be dark */
+}
+
+.window-app.realdark-theme-window select:hover,
+.window-app.realdark-theme-window select:focus {
+    color: var(--realdark-gold) !important;
+    border: 1px solid var(--realdark-gold) !important;
+    box-shadow: 0 0 5px var(--realdark-gold-dim);
+}
+
+.window-app.realdark-theme-window select option {
+    background-color: #1a1a1a !important;
+    color: var(--realdark-gold) !important;
+}
+
 /* Removing nav-item.webp and nav-item-inactive.webp */
 .window-app.realdark-theme-window .sheet-navigation .item,
 .window-app.realdark-theme-window nav.sheet-tabs .item {
     background-image: none !important;
     background: transparent !important;
     border: none !important;
-    border-bottom: 2px solid transparent !important;
+    border-bottom: 3px solid transparent !important;
+    /* increased thickness */
     color: var(--realdark-gold-dim) !important;
     transition: all 0.3s ease;
-    padding: 5px 10px !important;
+    padding: 9px 10px 1px 10px !important;
+    /* Shifted down to center icons */
+    transform: translateY(-6px) !important;
+    /* Force visual lift */
+    position: relative;
+    z-index: 5;
 }
 
 .window-app.realdark-theme-window .sheet-navigation .item.active,
@@ -437,6 +504,8 @@ html body .chat-message button[data-action]:hover {
     text-shadow: 0 0 8px var(--realdark-gold);
     box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.5);
 }
+
+
 
 .window-app.realdark-theme-window .sheet-navigation .item:hover,
 .window-app.realdark-theme-window nav.sheet-tabs .item:hover {
@@ -520,6 +589,8 @@ html body .chat-message button[data-action]:hover {
     z-index: 100 !important;
     position: relative !important;
     pointer-events: all !important;
+    margin-top: 2px !important;
+    /* Nudge down slighty */
 }
 
 /* Ensure Charname image is NOT hidden if it was caught before (likely token art) */
@@ -530,6 +601,16 @@ html body .chat-message button[data-action]:hover {
     visibility: visible !important;
     width: auto !important;
     height: auto !important;
+}
+
+/* Fix for standard Logo container gap in Sidebar */
+.window-app.realdark-theme-window .sidebar .logo,
+.window-app.realdark-theme-window aside .logo {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    position: relative;
+    background: transparent !important;
+    border: none !important;
 }
 
 /* Removed aggressive sidebar image hiding */
@@ -855,13 +936,230 @@ html body .window-app.realdark-theme-window .crb-style aside div,
 
 /* Fix strong/bold text inside tables */
 .window-app.realdark-theme-window table.pf2e.remaster strong,
-.window-app.realdark-theme-window table.pf2e.remaster b {
+
+/* ======================================================================== */
+/* 9. INVENTORY HEADER & CURRENCY FIXES                                     */
+/* ======================================================================== */
+
+/* Currency / Coinage Container */
+.window-app.realdark-theme-window .coinage,
+.window-app.realdark-theme-window .coinage .currency,
+.window-app.realdark-theme-window .coinage .wealth {
+    background: var(--realdark-input-bg) !important;
+    background-color: var(--realdark-input-bg) !important;
     color: var(--realdark-gold) !important;
+    border: 1px solid rgba(130, 130, 130, 0.2) !important;
+    box-shadow: none !important;
 }
+
+/* Wealth Breakdown lines */
+.window-app.realdark-theme-window .coinage .wealth .item-name {
+    color: var(--realdark-gold-dim) !important;
+}
+
+.window-app.realdark-theme-window .coinage .wealth .item-name span {
+    color: var(--realdark-text-light) !important;
+}
+
+/* Encumbrance & Resonance Bars */
+.window-app.realdark-theme-window .encumbrance,
+.window-app.realdark-theme-window .encumbrance .encumbrance-bar,
+.window-app.realdark-theme-window .invested-total {
+    background: var(--realdark-input-bg) !important;
+    color: var(--realdark-gold) !important;
+    border: 1px solid rgba(130, 130, 130, 0.2) !important;
+}
+
+.window-app.realdark-theme-window .encumbrance .bar,
+.window-app.realdark-theme-window .invested-total .bar {
+    background-color: var(--realdark-gold-dim) !important;
+}
+
+/* Fix specific list items in currency */
+.window-app.realdark-theme-window .coinage li,
+.window-app.realdark-theme-window .coinage li.label {
+    color: var(--realdark-gold) !important;
+    border-color: rgba(130, 130, 130, 0.2) !important;
+}
+
 
 html body .window-app.realdark-theme-window .crb-style aside header,
 html body .window-app.realdark-theme-window .crb-style aside nav,
-html body .window-app.realdark-theme-window .crb-style aside form,
+
+/* ======================================================================== */
+/* 10. SPELLCASTING DIALOG FIX                                              */
+/* ======================================================================== */
+
+#spellcasting-dialog .window-content,
+#spellcasting-dialog form {
+    background: var(--realdark-sheet-bg) !important;
+    color: var(--realdark-gold) !important;
+}
+
+#spellcasting-dialog .form-group label {
+    color: var(--realdark-gold) !important;
+}
+
+#spellcasting-dialog select {
+    background: var(--realdark-input-bg) !important;
+    color: #fff !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+#spellcasting-dialog select option {
+    background: var(--realdark-sheet-bg) !important;
+    color: var(--realdark-gold) !important;
+}
+
+#spellcasting-dialog button {
+    background: rgba(0, 0, 0, 0.5) !important;
+    color: var(--realdark-gold) !important;
+    border: 1px solid var(--realdark-gold-dim) !important;
+}
+
+#spellcasting-dialog button:hover {
+    box-shadow: 0 0 5px var(--realdark-gold) !important;
+}
+
+/* Ensure the wrapper also loses the light theme background if applied */
+#spellcasting-dialog.theme-light {
+    background-image: none !important;
+    background: var(--realdark-sheet-bg) !important;
+}
+
+
+/* ======================================================================== */
+/* 11. IWR (IMMUNITIES/WEAKNESSES/RESISTANCES) EDITOR FIX                   */
+/* ======================================================================== */
+
+.window-app.iwr-editor .window-content,
+.window-app.iwr-editor form {
+    background: var(--realdark-sheet-bg) !important;
+    color: var(--realdark-gold) !important;
+}
+
+.window-app.iwr-editor h2,
+.window-app.iwr-editor label {
+    color: var(--realdark-gold) !important;
+    border-bottom-color: rgba(130, 130, 130, 0.3) !important;
+}
+
+/* Inputs & Selects in IWR */
+.window-app.iwr-editor input,
+.window-app.iwr-editor select,
+.window-app.iwr-editor .tagify {
+    background: var(--realdark-input-bg) !important;
+    color: #fff !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.window-app.iwr-editor select option {
+    background: var(--realdark-sheet-bg) !important;
+    color: var(--realdark-gold) !important;
+}
+
+/* Tagify styling specific adjustments */
+.window-app.iwr-editor .tagify tag {
+    background: var(--realdark-gold-dim) !important;
+    color: #fff !important;
+}
+
+.window-app.iwr-editor .tagify tag x {
+    color: #fff !important;
+}
+
+/* ======================================================================== */
+/* 11. GLOBAL TAGIFY & INPUT FIX (Crucial for Item Sheets)                  */
+/* ======================================================================== */
+
+/* Force Tagify containers to be dark */
+html body .window-app.realdark-theme-window .tagify,
+html body .window-app.realdark-theme-window .tagify.tagify--focus,
+html body .window-app.realdark-theme-window tag,
+html body .window-app.realdark-theme-window .tagify__input {
+    background: var(--realdark-input-bg) !important;
+    background-color: var(--realdark-input-bg) !important;
+    color: var(--realdark-text-light) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    --tags-border-color: rgba(255, 255, 255, 0.2) !important;
+    --tag-bg: var(--realdark-gold-dim) !important;
+    --tag-text-color: #fff !important;
+    --tag-remove-btn-color: #fff !important;
+}
+
+/* Fix the actual text input area inside Tagify */
+html body .window-app.realdark-theme-window .tagify__input::before {
+    color: var(--realdark-text-light) !important;
+    /* Placeholder text */
+    opacity: 0.7;
+}
+
+/* Individual Tags */
+html body .window-app.realdark-theme-window tag.tagify__tag>div,
+html body .window-app.realdark-theme-window .tagify__tag>div {
+    background-color: var(--realdark-gold-dim) !important;
+    color: #fff !important;
+    border-radius: 3px;
+}
+
+html body .window-app.realdark-theme-window .tagify__tag__removeBtn {
+    color: #fff !important;
+}
+
+html body .window-app.realdark-theme-window .tagify__tag__removeBtn:hover {
+    background: var(--realdark-red-bright) !important;
+    color: white !important;
+}
+
+/* General Catch-All for any stubborn Inputs/Textareas */
+html body .window-app.realdark-theme-window input[type="text"],
+html body .window-app.realdark-theme-window input[type="number"],
+html body .window-app.realdark-theme-window textarea {
+    background-color: var(--realdark-input-bg) !important;
+    color: var(--realdark-text-light) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+html body .window-app.realdark-theme-window input::placeholder,
+html body .window-app.realdark-theme-window textarea::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Previous IWR Specifics (Retained but redundant now) */
+.window-app.iwr-editor button,
+.window-app.iwr-editor .form-action {
+    color: var(--realdark-gold) !important;
+
+}
+
+/* Override light theme wrapper */
+.window-app.iwr-editor.theme-light {
+    background-image: none !important;
+    background: var(--realdark-sheet-bg) !important;
+}
+
+/* ======================================================================== */
+/* 12. INITIATIVE SELECTOR FIX                                              */
+/* ======================================================================== */
+
+/* RE-NUKE INITIATIVE FIX - FINAL ATTEMPT */
+/* Targeting specifically with opaque background to force rendering engine compliance */
+html body select[name="system.initiative.statistic"],
+html body .window-app.realdark-theme-window select[name="system.initiative.statistic"] {
+    background-color: #050505 !important;
+    color: var(--realdark-gold) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color-scheme: dark !important;
+}
+
+html body select[name="system.initiative.statistic"] option,
+html body .window-app.realdark-theme-window select[name="system.initiative.statistic"] option {
+    background-color: #050505 !important;
+    color: var(--realdark-gold) !important;
+    -webkit-appearance: none !important;
+}
+
+
 html body .window-app.realdark-theme-window .crb-style aside h1,
 html body .window-app.realdark-theme-window .crb-style aside h2,
 html body .window-app.realdark-theme-window .crb-style aside h3,
@@ -1311,7 +1609,68 @@ html body .actor.sheet.character [src*='red_sidebar'] {
 }
 
 /* ======================================================================== */
-/* 13. GLOBAL BORDER SOFTENING (The Final Layer)                            */
+/* ======================================================================== */
+/* 13. NAVIGATION & LOGO FIXES                                              */
+/* ======================================================================== */
+
+/* Force hide original logo container if it exists (prevents gap) */
+/* Force hide original logo container if it exists (prevents gap) - HIGH SPECIFICITY */
+html body .window-app.realdark-theme-window .sidebar .logo:not(.realdark-logo),
+html body .window-app.realdark-theme-window .sidebar div.logo:not(.realdark-logo),
+.window-app.realdark-theme-window .sidebar .logo:not(.realdark-logo) {
+    display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    position: absolute !important;
+    top: -9999px !important;
+    pointer-events: none !important;
+}
+
+/* Ensure our custom logo IS visible */
+html body .window-app.realdark-theme-window .sidebar .realdark-logo,
+.window-app.realdark-theme-window .sidebar .realdark-logo {
+    display: block !important;
+    visibility: visible !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    position: relative !important;
+    top: auto !important;
+    opacity: 1 !important;
+}
+
+/* Fix Navigation Line - Tab Style Overlap (Restored) */
+.window-app.realdark-theme-window .sheet-navigation {
+    border-bottom: 1px solid var(--realdark-gold-dim) !important;
+    margin-bottom: 5px !important;
+    padding-bottom: 0 !important;
+    position: relative;
+    z-index: 1;
+}
+
+.window-app.realdark-theme-window .sheet-navigation .item {
+    border-bottom: 3px solid transparent !important;
+    margin-bottom: -2px !important;
+    /* Overlap the container border */
+    position: relative;
+    z-index: 2;
+    /* Sit on top */
+    padding-bottom: 5px !important;
+}
+
+.window-app.realdark-theme-window .sheet-navigation .item.active {
+    border-bottom: 3px solid var(--realdark-gold) !important;
+    color: var(--realdark-gold) !important;
+    background: transparent !important;
+}
+
+/* ======================================================================== */
+/* 14. GLOBAL BORDER SOFTENING (The Final Layer)                            */
 /* ======================================================================== */
 
 /* Soften Sidebar Inputs & Buttons */

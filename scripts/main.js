@@ -699,17 +699,40 @@ function applyRealDarkTheme(app, html) {
             // Clean sidebar background if inline
             if (sidebar.style.backgroundImage) sidebar.style.removeProperty("background-image");
 
-            // Inject Logo if needed
-            let myLogo = sidebar.querySelector(".realdark-logo");
-            if (!myLogo) {
-                myLogo = document.createElement("img");
-                myLogo.classList.add("realdark-logo");
-                myLogo.dataset.tooltip = "RealDark Custom Logo";
-                myLogo.src = "/modules/phils-pf2e-realdark/assets/Logo.webp";
-                // Style is now largely handled by CSS class .realdark-logo, 
-                // but we keep some specific overrides here to match user tweaks
-                myLogo.style.cssText = "display: block; margin: 0 -8px 0px -8px; width: calc(100% + 16px); max-width: none; height: auto; border: none; background: transparent; position: relative; z-index: 1000; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.8));";
-                sidebar.prepend(myLogo);
+            // Inject Logo into existing container if possible - GLOBAL SEARCH in sheet
+            // We search in 'el' (the window) to catch it whether it is in sidebar or header
+            const existingLogoContainer = el.querySelector(".logo");
+
+            // Check if we already injected (prevent duplicates)
+            if (el.querySelector(".realdark-logo")) return;
+
+            const logoImg = document.createElement("img");
+            logoImg.classList.add("realdark-logo");
+            logoImg.dataset.tooltip = "RealDark Custom Logo";
+            logoImg.src = "/modules/phils-pf2e-realdark/assets/Logo.webp";
+            // Style managed by CSS largely, but key overrides kept for safety
+            logoImg.style.cssText = "display: block; margin: 0; width: 100%; height: auto; border: none; background: transparent; position: relative; z-index: 1000; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.8));";
+
+            if (existingLogoContainer) {
+                // User Request: Insert our logo INTO the gap container instead of under it
+                existingLogoContainer.innerHTML = ""; // Clear existing (gap/old logo)
+                existingLogoContainer.appendChild(logoImg);
+
+                // CRITICAL: Ensure container is visible even if CSS tried to hide .logo
+                // We add a class that our CSS can optionally allow, or just inline force it
+                existingLogoContainer.classList.add("realdark-logo-container");
+                existingLogoContainer.style.setProperty("display", "block", "important");
+                existingLogoContainer.style.setProperty("margin", "0", "important");
+                existingLogoContainer.style.setProperty("padding", "0", "important");
+                existingLogoContainer.style.setProperty("height", "auto", "important");
+                existingLogoContainer.style.setProperty("opacity", "1", "important");
+                existingLogoContainer.style.setProperty("visibility", "visible", "important");
+                existingLogoContainer.style.setProperty("width", "auto", "important");
+            } else if (sidebar) {
+                // Fallback: Prepend if no container found
+                logoImg.style.margin = "0 -8px 0px -8px";
+                logoImg.style.width = "calc(100% + 16px)";
+                sidebar.prepend(logoImg);
             }
         }
 
@@ -729,6 +752,24 @@ function applyRealDarkTheme(app, html) {
         for (const h of invHeaders) {
             h.style.setProperty("background", "rgba(0, 0, 0, 0.4)", "important");
             h.style.setProperty("color", "var(--realdark-gold)", "important");
+        }
+
+        // E. INITIATIVE DROPDOWN FORCE FIX (The "Nuclear" JS Option)
+        const initSelect = el.querySelector('select[name="system.initiative.statistic"]');
+        if (initSelect) {
+            // Use Theme Variables for the Select Button
+            initSelect.style.setProperty("background-color", "var(--realdark-input-bg)", "important");
+            initSelect.style.setProperty("color", "var(--realdark-gold)", "important");
+            initSelect.style.setProperty("color-scheme", "dark", "important");
+            initSelect.style.setProperty("border", "1px solid rgba(255, 255, 255, 0.2)", "important");
+
+            // Force options to match the theme background (solid) and text color
+            const opts = initSelect.querySelectorAll("option");
+            for (const opt of opts) {
+                // Use sheet background which is usually opaque and themed, avoiding white-flash issues with transparent rgba
+                opt.style.setProperty("background-color", "var(--realdark-sheet-bg)", "important");
+                opt.style.setProperty("color", "var(--realdark-gold)", "important");
+            }
         }
 
         // REMOVED: Universal 'querySelectorAll(*)' loop for Plaque Swap. 
