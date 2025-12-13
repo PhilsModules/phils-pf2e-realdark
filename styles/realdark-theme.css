@@ -1157,6 +1157,7 @@ html body .window-app.realdark-theme-window select[name="system.initiative.stati
     background-color: #050505 !important;
     color: var(--realdark-gold) !important;
     -webkit-appearance: none !important;
+    appearance: none !important;
 }
 
 

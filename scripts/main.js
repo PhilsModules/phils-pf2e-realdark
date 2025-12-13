@@ -730,8 +730,15 @@ function applyRealDarkTheme(app, html) {
                 existingLogoContainer.style.setProperty("width", "auto", "important");
             } else if (sidebar) {
                 // Fallback: Prepend if no container found
-                logoImg.style.margin = "0 -8px 0px -8px";
-                logoImg.style.width = "calc(100% + 16px)";
+                const isNPC = (app.document?.type === 'npc' || app.document?.type === 'hazard');
+
+                if (isNPC) {
+                    logoImg.style.margin = "0";
+                    logoImg.style.width = "100%";
+                } else {
+                    logoImg.style.margin = "0 -8px 0px -8px";
+                    logoImg.style.width = "calc(100% + 16px)";
+                }
                 sidebar.prepend(logoImg);
             }
         }

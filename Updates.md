@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.3
+- **Fix:** Fixed custom logo centering on NPC and Monster sheets.
+- **Polish:** Added standard `appearance` property for better CSS compatibility.
+
 ## 1.2.2
 * Theme Anpassungen ;-p
 
