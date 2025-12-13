@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.2.5] - 2025-12-13
+### Improvements
+- **Invested Icon**: Fixed visibility of the "Invested" (Gem) icon on the dark background. It is now Light Gray when inactive and Theme Gold when active, ensuring it doesn't disappear into the void.
+
 ## [1.2.4] - 2025-12-13
 ### Bug Fix
 - **Persistent Backgrounds**: Fixed an issue where the dark theme background would persist on Actor and Journal sheets even when the theme was disabled for those scopes in the wizard.

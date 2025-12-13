@@ -124,6 +124,35 @@ html body .chat-message button:hover {
 }
 
 /* ======================================================================== */
+/* CHAT MESSAGE VARIANTS (Whisper, Blind)                                   */
+/* ======================================================================== */
+
+/* Styles moved to below generic block to ensure cascade wins */
+
+/* ======================================================================== */
+/* CONTEXT MENU FIX                                                         */
+/* ======================================================================== */
+html body #context-menu {
+    background: var(--realdark-sheet-bg) !important;
+    color: var(--realdark-gold) !important;
+    border: 1px solid var(--realdark-gold-dim) !important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8) !important;
+    z-index: 9999 !important;
+    position: absolute !important;
+}
+
+#context-menu .context-items .context-item {
+    color: var(--realdark-text-light) !important;
+    background: transparent !important;
+}
+
+#context-menu .context-items .context-item:hover {
+    background: var(--realdark-gold-dim) !important;
+    color: #000 !important;
+    text-shadow: none !important;
+}
+
+/* ======================================================================== */
 /* CLEANUP                                                                  */
 /* ======================================================================== */
 
@@ -182,11 +211,39 @@ html body .chat-message button:hover {
 html body .chat-message {
     background: var(--realdark-sheet-bg) !important;
     background-image: none !important;
-    backdrop-filter: blur(5px);
+    /* backdrop-filter removed to prevent stacking context issues */
     border: 1px solid rgba(130, 130, 130, 0.3) !important;
     /* Soft border */
     color: var(--realdark-gold) !important;
     box-shadow: 0 0 5px #000;
+}
+
+/* ======================================================================== */
+/* CHAT MESSAGE VARIANTS (Whisper, Blind) - RELOCATED                       */
+/* ======================================================================== */
+
+/* Whisper - Blue Border & Subtle Tint */
+html body .chat-message.whisper {
+    background: rgba(74, 144, 226, 0.1) !important;
+    border: 1px solid #4a90e2 !important;
+    box-shadow: 0 0 4px rgba(74, 144, 226, 0.4) !important;
+}
+
+html body .chat-message.whisper .message-header {
+    background-color: rgba(74, 144, 226, 0.1) !important;
+    border-bottom-color: #4a90e2 !important;
+}
+
+/* Blind - Pink/Magenta Border & Subtle Tint */
+html body .chat-message.blind {
+    background: rgba(226, 74, 144, 0.1) !important;
+    border: 1px solid #e24a90 !important;
+    box-shadow: 0 0 4px rgba(226, 74, 144, 0.4) !important;
+}
+
+html body .chat-message.blind .message-header {
+    background-color: rgba(226, 74, 144, 0.1) !important;
+    border-bottom-color: #e24a90 !important;
 }
 
 /* Chat Buttons */
@@ -195,6 +252,89 @@ html body .chat-message button {
     color: var(--realdark-gold) !important;
     border: 1px solid rgba(130, 130, 130, 0.2) !important;
     box-shadow: none !important;
+}
+
+/* Fix Damage Dialog Text Visibility - Variable Override Strategy */
+html body .damage-dialog .damage.instance,
+html body .damage-dialog .damage.instance *,
+html body .roll-modifiers-dialog .damage.instance,
+html body .roll-modifiers-dialog .damage.instance *,
+html body .dice-formula .damage.instance,
+html body .dice-formula .damage.instance *,
+html body .dice-formula span.damage {
+    color: #ffffff !important;
+    --color: #ffffff !important;
+    --text-color: #ffffff !important;
+    fill: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    text-shadow: 0 0 2px #000 !important;
+    opacity: 1 !important;
+}
+
+/* Status/Outcome Text Visibility */
+html body .window-app.realdark-theme-window .success,
+html body .window-app.realdark-theme-window .outcome.success,
+html body .chat-message .success,
+html body .chat-message .outcome.success,
+html body .chat-message span.success,
+html body .chat-message span.degree-of-success .success,
+html body .realdark-theme-window .degree-of-success .success {
+    color: #6eb4f8 !important;
+    /* Brighter Blue */
+    text-shadow: 0 0 2px #000;
+}
+
+html body .window-app.realdark-theme-window .critical-success,
+html body .window-app.realdark-theme-window .outcome.critical-success,
+html body .chat-message .critical-success,
+html body .chat-message .outcome.critical-success,
+html body .chat-message span.critical-success,
+html body .chat-message span.degree-of-success .critical-success,
+html body .realdark-theme-window .degree-of-success .critical-success {
+    color: #6ef886 !important;
+    /* Bright Green */
+    text-shadow: 0 0 2px #000;
+}
+
+html body .window-app.realdark-theme-window .failure,
+html body .window-app.realdark-theme-window .outcome.failure,
+html body .chat-message .failure,
+html body .chat-message .outcome.failure,
+html body .chat-message span.failure,
+html body .chat-message span.degree-of-success .failure,
+html body .realdark-theme-window .degree-of-success .failure {
+    color: #f86e6e !important;
+    /* Bright Red */
+    text-shadow: 0 0 2px #000;
+}
+
+html body .window-app.realdark-theme-window .critical-failure,
+html body .window-app.realdark-theme-window .outcome.critical-failure,
+html body .chat-message .critical-failure,
+html body .chat-message .outcome.critical-failure,
+html body .chat-message span.critical-failure,
+html body .chat-message span.degree-of-success .critical-failure,
+html body .realdark-theme-window .degree-of-success .critical-failure {
+    color: #ff0000 !important;
+    /* Stark Red */
+    text-shadow: 0 0 2px #000;
+}
+
+/* GM Visibility Text Fix - NO BACKGROUNDS */
+html body .window-app.realdark-theme-window [data-visibility="gm"],
+html body .chat-message [data-visibility="gm"] {
+    color: var(--realdark-text-light) !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    text-shadow: 0 0 2px #000;
+}
+
+/* Ensure modifier values are visible */
+html body .window-app.realdark-theme-window .modifier-container .value,
+html body .window-app.realdark-theme-window .modifier-container .mod {
+    color: var(--realdark-text-light) !important;
 }
 
 html body .chat-message button:hover {
@@ -1487,6 +1627,42 @@ html body .window-app.realdark-theme-window .sheet-sidebar {
 
 
 /* End of Unified Atmosphere System */
+
+/* ======================================================================== */
+/* 6.5 PROTECTED SYSTEM ICONS                                               */
+/* ======================================================================== */
+
+/* Protect Invested Icon (Gem) - VISIBILITY FIX */
+html body .window-app.realdark-theme-window a.invested,
+html body .window-app.realdark-theme-window a.invested i,
+html body .window-app.realdark-theme-window .invested,
+html body .window-app.realdark-theme-window .invested i {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    opacity: 1 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+
+    /* Inactive State: Light Grey (Visible on Dark) */
+    color: #666 !important;
+    text-shadow: none !important;
+    transition: color 0.2s ease;
+}
+
+html body .window-app.realdark-theme-window a.invested:hover,
+html body .window-app.realdark-theme-window a.invested:hover i {
+    color: #fff !important;
+}
+
+/* Active State: Theme Gold */
+html body .window-app.realdark-theme-window a.invested.active,
+html body .window-app.realdark-theme-window a.invested.active i {
+    color: var(--realdark-gold) !important;
+    text-shadow: 0 0 3px black !important;
+}
 
 /* ======================================================================== */
 /* 7. INVENTORY & JOURNAL OVERRIDES                                         */

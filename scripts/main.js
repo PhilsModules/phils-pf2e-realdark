@@ -928,6 +928,22 @@ Hooks.on("renderJournalSheet", (app, html, data) => applyRealDarkTheme(app, html
 Hooks.on("renderDialog", (app, html, data) => applyRealDarkTheme(app, html));
 Hooks.on("renderCheckModifiersDialog", (app, html, data) => applyRealDarkTheme(app, html));
 
+// Universal Trap for System Utilities that default to 'theme-light'
+// We hook renderApplication to catch things that might not have their own precise hook or use sub-classes
+Hooks.on("renderApplication", (app, html, data) => {
+    // Only target specific UI elements we know are problems
+    const el = html[0];
+    if (!el) return;
+
+    if (el.classList.contains("tag-selector") ||
+        el.classList.contains("attribute-builder") ||
+        el.classList.contains("damage-dialog") ||
+        el.classList.contains("roll-modifiers-dialog")) {
+        applyRealDarkTheme(app, html);
+    }
+});
+
+
 
 Hooks.once('ready', async () => {
     // MIGRATION: Check for old/broken default paths and clear them
