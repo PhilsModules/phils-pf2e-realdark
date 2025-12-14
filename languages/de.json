@@ -4,6 +4,9 @@
     "REALDARK.Settings.Menu.Hint": "Öffne das visuelle RealDark Konfigurationstool, um dein Theme anzupassen.",
     "REALDARK.Wizard.Title": "RealDark Konfiguration",
     "REALDARK.Wizard.Subtitle": "Ultimativer Customizer",
+    "REALDARK.Wizard.Label.ScopeItem": "Auf Gegenstände anwenden",
+    "REALDARK.Wizard.Label.ScopeJournal": "Auf Journale anwenden",
+    "REALDARK.Wizard.Label.ScopeChat": "Auf Chat anwenden",
     "REALDARK.Wizard.Section.Colors": "Farben",
     "REALDARK.Wizard.Section.Opacity": "Transparenz & Eingaben",
     "REALDARK.Wizard.Label.Banner": "Banner / Sidebar",
@@ -69,5 +72,7 @@
     "REALDARK.Import.Button": "Importieren",
     "REALDARK.Notify.ImportSuccess": "Theme erfolgreich importiert!",
     "REALDARK.Notify.ImportError": "Ungültiges JSON!",
-    "REALDARK.Notify.NoFile": "Keine Datei ausgewählt."
+    "REALDARK.Notify.NoFile": "Keine Datei ausgewählt.",
+    "REALDARK.Settings.GlobalEnable.Name": "RealDark Theme Aktivieren",
+    "REALDARK.Settings.GlobalEnable.Hint": "Deaktiviere dies, um das Theme für Debugging-Zwecke vollständig auszuschalten."
 }

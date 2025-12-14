@@ -1,4 +1,8 @@
-# Changelog
+# 1.2.8
+- **Fix:** Fixed the Pathfinder Society (PFS) icon appearing black. It now correctly uses the theme's gold color via a CSS mask strategy.
+- **Fix:** Excluded Skill Proficiency selectors from global styling to ensure they retain their system-defined colors (untrained/trained/etc).
+- **Update:** Switched PFS icon color to use "Primary Gold" to better match other navigation icons in certain presets.
+- **Performance:** Removed temporary JavaScript fixes for the icon to ensure zero performance impact.
 
 ## 1.2.7
 **Date:** 2025-12-14
@@ -28,13 +32,6 @@
 ## [1.2.4] - 2025-12-13
 ### Bug Fix
 - **Persistent Backgrounds**: Fixed an issue where the dark theme background would persist on Actor and Journal sheets even when the theme was disabled for those scopes in the wizard.
-
-## 1.2.3
-- **Fix:** Fixed custom logo centering on NPC and Monster sheets.
-- **Polish:** Added standard `appearance` property for better CSS compatibility.
-
-## 1.2.2
-* Theme Anpassungen ;-p
 
 ## [1.2.1] - 2025-12-13
 ### UI Polish & Remaster Support

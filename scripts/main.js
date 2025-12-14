@@ -3,6 +3,24 @@
 Hooks.once("init", () => {
     // REGISTER SETTINGS
 
+    // GLOBAL KILL SWITCH (Debug Mode)
+    game.settings.register(MODULE_ID, "globalEnable", {
+        name: "REALDARK.Settings.GlobalEnable.Name",
+        hint: "REALDARK.Settings.GlobalEnable.Hint",
+        scope: "client",
+        config: true, // Show in standard menu for easy access
+        type: Boolean,
+        default: true,
+        onChange: () => {
+            updateTheme();
+            // Force reload to ensure clean state if needed, or just let updateTheme handle it
+            // For now, let updateTheme handle cleanup
+            Object.values(ui.windows).forEach(app => {
+                if (app.element) applyRealDarkTheme(app, app.element);
+            });
+        }
+    });
+
     // Wizard Menu Button
     game.settings.registerMenu(MODULE_ID, "wizardMenu", {
         name: "REALDARK.Settings.Menu.Name",
@@ -147,6 +165,15 @@ Hooks.once("init", () => {
     });
 
     // MODULE SCOPES (Modular Settings)
+    game.settings.register(MODULE_ID, "themeEnabledChat", {
+        name: "REALDARK.Settings.ThemeEnabledChat.Name", // New Key
+        scope: "client",
+        config: false,
+        type: Boolean,
+        default: true,
+        onChange: () => updateTheme()
+    });
+
     game.settings.register(MODULE_ID, "themeEnabledActor", {
         name: "REALDARK.Settings.ThemeEnabledActor.Name",
         scope: "client",
@@ -187,6 +214,11 @@ Hooks.once("ready", () => {
         new RealDarkWizard().render(true);
     }
     ui.notifications.info(game.i18n.localize("REALDARK.Notify.Loaded"));
+
+    // PHIL'S PFS ICON FIXER
+    // The previous JS fixes (Intervals, Replacements) have been removed.
+    // The fix is now purely CSS-based using a mask image in realdark-theme.css.
+    // This ensures 0.00% performance impact.
 });
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
@@ -208,9 +240,7 @@ class RealDarkSettingsShim extends FormApplication {
     }
 
     render() {
-        // Just open the actual wizard and close this shim (or don't render it at all)
         new RealDarkWizard().render(true);
-        // We don't actually need to render this shim's window.
         return this;
     }
 
@@ -290,6 +320,7 @@ class RealDarkWizard extends HandlebarsApplicationMixin(ApplicationV2) {
             toggleActor: game.settings.get(MODULE_ID, "themeEnabledActor"),
             toggleJournal: game.settings.get(MODULE_ID, "themeEnabledJournal"),
             toggleItem: game.settings.get(MODULE_ID, "themeEnabledItem"),
+            toggleChat: game.settings.get(MODULE_ID, "themeEnabledChat"), // Pass new setting
             bgSizeOptions: {
                 "cover": "Cover (Scale to Fit)",
                 "contain": "Contain (Full Image)",
@@ -423,11 +454,7 @@ class RealDarkWizard extends HandlebarsApplicationMixin(ApplicationV2) {
         const preset = presets[presetKey];
         if (!preset) return;
 
-        // Use standard DOM to populate
-        const app = this; // 'this' in static method is class, but we need instance? 
-        // ACTIONS bind 'this' to the application instance in V2? No, default is class-bound if static but passed instance as 3rd arg?
-        // Documentation says: "The method is called with `this` bound to the application instance."
-        // So 'this' is the app instance.
+        const app = this;
 
         const setVal = (name, val) => {
             const el = this.element.querySelector(`input[name='${name}']`);
@@ -509,6 +536,7 @@ class RealDarkWizard extends HandlebarsApplicationMixin(ApplicationV2) {
             await game.settings.set(MODULE_ID, "themeEnabledActor", data.themeEnabledActor);
             await game.settings.set(MODULE_ID, "themeEnabledJournal", data.themeEnabledJournal);
             await game.settings.set(MODULE_ID, "themeEnabledItem", data.themeEnabledItem);
+            await game.settings.set(MODULE_ID, "themeEnabledChat", data.themeEnabledChat); // Save setting
 
             await game.settings.set(MODULE_ID, "wizardShown", true);
 
@@ -611,6 +639,7 @@ class RealDarkWizard extends HandlebarsApplicationMixin(ApplicationV2) {
         if (data.themeEnabledActor !== undefined) setCheck("themeEnabledActor", data.themeEnabledActor);
         if (data.themeEnabledJournal !== undefined) setCheck("themeEnabledJournal", data.themeEnabledJournal);
         if (data.themeEnabledItem !== undefined) setCheck("themeEnabledItem", data.themeEnabledItem);
+        if (data.themeEnabledChat !== undefined) setCheck("themeEnabledChat", data.themeEnabledChat); // Import support
 
         ui.notifications.info(game.i18n.localize("REALDARK.Notify.ImportSuccess"));
     }
@@ -641,6 +670,27 @@ function isColorDark(hexColor) {
 
 function updateTheme() {
     const root = document.documentElement;
+    const enabled = game.settings.get(MODULE_ID, "globalEnable");
+
+    if (!enabled) {
+        console.log("RealDark: Global Kill Switch Active - Disabling Theme");
+        document.body.classList.remove("realdark-theme-active");
+        // Force cleanup on all open windows
+        Object.values(ui.windows).forEach(app => {
+            if (app.element) applyRealDarkTheme(app, app.element);
+        });
+        return;
+    }
+
+    document.body.classList.add("realdark-theme-active");
+
+    // Chat Scoping - Toggle class based on setting
+    const chatEnabled = game.settings.get(MODULE_ID, "themeEnabledChat");
+    if (chatEnabled && enabled) {
+        document.body.classList.add("realdark-chat-active");
+    } else {
+        document.body.classList.remove("realdark-chat-active");
+    }
 
     // Helper to safely get string settings
     const getSetting = (key, fallback) => {
@@ -725,8 +775,7 @@ function applyRealDarkTheme(app, html, forcedType = null) {
     if (!app.element) return;
     const el = app.element[0] || app.element;
 
-    // 1. CHECK SCOPES & DETOX
-    // ----------------------
+    // Check scopes and clean up if disabled
     const docName = app.document?.documentName || app.object?.documentName;
 
     // Determine type: Trust ForcedType > DOM Classes > Fallback Property
@@ -735,13 +784,18 @@ function applyRealDarkTheme(app, html, forcedType = null) {
     let isJournal = forcedType === "JournalEntry";
 
     if (!forcedType) {
-        // USE DOM CLASSES AS TRUTH (More reliable than app options)
+        // Use DOM classes if app options aren't available
         isActor = el.classList.contains("actor-sheet");
         isItem = el.classList.contains("item-sheet");
         isJournal = el.classList.contains("journal-sheet") || el.classList.contains("journal-entry-page");
     }
 
     let isDisabled = false;
+
+    // GLOBAL KILL SWITCH CHECK
+    if (!game.settings.get(MODULE_ID, "globalEnable")) {
+        isDisabled = true;
+    }
 
     // Check Settings against determined type
     if (isActor && !game.settings.get(MODULE_ID, "themeEnabledActor")) isDisabled = true;
@@ -758,11 +812,11 @@ function applyRealDarkTheme(app, html, forcedType = null) {
     if (isDisabled) {
         console.log(`RealDark: Theme Disabled for ${docName} - Performing Cleanup`);
 
-        // A. Remove Main Markers
+        // cleanup main markers
         el.removeAttribute("data-realdark-theme");
         el.classList.remove("realdark-theme-window");
 
-        // B. Remove Custom Logo
+        // remove custom logo
         const customLogo = el.querySelector(".realdark-logo");
         if (customLogo) customLogo.remove();
 
@@ -773,7 +827,7 @@ function applyRealDarkTheme(app, html, forcedType = null) {
             logoCont.style = ""; // Reset inline styles
         }
 
-        // C. Clean Content Styles
+        // reset content styles
         // Remove the style attribute completely to reset to stylesheet defaults
         const content = el.querySelector(".window-content");
         if (content) {
@@ -782,8 +836,7 @@ function applyRealDarkTheme(app, html, forcedType = null) {
             content.style.removeProperty("background");
         }
 
-        // D. Clean Stubborn Elements (Journals/Sheets)
-        // We look for elements that might have been forced transparent
+        // reset stubborn elements
         const stubborns = el.querySelectorAll(".journal-entry-page, .sheet-body, article, section, .editor-content");
         for (const p of stubborns) {
             p.style.removeProperty("background");
@@ -791,14 +844,14 @@ function applyRealDarkTheme(app, html, forcedType = null) {
             p.style.removeProperty("color");
         }
 
-        // E. Clean Inventory Headers
+        // reset inventory headers
         const invHeaders = el.querySelectorAll(".inventory-header, .inventory-list header, .item-list header");
         for (const h of invHeaders) {
             h.style.removeProperty("background");
             h.style.removeProperty("color");
         }
 
-        // F. Clean Initiative Select
+        // reset initiative select
         const initSelect = el.querySelector('select[name="system.initiative.statistic"]');
         if (initSelect) {
             initSelect.style = "";
@@ -808,21 +861,21 @@ function applyRealDarkTheme(app, html, forcedType = null) {
         return;
     }
 
-    // 2. Mark Window Immediately
+    // Mark Window Immediately
     el.setAttribute("data-realdark-theme", "dark");
     el.classList.add("realdark-theme-window");
 
-    // 2. Schedule Heavy Lifting for Next Frame
+    // Defer heavy DOM manipulation
     requestAnimationFrame(() => {
-        // A. Custom Background Handling
+        // Fix background
         const content = el.querySelector(".window-content");
         if (content) {
             content.style.setProperty("background-color", "var(--realdark-sheet-bg)", "important");
             if (content.style.backgroundImage) content.style.removeProperty("background-image");
         }
 
-        // B. Sidebar Logo Injection
-        // SKIP FOR ITEMS/SPELLS/FEATS & JOURNALS
+        // Sidebar Logo Injection
+        // Skip for Items/Spells/Feats & Journals
         const isItem = (app.document && app.document.documentName === "Item") || (app.object && app.object.documentName === "Item");
         const isJournal = (app.document && app.document.documentName === "JournalEntry") || (app.object && app.object.documentName === "JournalEntry");
 
@@ -831,8 +884,8 @@ function applyRealDarkTheme(app, html, forcedType = null) {
             // Clean sidebar background if inline
             if (sidebar.style.backgroundImage) sidebar.style.removeProperty("background-image");
 
-            // Inject Logo into existing container if possible - GLOBAL SEARCH in sheet
-            // We search in 'el' (the window) to catch it whether it is in sidebar or header
+            // Inject Logo into existing container if possible
+            // Search in 'el' to catch it whether it is in sidebar or header
             const existingLogoContainer = el.querySelector(".logo");
 
             // Check if we already injected (prevent duplicates)
@@ -847,11 +900,10 @@ function applyRealDarkTheme(app, html, forcedType = null) {
 
             if (existingLogoContainer) {
                 // User Request: Insert our logo INTO the gap container instead of under it
-                existingLogoContainer.innerHTML = ""; // Clear existing (gap/old logo)
+                existingLogoContainer.innerHTML = ""; // Clear existing
                 existingLogoContainer.appendChild(logoImg);
 
-                // CRITICAL: Ensure container is visible even if CSS tried to hide .logo
-                // We add a class that our CSS can optionally allow, or just inline force it
+                // Ensure container is visible even if CSS tried to hide .logo
                 existingLogoContainer.classList.add("realdark-logo-container");
                 existingLogoContainer.style.setProperty("display", "block", "important");
                 existingLogoContainer.style.setProperty("margin", "0", "important");
@@ -875,12 +927,10 @@ function applyRealDarkTheme(app, html, forcedType = null) {
             }
         }
 
-        // C. Journal Specifics (Stubborn Sheets)
+        // Journal Specifics
         if (app.options && app.options.classes && app.options.classes.includes("journal-sheet")) {
-            // CHECK SETTING
             if (!game.settings.get(MODULE_ID, "themeEnabledJournal")) return;
 
-            // Use specific selectors instead of generic iteration where possible
             const stubborns = el.querySelectorAll(".journal-entry-page, .sheet-body, article, section");
             for (const p of stubborns) {
                 p.style.setProperty("background", "transparent", "important");
@@ -888,7 +938,7 @@ function applyRealDarkTheme(app, html, forcedType = null) {
             }
         }
 
-        // D. Inventory Headers (Specific Target)
+        // Inventory Headers
         // Kept because system updates might revert these specific elements
         const invHeaders = el.querySelectorAll(".inventory-header, .inventory-list header, .item-list header");
         for (const h of invHeaders) {
@@ -896,27 +946,20 @@ function applyRealDarkTheme(app, html, forcedType = null) {
             h.style.setProperty("color", "var(--realdark-gold)", "important");
         }
 
-        // E. INITIATIVE DROPDOWN FORCE FIX (The "Nuclear" JS Option)
+        // Clean up Initiative Dropdown
         const initSelect = el.querySelector('select[name="system.initiative.statistic"]');
         if (initSelect) {
-            // Use Theme Variables for the Select Button
             initSelect.style.setProperty("background-color", "var(--realdark-input-bg)", "important");
             initSelect.style.setProperty("color", "var(--realdark-gold)", "important");
             initSelect.style.setProperty("color-scheme", "dark", "important");
             initSelect.style.setProperty("border", "1px solid rgba(255, 255, 255, 0.2)", "important");
 
-            // Force options to match the theme background (solid) and text color
             const opts = initSelect.querySelectorAll("option");
             for (const opt of opts) {
-                // Use sheet background which is usually opaque and themed, avoiding white-flash issues with transparent rgba
                 opt.style.setProperty("background-color", "var(--realdark-sheet-bg)", "important");
                 opt.style.setProperty("color", "var(--realdark-gold)", "important");
             }
         }
-
-        // REMOVED: Universal 'querySelectorAll(*)' loop for Plaque Swap. 
-        // Improvement: This saves significant processing time per render.
-        // REMOVED: loops for Inputs, Nav, Text Colors (Handled by CSS now).
     });
 }
 
@@ -927,16 +970,15 @@ Hooks.on("renderJournalSheet", (app, html, data) => applyRealDarkTheme(app, html
 Hooks.on("renderDialog", (app, html, data) => applyRealDarkTheme(app, html));
 Hooks.on("renderCheckModifiersDialog", (app, html, data) => applyRealDarkTheme(app, html));
 
-// EXPLICIT PF2E HOOKS (Fixes 'External Browser' consistency issues)
+// PF2e Specific Hooks
 Hooks.on("renderAttributeBuilder", (app, html, data) => applyRealDarkTheme(app, html, "Actor"));
-Hooks.on("renderTagSelector", (app, html, data) => applyRealDarkTheme(app, html, "Actor")); // Treat as Actor mostly
+Hooks.on("renderTagSelector", (app, html, data) => applyRealDarkTheme(app, html, "Actor"));
 Hooks.on("renderDamageDialog", (app, html, data) => applyRealDarkTheme(app, html));
 Hooks.on("renderRollModifiersDialog", (app, html, data) => applyRealDarkTheme(app, html));
 
-// Universal Trap for System Utilities that default to 'theme-light'
-// We hook renderApplication to catch things that might not have their own precise hook or use sub-classes
+// General Application Hook
+// Catch things that might not have their own precise hook
 Hooks.on("renderApplication", (app, html, data) => {
-    // Only target specific UI elements we know are problems
     const el = html[0];
     if (!el) return;
 
@@ -973,9 +1015,7 @@ Hooks.once('ready', async () => {
 });
 
 /**
- * Nuclear option unique to RealDark:
- * Watch for ANY changes in the DOM and if a tag appears, force it to behave.
- * This handles lazy-loaded content in PF2e character sheets.
+ * Watch for DOM updates to style lazy-loaded tags
  */
 function setupTagObserver() {
     const observer = new MutationObserver((mutations) => {
@@ -1003,13 +1043,10 @@ function setupTagObserver() {
     });
 
     observer.observe(document.body, { childList: true, subtree: true });
-    console.log("RealDark | Tag Observer Active");
 }
 
 function applyTagStyles(elements) {
-    // SECURITY CHECK: Only apply if the CONTAINER is actually themed!
-    // This prevents the observer from forcing styles on disabled windows.
-    // We check if the element is inside a .realdark-theme-window
+    // Only apply if the CONTAINER is actually themed
     const $els = $(elements);
     const isThemed = $els.closest(".realdark-theme-window").length > 0;
 
@@ -1035,3 +1072,34 @@ function applyTagStyles(elements) {
         });
     });
 }
+
+// ========================================================================
+// PFS ICON FIX (FORCED INJECTION)
+// ========================================================================
+Hooks.on("renderSidebarTab", (app, html) => {
+    // Attempt to find the PFS icon
+    // We target the anchor AND the svg specifically
+    const pfsTargets = html.find('a[data-tab="pfs"] .pfs-icon, a[data-tab="pfs"] svg');
+
+    if (pfsTargets.length) {
+        // Apply inline styles to override specificities
+        pfsTargets.css({
+            "fill": "var(--realdark-gold)",
+            "color": "var(--realdark-gold)",
+            // The Drop-Shadow Hack in JS form (Guaranteed to work)
+            "filter": "drop-shadow(0px -100px 0px var(--realdark-gold))",
+            "transform": "translateY(100px)",
+            "overflow": "visible",
+            "opacity": "1"
+        });
+
+        // Safety: Target children too (paths)
+        pfsTargets.find("*").css({
+            "fill": "var(--realdark-gold)",
+            "stroke": "var(--realdark-gold)"
+        });
+
+        // Also force the parent anchor color
+        html.find('a[data-tab="pfs"]').css("color", "var(--realdark-gold)");
+    }
+});

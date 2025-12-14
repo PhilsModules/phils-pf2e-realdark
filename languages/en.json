@@ -10,6 +10,7 @@
     "REALDARK.Wizard.Label.ScopeActor": "Enable on Actors",
     "REALDARK.Wizard.Label.ScopeItem": "Enable on Items",
     "REALDARK.Wizard.Label.ScopeJournal": "Enable on Journals",
+    "REALDARK.Wizard.Label.ScopeChat": "Enable on Chat",
     "REALDARK.Wizard.Label.Banner": "Banner / Sidebar",
     "REALDARK.Wizard.Label.Gold": "Primary Gold",
     "REALDARK.Wizard.Label.Dim": "Secondary Dim",
@@ -73,5 +74,7 @@
     "REALDARK.Import.Button": "Import",
     "REALDARK.Notify.ImportSuccess": "Theme Imported Successfully!",
     "REALDARK.Notify.ImportError": "Invalid JSON!",
-    "REALDARK.Notify.NoFile": "No file selected."
+    "REALDARK.Notify.NoFile": "No file selected.",
+    "REALDARK.Settings.GlobalEnable.Name": "Enable RealDark Theme",
+    "REALDARK.Settings.GlobalEnable.Hint": "Uncheck this to completely disable the theme for debugging purposes."
 }
