@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.2.7
+**Date:** 2025-12-14
+
+### Bug Fixes
+*   **Wizard Color Save**: Fixed an issue where the background color setting in the Wizard would revert to default upon saving, ignoring user input.
+*   **Window Sizing**: Resolved a bug where certain dialog windows (e.g., Damage Roll, Roll Modifiers) opened with incorrect initial height and squashy layout.
+*   **Chat Sidebar**: Fixed an issue where the chat sidebar was transparent on the system tab, now correctly applying the dark theme background to the content area.
+
+### Improvements
+*   **Chat Card Styling**: comprehensive update to "Blind" and "Whisper" chat card styling:
+    *   Removed distracting solid background colors (Pink/Blue) and inset glows.
+    *   Cards now feature a clean, transparent dark background.
+    *   Added distinct 2px outer borders that dynamically match the Active Theme (e.g., Teal for Whispers in Perry theme, Orange for Blind rolls).
+    *   Neutralized internal system dividers (headers and horizontal rules) to match the border color, creating a unified look.
+
+
 ## [1.2.6] - 2025-12-13
 ### Bug Fix
 - **External Consistency**: Fixed an issue where "Attribute Builder" and "Language Selector" windows appeared light on external connections/browsers.

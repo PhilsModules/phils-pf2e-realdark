@@ -822,7 +822,6 @@ function applyRealDarkTheme(app, html, forcedType = null) {
         }
 
         // B. Sidebar Logo Injection
-        // B. Sidebar Logo Injection
         // SKIP FOR ITEMS/SPELLS/FEATS & JOURNALS
         const isItem = (app.document && app.document.documentName === "Item") || (app.object && app.object.documentName === "Item");
         const isJournal = (app.document && app.document.documentName === "JournalEntry") || (app.object && app.object.documentName === "JournalEntry");
