@@ -201,6 +201,16 @@ Hooks.once("init", () => {
         onChange: () => updateTheme()
     });
 
+    // Chat Header Color Bar
+    game.settings.register(MODULE_ID, "chatHeaderColor", {
+        name: "REALDARK.Settings.ChatHeaderColor.Name",
+        hint: "REALDARK.Settings.ChatHeaderColor.Hint",
+        scope: "client",
+        config: true,
+        type: Boolean,
+        default: true
+    });
+
     // INITIALIZE THEME
     updateTheme();
 
@@ -987,6 +997,32 @@ Hooks.on("renderApplication", (app, html, data) => {
         el.classList.contains("damage-dialog") ||
         el.classList.contains("roll-modifiers-dialog")) {
         applyRealDarkTheme(app, html);
+    }
+});
+
+/**
+ * Chat Message Hook
+ * Adds a colored bar to the top of the chat card based on the user's color
+ */
+Hooks.on("renderChatMessage", (message, html, data) => {
+    // Check if feature is enabled
+    if (!game.settings.get(MODULE_ID, "chatHeaderColor")) return;
+
+    // Check if the chat should be themed at all
+    if (!game.settings.get(MODULE_ID, "globalEnable")) return;
+    if (!game.settings.get(MODULE_ID, "themeEnabledChat")) return;
+
+    // Get the user color
+    const user = message.author ?? message.user; // V10/V11/V12 compatibility safe
+    if (!user || !user.color) return;
+
+    const header = html.find(".message-header");
+    if (header.length) {
+        // Apply the border
+        header.css("border-top", `3px solid ${user.color}`);
+
+        // Optional: Add a slight background tint to the header for better visibility
+        // header.css("background", `linear-gradient(to bottom, ${user.color}1A, transparent)`);
     }
 });
 

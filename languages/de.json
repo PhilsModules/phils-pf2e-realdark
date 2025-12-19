@@ -74,5 +74,7 @@
     "REALDARK.Notify.ImportError": "Ungültiges JSON!",
     "REALDARK.Notify.NoFile": "Keine Datei ausgewählt.",
     "REALDARK.Settings.GlobalEnable.Name": "RealDark Theme Aktivieren",
-    "REALDARK.Settings.GlobalEnable.Hint": "Deaktiviere dies, um das Theme für Debugging-Zwecke vollständig auszuschalten."
+    "REALDARK.Settings.GlobalEnable.Hint": "Deaktiviere dies, um das Theme für Debugging-Zwecke vollständig auszuschalten.",
+    "REALDARK.Settings.ChatHeaderColor.Name": "Chat-Header Farbleiste",
+    "REALDARK.Settings.ChatHeaderColor.Hint": "Zeigt eine farbige Leiste oben an Chatkarten an, die der Spielerfarbe entspricht."
 }

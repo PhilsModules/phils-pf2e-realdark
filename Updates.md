@@ -1,4 +1,8 @@
-# 1.2.8
+# 1.2.9
+- **Feature:** Added a "Chat Header Color Bar" setting which injects a colored bar at the top of chat messages matching the player's color for easier identification.
+- **Bug Fixes:** Various backend optimizations and stability improvements for cleaner rendering.
+
+## 1.2.8
 - **Fix:** Fixed the Pathfinder Society (PFS) icon appearing black. It now correctly uses the theme's gold color via a CSS mask strategy.
 - **Fix:** Excluded Skill Proficiency selectors from global styling to ensure they retain their system-defined colors (untrained/trained/etc).
 - **Update:** Switched PFS icon color to use "Primary Gold" to better match other navigation icons in certain presets.
