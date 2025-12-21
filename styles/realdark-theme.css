@@ -86,7 +86,7 @@
 /* ======================================================================== */
 
 .window-app.realdark-theme-window input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
-.window-app.realdark-theme-window select:not(.skill-proficiency):not(.pf-rank),
+.window-app.realdark-theme-window select:not(.skill-proficiency):not(.pf-rank):not(.rarity),
 .window-app.realdark-theme-window textarea,
 .window-app.realdark-theme-window .prosemirror,
 .window-app.realdark-theme-window .tagify {
@@ -100,21 +100,27 @@
 }
 
 .window-app.realdark-theme-window input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):focus,
-.window-app.realdark-theme-window select:not(.skill-proficiency):not(.pf-rank):focus,
+.window-app.realdark-theme-window select:not(.skill-proficiency):not(.pf-rank):not(.rarity):focus,
 .window-app.realdark-theme-window textarea:focus {
     border-color: var(--realdark-gold) !important;
     box-shadow: 0 0 5px rgba(255, 189, 74, 0.2) !important;
 }
 
-.window-app.realdark-theme-window select:not(.skill-proficiency):not(.pf-rank) {
+/* 
+.window-app.realdark-theme-window select:not(.skill-proficiency):not(.pf-rank):not(.rarity) {
     appearance: none;
     -webkit-appearance: none;
-    padding-right: 25px;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10"><path fill="%23b8860b" d="M0 0 L5 5 L10 0"/></svg>') !important;
+    padding-left: 5px !important;
+    padding-right: 25px !important;
+    height: 26px !important;
+    line-height: 24px !important;
+    box-sizing: border-box !important;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10"><path fill="%23b8860b" d="M0 2.5 L5 7.5 L10 2.5"/></svg>') !important;
     background-repeat: no-repeat !important;
     background-position: right 10px center !important;
     cursor: pointer;
-}
+} 
+*/
 
 .window-app.realdark-theme-window select option {
     background: #111 !important;
@@ -145,7 +151,7 @@
 
 /* Badges - Softened */
 .window-app.realdark-theme-window .badge,
-.window-app.realdark-theme-window .tag {
+.window-app.realdark-theme-window .tag:not(.rarity) {
     color: #fff !important;
     background: var(--realdark-red-bright) !important;
     border: 1px solid rgba(255, 255, 255, 0.3);
@@ -341,15 +347,9 @@ html body.realdark-chat-active .chat-message button {
     color: var(--realdark-gold) !important;
 }
 
-/* Fix "Double" Damage Icon (SVG) - DYNAMIC RECOLORING VIA DROP-SHADOW HACK */
-/* This forces the SVG to take the variable color. We shift the image away and cast a shadow back into place. */
-html body.realdark-chat-active #chat-log .chat-message button,
-html body.realdark-chat-active .chat-message button {
-    overflow: hidden !important;
-    /* Ensure the shifted image is clipped */
-}
-
-html body.realdark-chat-active #chat-log .chat-message button img,
+/* Fix "Double" Damage Icon (SVG) - DISABLED (Too Broad) */
+/* This was causing all chat button images (like Effect icons) to turn into Gold Shadows */
+/* html body.realdark-chat-active #chat-log .chat-message button img,
 html body.realdark-chat-active .chat-message button img {
     filter: drop-shadow(0px -100px 0px var(--realdark-gold)) !important;
     transform: translateY(100px) !important;
@@ -358,7 +358,7 @@ html body.realdark-chat-active .chat-message button img {
     background: transparent !important;
     width: 100% !important;
     object-fit: contain !important;
-}
+} */
 
 /* Fix "Half", "Damage", "Heal", "Block" (Font Awesome) - BROAD SELECTOR */
 /* Catches ALL buttons with data-multiplier OR known classes */
@@ -534,10 +534,9 @@ html body.realdark-chat-active .chat-message .card-header h3 {
 }
 
 /* FIX INLINE ROLLS & LINKS (Bright Spots) */
+/* Inline Rolls & Actions - Dark Background */
 html body.realdark-chat-active .chat-message a.inline-roll,
 html body.realdark-chat-active .chat-message a.inline-check,
-html body.realdark-chat-active .chat-message a.content-link,
-html body.realdark-chat-active .chat-message a.entity-link,
 html body.realdark-chat-active .chat-message span.damage-roll,
 html body.realdark-chat-active .chat-message button[data-action] {
     background: var(--realdark-input-bg) !important;
@@ -548,6 +547,21 @@ html body.realdark-chat-active .chat-message button[data-action] {
     text-shadow: none !important;
     border-radius: 3px;
     padding: 1px 4px;
+}
+
+/* Content Links (Items, Effects, UUIDs) - Transparent to blend in */
+html body.realdark-chat-active .chat-message a.content-link,
+html body.realdark-chat-active .chat-message a.entity-link {
+    background: transparent !important;
+    background-color: transparent !important;
+    color: var(--realdark-gold) !important;
+    border: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    border-radius: 3px;
+    padding: 0 2px;
+    border-bottom: 1px dotted var(--realdark-gold-dim) !important;
+    /* Subtle link indicator */
 }
 
 /* NUCLEAR FIX FOR NESTED SPANS INSIDE INLINE ROLLS */
@@ -598,6 +612,17 @@ html body.realdark-chat-active .chat-message button[data-action]:hover {
 .window-app.realdark-theme-window a.content-link i,
 .window-app.realdark-theme-window a.entity-link i {
     color: var(--realdark-gold) !important;
+}
+
+/* GM Notes Specific Styling - Dark & Distinct */
+.window-app.realdark-theme-window .gm-notes .editor,
+.window-app.realdark-theme-window .gm-notes .editor-content,
+.window-app.realdark-theme-window .gm-notes .prosemirror,
+.window-app.realdark-theme-window .gm-notes .ProseMirror {
+    background: rgba(0, 0, 0, 0.5) !important;
+    border: 1px dashed var(--realdark-gold-dim) !important;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    color: var(--realdark-text-light) !important;
 }
 
 /* ======================================================================== */

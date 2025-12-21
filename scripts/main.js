@@ -1093,7 +1093,13 @@ function applyTagStyles(elements) {
     $els.each((i, el) => {
         el.style.setProperty("background", "rgba(0, 0, 0, 0.8)", "important");
         el.style.setProperty("background-color", "rgba(0, 0, 0, 0.8)", "important");
-        el.style.setProperty("background-image", "none", "important");
+        if (el.tagName !== "SELECT") {
+            el.style.setProperty("background-image", "none", "important");
+        } else {
+            // For SELECTs, we want to allow the custom arrow, but ensure no OTHER background affects it
+            // Actually, since our CSS handles it, we can just NOT set background-image inline here.
+            el.style.removeProperty("background-image");
+        }
         el.style.setProperty("color", "var(--realdark-text-light)", "important");
         el.style.setProperty("border", "1px solid rgba(255, 255, 255, 0.2)", "important");
         el.style.setProperty("box-shadow", "none", "important");

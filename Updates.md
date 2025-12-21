@@ -1,3 +1,14 @@
+# 1.2.12
+- **UI Improvements:** Styled the "GM Notes" editor field to be distinct from normal inputs. It now features a dark background and a dashed border to clearly indicate its "Secret/GM Only" status, removing the previous bright white background.
+- **Bug Fix:** Fixed an issue where Item Rarity tags (Common, Rare, etc.) were incorrectly styled as red "Tags" instead of preserving their system-defined colors.
+- **UI Polish:** Dropdowns now utilize the native system/browser layout to ensure perfect alignment and consistency across all field types (including Rarity). The custom dark color theme is applied without altering the structural rendering of the inputs.
+
+# 1.2.11
+- **Critical Fix:** Removed an overly aggressive "Button Icon" fix that was causing Effect buttons (and others) in chat to display incorrectly (visual artifacts) and potentially causing layout spacing issues.
+
+# 1.2.10
+- **Bug Fix:** Fixed an issue where "Effect" links and other content links in chat cards were rendered with a solid black background. They are now standard transparent links with a subtle underline to match the theme better.
+
 # 1.2.9
 - **Feature:** Added a "Chat Header Color Bar" setting which injects a colored bar at the top of chat messages matching the player's color for easier identification.
 - **Bug Fixes:** Various backend optimizations and stability improvements for cleaner rendering.
