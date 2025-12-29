@@ -1,3 +1,8 @@
+# 1.2.13
+- **Fix:** Resolved a z-index issue where context menus were appearing behind chat cards.
+- **Fix:** Corrected styling for "Effect Area" indicators (e.g. Burst/Cone) in chat cards to match the dark theme, removing the bright white background.
+- **Fix:** Updated styling for chat card lists (e.g. inventory/currency items) to ensure they have transparent backgrounds and readable text.
+
 # 1.2.12
 - **UI Improvements:** Styled the "GM Notes" editor field to be distinct from normal inputs. It now features a dark background and a dashed border to clearly indicate its "Secret/GM Only" status, removing the previous bright white background.
 - **Bug Fix:** Fixed an issue where Item Rarity tags (Common, Rare, etc.) were incorrectly styled as red "Tags" instead of preserving their system-defined colors.
