@@ -357,10 +357,10 @@
                     <span class="rd-label-main">{{localize 'REALDARK.Wizard.Label.BgColor'}}</span>
                     <div style="display:flex; gap:5px;">
                         <input type="text" name="colorBackground" value="{{bgVal}}" class="rd-hex-input"
-                            oninput="this.parentElement.querySelector('.rd-swatch').style.background = this.value; updatePreview('colorBackground', this.value);">
+                            oninput="this.parentElement.querySelector('.rd-swatch').style.background = this.value; RealDark.updatePreview('colorBackground', this.value);">
                         <div class="rd-swatch" style="background: {{bgVal}}">
                             <input type="color" name="colorBackgroundPicker" value="{{bgVal}}"
-                                oninput="this.parentElement.style.background = this.value; this.parentElement.previousElementSibling.value = this.value; updatePreview('colorBackground', this.value);">
+                                oninput="this.parentElement.style.background = this.value; this.parentElement.previousElementSibling.value = this.value; RealDark.updatePreview('colorBackground', this.value);">
                         </div>
                     </div>
                 </div>
@@ -369,10 +369,10 @@
                     <span class="rd-label-main">{{localize 'REALDARK.Wizard.Label.Banner'}}</span>
                     <div style="display:flex; gap:5px;">
                         <input type="text" name="colorBanner" value="{{bannerVal}}" class="rd-hex-input"
-                            oninput="this.parentElement.querySelector('.rd-swatch').style.background = this.value; updatePreview('colorBanner', this.value);">
+                            oninput="this.parentElement.querySelector('.rd-swatch').style.background = this.value; RealDark.updatePreview('colorBanner', this.value);">
                         <div class="rd-swatch" style="background: {{bannerVal}}">
                             <input type="color" name="colorBannerPicker" value="{{bannerVal}}"
-                                oninput="this.parentElement.style.background = this.value; this.parentElement.previousElementSibling.value = this.value; updatePreview('colorBanner', this.value);">
+                                oninput="this.parentElement.style.background = this.value; this.parentElement.previousElementSibling.value = this.value; RealDark.updatePreview('colorBanner', this.value);">
                         </div>
                     </div>
                 </div>
@@ -381,10 +381,10 @@
                     <span class="rd-label-main">{{localize 'REALDARK.Wizard.Label.Gold'}}</span>
                     <div style="display:flex; gap:5px;">
                         <input type="text" name="colorGold" value="{{goldVal}}" class="rd-hex-input"
-                            oninput="this.parentElement.querySelector('.rd-swatch').style.background = this.value; updatePreview('colorGold', this.value);">
+                            oninput="this.parentElement.querySelector('.rd-swatch').style.background = this.value; RealDark.updatePreview('colorGold', this.value);">
                         <div class="rd-swatch" style="background: {{goldVal}}">
                             <input type="color" name="colorGoldPicker" value="{{goldVal}}"
-                                oninput="this.parentElement.style.background = this.value; this.parentElement.previousElementSibling.value = this.value; updatePreview('colorGold', this.value);">
+                                oninput="this.parentElement.style.background = this.value; this.parentElement.previousElementSibling.value = this.value; RealDark.updatePreview('colorGold', this.value);">
                         </div>
                     </div>
                 </div>
@@ -393,10 +393,10 @@
                     <span class="rd-label-main">{{localize 'REALDARK.Wizard.Label.Dim'}}</span>
                     <div style="display:flex; gap:5px;">
                         <input type="text" name="colorGoldDim" value="{{dimVal}}" class="rd-hex-input"
-                            oninput="this.parentElement.querySelector('.rd-swatch').style.background = this.value; updatePreview('colorGoldDim', this.value);">
+                            oninput="this.parentElement.querySelector('.rd-swatch').style.background = this.value; RealDark.updatePreview('colorGoldDim', this.value);">
                         <div class="rd-swatch" style="background: {{dimVal}}">
                             <input type="color" name="colorGoldDimPicker" value="{{dimVal}}"
-                                oninput="this.parentElement.style.background = this.value; this.parentElement.previousElementSibling.value = this.value; updatePreview('colorGoldDim', this.value);">
+                                oninput="this.parentElement.style.background = this.value; this.parentElement.previousElementSibling.value = this.value; RealDark.updatePreview('colorGoldDim', this.value);">
                         </div>
                     </div>
                 </div>
@@ -405,10 +405,34 @@
                     <span class="rd-label-main">{{localize 'REALDARK.Wizard.Label.Accent'}}</span>
                     <div style="display:flex; gap:5px;">
                         <input type="text" name="colorAccent" value="{{accVal}}" class="rd-hex-input"
-                            oninput="this.parentElement.querySelector('.rd-swatch').style.background = this.value; updatePreview('colorAccent', this.value);">
+                            oninput="this.parentElement.querySelector('.rd-swatch').style.background = this.value; RealDark.updatePreview('colorAccent', this.value);">
                         <div class="rd-swatch" style="background: {{accVal}}">
                             <input type="color" name="colorAccentPicker" value="{{accVal}}"
-                                oninput="this.parentElement.style.background = this.value; this.parentElement.previousElementSibling.value = this.value; updatePreview('colorAccent', this.value);">
+                                oninput="this.parentElement.style.background = this.value; this.parentElement.previousElementSibling.value = this.value; RealDark.updatePreview('colorAccent', this.value);">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rd-control-group">
+                    <span class="rd-label-main">{{localize 'REALDARK.Wizard.Label.Whisper'}}</span>
+                    <div style="display:flex; gap:5px;">
+                        <input type="text" name="colorWhisper" value="{{whisperVal}}" class="rd-hex-input"
+                            oninput="this.parentElement.querySelector('.rd-swatch').style.background = this.value; RealDark.updatePreview('colorWhisper', this.value);">
+                        <div class="rd-swatch" style="background: {{whisperVal}}">
+                            <input type="color" name="colorWhisperPicker" value="{{whisperVal}}"
+                                oninput="this.parentElement.style.background = this.value; this.parentElement.previousElementSibling.value = this.value; RealDark.updatePreview('colorWhisper', this.value);">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rd-control-group">
+                    <span class="rd-label-main">{{localize 'REALDARK.Wizard.Label.Blind'}}</span>
+                    <div style="display:flex; gap:5px;">
+                        <input type="text" name="colorBlind" value="{{blindVal}}" class="rd-hex-input"
+                            oninput="this.parentElement.querySelector('.rd-swatch').style.background = this.value; RealDark.updatePreview('colorBlind', this.value);">
+                        <div class="rd-swatch" style="background: {{blindVal}}">
+                            <input type="color" name="colorBlindPicker" value="{{blindVal}}"
+                                oninput="this.parentElement.style.background = this.value; this.parentElement.previousElementSibling.value = this.value; RealDark.updatePreview('colorBlind', this.value);">
                         </div>
                     </div>
                 </div>
@@ -417,10 +441,10 @@
                     <span class="rd-label-main">{{localize 'REALDARK.Wizard.Label.Text'}}</span>
                     <div style="display:flex; gap:5px;">
                         <input type="text" name="colorLight" value="{{textVal}}" class="rd-hex-input"
-                            oninput="this.parentElement.querySelector('.rd-swatch').style.background = this.value; updatePreview('colorLight', this.value);">
+                            oninput="this.parentElement.querySelector('.rd-swatch').style.background = this.value; RealDark.updatePreview('colorLight', this.value);">
                         <div class="rd-swatch" style="background: {{textVal}}">
                             <input type="color" name="colorLightPicker" value="{{textVal}}"
-                                oninput="this.parentElement.style.background = this.value; this.parentElement.previousElementSibling.value = this.value; updatePreview('colorLight', this.value);">
+                                oninput="this.parentElement.style.background = this.value; this.parentElement.previousElementSibling.value = this.value; RealDark.updatePreview('colorLight', this.value);">
                         </div>
                     </div>
                 </div>
@@ -435,8 +459,8 @@
                     <input type="range" name="sidebarOpacity" min="0" max="1" step="0.05" value="{{sidebarOpVal}}"
                         style="width:100%; margin-top:5px;" oninput="
                             document.getElementById('rd-sidebar-op-val').innerText = this.value;
-                            updatePreview('sidebarOpacity', this.value);
-                            updatePreview('colorBanner', document.querySelector('input[name=\'colorBanner\']').value); 
+                            RealDark.updatePreview('sidebarOpacity', this.value);
+                            RealDark.updatePreview('colorBanner', document.querySelector('input[name=\'colorBanner\']').value); 
                         ">
                 </div>
 

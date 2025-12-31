@@ -1,4 +1,5 @@
 ﻿const MODULE_ID = "phils-pf2e-realdark";
+window.RealDark = window.RealDark || {};
 
 Hooks.once("init", () => {
     // REGISTER SETTINGS
@@ -164,6 +165,25 @@ Hooks.once("init", () => {
         onChange: () => updateTheme()
     });
 
+    // Chat Colors (New)
+    game.settings.register(MODULE_ID, "colorWhisper", {
+        name: "REALDARK.Settings.ColorWhisper.Name",
+        scope: "client",
+        config: false,
+        type: new foundry.data.fields.ColorField(),
+        default: "#3399ff", // Default Blue
+        onChange: () => updateTheme()
+    });
+
+    game.settings.register(MODULE_ID, "colorBlind", {
+        name: "REALDARK.Settings.ColorBlind.Name",
+        scope: "client",
+        config: false,
+        type: new foundry.data.fields.ColorField(),
+        default: "#ff3333", // Default Red
+        onChange: () => updateTheme()
+    });
+
     // MODULE SCOPES (Modular Settings)
     game.settings.register(MODULE_ID, "themeEnabledChat", {
         name: "REALDARK.Settings.ThemeEnabledChat.Name", // New Key
@@ -225,10 +245,7 @@ Hooks.once("ready", () => {
     }
     ui.notifications.info(game.i18n.localize("REALDARK.Notify.Loaded"));
 
-    // PHIL'S PFS ICON FIXER
-    // The previous JS fixes (Intervals, Replacements) have been removed.
-    // The fix is now purely CSS-based using a mask image in realdark-theme.css.
-    // This ensures 0.00% performance impact.
+    // PFS ICON FIX IS HANDLED VIA CSS MASK
 });
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
@@ -317,9 +334,12 @@ class RealDarkWizard extends HandlebarsApplicationMixin(ApplicationV2) {
         const bgSizeVal = game.settings.get(MODULE_ID, "bgSize");
         const sidebarOpVal = game.settings.get(MODULE_ID, "sidebarOpacity");
 
+        const whisperVal = game.settings.get(MODULE_ID, "colorWhisper");
+        const blindVal = game.settings.get(MODULE_ID, "colorBlind");
+
         let inputVal = game.settings.get(MODULE_ID, "inputBg");
         let sliderVal = 0.7;
-        const match = inputVal.match(/rgba\(0, 0, 0, ([0-9.]+)\)/);
+        const match = inputVal.match(/rgba\(\s*0,\s*0,\s*0,\s*([0-9.]+)\s*\)/);
         if (match) {
             sliderVal = parseFloat(match[1]);
         }
@@ -327,6 +347,7 @@ class RealDarkWizard extends HandlebarsApplicationMixin(ApplicationV2) {
         return {
             goldVal, dimVal, accVal, textVal, bannerVal, bgVal,
             bgImgVal, bgSizeVal, sidebarOpVal, inputVal, sliderVal,
+            whisperVal, blindVal, // Pass new values
             toggleActor: game.settings.get(MODULE_ID, "themeEnabledActor"),
             toggleJournal: game.settings.get(MODULE_ID, "themeEnabledJournal"),
             toggleItem: game.settings.get(MODULE_ID, "themeEnabledItem"),
@@ -341,7 +362,7 @@ class RealDarkWizard extends HandlebarsApplicationMixin(ApplicationV2) {
 
     _onRender(context, options) {
         // Expose helpers globally for inline oninput handlers
-        window.updatePreview = (key, value) => {
+        window.RealDark.updatePreview = (key, value) => {
             if (key === 'colorGold') {
                 document.documentElement.style.setProperty('--realdark-gold', value);
                 const hex = value.replace('#', '');
@@ -359,10 +380,13 @@ class RealDarkWizard extends HandlebarsApplicationMixin(ApplicationV2) {
             else if (key === 'colorAccent') document.documentElement.style.setProperty('--realdark-red-bright', value);
             else if (key === 'colorBanner') {
                 document.documentElement.style.setProperty('--realdark-banner-color', value);
-                if (window.updateSidebarRGBA) window.updateSidebarRGBA();
+                if (window.RealDark.updateSidebarRGBA) window.RealDark.updateSidebarRGBA();
             }
             else if (key === 'colorBackground') document.documentElement.style.setProperty('--realdark-sheet-bg', value);
             else if (key === 'colorLight') document.documentElement.style.setProperty('--realdark-text-light', value);
+            
+            else if (key === 'colorWhisper') document.documentElement.style.setProperty('--realdark-color-whisper', value);
+            else if (key === 'colorBlind') document.documentElement.style.setProperty('--realdark-color-blind', value);
 
             else if (key === 'bgSize') document.documentElement.style.setProperty('--realdark-bg-size', value);
             else if (key === 'backgroundImage') {
@@ -371,11 +395,11 @@ class RealDarkWizard extends HandlebarsApplicationMixin(ApplicationV2) {
                 document.documentElement.style.setProperty('--realdark-bg-url', url ? `url('${url}')` : 'none');
             }
             else if (key === 'sidebarOpacity') {
-                if (window.updateSidebarRGBA) window.updateSidebarRGBA();
+                if (window.RealDark.updateSidebarRGBA) window.RealDark.updateSidebarRGBA();
             }
         };
 
-        window.updateSidebarRGBA = function () {
+        window.RealDark.updateSidebarRGBA = function () {
             const hexInput = document.querySelector("input[name='colorBanner']");
             const opInput = document.querySelector("input[name='sidebarOpacity']");
             if (!hexInput || !opInput) return;
@@ -407,7 +431,7 @@ class RealDarkWizard extends HandlebarsApplicationMixin(ApplicationV2) {
                     current: this.element.querySelector(`input[name="${target}"]`).value,
                     callback: path => {
                         this.element.querySelector(`input[name="${target}"]`).value = path;
-                        window.updatePreview(target, path);
+                        window.RealDark.updatePreview(target, path);
                         this.element.querySelector(`input[name="${target}"]`).dispatchEvent(new Event('change'));
                     }
                 });
@@ -509,11 +533,11 @@ class RealDarkWizard extends HandlebarsApplicationMixin(ApplicationV2) {
         target.style.color = "white";
 
         // Manually trigger previews
-        if (window.updatePreview) {
-            window.updatePreview('colorGold', preset.gold);
-            window.updatePreview('colorBanner', preset.banner);
-            window.updatePreview('backgroundImage', preset.bgImg);
-            window.updateSidebarRGBA();
+        if (window.RealDark.updatePreview) {
+            window.RealDark.updatePreview('colorGold', preset.gold);
+            window.RealDark.updatePreview('colorBanner', preset.banner);
+            window.RealDark.updatePreview('backgroundImage', preset.bgImg);
+            window.RealDark.updateSidebarRGBA();
         }
     }
 
@@ -534,6 +558,10 @@ class RealDarkWizard extends HandlebarsApplicationMixin(ApplicationV2) {
             await game.settings.set(MODULE_ID, "colorLight", data.colorLight);
             await game.settings.set(MODULE_ID, "colorBanner", data.colorBanner);
             await game.settings.set(MODULE_ID, "colorBackground", data.colorBackground);
+            
+            // Chat Colors
+            await game.settings.set(MODULE_ID, "colorWhisper", data.colorWhisper);
+            await game.settings.set(MODULE_ID, "colorBlind", data.colorBlind);
 
             // Handle hidden input for inputBg if it wasn't captured correctly (sometimes hidden fields are tricky)
             // But usually formData.object has it. 
@@ -625,6 +653,9 @@ class RealDarkWizard extends HandlebarsApplicationMixin(ApplicationV2) {
         if (data.colorLight) setVal("colorLight", data.colorLight);
         if (data.colorBanner) setVal("colorBanner", data.colorBanner);
         if (data.colorBackground) setVal("colorBackground", data.colorBackground);
+        
+        if (data.colorWhisper) setVal("colorWhisper", data.colorWhisper);
+        if (data.colorBlind) setVal("colorBlind", data.colorBlind);
 
         if (data.bgSize) {
             const bgSizeSelect = wizard.element.querySelector("select[name='bgSize']");
@@ -732,6 +763,10 @@ function updateTheme() {
     root.style.setProperty("--realdark-input-bg", getSetting("inputBg", "rgba(0, 0, 0, 0.7)"));
     root.style.setProperty("--realdark-banner-color", getSetting("colorBanner", "#7a0000"));
     root.style.setProperty("--realdark-bg-size", getSetting("bgSize", "cover"));
+    
+    // Chat Colors
+    root.style.setProperty("--realdark-color-whisper", getSetting("colorWhisper", "#3399ff"));
+    root.style.setProperty("--realdark-color-blind", getSetting("colorBlind", "#ff3333"));
 
     // CALCULATE SIDEBAR RGBA
     const bannerHex = getSetting("colorBanner", "#7a0000");
@@ -1056,6 +1091,11 @@ Hooks.once('ready', async () => {
 function setupTagObserver() {
     const observer = new MutationObserver((mutations) => {
         for (const mutation of mutations) {
+            const target = mutation.target;
+            // OPTIMIZATION: Check if this mutation is relevant to a themed window or chat
+            const isInsideTheme = target.closest && target.closest(".realdark-theme-window");
+            if (!isInsideTheme) continue;
+
             if (mutation.type === "childList" && mutation.addedNodes.length > 0) {
                 mutation.addedNodes.forEach((node) => {
                     // Check if node is an element (nodeType 1)
@@ -1115,33 +1155,4 @@ function applyTagStyles(elements) {
     });
 }
 
-// ========================================================================
-// PFS ICON FIX (FORCED INJECTION)
-// ========================================================================
-Hooks.on("renderSidebarTab", (app, html) => {
-    // Attempt to find the PFS icon
-    // We target the anchor AND the svg specifically
-    const pfsTargets = html.find('a[data-tab="pfs"] .pfs-icon, a[data-tab="pfs"] svg');
 
-    if (pfsTargets.length) {
-        // Apply inline styles to override specificities
-        pfsTargets.css({
-            "fill": "var(--realdark-gold)",
-            "color": "var(--realdark-gold)",
-            // The Drop-Shadow Hack in JS form (Guaranteed to work)
-            "filter": "drop-shadow(0px -100px 0px var(--realdark-gold))",
-            "transform": "translateY(100px)",
-            "overflow": "visible",
-            "opacity": "1"
-        });
-
-        // Safety: Target children too (paths)
-        pfsTargets.find("*").css({
-            "fill": "var(--realdark-gold)",
-            "stroke": "var(--realdark-gold)"
-        });
-
-        // Also force the parent anchor color
-        html.find('a[data-tab="pfs"]').css("color", "var(--realdark-gold)");
-    }
-});

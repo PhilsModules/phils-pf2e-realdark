@@ -97,6 +97,7 @@
     box-shadow: none !important;
     font-family: inherit;
     transition: border-color 0.2s;
+    box-sizing: border-box !important; /* Prevent layout jumps when adding borders */
 }
 
 .window-app.realdark-theme-window input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):focus,
@@ -546,7 +547,7 @@ html body.realdark-chat-active .chat-message button[data-action] {
     box-shadow: none !important;
     text-shadow: none !important;
     border-radius: 3px;
-    padding: 1px 4px;
+    padding: 0 2px;
 }
 
 /* Content Links (Items, Effects, UUIDs) - Transparent to blend in */
@@ -591,7 +592,7 @@ html body #chat-log .chat-message span.with-repost {
     color: var(--realdark-gold) !important;
     border: 1px solid rgba(130, 130, 130, 0.3) !important;
     border-radius: 3px;
-    padding: 1px 4px;
+    padding: 0 2px;
     text-shadow: none !important;
     box-shadow: none !important;
     -webkit-text-fill-color: var(--realdark-gold) !important;
@@ -2325,23 +2326,22 @@ html body .chat-message.private .message-content {
 
 /* Color the borders on our custom background layer - OUTER SHADOW ONLY */
 /* Color the borders on our custom background layer - OUTER SHADOW ONLY */
-/* WHISPER first (Primary Theme Color - e.g. Gold/Teal) */
+/* WHISPER first (Primary Theme Color - e.g. Gold/Teal) -> Changed to USER CONFIGURABLE per user request */
 html body.realdark-chat-active .chat-message.whisper,
 html body.realdark-chat-active .chat-message.private {
-    border: 2px solid var(--realdark-gold) !important;
-    /* Theme Primary */
+    border: 1px solid var(--realdark-color-whisper) !important;
+    border-left: 4px solid var(--realdark-color-whisper) !important;
     box-shadow: 0 0 5px #000 !important;
     background: var(--realdark-sheet-bg) !important;
-    /* Ensure dark bg */
 }
 
 /* BLIND overrides Whisper (Accent Theme Color - e.g. Red/Orange) */
-html body.realdark-chat-active .chat-message.blind {
-    border: 2px solid var(--realdark-red-bright) !important;
-    /* Theme Accent */
+html body.realdark-chat-active .chat-message.blind,
+html body.realdark-chat-active .chat-message.whisper.blind {
+    border: 1px solid var(--realdark-color-blind) !important;
+    border-left: 4px solid var(--realdark-color-blind) !important;
     box-shadow: 0 0 5px #000 !important;
     background: var(--realdark-sheet-bg) !important;
-    /* Ensure dark bg */
 }
 
 /* Ensure Tags in Chat are Neutral/Dark */
@@ -2357,24 +2357,26 @@ html body.realdark-chat-active .chat-message .tags .tag {
 /* WHISPER (Primary Theme Color) */
 html body.realdark-chat-active .chat-message.whisper .message-header,
 html body.realdark-chat-active .chat-message.private .message-header {
-    border-bottom: 1px solid var(--realdark-gold) !important;
+    border-bottom: 1px solid var(--realdark-color-whisper) !important;
     color: var(--realdark-text-light) !important;
 }
 
 html body.realdark-chat-active .chat-message.whisper hr,
-html body.realdark-chat-active .chat-message.private hr {
-    border-top: 1px solid var(--realdark-gold) !important;
+html body.realdark-chat-active .chat-message.whisper.private hr {
+    border-top: 1px solid var(--realdark-color-whisper) !important;
     border-bottom: none !important;
 }
 
-/* BLIND (Accent Theme Color) */
-html body.realdark-chat-active .chat-message.blind .message-header {
-    border-bottom: 1px solid var(--realdark-red-bright) !important;
+/* BLIND (Accent Theme Color) -> Hardcoded RED -> Configurable Blind Color */
+html body.realdark-chat-active .chat-message.blind .message-header,
+html body.realdark-chat-active .chat-message.whisper.blind .message-header {
+    border-bottom: 1px solid var(--realdark-color-blind) !important;
     color: var(--realdark-text-light) !important;
 }
 
-html body.realdark-chat-active .chat-message.blind hr {
-    border-top: 1px solid var(--realdark-red-bright) !important;
+html body.realdark-chat-active .chat-message.blind hr,
+html body.realdark-chat-active .chat-message.whisper.blind hr {
+    border-top: 1px solid var(--realdark-color-blind) !important;
     border-bottom: none !important;
 }
 
@@ -2540,4 +2542,140 @@ html body .chat-message ul li small {
 html body .chat-message ul {
     background: transparent !important;
 }
+
+
+/* ======================================================================== */
+/* UNIVERSAL THIRD-PARTY COMPATIBILITY (AUTO-THEMING)                       */
+/* ======================================================================== */
+
+/* 1. GREEDY BUTTONS & INPUTS
+   Force ANY button or input inside our windows to adopt the theme,
+   even if it comes from another module.
+*/
+.window-app.realdark-theme-window button,
+.window-app.realdark-theme-window .btn,
+.window-app.realdark-theme-window .button,
+.window-app.realdark-theme-window input[type="text"],
+.window-app.realdark-theme-window input[type="number"],
+.window-app.realdark-theme-window select,
+.window-app.realdark-theme-window textarea {
+    background-color: var(--realdark-input-bg) !important;
+    color: var(--realdark-gold) !important;
+    /* border: 1px solid rgba(255, 255, 255, 0.2) !important; -> Moved to hover or specific */
+    border: 1px solid transparent !important; /* Preserve size but hide unless needed */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important; /* Minimal aesthetic */
+    box-sizing: border-box !important; /* Prevent size jumps */
+    box-shadow: none !important;
+    text-shadow: var(--realdark-text-shadow) !important;
+}
+
+/* Hover States for Greedy Buttons */
+.window-app.realdark-theme-window button:hover,
+.window-app.realdark-theme-window .btn:hover,
+.window-app.realdark-theme-window .button:hover {
+    border-color: var(--realdark-gold) !important;
+    box-shadow: 0 0 5px var(--realdark-gold) !important;
+    color: white !important;
+}
+
+/* 2. THE BRIGHT KILLER
+   Aggressively target elements with inline styles attempting to be white.
+   We catch specific inline style strings.
+*/
+.window-app.realdark-theme-window [style*="background: white"],
+.window-app.realdark-theme-window [style*="background: #fff"],
+.window-app.realdark-theme-window [style*="background-color: white"],
+.window-app.realdark-theme-window [style*="background-color: #fff"],
+.window-app.realdark-theme-window [style*="background:white"],
+.window-app.realdark-theme-window [style*="background:#fff"] {
+    background: var(--realdark-sheet-bg) !important;
+    background-color: var(--realdark-sheet-bg) !important;
+    color: var(--realdark-text-light) !important;
+}
+
+/* 3. GENERIC CONTAINERS
+   Modules often use .card, .panel, .box for layout.
+*/
+.window-app.realdark-theme-window .card,
+.window-app.realdark-theme-window .panel,
+.window-app.realdark-theme-window .box {
+    background: rgba(0, 0, 0, 0.2) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: var(--realdark-text-light) !important;
+}
+
+/* 4. CHAT CARD AUTO-THEMING
+   Scopes to chat messages if Chat Theming is enabled.
+*/
+body.realdark-chat-active .chat-message .card-content,
+body.realdark-chat-active .chat-message .chat-card,
+body.realdark-chat-active .chat-message .table-draw {
+    background: transparent !important;
+    background-color: transparent !important;
+    border-color: transparent !important; /* Hide color, dont strip border width */
+    box-shadow: none !important;
+}
+
+/* Ensure text in chat cards is readable */
+body.realdark-chat-active .chat-message h3,
+body.realdark-chat-active .chat-message h4,
+body.realdark-chat-active .chat-message strong {
+    color: var(--realdark-gold) !important;
+}
+
+/* Fix for modules simply dumping black text */
+body.realdark-chat-active .chat-message {
+    color: var(--realdark-text-light); /* Fallback text color */
+}
+
+/* 6. CHARACTER HEADER SPECIFIC FIXES (Level, XP, Name) */
+/* Restore seamless look for header inputs */
+/* SPECIFICITY WARS: We must beat the global rule (0-5-1) which uses 3 :not() selectors.
+   We append the same :not() chain + .char-level to ensure we win (0-6-1). */
+.window-app.realdark-theme-window .char-header input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+.window-app.realdark-theme-window .char-details input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+.window-app.realdark-theme-window .char-level input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+.window-app.realdark-theme-window .char-level .exp-input input:not([type="checkbox"]):not([type="radio"]):not([type="range"]) {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important; /* Restore subtle border per user request */
+    border-radius: 2px !important;
+    box-shadow: none !important;
+    padding: 0 !important; /* Remove global padding to fix alignment */
+}
+
+/* SPECIFIC: Level and XP inputs only (Constraints) */
+.window-app.realdark-theme-window .char-level input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+.window-app.realdark-theme-window .char-level .exp-input input:not([type="checkbox"]):not([type="radio"]):not([type="range"]) {
+    text-align: center !important; /* Restore centering per user feedback ("Standard" look) */
+    width: 40px !important; /* Constrain width so bar doesn't extend too far */
+}
+
+/* Fix spacing between Level and XP blocks */
+.window-app.realdark-theme-window .char-level {
+    gap: 0.5rem !important; /* CSS Grid/Flex gap */
+}
+
+.window-app.realdark-theme-window .char-level .level {
+    margin-right: 0.5rem !important; /* Legacy margin fallback */
+}
+
+/* 7. PROGRESS BAR ALIGNMENT FIX */
+/* Remove forced width per user request - restore standard sizing */
+/* .window-app.realdark-theme-window .char-level .exp-data {
+    min-width: auto !important;
+    flex-basis: auto !important;
+} */
+/* Actually, just deleting the block is cleaner, but commenting out preserves the logic history if needed. 
+   I will remove the constraints entirely as requested. */
+
+/* Force the progress bar to fill the container exactly, suppressing any left-shift */
+.window-app.realdark-theme-window .char-level progress,
+.window-app.realdark-theme-window .char-level .exp-data progress {
+    width: 100% !important;
+    margin: 0 !important;
+    left: 0 !important; /* Reset positioning */
+    transform: none !important;
+}
+
 
