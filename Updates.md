@@ -1,3 +1,13 @@
+# 1.4.0
+
+**Major Content & UI Update (01.01.2026)**
+
+- **New Presets:** Added 17 new premium themes including Ebony, Relic, Velvet, Weave, Frost & Gilded, Crimson & Amber, Mystic Waters, and more.
+- **Color Logic:** Implemented high-contrast text and complementary accent colors for all new presets.
+- **Readability:** Enhanced text-shadow logic to ensure legibility on busy backgrounds.
+- **Wizard UI:** Completely redesigned configuration wizard with a cleaner, compact grid layout and categorized controls.
+- **Localization:** Added German translations for all new presets and UI elements.
+
 # 1.3.0
 
 **Major Update: Auto-Theming, Configurable Colors & Polish (31.12.2025)**

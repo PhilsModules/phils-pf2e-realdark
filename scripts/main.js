@@ -370,10 +370,11 @@ class RealDarkWizard extends HandlebarsApplicationMixin(ApplicationV2) {
                 const g = parseInt(hex.substr(2, 2), 16);
                 const b = parseInt(hex.substr(4, 2), 16);
                 const yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
-                if (yiq < 100) {
-                    document.documentElement.style.setProperty('--realdark-text-shadow', '0 0 2px white, 0 0 1px white');
+                if (yiq < 128) { // Increased threshold slightly
+                    document.documentElement.style.setProperty('--realdark-text-shadow', '0 0 3px #ffffff, 0 0 1px #ffffff');
                 } else {
-                    document.documentElement.style.setProperty('--realdark-text-shadow', '0 0 1px black');
+                    // Stronger black shadow for light text to pop against busy backgrounds
+                    document.documentElement.style.setProperty('--realdark-text-shadow', '1px 1px 3px black, 0 0 2px black');
                 }
             }
             else if (key === 'colorGoldDim') document.documentElement.style.setProperty('--realdark-gold-dim', value);
@@ -473,6 +474,26 @@ class RealDarkWizard extends HandlebarsApplicationMixin(ApplicationV2) {
             wood: { gold: "#d4af37", dim: "#aa8e7e", accent: "#8b0000", text: "#faebd7", banner: "#2e1b0f", bg: "#1a100a", bgSize: "cover", bgImg: "modules/phils-pf2e-realdark/assets/bgwood.webp", sidebarOp: 0.6 },
             // NEW PRESETS
             bamboo: { gold: "#e0d8a0", dim: "#8ea67a", accent: "#8fb339", text: "#f0f5e5", banner: "#1e300f", bg: "#0f1a08", bgSize: "cover", bgImg: "modules/phils-pf2e-realdark/assets/bgbamboo.webp", sidebarOp: 0.6 },
+            
+            // NEW PRESETS EXTENDED - High Contrast V2 (Complementary Accents)
+            frost: { gold: "#ffffff", dim: "#b0c4de", accent: "#ffd700", text: "#f0f8ff", banner: "#1c2e4a", bg: "#0f1a2b", bgSize: "cover", bgImg: "modules/phils-pf2e-realdark/assets/bgfrostgilded.webp", sidebarOp: 0.7 },
+            crimson: { gold: "#fff0e0", dim: "#d4af37", accent: "#ffd700", text: "#fff5ee", banner: "#3d0a0a", bg: "#1a0505", bgSize: "cover", bgImg: "modules/phils-pf2e-realdark/assets/bgcrimsonamber.webp", sidebarOp: 0.8 },
+            shadow_star: { gold: "#e0e0ff", dim: "#483d8b", accent: "#00bfff", text: "#f8f8ff", banner: "#101030", bg: "#05051a", bgSize: "cover", bgImg: "modules/phils-pf2e-realdark/assets/bgstarfall.webp", sidebarOp: 0.8 },
+            venom: { gold: "#f0fff0", dim: "#9acd32", accent: "#ff4500", text: "#f5fffa", banner: "#1a2e1a", bg: "#0a1f0a", bgSize: "cover", bgImg: "modules/phils-pf2e-realdark/assets/bgvenomwilds.webp", sidebarOp: 0.7 },
+            mystic: { gold: "#e0ffff", dim: "#20b2aa", accent: "#ffd700", text: "#f0ffff", banner: "#0a2b2b", bg: "#001a1a", bgSize: "cover", bgImg: "modules/phils-pf2e-realdark/assets/bgmystictides.webp", sidebarOp: 0.7 },
+            celestial: { gold: "#fffacd", dim: "#4169e1", accent: "#ffd700", text: "#f0f8ff", banner: "#0a0a2e", bg: "#00001a", bgSize: "cover", bgImg: "modules/phils-pf2e-realdark/assets/bgcelestialnightfall.webp", sidebarOp: 0.8 },
+            ritual: { gold: "#ffe0df", dim: "#800000", accent: "#ffa500", text: "#fff0f0", banner: "#2b0a0a", bg: "#1a0505", bgSize: "cover", bgImg: "modules/phils-pf2e-realdark/assets/bgritual.webp", sidebarOp: 0.7 },
+            ethereal: { gold: "#f0ffff", dim: "#87ceeb", accent: "#ff69b4", text: "#ffffff", banner: "#203a45", bg: "#102025", bgSize: "cover", bgImg: "modules/phils-pf2e-realdark/assets/bgetheral.webp", sidebarOp: 0.6 },
+            inferno: { gold: "#ffffff", dim: "#ff8c00", accent: "#ffff00", text: "#fff5ee", banner: "#330500", bg: "#1a0300", bgSize: "cover", bgImg: "modules/phils-pf2e-realdark/assets/bginferno.webp", sidebarOp: 0.8 },
+            ebony: { gold: "#e8e0d5", dim: "#8b7e66", accent: "#cd853f", text: "#f0f0e0", banner: "#1a1005", bg: "#171813", bgSize: "cover", bgImg: "modules/phils-pf2e-realdark/assets/bgebony.webp", sidebarOp: 0.9 },
+            obsidian: { gold: "#f0fff5", dim: "#2e8b57", accent: "#00fa9a", text: "#f0fffa", banner: "#0f2b20", bg: "#05140f", bgSize: "cover", bgImg: "modules/phils-pf2e-realdark/assets/bgscales.webp", sidebarOp: 0.8 },
+            shadowwing: { gold: "#f5f0ff", dim: "#6a5acd", accent: "#9370db", text: "#f8f8ff", banner: "#1a0a2e", bg: "#0d0517", bgSize: "cover", bgImg: "modules/phils-pf2e-realdark/assets/bgwing.webp", sidebarOp: 0.8 },
+            relic: { gold: "#fff8dc", dim: "#8fbc8f", accent: "#20b2aa", text: "#f0fff0", banner: "#202020", bg: "#202624", bgSize: "cover", bgImg: "modules/phils-pf2e-realdark/assets/bgrelic.webp", sidebarOp: 0.8 },
+            ore: { gold: "#ffefdb", dim: "#cd853f", accent: "#ffd700", text: "#fff8dc", banner: "#202020", bg: "#1a1a1a", bgSize: "cover", bgImg: "modules/phils-pf2e-realdark/assets/bgblackgold.webp", sidebarOp: 0.8 },
+            velvet: { gold: "#f8f8ff", dim: "#9932cc", accent: "#ba55d3", text: "#ffffff", banner: "#140026", bg: "#010201", bgSize: "cover", bgImg: "modules/phils-pf2e-realdark/assets/bgvelet.webp", sidebarOp: 0.9 },
+            weave: { gold: "#ffffe0", dim: "#a2cd5a", accent: "#adff2f", text: "#f0fff0", banner: "#0f1a0f", bg: "#070701", bgSize: "cover", bgImg: "modules/phils-pf2e-realdark/assets/bgweave.webp", sidebarOp: 0.8 },
+            swamp: { gold: "#f0fff0", dim: "#6b8e23", accent: "#7cfc00", text: "#f5f5dc", banner: "#1a261a", bg: "#0d140d", bgSize: "cover", bgImg: "modules/phils-pf2e-realdark/assets/bgswamp.webp", sidebarOp: 0.7 },
+
             croc: { gold: "#c0cfa0", dim: "#8e9e7a", accent: "#7da33f", text: "#e8ede0", banner: "#1b2611", bg: "#0d1406", bgSize: "cover", bgImg: "modules/phils-pf2e-realdark/assets/bgcroc.webp", sidebarOp: 0.7 },
             dragon: { gold: "#ffbd4a", dim: "#e66a6a", accent: "#ff3333", text: "#ffe5e5", banner: "#4a0808", bg: "#1a0404", bgSize: "cover", bgImg: "modules/phils-pf2e-realdark/assets/bgdragon.webp", sidebarOp: 0.6 },
             moon: { gold: "#c0e0ff", dim: "#6a8ac6", accent: "#66aaff", text: "#e0f0ff", banner: "#0b1421", bg: "#050810", bgSize: "cover", bgImg: "modules/phils-pf2e-realdark/assets/bgmoon.webp", sidebarOp: 0.7 },
@@ -798,10 +819,10 @@ function updateTheme() {
     // SMART CONTRAST
     if (isColorDark(primaryColor)) {
         // If primary color is dark (e.g. Black), give it a white glow so it's readable
-        root.style.setProperty("--realdark-text-shadow", "0 0 2px white, 0 0 1px white");
+        root.style.setProperty("--realdark-text-shadow", "0 0 3px #ffffff, 0 0 1px #ffffff");
     } else {
-        // Standard black shadow for light colors
-        root.style.setProperty("--realdark-text-shadow", "0 0 1px black");
+        // Default dark shadow for light text
+        root.style.setProperty("--realdark-text-shadow", "1px 1px 3px black, 0 0 2px black");
     }
 
     // Force Repaint of existing windows to be safe

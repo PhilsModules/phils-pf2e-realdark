@@ -103,127 +103,123 @@
             margin-top: 1px;
         }
 
-        /* PRESET BAR - COMPACT */
-        .rd-preset-bar {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 3px;
-            /* EXTRA COMPACT */
-            padding: 5px;
-            /* EXTRA COMPACT */
-            background: rgba(255, 255, 255, 0.02);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .rd-preset-btn {
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid var(--realdark-gold-dim);
-            color: #888;
-            padding: 3px 8px;
-            /* EXTRA COMPACT */
-            font-size: 0.7em;
-            /* EXTRA COMPACT */
-            text-transform: uppercase;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .rd-preset-btn:hover {
-            color: white;
-            border-color: var(--realdark-gold);
-            transform: translateY(-1px);
-        }
-
-        /* MAIN FORM AREA */
+        /* SINGLE SCROLLABLE BODY */
         .rd-form-body {
-            padding: 8px;
-            /* EXTRA COMPACT */
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            /* EXTRA COMPACT */
             flex: 1;
-            /* Take remaining space */
             overflow-y: auto;
-            /* Enable scrolling */
+            padding: 10px;
             scrollbar-width: thin;
         }
 
-        /* ... existing css ... */
-
-        .rd-footer {
-            padding: 10px;
-            /* EXTRA COMPACT */
-            background: rgba(0, 0, 0, 0.4);
+        /* CATEGORY TITLE FOR PRESETS */
+        .rd-preset-group-title {
+            grid-column: 1 / -1; /* Span all columns */
+            font-size: 0.7em;
+            color: var(--realdark-gold);
+            opacity: 0.6;
+            text-transform: uppercase;
+            margin-top: 8px;
+            margin-bottom: 2px;
             text-align: center;
-            /* margin-top: auto; Remove auto margin as it is now fixed at bottom via flex */
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            flex: 0 0 auto;
-            /* Don't shrink */
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
-        /* ... */
-
-        <form class="rd-form-body">< !-- Form wrapper -->< !-- ... controls ... -->< !-- HIDDEN FIELDS FOR PRESETS TO FILL IF NEEDED -->< !-- HIDDEN FIELDS FOR PRESETS --><input type="hidden" name="backgroundImage" value="{{bgImgVal}}"><input type="hidden" name="bgSize" value="{{bgSizeVal}}"><input type="hidden" name="colorBackground" value="{{bgVal}}"></form><div class="rd-footer"><button type="submit" class="rd-submit-btn"> {
-                {
-                localize 'REALDARK.Wizard.Button.Save'
-            }
+        /* PRESET GRID - ULTRA COMPACT */
+        .rd-preset-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2px;
+            margin-bottom: 15px;
         }
 
-        </button></div></div>.rd-section-title {
+        .rd-preset-btn {
+            flex: 1 1 45%; /* Auto width but try to fit 2 per line */
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            padding: 3px 2px;
             font-size: 0.7em;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            opacity: 0.5;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 1px;
-            margin-top: 2px;
-            margin-bottom: 2px;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
         }
 
-        /* CONTROL GROUPS - COMPACT */
+        .rd-preset-btn:hover, .rd-preset-btn.active {
+            color: white;
+            border-color: var(--realdark-gold);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 5px rgba(0,0,0,0.5);
+        }
+
+        /* Group Headers (Optional, keeping it simple flat list for now but sorted) */
+        
+        /* CONTROLS & INPUTS - PREMIUM LOOK */
         .rd-control-group {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 5px;
-            padding: 3px 6px;
-            /* EXTRA COMPACT */
+            padding: 8px 10px;
+            background: transparent;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            transition: background 0.2s;
+        }
+
+        .rd-control-group:hover {
             background: rgba(255, 255, 255, 0.03);
-            border-radius: 4px;
         }
 
         .rd-label-main {
-            font-size: 0.85em;
-            /* EXTRA COMPACT */
+            font-size: 0.8em;
+            color: #ccc;
             font-weight: 600;
-            color: #eee;
+            letter-spacing: 0.5px;
+        }
+
+        .rd-input-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .rd-hex-input {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid #444;
-            border-radius: 3px;
-            color: white;
-            font-family: 'Courier New', monospace;
-            text-align: center;
-            width: 60px;
-            font-size: 0.85em;
-            padding: 4px;
+            width: 70px;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--realdark-gold); /* Gold Text */
+            text-align: right;
+            font-family: 'Courier New', monospace; /* Tech feel */
+            font-size: 0.8em;
+            padding: 2px;
+            transition: all 0.2s;
+        }
+
+        .rd-hex-input:focus {
+            outline: none;
+            border-bottom-color: var(--realdark-gold);
+            background: rgba(0,0,0,0.2);
         }
 
         .rd-swatch {
-            position: relative;
-            width: 24px;
-            height: 24px;
-            border-radius: 4px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            cursor: pointer;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%; /* CIRCLE */
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
             overflow: hidden;
+            cursor: pointer;
+            position: relative; /* For absolute styling of input */
+            transition: transform 0.2s, border-color 0.2s;
         }
 
+        /* HIDE THE UGLY NATIVE INPUT BUT KEEP IT CLICKABLE */
         .rd-swatch input[type="color"] {
             position: absolute;
             top: -50%;
@@ -232,85 +228,49 @@
             height: 200%;
             opacity: 0;
             cursor: pointer;
+            border: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .rd-swatch:hover {
+            transform: scale(1.1);
+            border-color: var(--realdark-gold);
+            box-shadow: 0 0 8px var(--realdark-gold-dim);
         }
 
         /* FOOTER */
         .rd-footer {
             padding: 10px;
-            /* EXTRA COMPACT */
             background: rgba(0, 0, 0, 0.4);
-            text-align: center;
+            text-align: right; /* ALIGN RIGHT */
             border-top: 1px solid rgba(255, 255, 255, 0.05);
             flex: 0 0 auto;
-            /* Don't shrink */
+            display: flex; 
+            justify-content: flex-end;
         }
 
         .rd-submit-btn {
             background: linear-gradient(135deg, var(--realdark-gold), var(--realdark-gold-dim));
             border: none;
             color: #111;
-            padding: 8px 30px;
-            /* EXTRA COMPACT */
+            padding: 6px 25px; /* Compact padding */
             font-size: 0.9em;
-            border-radius: 30px;
+            border-radius: 20px;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1px;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            width: 100%;
+            width: auto; /* Auto width */
+            transition: transform 0.2s;
         }
 
-        /* PREVIEW STYLES (Mini Character Sheet) */
-        .rd-preview-sheet {
-            display: flex;
-            height: 100%;
-            gap: 10px;
-            color: var(--realdark-gold);
-            text-shadow: var(--realdark-text-shadow);
+        .rd-submit-btn:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
         }
 
-        .rd-preview-sidebar {
-            flex: 0 0 120px;
-            background: linear-gradient(to bottom, var(--realdark-sidebar-rgba-top) 0%, var(--realdark-sidebar-rgba-bottom) 100%);
-            border-right: 1px solid rgba(130, 130, 130, 0.2);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 10px;
-            gap: 10px;
-        }
-
-        .rd-preview-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .rd-preview-header {
-            border-bottom: 1px solid rgba(130, 130, 130, 0.2);
-            padding-bottom: 5px;
-            font-size: 1.5em;
-            font-weight: bold;
-        }
-
-        .rd-preview-input {
-            background: var(--realdark-input-bg);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #fff;
-            padding: 5px;
-            border-radius: 4px;
-            width: 100%;
-            font-family: inherit;
-        }
-
-        .rd-preview-box {
-            border: 1px solid rgba(130, 130, 130, 0.3);
-            background: rgba(0, 0, 0, 0.2);
-            padding: 10px;
-            border-radius: 4px;
-        }
     </style>
 
     <div class="window-content realdark-wizard-window">
@@ -321,41 +281,62 @@
                 <div class="rd-subtitle">{{localize 'REALDARK.Wizard.Subtitle'}}</div>
             </div>
 
-            <div class="rd-preset-bar">
-                <div class="rd-preset-btn" data-action="applyPreset" data-preset="leather">{{localize
-                    'REALDARK.Preset.Leather'}}</div>
-                <div class="rd-preset-btn" data-action="applyPreset" data-preset="wood">{{localize
-                    'REALDARK.Preset.Wood'}}</div>
-                <div class="rd-preset-btn" data-action="applyPreset" data-preset="stone">{{localize
-                    'REALDARK.Preset.Stone'}}</div>
-                <div class="rd-preset-btn" data-action="applyPreset" data-preset="paper">{{localize
-                    'REALDARK.Preset.Paper'}}</div>
-                <div class="rd-preset-btn" data-action="applyPreset" data-preset="dragon">{{localize
-                    'REALDARK.Preset.Dragon'}}</div>
-                <div class="rd-preset-btn" data-action="applyPreset" data-preset="croc">{{localize
-                    'REALDARK.Preset.Croc'}}</div>
-                <div class="rd-preset-btn" data-action="applyPreset" data-preset="bamboo">{{localize
-                    'REALDARK.Preset.Bamboo'}}</div>
-                <div class="rd-preset-btn" data-action="applyPreset" data-preset="moss">{{localize
-                    'REALDARK.Preset.Moss'}}</div>
-                <div class="rd-preset-btn" data-action="applyPreset" data-preset="moon">{{localize
-                    'REALDARK.Preset.Moon'}}</div>
-                <div class="rd-preset-btn" data-action="applyPreset" data-preset="stars">{{localize
-                    'REALDARK.Preset.Stars'}}</div>
-                <div class="rd-preset-btn" data-action="applyPreset" data-preset="roses">{{localize
-                    'REALDARK.Preset.Roses'}}</div>
-                <div class="rd-preset-btn" data-action="applyPreset" data-preset="perry">{{localize
-                    'REALDARK.Preset.Perry'}}</div>
-                <div class="rd-preset-btn" data-action="applyPreset" data-preset="void">{{localize
-                    'REALDARK.Preset.Void'}}</div>
-            </div>
+            <form class="rd-form-body"> <!-- MAIN SCROLL CONTAINER -->
+                
+                <!-- 1. PRESETS SECTION -->
+                <div class="rd-section-title" style="margin-top:0;">{{localize 'REALDARK.Wizard.Section.Presets'}}</div>
+                
+                <div class="rd-preset-grid">
+                    <!-- Neutral -->
+                    <div class="rd-preset-btn" data-action="applyPreset" data-preset="paper">{{localize 'REALDARK.Preset.Paper'}}</div>
+                    <div class="rd-preset-btn" data-action="applyPreset" data-preset="leather">{{localize 'REALDARK.Preset.Leather'}}</div>
+                    <div class="rd-preset-btn" data-action="applyPreset" data-preset="wood">{{localize 'REALDARK.Preset.Wood'}}</div>
+                    <div class="rd-preset-btn" data-action="applyPreset" data-preset="stone">{{localize 'REALDARK.Preset.Stone'}}</div>
+                    <div class="rd-preset-btn" data-action="applyPreset" data-preset="bamboo">{{localize 'REALDARK.Preset.Bamboo'}}</div>
 
-            <form class="rd-form-body"> <!-- Form wrapper -->
+                    <!-- Dark -->
+                    <div class="rd-preset-btn" data-action="applyPreset" data-preset="ebony">{{localize 'REALDARK.Preset.Ebony'}}</div>
+                    <div class="rd-preset-btn" data-action="applyPreset" data-preset="obsidian">{{localize 'REALDARK.Preset.Obsidian'}}</div>
+                    <div class="rd-preset-btn" data-action="applyPreset" data-preset="velvet">{{localize 'REALDARK.Preset.Velvet'}}</div>
+                    <div class="rd-preset-btn" data-action="applyPreset" data-preset="relic">{{localize 'REALDARK.Preset.Relic'}}</div>
+                    <div class="rd-preset-btn" data-action="applyPreset" data-preset="ore">{{localize 'REALDARK.Preset.Ore'}}</div>
+
+                    <!-- Warm -->
+                    <div class="rd-preset-btn" data-action="applyPreset" data-preset="inferno">{{localize 'REALDARK.Preset.Inferno'}}</div>
+                    <div class="rd-preset-btn" data-action="applyPreset" data-preset="crimson">{{localize 'REALDARK.Preset.Crimson'}}</div>
+                    <div class="rd-preset-btn" data-action="applyPreset" data-preset="roses">{{localize 'REALDARK.Preset.Roses'}}</div>
+                    <div class="rd-preset-btn" data-action="applyPreset" data-preset="dragon">{{localize 'REALDARK.Preset.Dragon'}}</div>
+                    <div class="rd-preset-btn" data-action="applyPreset" data-preset="ritual">{{localize 'REALDARK.Preset.Ritual'}}</div>
+
+                    <!-- Cool -->
+                    <div class="rd-preset-btn" data-action="applyPreset" data-preset="frost">{{localize 'REALDARK.Preset.Frost'}}</div>
+                    <div class="rd-preset-btn" data-action="applyPreset" data-preset="moon">{{localize 'REALDARK.Preset.Moon'}}</div>
+                    <div class="rd-preset-btn" data-action="applyPreset" data-preset="celestial">{{localize 'REALDARK.Preset.Celestial'}}</div>
+                    <div class="rd-preset-btn" data-action="applyPreset" data-preset="mystic">{{localize 'REALDARK.Preset.Mystic'}}</div>
+                    <div class="rd-preset-btn" data-action="applyPreset" data-preset="ethereal">{{localize 'REALDARK.Preset.Ethereal'}}</div>
+                    <div class="rd-preset-btn" data-action="applyPreset" data-preset="perry">{{localize 'REALDARK.Preset.Perry'}}</div>
+
+                    <!-- Nature -->
+                    <div class="rd-preset-btn" data-action="applyPreset" data-preset="moss">{{localize 'REALDARK.Preset.Moss'}}</div>
+                    <div class="rd-preset-btn" data-action="applyPreset" data-preset="venom">{{localize 'REALDARK.Preset.Venom'}}</div>
+                    <div class="rd-preset-btn" data-action="applyPreset" data-preset="swamp">{{localize 'REALDARK.Preset.Swamp'}}</div>
+                    <div class="rd-preset-btn" data-action="applyPreset" data-preset="croc">{{localize 'REALDARK.Preset.Croc'}}</div>
+
+                    <!-- Magic -->
+                    <div class="rd-preset-btn" data-action="applyPreset" data-preset="shadow_star">{{localize 'REALDARK.Preset.ShadowStar'}}</div>
+                    <div class="rd-preset-btn" data-action="applyPreset" data-preset="shadowwing">{{localize 'REALDARK.Preset.Shadowwing'}}</div>
+                    <div class="rd-preset-btn" data-action="applyPreset" data-preset="weave">{{localize 'REALDARK.Preset.Weave'}}</div>
+                    <div class="rd-preset-btn" data-action="applyPreset" data-preset="stars">{{localize 'REALDARK.Preset.Stars'}}</div>
+                    <div class="rd-preset-btn" data-action="applyPreset" data-preset="void">{{localize 'REALDARK.Preset.Void'}}</div>
+                </div>
+
+                <!-- 2. COLOR SETTINGS SECTION -->
                 <div class="rd-section-title">{{localize 'REALDARK.Wizard.Section.Colors'}}</div>
-
+                
+                <!-- Background -->
                 <div class="rd-control-group">
                     <span class="rd-label-main">{{localize 'REALDARK.Wizard.Label.BgColor'}}</span>
-                    <div style="display:flex; gap:5px;">
+                    <div class="rd-input-wrapper">
                         <input type="text" name="colorBackground" value="{{bgVal}}" class="rd-hex-input"
                             oninput="this.parentElement.querySelector('.rd-swatch').style.background = this.value; RealDark.updatePreview('colorBackground', this.value);">
                         <div class="rd-swatch" style="background: {{bgVal}}">
@@ -365,9 +346,10 @@
                     </div>
                 </div>
 
+                <!-- Banner -->
                 <div class="rd-control-group">
                     <span class="rd-label-main">{{localize 'REALDARK.Wizard.Label.Banner'}}</span>
-                    <div style="display:flex; gap:5px;">
+                    <div class="rd-input-wrapper">
                         <input type="text" name="colorBanner" value="{{bannerVal}}" class="rd-hex-input"
                             oninput="this.parentElement.querySelector('.rd-swatch').style.background = this.value; RealDark.updatePreview('colorBanner', this.value);">
                         <div class="rd-swatch" style="background: {{bannerVal}}">
@@ -377,9 +359,10 @@
                     </div>
                 </div>
 
+                <!-- Gold -->
                 <div class="rd-control-group">
                     <span class="rd-label-main">{{localize 'REALDARK.Wizard.Label.Gold'}}</span>
-                    <div style="display:flex; gap:5px;">
+                    <div class="rd-input-wrapper">
                         <input type="text" name="colorGold" value="{{goldVal}}" class="rd-hex-input"
                             oninput="this.parentElement.querySelector('.rd-swatch').style.background = this.value; RealDark.updatePreview('colorGold', this.value);">
                         <div class="rd-swatch" style="background: {{goldVal}}">
@@ -389,9 +372,10 @@
                     </div>
                 </div>
 
+                <!-- Dim -->
                 <div class="rd-control-group">
                     <span class="rd-label-main">{{localize 'REALDARK.Wizard.Label.Dim'}}</span>
-                    <div style="display:flex; gap:5px;">
+                    <div class="rd-input-wrapper">
                         <input type="text" name="colorGoldDim" value="{{dimVal}}" class="rd-hex-input"
                             oninput="this.parentElement.querySelector('.rd-swatch').style.background = this.value; RealDark.updatePreview('colorGoldDim', this.value);">
                         <div class="rd-swatch" style="background: {{dimVal}}">
@@ -401,9 +385,10 @@
                     </div>
                 </div>
 
+                <!-- Accent -->
                 <div class="rd-control-group">
                     <span class="rd-label-main">{{localize 'REALDARK.Wizard.Label.Accent'}}</span>
-                    <div style="display:flex; gap:5px;">
+                    <div class="rd-input-wrapper">
                         <input type="text" name="colorAccent" value="{{accVal}}" class="rd-hex-input"
                             oninput="this.parentElement.querySelector('.rd-swatch').style.background = this.value; RealDark.updatePreview('colorAccent', this.value);">
                         <div class="rd-swatch" style="background: {{accVal}}">
@@ -413,9 +398,10 @@
                     </div>
                 </div>
 
+                <!-- Whisper -->
                 <div class="rd-control-group">
                     <span class="rd-label-main">{{localize 'REALDARK.Wizard.Label.Whisper'}}</span>
-                    <div style="display:flex; gap:5px;">
+                    <div class="rd-input-wrapper">
                         <input type="text" name="colorWhisper" value="{{whisperVal}}" class="rd-hex-input"
                             oninput="this.parentElement.querySelector('.rd-swatch').style.background = this.value; RealDark.updatePreview('colorWhisper', this.value);">
                         <div class="rd-swatch" style="background: {{whisperVal}}">
@@ -425,9 +411,10 @@
                     </div>
                 </div>
 
+                <!-- Blind -->
                 <div class="rd-control-group">
                     <span class="rd-label-main">{{localize 'REALDARK.Wizard.Label.Blind'}}</span>
-                    <div style="display:flex; gap:5px;">
+                    <div class="rd-input-wrapper">
                         <input type="text" name="colorBlind" value="{{blindVal}}" class="rd-hex-input"
                             oninput="this.parentElement.querySelector('.rd-swatch').style.background = this.value; RealDark.updatePreview('colorBlind', this.value);">
                         <div class="rd-swatch" style="background: {{blindVal}}">
@@ -437,9 +424,10 @@
                     </div>
                 </div>
 
+                <!-- Text -->
                 <div class="rd-control-group">
                     <span class="rd-label-main">{{localize 'REALDARK.Wizard.Label.Text'}}</span>
-                    <div style="display:flex; gap:5px;">
+                    <div class="rd-input-wrapper">
                         <input type="text" name="colorLight" value="{{textVal}}" class="rd-hex-input"
                             oninput="this.parentElement.querySelector('.rd-swatch').style.background = this.value; RealDark.updatePreview('colorLight', this.value);">
                         <div class="rd-swatch" style="background: {{textVal}}">
