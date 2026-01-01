@@ -18,7 +18,7 @@ _Ein echter Dark Mode für Pathfinder 2e auf Foundry VTT._
 
 <br>
 
-<img src="https://raw.githubusercontent.com/PhilsModules/phils-pf2e-realdark/main/assets/logo.png" alt="RealDark Preview" width="800">
+<img src="https://raw.githubusercontent.com/PhilsModules/phils-pf2e-realdark/main/assets/logo.png" alt="RealDark Preview" width="700">
 
 </div>
 
@@ -109,4 +109,5 @@ Phil's PF2e RealDark ist eine umfassende Design-Überarbeitung für das Pathfind
     <br><br>
     <p><i>Made with ❤️ for the Foundry VTT Community</i></p>
 </div>
+
 
