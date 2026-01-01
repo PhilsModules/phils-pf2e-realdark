@@ -1,3 +1,8 @@
+# 1.4.1
+
+- **Localization:** Corrected missing German translation for "Presets" (now "Voreinstellungen").
+- **UI Polish:** Centered section headers ("Voreinstellungen", "Colors") and the Save button for a cleaner layout.
+
 # 1.4.0
 
 **Major Content & UI Update (01.01.2026)**
