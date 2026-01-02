@@ -38,6 +38,7 @@ Phil's PF2e RealDark is a comprehensive theme overhaul for the Pathfinder 2e sys
 - **👁️ Softened UI**: Aggressively removes standard hard gold/red borders and replaces them with soft, translucent edges for a modern look.
 - **🔧 Deep Customization**: Tweak primary colors, accent colors, sidebar opacity, and input field darkness to your detailed preferences.
 - **📜 Journal Fixes**: Eliminates the "white flash" when opening journals and ensures consistent dark backgrounds for all text content.
+- **🎲 Dice So Nice Integration**: Includes custom 3D dice presets that match your chosen theme. _You can select them in the Dice So Nice settings (e.g., RealDark - Dragon)._
 
 ## 📦 Installation
 
@@ -58,6 +59,7 @@ Phil's PF2e RealDark is a comprehensive theme overhaul for the Pathfinder 2e sys
     - **Colors**: Adjust the Sidebar, Gold elements, Dim accents, and Text colors.
     - **Opacity**: Use the slider to control how transparent your sidebar background is.
     - **Live Preview**: Watch the right side of the window! It updates instantly to show you a mock character sheet with your new settings.
+    - **Dice Colors**: If you manually changed the dice text color and want to reset it to "Auto", simply clear the input field and save.
 4.  **Save**: Click "Save Changes" to apply the theme globally.
 
 ---
@@ -76,6 +78,7 @@ Phil's PF2e RealDark ist eine umfassende Design-Überarbeitung für das Pathfind
 - **👁️ Sanftes UI**: Entfernt aggressiv die harten Gold/Rot-Ränder des Standardsystems und ersetzt sie durch weiche, transluzente Kanten.
 - **🔧 Tiefgreifende Anpassung**: Stelle Primärfarben, Akzentfarben, Sidebar-Transparenz und die Dunkelheit der Eingabefelder genau nach deinen Wünschen ein.
 - **📜 Journal Fixes**: Eliminiert das "weiße Aufblitzen" beim Öffnen von Journalen und sorgt für konsistent dunkle Hintergründe.
+- **🎲 Dice So Nice Integration**: Enthält spezielle 3D-Würfel-Presets passend zu den Themes. _Du kannst sie in den Dice So Nice Einstellungen auswählen (z.B. RealDark - Dragon)._
 
 ## 📦 Installation
 
@@ -96,6 +99,7 @@ Phil's PF2e RealDark ist eine umfassende Design-Überarbeitung für das Pathfind
     - **Farben**: Passe Sidebar, Gold-Elemente, Dim-Akzente und Textfarben an.
     - **Deckkraft**: Nutze den Slider, um die Transparenz der Sidebar zu steuern.
     - **Live Vorschau**: Schau auf die rechte Seite! Sie aktualisiert sich sofort und zeigt dir einen Beispiel-Charakterbogen mit deinen neuen Einstellungen.
+    - **Würfelfarben**: Wenn du die Textfarbe der Würfel manuell geändert hast und zurück auf "Automatisch" willst, leere einfach das Eingabefeld und speichere.
 4.  **Speichern**: Klicke auf "Save Changes", um das Theme global anzuwenden.
 
 <br>
@@ -109,4 +113,3 @@ Phil's PF2e RealDark ist eine umfassende Design-Überarbeitung für das Pathfind
     <br><br>
     <p><i>Made with ❤️ for the Foundry VTT Community</i></p>
 </div>
-
