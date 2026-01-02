@@ -1,6 +1,30 @@
+# 1.5.0 - Dice So Nice Integration
+
+
+
+## Features
+
+- **Dice So Nice Support:** Added a comprehensive integration with the "Dice So Nice" module.
+  - **30+ Custom Textures:** High-quality textures matching every RealDark theme (Bamboo, Leather, Inferno, Frost, etc.).
+  - **Smart Presets:** Selecting a UI theme automatically suggests the matching dice preset.
+  - **Signal Colors:** Dice numbers automatically use the theme's "signal/accent" color for maximum readability and style.
+- **Wizard Extension:**
+  - Added **"Dice Color"** setting to the configuration wizard.
+  - Allows users to override the default theme color with any custom color for dice numbers.
+
+## Fixes
+
+- Fixed localization keys for Wizard logic.
+- Improved Dice text readability by ensuring high contrast on all textures.
+- Removed white edges/wireframes from custom dice models.
+
+<br>
+<br>
+
 # 1.4.1
 
 - **Localization:** Corrected missing German translation for "Presets" (now "Voreinstellungen").
+- **New Feature:** Added custom "RealDark" specific dice presets to Dice So Nice. You can now choose standard dice that match every specific RealDark theme (Leather, Ore, Stars, etc.) in the Dice So Nice settings.
 - **UI Polish:** Centered section headers ("Voreinstellungen", "Colors") and the Save button for a cleaner layout.
 
 # 1.4.0

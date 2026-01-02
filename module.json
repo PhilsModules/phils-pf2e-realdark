@@ -1,7 +1,7 @@
 {
     "id": "phils-pf2e-realdark",
     "title": "Phil's PF2e RealDark",
-    "version": "1.4.1",
+    "version": "1.5.0",
     "description": "A dark, immersive parchment theme for the Pathfinder 2e system.",
     "url": "https://github.com/PhilsModules/phils-pf2e-realdark",
     "authors": [
@@ -34,10 +34,17 @@
                     "minimum": "6.0.0"
                 }
             }
+        ],
+        "requires": [
+            {
+                "id": "dice-so-nice",
+                "type": "module"
+            }
         ]
     },
     "esmodules": [
-        "scripts/main.js"
+        "scripts/main.js",
+        "scripts/dice.js"
     ],
     "styles": [
         "styles/realdark-theme.css"

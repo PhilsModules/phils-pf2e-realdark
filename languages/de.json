@@ -11,6 +11,7 @@
 
     "REALDARK.Wizard.Title": "RealDark Konfiguration",
     "REALDARK.Wizard.Subtitle": "Design-Einstellungen",
+    "REALDARK.Wizard.Placeholder.Auto": "Auto",
     "REALDARK.Wizard.Label.ScopeActor": "Für Akteure aktivieren",
     "REALDARK.Wizard.Label.ScopeItem": "Für Gegenstände aktivieren",
     "REALDARK.Wizard.Label.ScopeJournal": "Für Journale aktivieren",
@@ -25,6 +26,7 @@
     "REALDARK.Wizard.Label.Whisper": "Flüstern (Whisper)",
     "REALDARK.Wizard.Label.Blind": "Verdeckt (Blind)",
     "REALDARK.Wizard.Label.Text": "Allgemeiner Text",
+    "REALDARK.Wizard.Label.DiceText": "Würfelfarbe (Zahl)",
     "REALDARK.Wizard.Label.SidebarOpacity": "Deckkraft Seitenleiste",
     "REALDARK.Wizard.Label.InputDarkness": "Transparenz Eingabefelder",
     "REALDARK.Wizard.Label.BgColor": "Hintergrund-Overlay",

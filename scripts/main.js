@@ -184,6 +184,20 @@ Hooks.once("init", () => {
         onChange: () => updateTheme()
     });
 
+    // Dice Text Color
+    game.settings.register(MODULE_ID, "colorDiceText", {
+        name: "REALDARK.Settings.ColorDiceText.Name",
+        scope: "client",
+        config: false,
+        type: new foundry.data.fields.ColorField(),
+        default: "", // Empty = specific preset colors
+        onChange: () => {
+            if (window.RealDark && window.RealDark.updateDiceColors) {
+                window.RealDark.updateDiceColors();
+            }
+        }
+    });
+
     // MODULE SCOPES (Modular Settings)
     game.settings.register(MODULE_ID, "themeEnabledChat", {
         name: "REALDARK.Settings.ThemeEnabledChat.Name", // New Key
@@ -336,6 +350,7 @@ class RealDarkWizard extends HandlebarsApplicationMixin(ApplicationV2) {
 
         const whisperVal = game.settings.get(MODULE_ID, "colorWhisper");
         const blindVal = game.settings.get(MODULE_ID, "colorBlind");
+        const diceVal = game.settings.get(MODULE_ID, "colorDiceText");
 
         let inputVal = game.settings.get(MODULE_ID, "inputBg");
         let sliderVal = 0.7;
@@ -347,7 +362,7 @@ class RealDarkWizard extends HandlebarsApplicationMixin(ApplicationV2) {
         return {
             goldVal, dimVal, accVal, textVal, bannerVal, bgVal,
             bgImgVal, bgSizeVal, sidebarOpVal, inputVal, sliderVal,
-            whisperVal, blindVal, // Pass new values
+            whisperVal, blindVal, diceVal, // Pass new values
             toggleActor: game.settings.get(MODULE_ID, "themeEnabledActor"),
             toggleJournal: game.settings.get(MODULE_ID, "themeEnabledJournal"),
             toggleItem: game.settings.get(MODULE_ID, "themeEnabledItem"),
@@ -388,6 +403,7 @@ class RealDarkWizard extends HandlebarsApplicationMixin(ApplicationV2) {
             
             else if (key === 'colorWhisper') document.documentElement.style.setProperty('--realdark-color-whisper', value);
             else if (key === 'colorBlind') document.documentElement.style.setProperty('--realdark-color-blind', value);
+            else if (key === 'colorDiceText') { } // No preview possible for 3D dice currently
 
             else if (key === 'bgSize') document.documentElement.style.setProperty('--realdark-bg-size', value);
             else if (key === 'backgroundImage') {
@@ -583,6 +599,9 @@ class RealDarkWizard extends HandlebarsApplicationMixin(ApplicationV2) {
             // Chat Colors
             await game.settings.set(MODULE_ID, "colorWhisper", data.colorWhisper);
             await game.settings.set(MODULE_ID, "colorBlind", data.colorBlind);
+            
+            // Dice Text Color
+            await game.settings.set(MODULE_ID, "colorDiceText", data.colorDiceText);
 
             // Handle hidden input for inputBg if it wasn't captured correctly (sometimes hidden fields are tricky)
             // But usually formData.object has it. 
@@ -677,6 +696,7 @@ class RealDarkWizard extends HandlebarsApplicationMixin(ApplicationV2) {
         
         if (data.colorWhisper) setVal("colorWhisper", data.colorWhisper);
         if (data.colorBlind) setVal("colorBlind", data.colorBlind);
+        if (data.colorDiceText !== undefined) setVal("colorDiceText", data.colorDiceText);
 
         if (data.bgSize) {
             const bgSizeSelect = wizard.element.querySelector("select[name='bgSize']");
@@ -788,6 +808,7 @@ function updateTheme() {
     // Chat Colors
     root.style.setProperty("--realdark-color-whisper", getSetting("colorWhisper", "#3399ff"));
     root.style.setProperty("--realdark-color-blind", getSetting("colorBlind", "#ff3333"));
+    // Dice Color has no CSS variable update needed
 
     // CALCULATE SIDEBAR RGBA
     const bannerHex = getSetting("colorBanner", "#7a0000");

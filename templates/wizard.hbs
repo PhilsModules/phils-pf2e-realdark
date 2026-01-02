@@ -439,6 +439,19 @@
                     </div>
                 </div>
 
+                <!-- Dice Text -->
+                <div class="rd-control-group">
+                    <span class="rd-label-main">{{localize 'REALDARK.Wizard.Label.DiceText'}}</span>
+                    <div class="rd-input-wrapper">
+                        <input type="text" name="colorDiceText" value="{{diceVal}}" class="rd-hex-input" placeholder="{{localize 'REALDARK.Wizard.Placeholder.Auto'}}"
+                            oninput="this.parentElement.querySelector('.rd-swatch').style.background = this.value; RealDark.updatePreview('colorDiceText', this.value);">
+                        <div class="rd-swatch" style="background: {{diceVal}}">
+                            <input type="color" name="colorDiceTextPicker" value="{{diceVal}}"
+                                oninput="this.parentElement.style.background = this.value; this.parentElement.previousElementSibling.value = this.value; RealDark.updatePreview('colorDiceText', this.value);">
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Text -->
                 <div class="rd-control-group">
                     <span class="rd-label-main">{{localize 'REALDARK.Wizard.Label.Text'}}</span>
