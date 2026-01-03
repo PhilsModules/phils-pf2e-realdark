@@ -6,7 +6,7 @@
 ![Foundry v13 Compatible](https://img.shields.io/badge/Foundry-v13-brightgreen)
 ![System](https://img.shields.io/badge/System-PF2e-blue)
 ![License](https://img.shields.io/badge/License-GPLv3-blue)
-[![Version](https://img.shields.io/badge/version-1.5.0-blue)](https://github.com/PhilsModules/phils-pf2e-realdark/releases)
+[![Version](https://img.shields.io/badge/version-1.5.1-blue)](https://github.com/PhilsModules/phils-pf2e-realdark/releases)
 [![Version](https://img.shields.io/badge/Changelog-Updates-red)](https://github.com/PhilsModules/phils-pf2e-realdark/blob/main/Updates.md)
 [![Patreon](https://img.shields.io/badge/SUPPORT-Patreon-ff424d?logo=patreon)](https://www.patreon.com/PhilsModules)
 

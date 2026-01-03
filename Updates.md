@@ -1,6 +1,10 @@
+# 1.5.1 - Code Cleanup
+
+- **Refactoring:** Comprehensive code cleanup and optimization of the settings logic.
+- **Fix:** Resolved potential syntax errors and removed redundant logic loops.
+- **Maintenance:** Removed unused backup files to reduce module size.
+
 # 1.5.0 - Dice So Nice Integration
-
-
 
 ## Features
 
