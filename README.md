@@ -1,14 +1,9 @@
 <div align="center">
 
-# Phil's PF2e RealDark
+# Phil's PF2e RealDark 🌑
 
-![Foundry v12 Compatible](https://img.shields.io/badge/Foundry-v12-green)
-![Foundry v13 Compatible](https://img.shields.io/badge/Foundry-v13-brightgreen)
-![System](https://img.shields.io/badge/System-PF2e-blue)
-![License](https://img.shields.io/badge/License-GPLv3-blue)
-[![Version](https://img.shields.io/badge/version-1.5.1-blue)](https://github.com/PhilsModules/phils-pf2e-realdark/releases)
-[![Version](https://img.shields.io/badge/Changelog-Updates-red)](https://github.com/PhilsModules/phils-pf2e-realdark/blob/main/Updates.md)
-[![Patreon](https://img.shields.io/badge/SUPPORT-Patreon-ff424d?logo=patreon)](https://www.patreon.com/PhilsModules)
+![Foundry v13 Compatible](https://img.shields.io/badge/Foundry-v13-brightgreen?style=flat-square) ![Foundry v12 Compatible](https://img.shields.io/badge/Foundry-v12-green?style=flat-square) ![System](https://img.shields.io/badge/System-PF2e-blue?style=flat-square)
+![License](https://img.shields.io/badge/License-GPLv3-blue?style=flat-square) [![Version](https://img.shields.io/badge/Version-1.5.2-orange?style=flat-square)](https://github.com/PhilsModules/phils-pf2e-realdark/releases) [![Patreon](https://img.shields.io/badge/SUPPORT-Patreon-ff424d?style=flat-square&logo=patreon)](https://www.patreon.com/PhilsModules)
 
 <br>
 
@@ -18,9 +13,21 @@ _Ein echter Dark Mode für Pathfinder 2e auf Foundry VTT._
 
 <br>
 
-<img src="https://raw.githubusercontent.com/PhilsModules/phils-pf2e-realdark/main/assets/logo.png" alt="RealDark Preview" width="700">
+<a href="#-english-instructions"><img src="https://img.shields.io/badge/%20-English_Instructions-black?style=for-the-badge&logo=united-kingdom&logoColor=white" alt="English Instructions"></a> <a href="#-deutsche-anleitung"><img src="https://img.shields.io/badge/%20-Deutsche_Anleitung-black?style=for-the-badge&logo=germany&logoColor=red" alt="Deutsche Anleitung"></a> <a href="Updates.md"><img src="https://img.shields.io/badge/%20-Update_Logs-black?style=for-the-badge&logo=clock&logoColor=white" alt="Updates"></a>
 
 </div>
+
+<br>
+
+<div align="center">
+<img src="https://raw.githubusercontent.com/PhilsModules/phils-pf2e-realdark/main/assets/logo.png" alt="RealDark Preview" width="700">
+</div>
+
+<br>
+
+<br>
+
+---
 
 <br>
 
@@ -62,7 +69,11 @@ Phil's PF2e RealDark is a comprehensive theme overhaul for the Pathfinder 2e sys
     - **Dice Colors**: If you manually changed the dice text color and want to reset it to "Auto", simply clear the input field and save.
 4.  **Save**: Click "Save Changes" to apply the theme globally.
 
+<br>
+
 ---
+
+<br>
 
 # <img src="https://flagcdn.com/48x36/de.png" width="28" height="21" alt="DE"> Deutsche Anleitung
 
@@ -104,9 +115,18 @@ Phil's PF2e RealDark ist eine umfassende Design-Überarbeitung für das Pathfind
 
 <br>
 
+---
+
+## 📜 License
+
+This module is licensed under the [GPL-3.0 License](LICENSE).
+
+<br>
+
 <div align="center">
     <h2>❤️ Support the Development</h2>
-    <p>If you enjoy this module and want to support open-source development for Foundry VTT, check out my Patreon!</p>
+    <p>If you enjoy this module and want to support open source development for Foundry VTT check out my Patreon.</p>
+    <p>Gefällt dir das Modul? Unterstütze die Weiterentwicklung auf Patreon.</p>
     <a href="https://www.patreon.com/PhilsModules">
         <img src="https://c5.patreon.com/external/logo/become_a_patron_button.png" alt="Become a Patron" width="200" />
     </a>
