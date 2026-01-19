@@ -1,3 +1,28 @@
+# 1.5.5 - Console & Wizard Polish
+
+- **Fix:** Fixed a console deprecation warning regarding the V1 Application framework.
+- **Fix:** Fixed an error where the Wizard's color picker would fail when the "Auto" (empty) color was selected for Dice Text.
+
+# 1.5.4 - High-Res Texture Fix
+
+- **Fix:** Fixed a critical issue where dice textures would disappear (black faces) during longer sessions.
+- **Optimization:** Separated dice textures from background assets.
+  - Dice now use optimized 512x512 textures for maximum stability and atlas compatibility.
+  - Background defaults remain high-resolution.
+- **Maintenance:** Updated unit tests to prevent regression of texture settings.
+- **UI Fix:** Fixed the "Shield Block" button not showing its active state (toggle visibility).
+- **UI Fix:** Fixed the "Double Damage" button icon being invisible (black on dark). It is now correctly gold.
+- **UI Style:** Refined the "Half Damage" button to use a vertical gold/transparent split for better clarity.
+
+# 1.5.3 - Dice So Nice Optional
+
+- **Feature:** Made "Dice So Nice" an optional dependency. The module now works seamlessly without it.
+- **Cleanup:** Removed the "Dice So Nice Integration" setting as it is now handled automatically.
+
+# 1.5.2
+
+- Manifest cleanup and normalization.
+
 # 1.5.1 - Code Cleanup
 
 - **Refactoring:** Comprehensive code cleanup and optimization of the settings logic.
