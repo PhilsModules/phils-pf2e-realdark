@@ -1,3 +1,10 @@
+# 1.5.6 - Dice Visibility Final
+
+- **Fix:** Fixed visibility issues with dice icons in the Player Character sheet.
+  - **Skills:** Dice icons are now a soft off-white (Grey) by default and turn bright white on hover, removing the confusing gold glare.
+  - **Speeds:** Movement speed dice icons are now Gold by default (fixing the "too dark" issue) and turn bright white on hover.
+- **Polish:** Removed intense "drop-shadow" glows from all sidebar dice to ensure a cleaner, flatter look.
+
 # 1.5.5 - Console & Wizard Polish
 
 - **Fix:** Fixed a console deprecation warning regarding the V1 Application framework.
