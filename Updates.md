@@ -1,3 +1,18 @@
+# 1.6.0 - Skill Styling Override
+
+- **Feature:** Added **"Override Skill Styling"** option to the settings/wizard.
+  - Defaults to **ON**: Forces **all** proficiency indicators (Skills, Defenses, Spells, Class DC) to match the dark theme (Gold text/borders on dark background).
+  - When **OFF**: Restores the colorful standard system badges (Blue, Green, Red, Purple backgrounds) for all these elements.
+- **Localization:** Added translations for the new setting.
+
+# 1.5.7 - Styling Fix (Proficiency Dropdowns)
+
+- **Fix:** Fixed a persistent issue where **Skill Proficiency Dropdowns** (Trained, Expert, etc.) were displaying with a dark grey background/text instead of the system's colored badges (Blue, Gold, Red).
+  - Investigated and removed multiple high-specificity CSS overrides in `realdark-theme.css`.
+  - Added targeted exclusions for `.skill-proficiency` and `.pf-rank` to generic select styling rules.
+  - Ensured the dropdown menu options (`<option>`) also respect the system's color coding by reverting their background styles.
+  - Removed "nuclear" global reset rules that were inadvertently stripping system colors.
+
 # 1.5.6 - Dice Visibility Final
 
 - **Fix:** Fixed visibility issues with dice icons in the Player Character sheet.
