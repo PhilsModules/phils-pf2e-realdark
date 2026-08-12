@@ -1,215 +1,431 @@
-/* Phil's PF2e RealDark - CONFIGURABLE EDITION */
+/* ======================================================================== */
+/* Phil's PF2e RealDark - Theme Stylesheet                                  */
+/* ======================================================================== */
 
 :root {
-    /* DEFAULT VALUES - Overridden by JS Settings immediately on load */
-    --realdark-gold: #ffbd4a;
-    --realdark-gold-dim: #b8860b;
-    --realdark-text-light: #fff0d4;
-    --realdark-red-bright: #ff3333;
+    --realdark-primary: #ffbd4a;
+    --realdark-secondary: #b8860b;
+    --realdark-accent: #ff3333;
+    --realdark-text: #fff0d4;
+    --realdark-sheet-bg: #111111;
     --realdark-input-bg: rgba(0, 0, 0, 0.7);
-    --realdark-text-shadow: 0 0 1px black;
+    --realdark-text-shadow: 1px 1px 3px black, 0 0 2px black;
     --realdark-banner-color: #7a0000;
-    /* AUTO-CALCULATED BY JS */
-    /* Sidebar RGBA defaults (roughly 0.8 opacity) */
     --realdark-sidebar-rgba-top: rgba(122, 0, 0, 0.8);
     --realdark-sidebar-rgba-bottom: rgba(0, 0, 0, 0.8);
-    /* Image vars are set by JS */
+    --realdark-color-whisper: #3399ff;
+    --realdark-color-blind: #ff3333;
+    --realdark-bg-size: cover;
+    --realdark-bg-url: none;
+    --realdark-plaque-url: none;
+
+    /* Foundry Core Token Overrides for High Contrast (Pure Colors only) */
+    --color-text-content-link: #ffffff;
+    --color-bg-content-link: rgba(0, 0, 0, 0.7);
+    --color-border-content-link: rgba(255, 255, 255, 0.3);
+    --color-text-hyperlink: var(--realdark-primary);
+
+    /* Compatibility aliases */
+    --realdark-gold: var(--realdark-primary);
+    --realdark-gold-dim: var(--realdark-secondary);
+    --realdark-red-bright: var(--realdark-accent);
+    --realdark-text-light: var(--realdark-text);
+
     color-scheme: dark;
-
-    /* Scrollbars */
-    ::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-        background: #000;
-        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background: #444;
-        border: 1px solid #222;
-        border-radius: 4px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-        background: var(--realdark-gold-dim);
-    }
 }
 
 /* ======================================================================== */
-/* BACKGROUND ASSETS                                                        */
+/* WIZARD CONFIGURATION WINDOW                                              */
 /* ======================================================================== */
 
-/* GLOBAL SIDEBAR FIX - Ensure main sidebar content has background */
-#sidebar-content {
+.realdark-wizard-window.window-app {
+    width: 920px !important;
+    height: 620px !important;
+}
+
+.realdark-wizard-window .window-content {
+    background: rgba(10, 10, 10, 0.95) !important;
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--realdark-secondary);
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 1);
+    color: var(--realdark-primary);
+    font-family: 'Signika', sans-serif;
+    padding: 0 !important;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+}
+
+.realdark-wizard-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+.realdark-wizard-left {
+    flex: 0 0 280px;
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    height: 100%;
+}
+
+.realdark-wizard-right {
+    flex: 1;
+    position: relative;
+    background-color: var(--realdark-sheet-bg);
+    background-image:
+        radial-gradient(circle at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 60%, rgba(0, 0, 0, 0.6) 100%),
+        var(--realdark-bg-url);
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.rd-header-panel {
+    padding: 8px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+    position: relative;
+}
+
+.rd-title {
+    font-size: 1.1em;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0;
+    background: linear-gradient(45deg, var(--realdark-primary), white, var(--realdark-primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.rd-subtitle {
+    font-size: 0.6em;
+    opacity: 0.6;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 1px;
+}
+
+.rd-form-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+    scrollbar-width: thin;
+}
+
+.rd-preset-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    margin-bottom: 15px;
+}
+
+.rd-section-title {
+    font-family: 'Modesto Condensed', serif;
+    font-size: 1.1em;
+    color: var(--realdark-primary);
+    margin: 15px 0 5px 0;
+    padding-bottom: 2px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    text-align: center;
+}
+
+.rd-preset-btn {
+    flex: 1 1 45%;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #aaa;
+    padding: 3px 2px;
+    font-size: 0.7em;
+    text-transform: uppercase;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.rd-preset-btn:hover,
+.rd-preset-btn.active {
+    color: white;
+    border-color: var(--realdark-primary);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.rd-control-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 10px;
+    background: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    transition: background 0.2s;
+}
+
+.rd-control-group:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.rd-label-main {
+    font-size: 0.8em;
+    color: #ccc;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.rd-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rd-hex-input {
+    width: 70px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--realdark-primary);
+    text-align: right;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8em;
+    padding: 2px;
+    transition: all 0.2s;
+}
+
+.rd-hex-input:focus {
+    outline: none;
+    border-bottom-color: var(--realdark-primary);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.rd-swatch {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.rd-swatch input[type="color"] {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    opacity: 0;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.rd-swatch:hover {
+    transform: scale(1.1);
+    border-color: var(--realdark-primary);
+    box-shadow: 0 0 8px var(--realdark-secondary);
+}
+
+.rd-footer {
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.4);
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.rd-submit-btn {
+    background: linear-gradient(135deg, var(--realdark-primary), var(--realdark-secondary));
+    border: none;
+    color: #111;
+    padding: 6px 25px;
+    font-size: 0.9em;
+    border-radius: 20px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    width: auto;
+    transition: transform 0.2s;
+}
+
+.rd-submit-btn:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+.rd-preview-sheet {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--realdark-secondary);
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+}
+
+.rd-preview-sidebar {
+    width: 140px;
+    background: linear-gradient(to bottom, var(--realdark-sidebar-rgba-top) 0%, var(--realdark-sidebar-rgba-bottom) 100%);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 15px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.rd-preview-content {
+    flex: 1;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.rd-preview-header {
+    font-family: 'Modesto Condensed', serif;
+    font-size: 1.8em;
+    color: var(--realdark-primary);
+    border-bottom: 2px solid var(--realdark-primary);
+    padding-bottom: 5px;
+}
+
+.rd-preview-input {
+    background: var(--realdark-input-bg) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: var(--realdark-text) !important;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.rd-preview-box {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    padding: 10px;
+}
+
+/* ======================================================================== */
+/* GLOBAL FOUNDRY SCOPES (Only active when RealDark is active)              */
+/* ======================================================================== */
+
+body.realdark-theme-active #sidebar-content {
     background: var(--realdark-sheet-bg) !important;
     background-image:
         radial-gradient(circle at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 60%, rgba(0, 0, 0, 0.6) 100%),
         var(--realdark-bg-url) !important;
     background-repeat: no-repeat, repeat !important;
     background-size: cover, var(--realdark-bg-size, auto) !important;
-    border-left: 1px solid var(--realdark-gold-dim);
+    border-left: 1px solid var(--realdark-secondary);
     box-shadow: -5px 0 10px rgba(0, 0, 0, 0.5);
 }
 
-/* Main Window Content */
+body.realdark-theme-active #context-menu {
+    background: var(--realdark-sheet-bg) !important;
+    color: var(--realdark-primary) !important;
+    border: 1px solid var(--realdark-secondary) !important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8) !important;
+    z-index: 9999 !important;
+}
+
+body.realdark-theme-active #context-menu .context-items .context-item {
+    color: var(--realdark-text) !important;
+    background: transparent !important;
+}
+
+body.realdark-theme-active #context-menu .context-items .context-item:hover {
+    background: var(--realdark-secondary) !important;
+    color: #000 !important;
+    text-shadow: none !important;
+}
+
+/* ======================================================================== */
+/* THEMED WINDOW APPLICATION (Actors, Items, Journals, Dialogs)             */
+/* ======================================================================== */
+
+.window-app.realdark-theme-window {
+    border: 1px solid rgba(130, 130, 130, 0.3) !important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8) !important;
+}
+
 .window-app.realdark-theme-window .window-content {
     background-color: var(--realdark-sheet-bg) !important;
-    /* Default: Vignette + Custom Image Override */
     background-image:
         radial-gradient(circle at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 60%, rgba(0, 0, 0, 0.6) 100%),
         var(--realdark-bg-url) !important;
     background-repeat: no-repeat, repeat;
     background-size: cover, var(--realdark-bg-size, auto) !important;
     background-position: center !important;
-    background-blend-mode: normal !important;
-}
-
-/* ======================================================================== */
-/* TEXT & CONTRAST                                                          */
-/* ======================================================================== */
-
-/* Force COLOR Variables */
-.window-app.realdark-theme-window,
-.window-app.realdark-theme-window .window-content,
-.window-app.realdark-theme-window .window-content * {
-    color: var(--realdark-gold) !important;
-    text-shadow: var(--realdark-text-shadow) !important;
+    color: var(--realdark-primary);
     color-scheme: dark !important;
-    /* Force native controls to dark */
 }
 
-/* ======================================================================== */
-/* UNIFIED FORM CONTROLS                                                    */
-/* ======================================================================== */
-
-.window-app.realdark-theme-window input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
-.window-app.realdark-theme-window select:not(.skill-proficiency):not(.pf-rank):not(.rarity),
-.window-app.realdark-theme-window textarea,
-.window-app.realdark-theme-window .prosemirror,
-.window-app.realdark-theme-window .tagify {
-    background: var(--realdark-input-bg) !important;
-    color: #fff !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    border-radius: 3px;
-    box-shadow: none !important;
-    font-family: inherit;
-    transition: border-color 0.2s;
-    box-sizing: border-box !important; /* Prevent layout jumps when adding borders */
+/* Headings & Labels */
+.window-app.realdark-theme-window h1,
+.window-app.realdark-theme-window h2,
+.window-app.realdark-theme-window h3,
+.window-app.realdark-theme-window h4,
+.window-app.realdark-theme-window .window-title,
+.window-app.realdark-theme-window label {
+    color: var(--realdark-primary);
+    text-shadow: var(--realdark-text-shadow);
 }
 
-.window-app.realdark-theme-window input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):focus,
-.window-app.realdark-theme-window select:not(.skill-proficiency):not(.pf-rank):not(.rarity):focus,
-.window-app.realdark-theme-window textarea:focus {
-    border-color: var(--realdark-gold) !important;
-    box-shadow: 0 0 5px rgba(255, 189, 74, 0.2) !important;
+.window-app.realdark-theme-window p,
+.window-app.realdark-theme-window span:not(.tag):not(.badge):not(.action-glyph):not(.content-link),
+.window-app.realdark-theme-window li,
+.window-app.realdark-theme-window .journal-entry-content,
+.window-app.realdark-theme-window .journal-page-content,
+.window-app.realdark-theme-window .journal-entry-pages {
+    color: var(--realdark-text);
 }
 
-/* 
-.window-app.realdark-theme-window select:not(.skill-proficiency):not(.pf-rank):not(.rarity) {
-    appearance: none;
-    -webkit-appearance: none;
-    padding-left: 5px !important;
-    padding-right: 25px !important;
-    height: 26px !important;
-    line-height: 24px !important;
-    box-sizing: border-box !important;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10"><path fill="%23b8860b" d="M0 2.5 L5 7.5 L10 2.5"/></svg>') !important;
-    background-repeat: no-repeat !important;
-    background-position: right 10px center !important;
-    cursor: pointer;
-} 
-*/
-
-.window-app.realdark-theme-window select option {
-    background: #111 !important;
-    color: var(--realdark-gold) !important;
-}
-
-/* Fix Checkboxes & Radio Buttons */
-.window-app.realdark-theme-window input[type="checkbox"],
-.window-app.realdark-theme-window input[type="radio"] {
-    appearance: auto !important;
-    accent-color: var(--realdark-gold) !important;
-    filter: sepia(100%) hue-rotate(-50deg) saturate(300%) contrast(0.8);
-}
-
-/* ...AND ICONS */
-.window-app.realdark-theme-window i.fas,
-.window-app.realdark-theme-window i.far {
-    text-shadow: none !important;
-}
-
-/* Modifier Highlights */
-.window-app.realdark-theme-window .modifier,
-.window-app.realdark-theme-window .value,
-.window-app.realdark-theme-window .adjusted-value {
-    color: var(--realdark-red-bright) !important;
-    font-weight: bold;
-}
-
-/* Badges - Softened */
-.window-app.realdark-theme-window .badge,
-.window-app.realdark-theme-window .tag:not(.rarity) {
-    color: #fff !important;
-    background: var(--realdark-red-bright) !important;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    /* Soft border */
-}
-
-/* Chat Buttons - Softened */
-html body.realdark-chat-active .chat-message button {
-    background: var(--realdark-input-bg) !important;
-    color: var(--realdark-gold) !important;
-    border: 1px solid rgba(130, 130, 130, 0.2) !important;
-    /* Soft border */
-    box-shadow: none !important;
-}
-
-html body.realdark-chat-active .chat-message button:hover {
-    background: var(--realdark-gold-dim) !important;
-    color: #000 !important;
-    text-shadow: none !important;
-    border: 1px solid rgba(255, 255, 255, 0.3) !important;
-    /* Glow on hover */
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.3) !important;
-}
-
-/* ======================================================================== */
-/* CHAT MESSAGE VARIANTS (Whisper, Blind)                                   */
-/* ======================================================================== */
-
-/* Styles moved to below generic block to ensure cascade wins */
-
-/* ======================================================================== */
-/* CONTEXT MENU FIX                                                         */
-/* ======================================================================== */
-html body #context-menu {
+/* Window Header */
+.window-app.realdark-theme-window .window-header {
     background: var(--realdark-sheet-bg) !important;
-    color: var(--realdark-gold) !important;
-    border: 1px solid var(--realdark-gold-dim) !important;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8) !important;
-    z-index: 9999 !important;
-    position: absolute !important;
+    border-bottom: 1px solid rgba(130, 130, 130, 0.2) !important;
+    color: var(--realdark-primary) !important;
 }
 
-#context-menu .context-items .context-item {
-    color: var(--realdark-text-light) !important;
-    background: transparent !important;
+.window-app.realdark-theme-window .window-header .header-button {
+    color: var(--realdark-text) !important;
 }
 
-#context-menu .context-items .context-item:hover {
-    background: var(--realdark-gold-dim) !important;
-    color: #000 !important;
-    text-shadow: none !important;
+.window-app.realdark-theme-window .window-header .header-button:hover {
+    color: var(--realdark-primary) !important;
+    text-shadow: 0 0 5px var(--realdark-primary) !important;
 }
 
-/* ======================================================================== */
-/* CLEANUP                                                                  */
-/* ======================================================================== */
-
+/* Neutralized containers for clean backgrounds */
 .window-app.realdark-theme-window nav,
 .window-app.realdark-theme-window .sheet-navigation,
 .window-app.realdark-theme-window .secondary-navigation,
@@ -228,617 +444,52 @@ html body #context-menu {
     box-shadow: none !important;
 }
 
-/* Standard Window Header (Draggable Top Bar) */
-.window-app.realdark-theme-window .window-header {
-    background: var(--realdark-sheet-bg) !important;
-    border-bottom: 1px solid rgba(130, 130, 130, 0.2) !important;
-    color: var(--realdark-gold) !important;
-}
-
-.window-app.realdark-theme-window .window-header .window-title {
-    color: var(--realdark-gold) !important;
-    text-shadow: 0 0 2px black !important;
-}
-
-.window-app.realdark-theme-window .window-header .header-button {
-    color: var(--realdark-text-light) !important;
-    /* White-ish */
-}
-
-.window-app.realdark-theme-window .window-header .header-button:hover {
-    color: var(--realdark-gold) !important;
-    text-shadow: 0 0 5px var(--realdark-gold) !important;
-}
-
-/* Header & Borders - SOFTENED */
-.window-app.realdark-theme-window .sheet-header {
-    border-bottom: 1px solid rgba(130, 130, 130, 0.2) !important;
-    display: flex !important;
-    flex-wrap: wrap;
-    /* Safety for small widths */
-    align-items: flex-end;
-    /* Align items to bottom */
-    padding-bottom: 0 !important;
-}
-
-/* Force Nav to lift items up */
-.window-app.realdark-theme-window nav.sheet-navigation {
-    margin-bottom: 5px !important;
-    /* Larger gap */
-    align-items: flex-end !important;
-}
-
-.window-app.realdark-theme-window nav.sheet-navigation .item.active {
-    border-bottom: 2px solid var(--realdark-gold) !important;
-}
-
-.window-app.realdark-theme-window hr {
-    border-top: 1px solid rgba(130, 130, 130, 0.2) !important;
-    border-bottom: none !important;
-}
-
-
-/* ======================================================================== */
-/* CHAT MESSAGES                                                            */
-/* ======================================================================== */
-
-/* Target Chat Messages - SOFTENED */
-html body.realdark-chat-active .chat-message {
-    background: var(--realdark-sheet-bg) !important;
-    background-image: none !important;
-    /* backdrop-filter removed to prevent stacking context issues */
-    border: 1px solid rgba(130, 130, 130, 0.3) !important;
-    /* Soft border */
-    color: var(--realdark-gold) !important;
-    box-shadow: 0 0 5px #000;
-}
-
-/* ======================================================================== */
-/* CHAT MESSAGE VARIANTS (Whisper, Blind) - RELOCATED                       */
-/* ======================================================================== */
-
-/* Whisper - Blue Tint over Theme BG */
-/* Whisper - Blue Tint over Theme BG (via pseudo) */
-html body.realdark-chat-active .chat-message.whisper {
-    background: linear-gradient(rgba(74, 144, 226, 0.1), rgba(74, 144, 226, 0.1)) !important;
-    border: 1px solid #4a90e2 !important;
-    box-shadow: 0 0 4px rgba(74, 144, 226, 0.4) !important;
-}
-
-html body.realdark-chat-active .chat-message.whisper .message-header {
-    background-color: rgba(74, 144, 226, 0.1) !important;
-    border-bottom-color: #4a90e2 !important;
-}
-
-/* Blind - Pink Tint over Theme BG (via pseudo) */
-html body.realdark-chat-active .chat-message.blind {
-    background: linear-gradient(rgba(226, 74, 144, 0.1), rgba(226, 74, 144, 0.1)) !important;
-    border: 1px solid #e24a90 !important;
-    box-shadow: 0 0 4px rgba(226, 74, 144, 0.4) !important;
-}
-
-html body.realdark-chat-active .chat-message.blind .message-header {
-    background-color: rgba(226, 74, 144, 0.1) !important;
-    border-bottom-color: #e24a90 !important;
-}
-
-/* Chat Buttons */
-html body.realdark-chat-active .chat-message button {
+/* Form Controls */
+.window-app.realdark-theme-window input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+.window-app.realdark-theme-window select:not(.skill-proficiency):not(.pf-rank),
+.window-app.realdark-theme-window textarea,
+.window-app.realdark-theme-window .prosemirror,
+.window-app.realdark-theme-window .tagify {
     background: var(--realdark-input-bg) !important;
-    color: var(--realdark-gold) !important;
-    border: 1px solid rgba(130, 130, 130, 0.2) !important;
-    box-shadow: none !important;
-}
-
-/* CSS RESET FOR DAMAGE BUTTONS - EXPLICIT HIGH SPECIFICITY */
-/* Target i tags inside buttons within chat log specifically */
-#chat-log .chat-message button i,
-#chat-log .chat-message button .fa-solid,
-#chat-log .chat-message button .fa-fw,
-.window-content .chat-message button i {
-    color: var(--realdark-gold) !important;
-    text-shadow: none !important;
-}
-
-/* Explicit Overrides for "Half" (often black) and "Damage/Heal" (often pink) */
-#chat-log .chat-message button.half-damage i,
-#chat-log .chat-message button[data-action="applyDamage"] i,
-#chat-log .chat-message button[data-action="applyHealing"] i,
-#chat-log .chat-message button[data-action="shieldBlock"] i {
-    color: var(--realdark-gold) !important;
-}
-
-/* Fix "Double" Damage Icon (SVG) - DISABLED (Too Broad) */
-/* This was causing all chat button images (like Effect icons) to turn into Gold Shadows */
-/* html body.realdark-chat-active #chat-log .chat-message button img,
-html body.realdark-chat-active .chat-message button img {
-    filter: drop-shadow(0px -100px 0px var(--realdark-gold)) !important;
-    transform: translateY(100px) !important;
-    border: none !important;
-    box-shadow: none !important;
-    background: transparent !important;
-    width: 100% !important;
-    object-fit: contain !important;
-} */
-
-/* Fix "Half", "Damage", "Heal", "Block" (Font Awesome) - BROAD SELECTOR */
-/* Catches ALL buttons with data-multiplier OR known classes */
-html body.realdark-chat-active #chat-log .chat-message button.half-damage i,
-html body.realdark-chat-active #chat-log .chat-message button[data-action] i,
-html body.realdark-chat-active .chat-message button.half-damage i,
-html body.realdark-chat-active .chat-message button[data-action] i {
-    color: var(--realdark-gold) !important;
-    text-shadow: none !important;
-}
-
-/* EXPLICIT HALF-DAMAGE OVERRIDE - NUCLEAR SPECIFICITY */
-/* Chaining ID to double specificity score against system rules */
-#chat-log #chat-log .chat-message button.half-damage,
-#chat-log #chat-log .chat-message button.half-damage i,
-#chat-log #chat-log .chat-message button.half-damage *,
-html body.realdark-chat-active .chat-message button.half-damage,
-html body.realdark-chat-active .chat-message button.half-damage i,
-html body.realdark-chat-active .chat-message button.half-damage * {
-    color: var(--realdark-gold) !important;
-    fill: var(--realdark-gold) !important;
-    text-shadow: none !important;
-    -webkit-text-fill-color: var(--realdark-gold) !important;
-}
-
-
-/* Fix Damage Dialog Text Visibility - Variable Override Strategy */
-html body .damage-dialog .damage.instance,
-html body .damage-dialog .damage.instance *,
-html body .roll-modifiers-dialog .damage.instance,
-html body .roll-modifiers-dialog .damage.instance *,
-html body.realdark-chat-active .dice-formula .damage.instance,
-html body.realdark-chat-active .dice-formula .damage.instance *,
-html body.realdark-chat-active .dice-formula span.damage {
-    color: #ffffff !important;
-    --color: #ffffff !important;
-    --text-color: #ffffff !important;
-    fill: #ffffff !important;
-    -webkit-text-fill-color: #ffffff !important;
-    text-shadow: 0 0 2px #000 !important;
-    opacity: 1 !important;
-}
-
-/* Status/Outcome Text Visibility */
-html body .window-app.realdark-theme-window .success,
-html body .window-app.realdark-theme-window .outcome.success,
-html body.realdark-chat-active .chat-message .success,
-html body.realdark-chat-active .chat-message .outcome.success,
-html body.realdark-chat-active .chat-message span.success,
-html body.realdark-chat-active .chat-message span.degree-of-success .success,
-html body .realdark-theme-window .degree-of-success .success {
-    color: #6eb4f8 !important;
-    /* Brighter Blue */
-    text-shadow: 0 0 2px #000;
-}
-
-html body .window-app.realdark-theme-window .critical-success,
-html body .window-app.realdark-theme-window .outcome.critical-success,
-html body.realdark-chat-active .chat-message .critical-success,
-html body.realdark-chat-active .chat-message .outcome.critical-success,
-html body.realdark-chat-active .chat-message span.critical-success,
-html body.realdark-chat-active .chat-message span.degree-of-success .critical-success,
-html body .realdark-theme-window .degree-of-success .critical-success {
-    color: #6ef886 !important;
-    /* Bright Green */
-    text-shadow: 0 0 2px #000;
-}
-
-html body .window-app.realdark-theme-window .failure,
-html body .window-app.realdark-theme-window .outcome.failure,
-html body.realdark-chat-active .chat-message .failure,
-html body.realdark-chat-active .chat-message .outcome.failure,
-html body.realdark-chat-active .chat-message span.failure,
-html body.realdark-chat-active .chat-message span.degree-of-success .failure,
-html body .realdark-theme-window .degree-of-success .failure {
-    color: #f86e6e !important;
-    /* Bright Red */
-    text-shadow: 0 0 2px #000;
-}
-
-html body .window-app.realdark-theme-window .critical-failure,
-html body .window-app.realdark-theme-window .outcome.critical-failure,
-html body.realdark-chat-active .chat-message .critical-failure,
-html body.realdark-chat-active .chat-message .outcome.critical-failure,
-html body.realdark-chat-active .chat-message span.critical-failure,
-html body.realdark-chat-active .chat-message span.degree-of-success .critical-failure,
-html body .realdark-theme-window .degree-of-success .critical-failure {
-    color: #ff0000 !important;
-    /* Stark Red */
-    text-shadow: 0 0 2px #000;
-}
-
-/* GM Visibility Text Fix - NO BACKGROUNDS */
-html body .window-app.realdark-theme-window [data-visibility="gm"],
-html body.realdark-chat-active .chat-message [data-visibility="gm"] {
-    color: var(--realdark-text-light) !important;
-    background: transparent !important;
-    background-color: transparent !important;
-    box-shadow: none !important;
-    border: none !important;
-    text-shadow: 0 0 2px #000;
-}
-
-/* Ensure modifier values are visible */
-html body .window-app.realdark-theme-window .modifier-container .value,
-html body .window-app.realdark-theme-window .modifier-container .mod {
-    color: var(--realdark-text-light) !important;
-}
-
-html body.realdark-chat-active .chat-message button:hover {
-    background: var(--realdark-gold-dim) !important;
-    color: #000 !important;
-    text-shadow: none !important;
-    border: 1px solid rgba(255, 255, 255, 0.3) !important;
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.3) !important;
-}
-
-/* Chat Header */
-html body.realdark-chat-active .chat-message .message-header {
-    color: var(--realdark-gold-dim) !important;
-    border-bottom: 1px solid rgba(130, 130, 130, 0.2);
-}
-
-html body.realdark-chat-active .chat-message .message-sender {
-    color: var(--realdark-gold) !important;
-    text-shadow: 0 0 2px black;
-}
-
-html body.realdark-chat-active .chat-message .message-metadata {
-    color: #888 !important;
-}
-
-/* Chat Content & Rolls */
-html body.realdark-chat-active .chat-message .message-content,
-html body.realdark-chat-active .chat-message .card-content {
-    color: var(--realdark-text-light) !important;
-}
-
-/* Dice Rolls */
-html body.realdark-chat-active .chat-message .dice-roll .dice-total {
-    background: var(--realdark-input-bg) !important;
-    color: var(--realdark-gold) !important;
-    border: 1px solid rgba(130, 130, 130, 0.2);
-    text-shadow: 0 0 5px black;
-}
-
-html body.realdark-chat-active .chat-message .dice-roll .dice-formula,
-html body.realdark-chat-active .chat-message .dice-roll .dice-tooltip {
-    background: var(--realdark-input-bg) !important;
-    color: var(--realdark-gold) !important;
-    border: 1px solid rgba(130, 130, 130, 0.2);
-    text-shadow: none !important;
-}
-
-/* Remove flavor backgrounds */
-html body.realdark-chat-active .chat-message .flavor-text,
-html body.realdark-chat-active .chat-message .tags .tag,
-html body.realdark-chat-active .chat-message p span,
-html body.realdark-chat-active .chat-message div span[style*="background"] {
-    background: transparent !important;
-    background-color: transparent !important;
-    color: var(--realdark-gold) !important;
-    border-color: rgba(130, 130, 130, 0.2) !important;
-}
-
-/* Fix Inner Chat Card Headers (Black text issue) */
-html body.realdark-chat-active .chat-message header,
-html body.realdark-chat-active .chat-message h3,
-html body.realdark-chat-active .chat-message h4,
-html body.realdark-chat-active .chat-message .card-header h3 {
-    color: var(--realdark-gold) !important;
-    text-shadow: 0 0 2px black !important;
-}
-
-/* FIX INLINE ROLLS & LINKS (Bright Spots) */
-/* Inline Rolls & Actions - Dark Background */
-html body.realdark-chat-active .chat-message a.inline-roll,
-html body.realdark-chat-active .chat-message a.inline-check,
-html body.realdark-chat-active .chat-message span.damage-roll,
-html body.realdark-chat-active .chat-message button[data-action] {
-    background: var(--realdark-input-bg) !important;
-    background-color: var(--realdark-input-bg) !important;
-    color: var(--realdark-gold) !important;
-    border: 1px solid rgba(130, 130, 130, 0.3) !important;
-    box-shadow: none !important;
-    text-shadow: none !important;
-    border-radius: 3px;
-    padding: 0 2px;
-}
-
-/* Content Links (Items, Effects, UUIDs) - Transparent to blend in */
-html body.realdark-chat-active .chat-message a.content-link,
-html body.realdark-chat-active .chat-message a.entity-link {
-    background: transparent !important;
-    background-color: transparent !important;
-    color: var(--realdark-gold) !important;
-    border: none !important;
-    box-shadow: none !important;
-    text-shadow: none !important;
-    border-radius: 3px;
-    padding: 0 2px;
-    border-bottom: 1px dotted var(--realdark-gold-dim) !important;
-    /* Subtle link indicator */
-}
-
-html body.realdark-chat-active .chat-message a.inline-roll *,
-html body.realdark-chat-active .chat-message a.inline-check *,
-html body.realdark-chat-active .chat-message a.content-link *,
-html body.realdark-chat-active .chat-message a.entity-link *,
-html body.realdark-chat-active .chat-message button[data-action] *,
-html body.realdark-chat-active .chat-message p span *,
-html body.realdark-chat-active .chat-message div span[style*="background"] *,
-html body.realdark-chat-active .chat-message span[data-pf2-effect-area] *,
-html body.realdark-chat-active .chat-message span.with-repost * {
-    background: transparent !important;
-    color: inherit !important;
-    text-shadow: inherit !important;
-    box-shadow: none !important;
-}
-
-/* NUCLEAR FIX FOR INLINE EFFECT AREAS */
-/* Using multiple selectors to ensure we catch it everywhere */
-html body.realdark-chat-active .chat-message span[data-pf2-effect-area],
-html body.realdark-chat-active .chat-message span.with-repost,
-html body #chat-log .chat-message span[data-pf2-effect-area],
-html body #chat-log .chat-message span.with-repost {
-    background: var(--realdark-input-bg) !important;
-    background-color: var(--realdark-input-bg) !important;
-    background-image: none !important;
-    color: var(--realdark-gold) !important;
-    border: 1px solid rgba(130, 130, 130, 0.3) !important;
-    border-radius: 3px;
-    padding: 0 2px;
-    text-shadow: none !important;
-    box-shadow: none !important;
-    -webkit-text-fill-color: var(--realdark-gold) !important;
-    display: inline-block;
-    /* Ensure background wraps correctly */
-}
-
-/* Fix inner header/title text if it exists */
-html body.realdark-chat-active .chat-message span[data-pf2-effect-area] h4,
-html body.realdark-chat-active .chat-message span.with-repost h4 {
-    color: var(--realdark-gold) !important;
-    background: transparent !important;
-}
-
-html body.realdark-chat-active .chat-message a.inline-roll:hover,
-html body.realdark-chat-active .chat-message a.inline-check:hover,
-html body.realdark-chat-active .chat-message a.content-link:hover,
-html body.realdark-chat-active .chat-message a.entity-link:hover,
-html body.realdark-chat-active .chat-message button[data-action]:hover {
-    background: var(--realdark-gold-dim) !important;
-    color: #000 !important;
-    text-shadow: none !important;
-    border-color: var(--realdark-gold) !important;
-}
-
-/* GENERAL WINDOW CONTENT LINKS (Fixing bright fields) */
-.window-app.realdark-theme-window a.content-link,
-.window-app.realdark-theme-window a.entity-link,
-.window-app.realdark-theme-window a.inline-check,
-.window-app.realdark-theme-window a.inline-roll,
-.window-app.realdark-theme-window span.inline-check,
-.window-app.realdark-theme-window span.inline-roll,
-.window-app.realdark-theme-window span[data-pf2-check],
-.window-app.realdark-theme-window span[data-pf2-saving-throw],
-.window-app.realdark-theme-window span[data-pf2-dc],
-.window-app.realdark-theme-window [data-visibility="gm"] {
-    background: var(--realdark-input-bg) !important;
-    color: var(--realdark-gold) !important;
-    border: 1px solid rgba(130, 130, 130, 0.3) !important;
-    text-shadow: none !important;
-    border-radius: 3px;
-    padding: 1px 4px;
-    text-decoration: none;
-}
-
-.window-app.realdark-theme-window a.content-link i,
-.window-app.realdark-theme-window a.entity-link i {
-    color: var(--realdark-gold) !important;
-}
-
-/* GM Notes Specific Styling - Dark & Distinct */
-.window-app.realdark-theme-window .gm-notes .editor,
-.window-app.realdark-theme-window .gm-notes .editor-content,
-.window-app.realdark-theme-window .gm-notes .prosemirror,
-.window-app.realdark-theme-window .gm-notes .ProseMirror {
-    background: rgba(0, 0, 0, 0.5) !important;
-    border: 1px dashed var(--realdark-gold-dim) !important;
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
-    color: var(--realdark-text-light) !important;
-}
-
-/* ======================================================================== */
-/* STUBBORN PF2E SPECIFIC OVERRIDES                                         */
-/* ======================================================================== */
-
-/* HARDENING: Attribute Builder & Tag Selectors */
-/* These windows often have unique IDs or classes that fight generic styles */
-.window-app.realdark-theme-window.attribute-builder .window-content,
-.window-app.realdark-theme-window.tag-selector .window-content,
-.window-app.realdark-theme-window.damage-dialog .window-content,
-.window-app.realdark-theme-window.roll-modifiers-dialog .window-content {
-    background: var(--realdark-sheet-bg) !important;
-    background-color: var(--realdark-sheet-bg) !important;
-    background-image:
-        radial-gradient(circle at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 60%, rgba(0, 0, 0, 0.6) 100%),
-        var(--realdark-bg-url) !important;
-    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
-}
-
-/* Force all Sidebar Headers & Labels to Gold */
-.window-app.realdark-theme-window .sidebar .health-header,
-.window-app.realdark-theme-window .sidebar .defense-header,
-.window-app.realdark-theme-window .armor-class .shield-hp,
-.window-app.realdark-theme-window .sidebar label,
-.window-app.realdark-theme-window .sidebar h4,
-.window-app.realdark-theme-window .sidebar span.label {
-    color: var(--realdark-gold) !important;
-    text-shadow: var(--realdark-text-shadow) !important;
-}
-
-/* "MODIFIERS" / Layout Buttons */
-.window-app.realdark-theme-window .sidebar a,
-.window-app.realdark-theme-window .sidebar button,
-.window-app.realdark-theme-window .sidebar .modifier-icon,
-.window-app.realdark-theme-window .sidebar .roll-icon {
-    background: var(--realdark-input-bg) !important;
-    background-color: var(--realdark-input-bg) !important;
-    background-image: none !important;
-    color: var(--realdark-gold) !important;
+    color: #fff !important;
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    box-shadow: none !important;
+    box-sizing: border-box !important;
 }
 
-/* "Untrained" / Proficiency Badges */
-.window-app.realdark-theme-window .proficiency-badge,
-.window-app.realdark-theme-window .proficiency-rank {
-    background: var(--realdark-input-bg) !important;
-    background-color: var(--realdark-input-bg) !important;
-    color: var(--realdark-red-bright) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    text-shadow: none !important;
+.window-app.realdark-theme-window input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):focus,
+.window-app.realdark-theme-window select:not(.skill-proficiency):not(.pf-rank):focus,
+.window-app.realdark-theme-window textarea:focus {
+    border-color: var(--realdark-primary) !important;
+    box-shadow: 0 0 5px rgba(255, 189, 74, 0.2) !important;
 }
 
-/* "Edit" / "Toggle" Buttons (Aggressive) */
-.window-app.realdark-theme-window a.editor-toggle,
-.window-app.realdark-theme-window button.edit-btn,
-.window-app.realdark-theme-window a.control,
-.window-app.realdark-theme-window .action-button,
-.window-app.realdark-theme-window button:not(.rd-submit-btn) {
-    background: var(--realdark-input-bg) !important;
-    background-color: var(--realdark-input-bg) !important;
-    background-image: none !important;
-    color: var(--realdark-gold) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    box-shadow: none !important;
+.window-app.realdark-theme-window select:not(.skill-proficiency):not(.pf-rank) option {
+    background: #111 !important;
+    color: var(--realdark-primary) !important;
 }
 
-.window-app.realdark-theme-window a.editor-toggle:hover,
-.window-app.realdark-theme-window button.edit-btn:hover,
-.window-app.realdark-theme-window button:not(.rd-submit-btn):hover {
-    background: var(--realdark-gold-dim) !important;
-    border-color: var(--realdark-gold) !important;
-    color: #000 !important;
+.window-app.realdark-theme-window input[type="checkbox"],
+.window-app.realdark-theme-window input[type="radio"] {
+    accent-color: var(--realdark-primary) !important;
 }
 
-/* ======================================================================== */
-/* BANNER & SIDEBAR GRADIENTS (THEME CONFIGURABLE)                          */
-/* ======================================================================== */
-
-/* Targeted Sidebar Override - Force transparency via variable */
-.window-app.realdark-theme-window aside.sidebar,
-.window-app.realdark-theme-window .sidebar,
-.window-app.realdark-theme-window .sheet-sidebar {
-    border-image: none !important;
-    border: none !important;
-    background-color: transparent !important;
-    /* Ensure base is transparent */
-    background: linear-gradient(to bottom,
-            var(--realdark-sidebar-rgba-top) 0%,
-            var(--realdark-sidebar-rgba-bottom) 100%) !important;
-    box-shadow: inset 0 0 20px black;
-    border-right: 1px solid rgba(130, 130, 130, 0.2) !important;
-}
-
-/* Ensure header text sits on top */
-.window-app.realdark-theme-window .sidebar header,
-.window-app.realdark-theme-window aside.sidebar header,
-.window-app.realdark-theme-window .crb-style aside header,
-.window-app.realdark-theme-window.actor.sheet.character .crb-style aside header {
-    background: transparent !important;
-    background-image: none !important;
-    border-bottom: 1px solid rgba(130, 130, 130, 0.2);
-}
-
-
-
-
-/* ======================================================================== */
-/* ASSET NEUTRALIZATION & REPLACEMENT                                       */
-/* 'The Great Purge' - Replacing Image Assets with CSS                      */
-/* ======================================================================== */
-
-/* 1. SHIELDS (AC, HP, ETC) */
-/* Targeted removal of shield-red.webp, shield-blue.webp, etc. */
-.window-app.realdark-theme-window .armor-class .shield .shield-plate,
-.window-app.realdark-theme-window .hit-points .hp-section .hp-value,
-.window-app.realdark-theme-window .defense-list .defense .defense-value,
-.window-app.realdark-theme-window .pf2e.sheet.character .window-content .sheet-body .sheet-content .tab[data-tab='character'] .health-section .hp-value {
-    background-image: none !important;
-    background: rgba(0, 0, 0, 0.4) !important;
-    border: 2px solid var(--realdark-red-bright) !important;
-    border-radius: 8px !important;
-    box-shadow: 0 0 10px var(--realdark-red-bright) inset, 0 0 5px #000 !important;
-    backdrop-filter: blur(5px);
-}
-
-/* Fix text alignment and shape for the new 'Digital Shield' */
-.window-app.realdark-theme-window .armor-class .shield .shield-plate {
-    width: 100% !important;
-    height: 100% !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* 2. NAVIGATION TABS */
-/* Generic Input Styling - Fix for Dropdowns (Initiative etc) */
-.window-app.realdark-theme-window select {
-    background: var(--realdark-input-bg) !important;
-    color: var(--realdark-gold-dim) !important;
-    border: 1px solid rgba(130, 130, 130, 0.4) !important;
-    border-radius: 4px;
-    color-scheme: dark;
-    /* CRITICAL: Forces native dropdown to be dark */
-}
-
-.window-app.realdark-theme-window select:hover,
-.window-app.realdark-theme-window select:focus {
-    color: var(--realdark-gold) !important;
-    border: 1px solid var(--realdark-gold) !important;
-    box-shadow: 0 0 5px var(--realdark-gold-dim);
-}
-
-.window-app.realdark-theme-window select option {
-    background-color: #1a1a1a !important;
-    color: var(--realdark-gold) !important;
-}
-
-/* Removing nav-item.webp and nav-item-inactive.webp */
+/* Navigation Tabs */
 .window-app.realdark-theme-window .sheet-navigation .item,
 .window-app.realdark-theme-window nav.sheet-tabs .item {
     background-image: none !important;
     background: transparent !important;
     border: none !important;
     border-bottom: 3px solid transparent !important;
-    /* increased thickness */
-    color: var(--realdark-gold-dim) !important;
+    color: var(--realdark-secondary) !important;
     transition: all 0.3s ease;
-    padding: 9px 10px 1px 10px !important;
-    /* Shifted down to center icons */
-    transform: translateY(-6px) !important;
-    /* Force visual lift */
-    position: relative;
-    z-index: 5;
 }
 
 .window-app.realdark-theme-window .sheet-navigation .item.active,
 .window-app.realdark-theme-window nav.sheet-tabs .item.active {
-    background-image: none !important;
-    border-bottom: 2px solid var(--realdark-gold) !important;
-    color: var(--realdark-gold) !important;
-    text-shadow: 0 0 8px var(--realdark-gold);
-    box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.5);
+    border-bottom: 2px solid var(--realdark-primary) !important;
+    color: var(--realdark-primary) !important;
+    text-shadow: 0 0 8px var(--realdark-primary);
 }
-
-
 
 .window-app.realdark-theme-window .sheet-navigation .item:hover,
 .window-app.realdark-theme-window nav.sheet-tabs .item:hover {
@@ -846,456 +497,195 @@ html body.realdark-chat-active .chat-message button[data-action]:hover {
     text-shadow: 0 0 5px #fff;
 }
 
-/* PFS Icon Fix - Force SVG to take theme color */
-/* PFS Icon Fix - MASK STRATEGY (Definitive 2.0) */
-/* Hide the stubborn black SVG */
-html body .item[data-tab="pfs"] svg,
-html body .item[data-tab="pfs"] .pfs-icon {
-    opacity: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
+/* Sidebar Gradient */
+.window-app.realdark-theme-window aside.sidebar,
+.window-app.realdark-theme-window .sidebar,
+.window-app.realdark-theme-window .sheet-sidebar {
+    background: linear-gradient(to bottom, var(--realdark-sidebar-rgba-top) 0%, var(--realdark-sidebar-rgba-bottom) 100%) !important;
+    box-shadow: inset 0 0 20px black;
+    border-right: 1px solid rgba(130, 130, 130, 0.2) !important;
 }
 
-html body .item[data-tab="pfs"] {
-    position: relative !important;
-    color: var(--realdark-gold-dim) !important;
-}
-
-/* Create a new 'Ghost' Icon using the Mask */
-html body .item[data-tab="pfs"]::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 20px;
-    /* Standard Nav Icon Size */
-    height: 20px;
-
-    /* User request: Use Primary Gold even for inactive state to match other icons in Dragon preset */
-    background-color: var(--realdark-gold);
-
-    /* The Magic Mask */
-    mask: url('../assets/pfs-icon-clean.svg') no-repeat center center;
-    -webkit-mask: url('../assets/pfs-icon-clean.svg') no-repeat center center;
-    mask-size: contain;
-    -webkit-mask-size: contain;
-
-    pointer-events: none;
-    transition: all 0.3s ease;
-}
-
-/* Active State */
-html body .item[data-tab="pfs"].active {
-    color: var(--realdark-gold) !important;
-    text-shadow: 0 0 8px var(--realdark-gold);
-}
-
-html body .item[data-tab="pfs"].active::after {
-    background-color: var(--realdark-gold);
-    filter: drop-shadow(0 0 5px var(--realdark-gold));
-}
-
-/* Hover State */
-html body .item[data-tab="pfs"]:hover {
-    color: #fff !important;
-    text-shadow: 0 0 5px #fff;
-}
-
-html body .item[data-tab="pfs"]:hover::after {
-    background-color: #fff;
-    filter: drop-shadow(0 0 5px #fff);
-}
-
-/* 3. HEADERS & BANNERS */
-/* Removing header.webp, banner-bg.webp */
-.window-app.realdark-theme-window header .frame,
-.window-app.realdark-theme-window .sheet-header,
-.window-app.realdark-theme-window .summary-header,
-.window-app.realdark-theme-window .tab[data-tab='actions'] .actions-container .actions-header {
-    background-image: none !important;
-    background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.6), transparent) !important;
-    border-bottom: 1px solid var(--realdark-gold-dim) !important;
-}
-
-/* 4. DECORATIONS */
-/* Hiding miscellaneous textures clearly */
-.window-app.realdark-theme-window .sidebar_top,
-.window-app.realdark-theme-window .sidebar_bottom,
-.window-app.realdark-theme-window .accent-decoration,
-.window-app.realdark-theme-window .corner-box,
-.window-app.realdark-theme-window [src*='accent-decoration.webp'],
-.window-app.realdark-theme-window [src*='corner-box.webp'],
-.window-app.realdark-theme-window [style*='corner-box.webp'] {
-    display: none !important;
-}
-
-/* 5. SIDEBAR CLEANUP - SUPER SPECIFIC TARGETING */
-.window-app.realdark-theme-window .sidebar::before,
-.window-app.realdark-theme-window .sidebar::after,
-.window-app.realdark-theme-window aside.sidebar::before,
-.window-app.realdark-theme-window aside.sidebar::after,
-.window-app.realdark-theme-window .crb-style aside::before,
-.window-app.realdark-theme-window .crb-style aside::after,
-.window-app.realdark-theme-window form.crb-style aside::before,
-.window-app.realdark-theme-window form.crb-style aside::after,
-.window-app.realdark-theme-window .crb-style .sidebar::before,
-.window-app.realdark-theme-window .crb-style .sidebar::after,
-/* Target Specific System Path (0,6,1 vs 0,5,2) */
-.window-app.realdark-theme-window.actor.sheet.character .crb-style aside,
-.window-app.realdark-theme-window.actor.sheet.character .crb-style .sidebar {
-    background-image: none !important;
+.window-app.realdark-theme-window .sidebar header,
+.window-app.realdark-theme-window aside.sidebar header {
     background: transparent !important;
-    border-image: none !important;
-    /* CORRECTED: Do NOT hide the element, just the background */
-}
-
-/* 6. INPUT UNDERLINES */
-/* Remove the 'stroke.svg' underlines if they exist as images */
-.window-app.realdark-theme-window input {
     background-image: none !important;
+    border-bottom: 1px solid rgba(130, 130, 130, 0.2);
 }
 
-/* 7. LOGO REPLACEMENT */
-/* Swap Pathfinder Logo with Custom Module Logo */
+/* AC / HP Plates */
+.window-app.realdark-theme-window .armor-class .shield .shield-plate,
+.window-app.realdark-theme-window .hit-points .hp-section .hp-value,
+.window-app.realdark-theme-window .defense-list .defense .defense-value {
+    background-image: none !important;
+    background: rgba(0, 0, 0, 0.4) !important;
+    border: 2px solid var(--realdark-accent) !important;
+    box-shadow: 0 0 10px var(--realdark-accent) inset, 0 0 5px #000 !important;
+}
+
+/* ======================================================================== */
+/* PF2E SHEET SPECIFICS (Speeds, Actions Tab, Section Headers, Badges)       */
+/* ======================================================================== */
+
+/* Speeds Section */
+.window-app.realdark-theme-window .speeds,
+.window-app.realdark-theme-window .speed-section,
+.window-app.realdark-theme-window .sidebar .speed {
+    color: var(--realdark-text);
+}
+
+.window-app.realdark-theme-window .speeds label,
+.window-app.realdark-theme-window .speed-section label,
+.window-app.realdark-theme-window .sidebar .speed label,
+.window-app.realdark-theme-window .sidebar .speed .label {
+    color: var(--realdark-text) !important;
+    opacity: 0.9 !important;
+}
+
+.window-app.realdark-theme-window .speeds .value,
+.window-app.realdark-theme-window .speed-section .value,
+.window-app.realdark-theme-window .sidebar .speed .value {
+    color: var(--realdark-primary) !important;
+    font-weight: bold;
+}
+
+.window-app.realdark-theme-window .speed-section .d20-svg,
+.window-app.realdark-theme-window .sidebar .speed .d20-svg,
+.window-app.realdark-theme-window a.value.rollable .d20-svg {
+    color: var(--realdark-primary) !important;
+    fill: var(--realdark-primary) !important;
+    -webkit-text-fill-color: var(--realdark-primary) !important;
+    opacity: 1 !important;
+    filter: drop-shadow(0 0 2px black) !important;
+}
+
+/* Actions Tab Section Headers */
+.window-app.realdark-theme-window .tab[data-tab="actions"] h3,
+.window-app.realdark-theme-window .tab[data-tab="actions"] h4,
+.window-app.realdark-theme-window .tab[data-tab="actions"] .actions-header,
+.window-app.realdark-theme-window .tab[data-tab="actions"] .header,
+.window-app.realdark-theme-window .actions-container h3,
+.window-app.realdark-theme-window .actions-container h4,
+.window-app.realdark-theme-window .actions-list .actions-header,
+.window-app.realdark-theme-window .actions-list .section-header {
+    color: var(--realdark-primary) !important;
+    text-shadow: 0 0 2px black;
+}
+
+/* Action subtabs: Encounter, Exploration, Downtime */
+.window-app.realdark-theme-window .actions-nav .item {
+    color: var(--realdark-text) !important;
+    opacity: 0.7;
+}
+
+.window-app.realdark-theme-window .actions-nav .item.active {
+    color: var(--realdark-primary) !important;
+    opacity: 1 !important;
+    border-bottom: 2px solid var(--realdark-primary) !important;
+    text-shadow: 0 0 4px var(--realdark-primary);
+}
+
+/* Action controls: "+ CREATE ACTION", "BROWSE" */
+.window-app.realdark-theme-window .tab[data-tab="actions"] a.action-create,
+.window-app.realdark-theme-window .tab[data-tab="actions"] a.action-browse,
+.window-app.realdark-theme-window .tab[data-tab="actions"] .controls a,
+.window-app.realdark-theme-window .tab[data-tab="actions"] .controls button {
+    color: var(--realdark-secondary) !important;
+}
+
+.window-app.realdark-theme-window .tab[data-tab="actions"] a.action-create:hover,
+.window-app.realdark-theme-window .tab[data-tab="actions"] a.action-browse:hover,
+.window-app.realdark-theme-window .tab[data-tab="actions"] .controls a:hover {
+    color: var(--realdark-primary) !important;
+}
+
+/* Strike action badges */
+.window-app.realdark-theme-window .item.strike .item-image,
+.window-app.realdark-theme-window .item.strike .tag,
+.window-app.realdark-theme-window .item.strike .badge,
+.window-app.realdark-theme-window .action-badge,
+.window-app.realdark-theme-window .item-summary .tag {
+    background: var(--realdark-input-bg) !important;
+    color: var(--realdark-text) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Logo handling */
 .window-app.realdark-theme-window .sheet-header .logo:not(.realdark-logo),
 .window-app.realdark-theme-window header .logo:not(.realdark-logo),
-.window-app.realdark-theme-window header img[src*="Pathfinder"]:not(.realdark-logo),
-.window-app.realdark-theme-window header img[src*="logo"]:not(.realdark-logo) {
+.window-app.realdark-theme-window header img[src*="Pathfinder"]:not(.realdark-logo) {
     display: none !important;
     opacity: 0 !important;
     visibility: hidden !important;
-    width: 0 !important;
-    height: 0 !important;
-    pointer-events: none !important;
 }
 
 .realdark-logo {
     display: block !important;
     opacity: 1 !important;
     visibility: visible !important;
-    /* Allow JS to control dimensions */
-    width: auto;
+    width: 100%;
     height: auto;
-    z-index: 100 !important;
-    position: relative !important;
-    pointer-events: all !important;
-    margin-top: 2px !important;
-    /* Nudge down slighty */
-}
-
-/* Ensure Charname image is NOT hidden if it was caught before (likely token art) */
-.window-app.realdark-theme-window .charname img {
-    display: block !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    width: auto !important;
-    height: auto !important;
-}
-
-/* Fix for standard Logo container gap in Sidebar */
-.window-app.realdark-theme-window .sidebar .logo,
-.window-app.realdark-theme-window aside .logo {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-    position: relative;
-    background: transparent !important;
     border: none !important;
+    background: transparent !important;
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.8));
 }
 
-/* Removed aggressive sidebar image hiding */
-
-/* Targeted Background Elements that might be masquerading as content */
-.window-app.realdark-theme-window .sidebar_top,
-.window-app.realdark-theme-window .sidebar_bottom,
-.window-app.realdark-theme-window .sheet-sidebar .sidebar_top,
-.window-app.realdark-theme-window .sheet-sidebar .sidebar_bottom,
-.window-app.realdark-theme-window aside.sidebar .sidebar_top,
-.window-app.realdark-theme-window aside.sidebar .sidebar_bottom,
-.window-app.realdark-theme-window [style*="red_sidebar"] {
-    display: none !important;
-    background: none !important;
-    width: 0 !important;
-    height: 0 !important;
+/* PFS Icon Mask */
+.window-app.realdark-theme-window .item[data-tab="pfs"] svg,
+.window-app.realdark-theme-window .item[data-tab="pfs"] .pfs-icon {
     opacity: 0 !important;
-    pointer-events: none !important;
+    width: 100% !important;
+    height: 100% !important;
 }
 
-/* Ensure Logo Area Collapse */
-/* Ensure Logo Area Collapse */
-.window-app.realdark-theme-window header h1 {
-    background: transparent !important;
+.window-app.realdark-theme-window .item[data-tab="pfs"] {
+    position: relative !important;
+    color: var(--realdark-secondary) !important;
 }
 
-.window-app.realdark-theme-window .charname {
-    margin: 0 !important;
+.window-app.realdark-theme-window .item[data-tab="pfs"]::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background-color: var(--realdark-primary);
+    mask: url('../assets/pfs-icon-clean.svg') no-repeat center center;
+    -webkit-mask: url('../assets/pfs-icon-clean.svg') no-repeat center center;
+    mask-size: contain;
+    -webkit-mask-size: contain;
+    pointer-events: none;
+    transition: all 0.3s ease;
 }
 
-/* ======================================================================== */
-/* TARGETED ASSET NULLIFICATION (USER LIST)                                 */
-/* Explicitly catching every file requested by user                         */
-/* ======================================================================== */
+.window-app.realdark-theme-window .item[data-tab="pfs"].active::after {
+    background-color: var(--realdark-primary);
+    filter: drop-shadow(0 0 5px var(--realdark-primary));
+}
 
-/* 1. Sidebar & Backgrounds */
+/* Parchment asset suppressions */
 .window-app.realdark-theme-window [src*='blue_sidebar_top.webp'],
-.window-app.realdark-theme-window [style*='blue_sidebar_top.webp'],
 .window-app.realdark-theme-window [src*='blue_sidebar_bottom.webp'],
-.window-app.realdark-theme-window [style*='blue_sidebar_bottom.webp'],
 .window-app.realdark-theme-window [src*='banner-bg.webp'],
-.window-app.realdark-theme-window [style*='banner-bg.webp'],
-.window-app.realdark-theme-window [src*='banner-bg2.webp'],
-.window-app.realdark-theme-window [style*='banner-bg2.webp'],
 .window-app.realdark-theme-window [src*='background.webp'],
-.window-app.realdark-theme-window [style*='background.webp'],
 .window-app.realdark-theme-window [src*='parchment.webp'],
-.window-app.realdark-theme-window [style*='parchment.webp'],
-.window-app.realdark-theme-window [src*='red_sidebar'],
-.window-app.realdark-theme-window [style*='red_sidebar'] {
-    display: none !important;
-    background-image: none !important;
-    visibility: hidden !important;
-    width: 0 !important;
-    height: 0 !important;
-}
-
-/* 2. Headers & Decorations */
 .window-app.realdark-theme-window [src*='accent-decoration.webp'],
-.window-app.realdark-theme-window [style*='accent-decoration.webp'],
 .window-app.realdark-theme-window [src*='header.webp'],
-.window-app.realdark-theme-window [style*='header.webp'],
-.window-app.realdark-theme-window [src*='header-bw.webp'],
-.window-app.realdark-theme-window [style*='header-bw.webp'],
 .window-app.realdark-theme-window [src*='gold.webp'],
-.window-app.realdark-theme-window [style*='gold.webp'],
-.window-app.realdark-theme-window [src*='frame-elegant.svg'],
-.window-app.realdark-theme-window [style*='frame-elegant.svg'],
-.window-app.realdark-theme-window [src*='deity.svg'],
-.window-app.realdark-theme-window [style*='deity.svg'],
-.window-app.realdark-theme-window [src*='deity.webp'],
-.window-app.realdark-theme-window [style*='deity.webp'],
-.window-app.realdark-theme-window [src*='corner-box.webp'],
-.window-app.realdark-theme-window [style*='corner-box.webp'],
-.window-app.realdark-theme-window [src*='corner-box.svg'],
-.window-app.realdark-theme-window [style*='corner-box.svg'],
-.window-app.realdark-theme-window [src*='border-pattern.webp'],
-.window-app.realdark-theme-window [style*='border-pattern.webp'] {
+.window-app.realdark-theme-window [src*='corner-box.webp'] {
     display: none !important;
     background-image: none !important;
 }
 
-/* 3. Navigation & Badges */
-.window-app.realdark-theme-window [src*='nav-item.webp'],
-.window-app.realdark-theme-window [style*='nav-item.webp'],
-.window-app.realdark-theme-window [src*='nav-item-inactive.webp'],
-.window-app.realdark-theme-window [style*='nav-item-inactive.webp'],
-.window-app.realdark-theme-window [src*='level-badge.webp'],
-.window-app.realdark-theme-window [style*='level-badge.webp'] {
-    display: none !important;
-    background-image: none !important;
+/* Inventory Headers & Tables */
+.window-app.realdark-theme-window .inventory-header,
+.window-app.realdark-theme-window .inventory-list header,
+.window-app.realdark-theme-window .item-list header {
+    background: rgba(0, 0, 0, 0.4) !important;
+    color: var(--realdark-primary) !important;
 }
-
-/* 4. Item Frames */
-.window-app.realdark-theme-window [src*='item-frame.svg'],
-.window-app.realdark-theme-window [style*='item-frame.svg'] {
-    /* We often want to KEEP the item frame but remove the image */
-    /* So we hide duplicate images but force CSS borders on containers instead */
-    display: none !important;
-}
-
-/* ======================================================================== */
-/* 5. SIDEBAR CLEANUP - SUPER SPECIFIC TARGETING                            */
-/* ======================================================================== */
-
-/* Remove standard pseudo-elements and potential images */
-.window-app.realdark-theme-window .sidebar::before,
-.window-app.realdark-theme-window .sidebar::after,
-.window-app.realdark-theme-window aside.sidebar::before,
-.window-app.realdark-theme-window aside.sidebar::after,
-.window-app.realdark-theme-window .crb-style aside::before,
-.window-app.realdark-theme-window .crb-style aside::after,
-.window-app.realdark-theme-window form.crb-style aside::before,
-.window-app.realdark-theme-window form.crb-style aside::after,
-.window-app.realdark-theme-window .crb-style .sidebar::before,
-.window-app.realdark-theme-window .crb-style .sidebar::after {
-    background-image: none !important;
-    content: none !important;
-    display: none !important;
-}
-
-/* CORRECTED: Don't hide the sidebar itself, just the background! */
-.window-app.realdark-theme-window.actor.sheet.character .crb-style aside,
-.window-app.realdark-theme-window.actor.sheet.character .crb-style .sidebar {
-    background-image: none !important;
-    background: transparent !important;
-    border-image: none !important;
-    /* Do NOT set display:none here! */
-}
-
-/* Removed aggressive sidebar image hiding */
-
-.window-app.realdark-theme-window aside {
-    background-color: transparent !important;
-}
-
-/* ======================================================================== */
-/* 6. REINSTATEMENT & ATMOSPHERE (THE FINAL LAYER)                          */
-/* ======================================================================== */
-
-/* Common Selector base for Re-instatement - beats System (0,5,2) with (0,6,1) */
-.window-app.realdark-theme-window aside.sidebar,
-.window-app.realdark-theme-window .sidebar,
-.window-app.realdark-theme-window .sheet-sidebar,
-.window-app.realdark-theme-window .crb-style aside,
-.window-app.realdark-theme-window .crb-style .sidebar,
-.window-app.realdark-theme-window.actor.sheet.character .crb-style aside {
-    background: linear-gradient(to bottom, var(--realdark-sidebar-rgba-top) 0%, var(--realdark-sidebar-rgba-bottom) 100%) !important;
-    background-image: linear-gradient(to bottom, var(--realdark-sidebar-rgba-top) 0%, var(--realdark-sidebar-rgba-bottom) 100%) !important;
-    background-color: transparent !important;
-    border-image: none !important;
-    box-shadow: inset 0 0 20px black;
-    /* Reset props that system sets */
-    background-repeat: no-repeat !important;
-    background-size: 100% 100% !important;
-}
-
-/* Force children to verify they are clean */
-.window-app.realdark-theme-window .sheet-sidebar *,
-.window-app.realdark-theme-window .crb-style aside *,
-.window-app.realdark-theme-window .crb-style .sidebar * {
-    background-image: none !important;
-    background-color: transparent !important;
-    border-image: none !important;
-    box-shadow: none !important;
-}
-
-/* SCORCHED EARTH: Top Sidebar Subsections & Pseudo-elements */
-/* UNIVERSAL TARGETING: All direct children AND grandchildren of the sidebar */
-/* UNIVERSAL TARGETING: All direct children AND grandchildren of the sidebar */
-.window-app.realdark-theme-window aside>*,
-.window-app.realdark-theme-window .crb-style aside>*,
-.window-app.realdark-theme-window .sidebar>*,
-.window-app.realdark-theme-window .crb-style .sidebar>*,
-/* Pseudos for children */
-.window-app.realdark-theme-window .crb-style aside>*::before,
-.window-app.realdark-theme-window .crb-style aside>*::after,
-.window-app.realdark-theme-window .crb-style .sidebar>*::before,
-.window-app.realdark-theme-window .crb-style .sidebar>*::after {
-    background: transparent !important;
-    background-image: none !important;
-    box-shadow: none !important;
-    border: none !important;
-    content: none !important;
-}
-
-/* DEEP VOIDS: Specific Subsections (HP, AC, Perception) */
-/* Target the container, its pseudo-elements, AND ALL CHILDREN recursively */
-.window-app.realdark-theme-window .hitpoints,
-.window-app.realdark-theme-window .hitpoints *,
-.window-app.realdark-theme-window .hitpoints::before,
-.window-app.realdark-theme-window .hitpoints::after,
-.window-app.realdark-theme-window .hitpoints *::before,
-.window-app.realdark-theme-window .hitpoints *::after,
-
-.window-app.realdark-theme-window .armor-class,
-.window-app.realdark-theme-window .armor-class *,
-.window-app.realdark-theme-window .armor-class::before,
-.window-app.realdark-theme-window .armor-class::after,
-.window-app.realdark-theme-window .armor-class *::before,
-.window-app.realdark-theme-window .armor-class *::after,
-
-.window-app.realdark-theme-window .perception,
-.window-app.realdark-theme-window .perception *,
-.window-app.realdark-theme-window .perception::before,
-.window-app.realdark-theme-window .perception::after,
-.window-app.realdark-theme-window .perception *::before,
-.window-app.realdark-theme-window .perception *::after {
-    background: transparent !important;
-    background-image: none !important;
-    box-shadow: none !important;
-    border: none !important;
-    /* Don't set content:none here or we lose text */
-}
-
-/* EXCEPT those we specifically styled (Inputs/Buttons) */
-.window-app.realdark-theme-window aside.sidebar input,
-.window-app.realdark-theme-window aside.sidebar button,
-.window-app.realdark-theme-window .sidebar input,
-.window-app.realdark-theme-window .sidebar button,
-.window-app.realdark-theme-window .crb-style aside input,
-.window-app.realdark-theme-window .crb-style aside button {
-    background-color: var(--realdark-input-bg) !important;
-    box-shadow: none !important;
-}
-
-/* Ensure Logo Area Collapse */
-header h1 {
-    background: transparent !important;
-}
-
-.charname {
-    margin: 0 !important;
-}
-
-
-/* 5. SIDEBAR BACKGROUND RESET                                              */
-/* ======================================================================== */
-/* Force the container to hold the gradient */
-.window-app.realdark-theme-window aside.sidebar,
-.window-app.realdark-theme-window .sidebar,
-.window-app.realdark-theme-window .sheet-sidebar {
-    background: linear-gradient(to bottom, var(--realdark-banner-color) 0%, #000 100%) !important;
-    background-image: linear-gradient(to bottom, var(--realdark-banner-color) 0%, #000 100%) !important;
-    background-color: transparent !important;
-    border-image: none !important;
-    box-shadow: inset 0 0 20px black;
-}
-
-/* Force ALL children to be transparent so they don't block the gradient */
-.window-app.realdark-theme-window aside.sidebar *,
-.window-app.realdark-theme-window .sidebar *,
-.window-app.realdark-theme-window .sheet-sidebar *,
-.window-app.realdark-theme-window .crb-style aside *,
-.window-app.realdark-theme-window .crb-style .sidebar * {
-
-    background-image: none !important;
-    background-color: transparent !important;
-    border-image: none !important;
-    box-shadow: none !important;
-}
-
-/* EXCEPT those we specifically styled (Inputs/Buttons) */
-.window-app.realdark-theme-window aside.sidebar input,
-.window-app.realdark-theme-window aside.sidebar button,
-.window-app.realdark-theme-window .sidebar input,
-.window-app.realdark-theme-window .sidebar button,
-.window-app.realdark-theme-window .crb-style aside input,
-.window-app.realdark-theme-window .crb-style aside button {
-    background-color: var(--realdark-input-bg) !important;
-    box-shadow: none !important;
-    /* Re-apply locally if needed */
-}
-
-/* Re-assert Background Colors where images were removed */
-.sidebar,
-.sheet-sidebar,
-.window-app.realdark-theme-window aside {
-    background-color: transparent !important;
-}
-
-/* ======================================================================== */
-/* 7. HIGH SPECIFICITY OVERRIDES                                            */
-/* ======================================================================== */
-/* 
-   If this doesn't work, nothing will.
-   We use 'html body' to artificially boost specificity above any system level.
-   We target every standard container tag inside the sidebar.
-*/
-
-html body .window-app.realdark-theme-window .crb-style aside div,
-
-/* ======================================================================== */
-/* 8. PF2E REMASTER TABLES                                                  */
-/* ======================================================================== */
 
 .window-app.realdark-theme-window table.pf2e.remaster,
 .window-app.realdark-theme-window table.pf2e.remaster thead,
@@ -1304,1378 +694,423 @@ html body .window-app.realdark-theme-window .crb-style aside div,
 .window-app.realdark-theme-window table.pf2e.remaster th,
 .window-app.realdark-theme-window table.pf2e.remaster td {
     background: transparent !important;
-    background-color: transparent !important;
-    color: var(--realdark-text-light) !important;
-    border-color: rgba(130, 130, 130, 0.2) !important;
-}
-
-/* Fix alternating rows or distinct headers if needed */
-.window-app.realdark-theme-window table.pf2e.remaster th {
-    background: rgba(0, 0, 0, 0.4) !important;
-    color: var(--realdark-gold) !important;
-}
-
-.window-app.realdark-theme-window table.pf2e.remaster tbody tr:nth-child(odd) {
-    background: rgba(255, 255, 255, 0.05) !important;
-}
-
-.window-app.realdark-theme-window table.pf2e.remaster tbody tr:nth-child(even) {
-    background: rgba(0, 0, 0, 0.2) !important;
-}
-
-/* Fix strong/bold text inside tables */
-.window-app.realdark-theme-window table.pf2e.remaster strong,
-
-/* ======================================================================== */
-/* 9. INVENTORY HEADER & CURRENCY FIXES                                     */
-/* ======================================================================== */
-
-/* Currency / Coinage Container */
-.window-app.realdark-theme-window .coinage,
-.window-app.realdark-theme-window .coinage .currency,
-.window-app.realdark-theme-window .coinage .wealth {
-    background: var(--realdark-input-bg) !important;
-    background-color: var(--realdark-input-bg) !important;
-    color: var(--realdark-gold) !important;
-    border: 1px solid rgba(130, 130, 130, 0.2) !important;
-    box-shadow: none !important;
-}
-
-/* Wealth Breakdown lines */
-.window-app.realdark-theme-window .coinage .wealth .item-name {
-    color: var(--realdark-gold-dim) !important;
-}
-
-.window-app.realdark-theme-window .coinage .wealth .item-name span {
-    color: var(--realdark-text-light) !important;
-}
-
-/* Encumbrance & Resonance Bars */
-.window-app.realdark-theme-window .encumbrance,
-.window-app.realdark-theme-window .encumbrance .encumbrance-bar,
-.window-app.realdark-theme-window .invested-total {
-    background: var(--realdark-input-bg) !important;
-    color: var(--realdark-gold) !important;
-    border: 1px solid rgba(130, 130, 130, 0.2) !important;
-}
-
-.window-app.realdark-theme-window .encumbrance .bar,
-.window-app.realdark-theme-window .invested-total .bar {
-    background-color: var(--realdark-gold-dim) !important;
-}
-
-/* Fix specific list items in currency */
-.window-app.realdark-theme-window .coinage li,
-.window-app.realdark-theme-window .coinage li.label {
-    color: var(--realdark-gold) !important;
-    border-color: rgba(130, 130, 130, 0.2) !important;
-}
-
-
-html body .window-app.realdark-theme-window .crb-style aside header,
-html body .window-app.realdark-theme-window .crb-style aside nav,
-
-/* ======================================================================== */
-/* 10. SPELLCASTING DIALOG FIX                                              */
-/* ======================================================================== */
-
-#spellcasting-dialog .window-content,
-#spellcasting-dialog form {
-    background: var(--realdark-sheet-bg) !important;
-    color: var(--realdark-gold) !important;
-}
-
-#spellcasting-dialog .form-group label {
-    color: var(--realdark-gold) !important;
-}
-
-#spellcasting-dialog select {
-    background: var(--realdark-input-bg) !important;
-    color: #fff !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-}
-
-#spellcasting-dialog select option {
-    background: var(--realdark-sheet-bg) !important;
-    color: var(--realdark-gold) !important;
-}
-
-#spellcasting-dialog button {
-    background: rgba(0, 0, 0, 0.5) !important;
-    color: var(--realdark-gold) !important;
-    border: 1px solid var(--realdark-gold-dim) !important;
-}
-
-#spellcasting-dialog button:hover {
-    box-shadow: 0 0 5px var(--realdark-gold) !important;
-}
-
-/* Ensure the wrapper also loses the light theme background if applied */
-#spellcasting-dialog.theme-light {
-    background-image: none !important;
-    background: var(--realdark-sheet-bg) !important;
-}
-
-
-/* ======================================================================== */
-/* 11. IWR (IMMUNITIES/WEAKNESSES/RESISTANCES) EDITOR FIX                   */
-/* ======================================================================== */
-
-.window-app.iwr-editor .window-content,
-.window-app.iwr-editor form {
-    background: var(--realdark-sheet-bg) !important;
-    color: var(--realdark-gold) !important;
-}
-
-.window-app.iwr-editor h2,
-.window-app.iwr-editor label {
-    color: var(--realdark-gold) !important;
-    border-bottom-color: rgba(130, 130, 130, 0.3) !important;
-}
-
-/* Inputs & Selects in IWR */
-.window-app.iwr-editor input,
-.window-app.iwr-editor select,
-.window-app.iwr-editor .tagify {
-    background: var(--realdark-input-bg) !important;
-    color: #fff !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-}
-
-.window-app.iwr-editor select option {
-    background: var(--realdark-sheet-bg) !important;
-    color: var(--realdark-gold) !important;
-}
-
-/* Tagify styling specific adjustments */
-.window-app.iwr-editor .tagify tag {
-    background: var(--realdark-gold-dim) !important;
-    color: #fff !important;
-}
-
-.window-app.iwr-editor .tagify tag x {
-    color: #fff !important;
-}
-
-/* ======================================================================== */
-/* 11. GLOBAL TAGIFY & INPUT FIX (Crucial for Item Sheets)                  */
-/* ======================================================================== */
-
-/* Force Tagify containers to be dark */
-html body .window-app.realdark-theme-window .tagify,
-html body .window-app.realdark-theme-window .tagify.tagify--focus,
-html body .window-app.realdark-theme-window tag,
-html body .window-app.realdark-theme-window .tagify__input {
-    background: var(--realdark-input-bg) !important;
-    background-color: var(--realdark-input-bg) !important;
-    color: var(--realdark-text-light) !important;
-    border-color: rgba(255, 255, 255, 0.2) !important;
-    --tags-border-color: rgba(255, 255, 255, 0.2) !important;
-    --tag-bg: var(--realdark-gold-dim) !important;
-    --tag-text-color: #fff !important;
-    --tag-remove-btn-color: #fff !important;
-}
-
-/* Fix the actual text input area inside Tagify */
-html body .window-app.realdark-theme-window .tagify__input::before {
-    color: var(--realdark-text-light) !important;
-    /* Placeholder text */
-    opacity: 0.7;
-}
-
-/* Individual Tags - High Contrast Fix */
-/* Individual Tags - High Contrast Fix */
-html body .window-app.realdark-theme-window tag.tagify__tag,
-html body .window-app.realdark-theme-window .tagify__tag {
-    /* Set Variables on the Tag Element itself for robustness */
-    --tag-bg: #000 !important;
-    --tag-hover: #111 !important;
-    --tag-text-color: var(--realdark-gold) !important;
-    --tag-remove-btn-color: var(--realdark-red-bright) !important;
-    --tag-remove-bg: transparent !important;
-    --tag-inset-shadow-size: 2em !important;
-    /* Ensure the wrapper uses these vars or is transparent */
-    background-color: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-}
-
-html body .window-app.realdark-theme-window tag.tagify__tag>div,
-html body .window-app.realdark-theme-window .tagify__tag>div {
-    background: #000 !important;
-    background-color: #000 !important;
-    color: var(--realdark-gold) !important;
-    border: 1px solid var(--realdark-gold-dim) !important;
-    border-radius: 3px;
-    padding: 2px 5px !important;
-}
-
-/* Ensure the ::before pseudo (used by library for background) is black */
-html body .window-app.realdark-theme-window tag.tagify__tag>div::before,
-html body .window-app.realdark-theme-window .tagify__tag>div::before {
-    background: #000 !important;
-    background-color: #000 !important;
-    box-shadow: none !important;
-}
-
-html body .window-app.realdark-theme-window .tagify__tag__removeBtn {
-    color: var(--realdark-red-bright) !important;
-    opacity: 0.8;
-}
-
-html body .window-app.realdark-theme-window .tagify__tag__removeBtn:hover {
-    background: transparent !important;
-    color: #ff0000 !important;
-    opacity: 1;
-}
-
-/* Tagify Dropdown (Autocomplete) */
-html body .tagify__dropdown,
-html body .tagify__dropdown__wrapper {
-    background: var(--realdark-sheet-bg) !important;
-    color: var(--realdark-text-light) !important;
-    border: 1px solid var(--realdark-gold-dim) !important;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8) !important;
-}
-
-html body .tagify__dropdown__item {
-    color: var(--realdark-text-light) !important;
-    background: transparent !important;
-}
-
-html body .tagify__dropdown__item--active {
-    background: var(--realdark-gold-dim) !important;
-    color: white !important;
-}
-
-/* [Consolidated into Unified Form Controls] */
-
-html body .window-app.realdark-theme-window input::placeholder,
-html body .window-app.realdark-theme-window textarea::placeholder {
-    color: rgba(255, 255, 255, 0.5) !important;
-}
-
-/* Previous IWR Specifics (Retained but redundant now) */
-.window-app.realdark-theme-window .window-app.iwr-editor button,
-.window-app.realdark-theme-window .window-app.iwr-editor .form-action {
-    color: var(--realdark-gold) !important;
-
-}
-
-/* Override light theme wrapper */
-.window-app.realdark-theme-window .window-app.iwr-editor.theme-light,
-.window-app.realdark-theme-window.iwr-editor.theme-light {
-    background-image: none !important;
-    background: var(--realdark-sheet-bg) !important;
-}
-
-/* ======================================================================== */
-/* 12. INITIATIVE SELECTOR FIX                                              */
-/* ======================================================================== */
-
-/* [Consolidated into Unified Form Controls] */
-
-
-html body .window-app.realdark-theme-window .crb-style aside h1,
-html body .window-app.realdark-theme-window .crb-style aside h2,
-html body .window-app.realdark-theme-window .crb-style aside h3,
-html body .window-app.realdark-theme-window .crb-style aside .sidebar div,
-html body .window-app.realdark-theme-window .crb-style aside .sidebar section,
-html body .window-app.realdark-theme-window .crb-style aside .sidebar header,
-html body .window-app.realdark-theme-window .crb-style aside .sidebar h2 {
-    background: transparent !important;
-    background-image: none !important;
-    box-shadow: none !important;
-    border-color: transparent !important;
-}
-
-/* Re-Re-Protect Inputs & Buttons from the nuclear blast */
-/* Re-Re-Protect Inputs & Buttons from the nuclear blast - SOFTENED */
-html body .window-app.realdark-theme-window .crb-style aside input,
-html body .window-app.realdark-theme-window .crb-style aside button,
-html body .window-app.realdark-theme-window .crb-style aside select,
-html body .window-app.realdark-theme-window .crb-style aside textarea {
-    background-color: rgba(0, 0, 0, 0.5) !important;
-    /* Darker, slightly transparent */
-    border: 1px solid rgba(130, 130, 130, 0.4) !important;
-    /* Subtle grey/transparent border */
-    box-shadow: none !important;
-    color: var(--realdark-text-light) !important;
-    transition: border-color 0.2s ease;
-}
-
-html body .window-app.realdark-theme-window .crb-style aside input:hover,
-html body .window-app.realdark-theme-window .crb-style aside button:hover,
-html body .window-app.realdark-theme-window .crb-style aside select:hover,
-html body .window-app.realdark-theme-window .crb-style aside textarea:hover {
-    border: 1px solid rgba(255, 255, 255, 0.3) !important;
-    /* Glow on hover only */
-}
-
-
-/* ======================================================================== */
-/* 8. WINDOW HEADER CONTROLS (Manual Polish)                                */
-/* ======================================================================== */
-
-/* Remove the 'box' look from header buttons (Token, Configure, Close) */
-.window-app.realdark-theme-window .window-header .window-control,
-.window-app.realdark-theme-window .window-header a {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    color: var(--realdark-gold) !important;
-    /* Brighter gold */
-    opacity: 1 !important;
-    /* maximum visibility */
-    text-shadow: 0 0 2px black;
-    /* clearer contrast */
-    transition: all 0.2s ease;
-}
-
-/* Hover State: Brighten up and maybe subtle glow */
-.window-app.realdark-theme-window .window-header .window-control:hover,
-.window-app.realdark-theme-window .window-header a:hover {
-    background: transparent !important;
-    color: #fff !important;
-    /* White on hover for max pop */
-    text-shadow: 0 0 5px var(--realdark-gold);
-    cursor: pointer;
-}
-
-/* Clean up the title text as well */
-.window-app.realdark-theme-window .window-header .window-title {
-    text-align: left;
-    /* User prefers left alignment */
-    flex: 1;
-    /* Ensure it takes up space to push buttons right */
-    color: var(--realdark-gold) !important;
-    text-shadow: var(--realdark-text-shadow) !important;
-    font-weight: bold;
-    border: none !important;
-}
-
-/* ======================================================================== */
-/* 9. REINFORCEMENTS (Wrap Up)                                              */
-/* ======================================================================== */
-
-/* Ensure the Main Sheet Background Color is always respected, even against vignettes */
-html body .window-app.realdark-theme-window .window-content {
-    background-color: var(--realdark-sheet-bg) !important;
-}
-
-/* Ensure the Sidebar takes the gradient defined by JS (via variable) */
-/* This is just a CSS backup for the JS inline style */
-html body .window-app.realdark-theme-window aside.sidebar,
-html body .window-app.realdark-theme-window .sidebar,
-html body .window-app.realdark-theme-window .sheet-sidebar {
-    background-image: linear-gradient(to bottom, var(--realdark-banner-color) 0%, #000 100%) !important;
-}
-
-
-/* ======================================================================== */
-/* 10. UNIFIED ATMOSPHERE SYSTEM 2.0 (The Real Fix)                         */
-/* ======================================================================== */
-
-/* 1. Base Container Setup */
-.window-app.realdark-theme-window .window-content {
-    position: relative;
-    /* Ensure it catches absolute children */
-    z-index: 0;
-    overflow: hidden !important;
-    /* Keep atmosphere inside */
-    /* Ensure background color is consistent but we will layer on top */
-    background-color: var(--realdark-sheet-bg) !important;
-}
-
-/* 2. The Atmosphere Layer (Global Overlay) */
-.window-app.realdark-theme-window .window-content::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    /* Sit BEHIND content */
-    pointer-events: none;
-    opacity: 0.5;
-    /* Restore intensity */
-    mix-blend-mode: screen;
-    /* Lighten the dark background */
-    transition: opacity 2s ease;
-}
-
-/* 2.5 Ensure Content Sits ON TOP of Atmosphere */
-.window-app.realdark-theme-window .window-content>*,
-.window-app.realdark-theme-window .window-content form,
-.window-app.realdark-theme-window .window-content .sheet-body {
-    position: relative !important;
-    z-index: auto !important;
-    /* Let natural stacking handle it (Relative > Absolute) */
-}
-
-/* 3. Make Sidebar Glassy */
-/* Replaces opaque gradients with semi-transparent ones */
-.window-app.realdark-theme-window aside.sidebar,
-.window-app.realdark-theme-window .sidebar,
-.window-app.realdark-theme-window .sheet-sidebar {
-    /* Tint color from variable, but semi-transparent */
-    /* Fallback for older browsers: just opacity */
-    background: linear-gradient(to bottom, var(--realdark-banner-color), black) !important;
-    /* Modern CSS: color-mix for true transparency */
-    background: linear-gradient(to bottom, color-mix(in srgb, var(--realdark-banner-color) 80%, transparent), color-mix(in srgb, black 90%, transparent)) !important;
-
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
-    /* subtle separation */
-    border-right: 1px solid var(--realdark-gold-dim) !important;
-
-    /* Ensure no other images interfere */
-    background-image: linear-gradient(to bottom, color-mix(in srgb, var(--realdark-banner-color) 80%, transparent), color-mix(in srgb, black 90%, transparent)) !important;
-}
-
-/* Ensure sidebar children don't paint backgrounds */
-.window-app.realdark-theme-window aside.sidebar *,
-.window-app.realdark-theme-window .sidebar * {
-    background-color: transparent !important;
-}
-
-/* Restore inputs */
-.window-app.realdark-theme-window aside.sidebar input,
-.window-app.realdark-theme-window .sidebar input,
-.window-app.realdark-theme-window aside.sidebar button,
-.window-app.realdark-theme-window .sidebar button {
-    background-color: var(--realdark-input-bg) !important;
-}
-
-
-/* 4. Implement Modes on ::before */
-
-/* FOG (Global) */
-:root[data-realdark-atmosphere="fog"] .window-app.realdark-theme-window .window-content::before {
-    background-image:
-        radial-gradient(circle at 20% 50%, var(--realdark-banner-color) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(100, 100, 100, 0.3) 0%, transparent 50%);
-    background-size: 150% 150%;
-    /* Larger canvas for movement */
-    filter: blur(40px);
-    opacity: 0.5;
-    /* animation: realdark-fog-pulse 20s infinite alternate; */
-}
-
-/* VEINS (New Design - Organic Web) */
-:root[data-realdark-atmosphere="veins"] .window-app.realdark-theme-window .window-content::before {
-    /* Complex intersecting radial patterns to simulate organic webbing/veins */
-    background-image:
-        repeating-radial-gradient(circle at 0 0, transparent 0, rgba(255, 255, 255, 0.08) 1px, transparent 2px, transparent 15px),
-        repeating-radial-gradient(circle at 100% 0, transparent 0, rgba(255, 255, 255, 0.08) 1px, transparent 2px, transparent 15px),
-        repeating-radial-gradient(circle at 50% 100%, transparent 0, rgba(255, 255, 255, 0.08) 1px, transparent 2px, transparent 20px),
-        radial-gradient(circle at 50% 50%, var(--realdark-banner-color), transparent 70%);
-    background-size: 100% 100%;
-    opacity: 0.9 !important;
-    /* High visibility */
-    filter: contrast(1.2) brightness(1.2);
-    /* Boost contrast */
-    mix-blend-mode: screen;
-    /* Safer blending */
-    z-index: 10 !important;
-    /* Bring to FRONT */
-}
-
-/* STORM (Now: Electric Arcs / Lightning) */
-:root[data-realdark-atmosphere="storm"] .window-app.realdark-theme-window .window-content::before {
-    /* Sharp, sparse electrical arcs using the Veins technique but "hotter" */
-    background-image:
-        repeating-linear-gradient(60deg, transparent, transparent 100px, rgba(255, 255, 255, 0.6) 100.5px, transparent 101px),
-        repeating-linear-gradient(-60deg, transparent, transparent 120px, rgba(255, 255, 255, 0.5) 120.5px, transparent 121px),
-        linear-gradient(to bottom, var(--realdark-banner-color), transparent);
-    background-size: 100% 100%;
-    filter: brightness(1.5) contrast(1.2);
-    opacity: 0.8 !important;
-    mix-blend-mode: screen;
-    z-index: 10 !important;
-    /* Bring to FRONT */
-    /* animation: realdark-storm-flash 3s infinite steps(5); */
-    /* erratic flashing */
-}
-
-/* ABYSS (Global) */
-:root[data-realdark-atmosphere="abyss"] .window-app.realdark-theme-window .window-content::before {
-    background-image: radial-gradient(circle at center, transparent 30%, black 100%);
-    box-shadow: inset 0 0 150px black;
-    opacity: 1;
-    mix-blend-mode: multiply;
-}
-
-/* Remove old animations or keep if useful */
-@keyframes realdark-fog-pulse {
-    0% {
-        background-position: 0% 50%;
-        opacity: 0.5;
-    }
-
-    100% {
-        background-position: 10% 40%;
-        opacity: 0.7;
-    }
-}
-
-/* New Animation: Lightning Flicker */
-@keyframes realdark-storm-flash {
-
-    0%,
-    100% {
-        opacity: 0.6;
-        filter: brightness(1.5);
-    }
-
-    3% {
-        opacity: 0.9;
-        filter: brightness(3) blur(1px);
-    }
-
-    /* FLASH */
-    6% {
-        opacity: 0.6;
-        filter: brightness(1.5);
-    }
-
-    40% {
-        opacity: 0.5;
-    }
-
-    42% {
-        opacity: 0.8;
-        filter: brightness(2);
-    }
-
-    /* Mini flash */
-    44% {
-        opacity: 0.5;
-    }
-}
-
-/* [Atmosphere System - Consolidated at bottom] */
-
-/* ======================================================================== */
-/* 6.5 PROTECTED SYSTEM ICONS                                               */
-/* ======================================================================== */
-
-/* Protect Invested Icon (Gem) - VISIBILITY FIX */
-html body .window-app.realdark-theme-window a.invested,
-html body .window-app.realdark-theme-window a.invested i,
-html body .window-app.realdark-theme-window .invested,
-html body .window-app.realdark-theme-window .invested i {
-    background: transparent !important;
-    background-color: transparent !important;
-    background-image: none !important;
-    border: none !important;
-    box-shadow: none !important;
-    opacity: 1 !important;
-    padding: 0 !important;
-    margin: 0 !important;
-
-    /* Inactive State: Light Grey (Visible on Dark) */
-    color: #666 !important;
-    text-shadow: none !important;
-    transition: color 0.2s ease;
-}
-
-html body .window-app.realdark-theme-window a.invested:hover,
-html body .window-app.realdark-theme-window a.invested:hover i {
-    color: #fff !important;
-}
-
-/* Active State: Theme Gold */
-html body .window-app.realdark-theme-window a.invested.active,
-html body .window-app.realdark-theme-window a.invested.active i {
-    color: var(--realdark-gold) !important;
-    text-shadow: 0 0 3px black !important;
-}
-
-/* ======================================================================== */
-/* 7. INVENTORY & JOURNAL OVERRIDES                                         */
-/* ======================================================================== */
-
-/* Inventory Headers - Darken the brown */
-.window-app.realdark-theme-active .inventory-list .header,
-.window-app.realdark-theme-active .inventory-list .item-summary,
-.window-app.realdark-theme-active .item-list .header {
-    background: var(--realdark-sidebar-rgba-bottom) !important;
-    color: var(--realdark-gold) !important;
-    border-color: rgba(130, 130, 130, 0.2) !important;
-    text-shadow: none !important;
-    box-shadow: none !important;
-}
-
-/* Journal Sheets - Remove Parchment (Aggressive) */
-.window-app.realdark-theme-active .journal-sheet,
-.window-app.realdark-theme-active .journal-sheet .sheet-body,
-.window-app.realdark-theme-active .journal-sheet .journal-entry-page,
-/* ======================================================================== */
-/* ANTI-FLASH: PREEMPTIVE STYLING (Scoped to Active Theme Only)             */
-/* ======================================================================== */
-/* 
-   CHANGED: Scoped to .realdark-theme-window to preventing persisting on disabled sheets.
-   Note: This may slightly reduce anti-flash effectiveness on first load before JS attaches the class,
-   but it is necessary for the "Disable" feature to function correctly.
-*/
-html .realdark-theme-window.journal-sheet,
-html .realdark-theme-window.journal-sheet .window-content,
-html .realdark-theme-window.journal-sheet .sheet-body,
-html .realdark-theme-window.journal-sheet article,
-html .realdark-theme-window.journal-sheet .journal-entry-page,
-html .realdark-theme-window.journal-sheet .journal-entry-content {
-    background: transparent !important;
-    background-image: none !important;
-    background-color: transparent !important;
-}
-
-/* Kill the parchment image specifically and globally within journals immediately */
-html .realdark-theme-window.journal-sheet [src*='parchment.webp'],
-html .realdark-theme-window.journal-sheet [style*='parchment.webp'] {
-    background-image: none !important;
-    display: none !important;
-}
-
-/* FORCE BACKGROUND ON ALL LAYERS TO ENSURE VISIBILITY */
-html body .realdark-theme-window.journal-sheet,
-html body .realdark-theme-window.journal-sheet .window-content,
-html body .realdark-theme-window.journal-sheet .sheet-body,
-html body .realdark-theme-window.journal-sheet .journal-entry-page {
-    background: var(--realdark-sheet-bg) !important;
-    background-image: none !important;
-    /* ensure no parchment */
-}
-
-/* Original Rules */
-.window-app.realdark-theme-active .journal-sheet .journal-entry-content,
-.window-app.realdark-theme-active .journal-sheet .editor-content,
-.window-app.realdark-theme-active .journal-sheet article {
-    background: transparent !important;
-    background-image: none !important;
-    background-color: transparent !important;
-    color: var(--realdark-text-light) !important;
-    border: none !important;
-    box-shadow: none !important;
-}
-
-/* ======================================================================== */
-/* NUCLEAR CHARACTER SHEET ANTI-FLASH (Scoped)                              */
-/* ======================================================================== */
-
-/* Force immediate dark background on character sheets */
-html body .realdark-theme-window.pf2e.sheet.character .window-content,
-html body .realdark-theme-window.actor.sheet.character .window-content,
-html body .realdark-theme-window.pf2e.sheet.character .sheet-body,
-html body .realdark-theme-window.actor.sheet.character .sheet-body {
-    background-color: var(--realdark-sheet-bg) !important;
-    background-image:
-        radial-gradient(circle at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 60%, rgba(0, 0, 0, 0.6) 100%),
-        var(--realdark-bg-url) !important;
-    background-repeat: no-repeat, repeat;
-    background-size: cover, var(--realdark-bg-size, auto) !important;
-    background-position: center !important;
-    background-blend-mode: normal !important;
-}
-
-/* Kill specific assets immediately */
-html body .realdark-theme-window.pf2e.sheet.character [src*='blue_sidebar_top.webp'],
-html body .realdark-theme-window.actor.sheet.character [src*='blue_sidebar_top.webp'],
-html body .realdark-theme-window.pf2e.sheet.character [src*='blue_sidebar_bottom.webp'],
-html body .realdark-theme-window.actor.sheet.character [src*='blue_sidebar_bottom.webp'],
-html body .realdark-theme-window.pf2e.sheet.character [src*='banner-bg.webp'],
-html body .realdark-theme-window.actor.sheet.character [src*='banner-bg.webp'],
-html body .realdark-theme-window.pf2e.sheet.character [src*='banner-bg2.webp'],
-html body .realdark-theme-window.actor.sheet.character [src*='banner-bg2.webp'],
-html body .realdark-theme-window.pf2e.sheet.character [src*='background.webp'],
-html body .realdark-theme-window.actor.sheet.character [src*='background.webp'],
-html body .realdark-theme-window.pf2e.sheet.character [src*='parchment.webp'],
-html body .realdark-theme-window.actor.sheet.character [src*='parchment.webp'],
-html body .realdark-theme-window.pf2e.sheet.character [src*='red_sidebar'],
-html body .realdark-theme-window.actor.sheet.character [src*='red_sidebar'] {
-    display: none !important;
-    background-image: none !important;
-    visibility: hidden !important;
-    width: 0 !important;
-    height: 0 !important;
-}
-
-/* Force specific header/bg fixes */
-.window-app.realdark-theme-active .journal-header {
-    background: rgba(0, 0, 0, 0.5) !important;
-    border-bottom: 1px solid rgba(130, 130, 130, 0.2) !important;
-}
-
-/* Fix Journal Text Rendering */
-.window-app.realdark-theme-active .journal-entry-content p,
-.window-app.realdark-theme-active .journal-entry-content h1,
-.window-app.realdark-theme-active .journal-entry-content h2,
-.window-app.realdark-theme-active .journal-entry-content h3,
-.window-app.realdark-theme-active .journal-entry-content span,
-.window-app.realdark-theme-active .journal-entry-content li {
-    color: var(--realdark-text-light) !important;
-}
-
-/* Specific fix for "light" styled journals if PF2e forces class */
-.window-app.realdark-theme-window .journal-entry-page.light {
-    filter: invert(0.9) hue-rotate(180deg) !important;
-    background: #111 !important;
-}
-
-/* Re-invert images so they look normal */
-.window-app.realdark-theme-window .journal-entry-page.light img {
-    filter: invert(1) hue-rotate(180deg) !important;
-}
-
-/* HIDE LOGO IN JOURNAL SHEETS */
-.window-app.realdark-theme-window.journal-sheet .realdark-logo {
-    display: none !important;
-}
-
-/* ======================================================================== */
-/* ======================================================================== */
-/* 13. NAVIGATION & LOGO FIXES                                              */
-/* ======================================================================== */
-
-/* Force hide original logo container if it exists (prevents gap) */
-/* Force hide original logo container if it exists (prevents gap) - HIGH SPECIFICITY */
-html body .window-app.realdark-theme-window .sidebar .logo:not(.realdark-logo),
-html body .window-app.realdark-theme-window .sidebar div.logo:not(.realdark-logo),
-.window-app.realdark-theme-window .sidebar .logo:not(.realdark-logo) {
-    display: none !important;
-    height: 0 !important;
-    min-height: 0 !important;
-    max-height: 0 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-    position: absolute !important;
-    top: -9999px !important;
-    pointer-events: none !important;
-}
-
-/* Ensure our custom logo IS visible */
-html body .window-app.realdark-theme-window .sidebar .realdark-logo,
-.window-app.realdark-theme-window .sidebar .realdark-logo {
-    display: block !important;
-    visibility: visible !important;
-    height: auto !important;
-    min-height: auto !important;
-    max-height: none !important;
-    position: relative !important;
-    top: auto !important;
-    opacity: 1 !important;
-}
-
-/* Fix Navigation Line - Tab Style Overlap (Restored) */
-.window-app.realdark-theme-window .sheet-navigation {
-    border-bottom: 1px solid var(--realdark-gold-dim) !important;
-    margin-bottom: 5px !important;
-    padding-bottom: 0 !important;
-    position: relative;
-    z-index: 1;
-}
-
-.window-app.realdark-theme-window .sheet-navigation .item {
-    border-bottom: 3px solid transparent !important;
-    margin-bottom: -2px !important;
-    /* Overlap the container border */
-    position: relative;
-    z-index: 2;
-    /* Sit on top */
-    padding-bottom: 5px !important;
-}
-
-.window-app.realdark-theme-window .sheet-navigation .item.active {
-    border-bottom: 3px solid var(--realdark-gold) !important;
-    color: var(--realdark-gold) !important;
-    background: transparent !important;
-}
-
-/* ======================================================================== */
-/* 14. GLOBAL BORDER SOFTENING (The Final Layer)                            */
-/* ======================================================================== */
-
-/* Soften Sidebar Inputs & Buttons */
-html body .window-app.realdark-theme-window .crb-style aside input,
-html body .window-app.realdark-theme-window .crb-style aside button,
-html body .window-app.realdark-theme-window .crb-style aside select,
-html body .window-app.realdark-theme-window .crb-style aside textarea,
-html body .window-app.realdark-theme-window .sidebar input,
-html body .window-app.realdark-theme-window .sidebar button {
-    background-color: rgba(0, 0, 0, 0.5) !important;
-    border: 1px solid rgba(130, 130, 130, 0.3) !important;
-    /* Soft border */
-    box-shadow: none !important;
-    color: var(--realdark-text-light) !important;
-    transition: border-color 0.2s ease;
-}
-
-html body .window-app.realdark-theme-window .crb-style aside input:hover,
-html body .window-app.realdark-theme-window .crb-style aside button:hover,
-html body .window-app.realdark-theme-window .crb-style aside select:hover,
-html body .window-app.realdark-theme-window .crb-style aside textarea:hover,
-html body .window-app.realdark-theme-window .sidebar input:hover,
-html body .window-app.realdark-theme-window .sidebar button:hover {
-    border: 1px solid rgba(255, 255, 255, 0.3) !important;
-    /* Glow on hover */
-}
-
-/* Soften Window Frame & Header */
-.window-app.realdark-theme-window {
-    border: 1px solid rgba(130, 130, 130, 0.3) !important;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8) !important;
-}
-
-.window-app.realdark-theme-window .sheet-header {
-    border-bottom: 1px solid rgba(130, 130, 130, 0.2) !important;
-}
-
-/* Soften Chat Cards */
-body.realdark-theme-active .chat-message {
-    border: 1px solid rgba(130, 130, 130, 0.2) !important;
-    /* Soft border */
-    box-shadow: 0 0 5px #000 !important;
-}
-
-/* Fix Item Summary Background (Inventory Dropdowns) */
-html body .window-app.realdark-theme-window .item-summary {
-    background-color: rgba(0, 0, 0, 0.5) !important;
-    color: var(--realdark-text-light) !important;
-    border: 1px solid rgba(130, 130, 130, 0.2) !important;
-    padding: 5px !important;
-    border-radius: 4px !important;
-}
-
-/* ======================================================================== */
-/* 14. TAG STYLING OVERRIDES (Language, Traits, Etc)                        */
-/* ======================================================================== */
-/* Force dark background for language fields and other tags */
-html body .sheet.actor li.tag,
-html body .sheet.actor span.tag,
-html body .sheet.actor div.tag,
-html body .sheet.actor .tags .tag,
-html body .sheet.actor .subsection.languages ul li,
-html body .sheet.actor .trait {
-    background: rgba(0, 0, 0, 0.8) !important;
-    background-color: rgba(0, 0, 0, 0.8) !important;
-    background-image: none !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    color: var(--realdark-text-light) !important;
-    box-shadow: none !important;
-    text-shadow: none !important;
-}
-
-html body .sheet.actor li.tag span,
-html body .sheet.actor .tag span {
-    color: var(--realdark-text-light) !important;
-    background: transparent !important;
-}
-
-/* Specific rarity/trait colors override */
-/* Specific rarity/trait colors override */
-.window-app.realdark-theme-window .sheet.actor .tag.common,
-.window-app.realdark-theme-window .sheet.actor .tag.uncommon,
-.window-app.realdark-theme-window .sheet.actor .tag.rare,
-.window-app.realdark-theme-window .sheet.actor .tag.unique,
-.window-app.realdark-theme-window .sheet.actor .tag.secondary,
-.window-app.realdark-theme-window .sheet.actor .tag.nephilim,
-.window-app.realdark-theme-window .sheet.actor .tag.feenling {
-    background-color: rgba(0, 0, 0, 0.8) !important;
-}
-
-/* ======================================================================== */
-/* 15. SPECIFIC SHEET ADJUSTMENTS                                           */
-/* ======================================================================== */
-
-/* HP Alignment Fix - Refined */
-.window-app.realdark-theme-window .hp-big {
-    display: flex !important;
-    align-items: flex-end !important;
-    justify-content: center !important;
-    gap: 10px;
-}
-
-.window-app.realdark-theme-window .hp-big .container {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: flex-end !important;
-}
-
-.window-app.realdark-theme-window .hp-big .data-value {
-    height: auto !important;
-    min-height: 30px;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    background: transparent !important;
-    border: none !important;
-}
-
-/* Inputs specifically */
-.window-app.realdark-theme-window .hp-big input {
-    height: 30px !important;
-    width: 60px !important;
-    text-align: center !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    border: 1px solid rgba(130, 130, 130, 0.3) !important;
-    background: rgba(0, 0, 0, 0.3) !important;
-    font-size: 20px !important;
-    font-family: var(--font-primary) !important;
-}
-
-/* Max HP Text (H2) */
-.window-app.realdark-theme-window .hp-big h2 {
-    height: 30px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    border: none !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    font-size: 20px !important;
-    line-height: 30px !important;
-    color: var(--realdark-text-light) !important;
-    position: relative !important;
-    top: 1px !important;
-}
-
-/* Roll Mode Select Dropdown */
-.window-app.realdark-theme-window select[name="rollmode"] {
-    text-align: center !important;
-    text-align-last: center !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    height: 24px !important;
-    /* Force a reasonable height */
-    line-height: 24px !important;
-    /* Vertical center */
-}
-
-/* CHAT MESSAGE BACKGROUND SAFESTY FIX */
-/* CHAT MESSAGE BACKGROUND - PSEUDO ELEMENT STRATEGY */
-/* CHAT MESSAGE BACKGROUND - DIRECT STYLE STRATEGY (Fixes Stacking Context) */
-html body.realdark-chat-active .chat-message {
-    background: var(--realdark-sheet-bg) !important;
-    background-image: none !important;
-    /* Move border/box-shadow here directly */
-    border: 1px solid rgba(130, 130, 130, 0.3) !important;
-    box-shadow: 0 0 5px #000 !important;
-    position: relative !important;
-    /* REMOVED z-index: 0 to prevent stacking context trap */
-    z-index: auto !important;
-    border-radius: 5px;
-}
-
-/* Ensure inner content doesn't block our background */
-html body.realdark-chat-active .chat-message .message-content,
-html body.realdark-chat-active .chat-message .message-header {
-    background: transparent !important;
-    background-image: none !important;
-}
-
-/* REMOVED ::before pseudo-element */
-html body.realdark-chat-active .chat-message::before {
-    display: none !important;
-}
-
-/* ======================================================================== */
-/* BUG FIXES                                                                */
-/* ======================================================================== */
-
-/* Fix Initial Render Sizing for Damage & Roll Dialogs */
-.window-app.realdark-theme-window.damage-dialog,
-.window-app.realdark-theme-window.roll-modifiers-dialog {
-    height: auto !important;
-    min-height: fit-content !important;
-}
-
-.window-app.realdark-theme-window.damage-dialog .window-content,
-.window-app.realdark-theme-window.roll-modifiers-dialog .window-content {
-    height: auto !important;
-    overflow-y: visible !important;
-    flex: 0 0 auto !important;
-}
-
-/* Fix Blind/Whisper - AGGRESSIVE BACKGROUND REMOVAL */
-html body.realdark-chat-active .chat-message.blind,
-html body.realdark-chat-active .chat-message.whisper,
-html body.realdark-chat-active .chat-message.private {
-    background: transparent !important;
-    background-image: none !important;
-    border-color: transparent !important;
-    box-shadow: none !important;
-}
-
-/* Kill inner backgrounds that might persist */
-html body .chat-message.blind .message-header,
-html body .chat-message.whisper .message-header,
-html body .chat-message.private .message-header,
-html body .chat-message.blind .message-content,
-html body .chat-message.whisper .message-content,
-html body .chat-message.private .message-content {
-    background: transparent !important;
-    background-image: none !important;
-    background-color: transparent !important;
-}
-
-/* Color the borders on our custom background layer - OUTER SHADOW ONLY */
-/* Color the borders on our custom background layer - OUTER SHADOW ONLY */
-/* WHISPER first (Primary Theme Color - e.g. Gold/Teal) -> Changed to USER CONFIGURABLE per user request */
-html body.realdark-chat-active .chat-message.whisper,
-html body.realdark-chat-active .chat-message.private {
-    border: 1px solid var(--realdark-color-whisper) !important;
-    border-left: 4px solid var(--realdark-color-whisper) !important;
-    box-shadow: 0 0 5px #000 !important;
-    background: var(--realdark-sheet-bg) !important;
-}
-
-/* BLIND overrides Whisper (Accent Theme Color - e.g. Red/Orange) */
-html body.realdark-chat-active .chat-message.blind,
-html body.realdark-chat-active .chat-message.whisper.blind {
-    border: 1px solid var(--realdark-color-blind) !important;
-    border-left: 4px solid var(--realdark-color-blind) !important;
-    box-shadow: 0 0 5px #000 !important;
-    background: var(--realdark-sheet-bg) !important;
-}
-
-/* Ensure Tags in Chat are Neutral/Dark */
-html body.realdark-chat-active .chat-message .tag,
-html body.realdark-chat-active .chat-message .tags .tag {
-    background-color: rgba(0, 0, 0, 0.5) !important;
-    border: 1px solid rgba(130, 130, 130, 0.3) !important;
-    color: var(--realdark-text-light) !important;
-    box-shadow: none !important;
-}
-
-/* Match Inner Lines to Border Colors */
-/* WHISPER (Primary Theme Color) */
-html body.realdark-chat-active .chat-message.whisper .message-header,
-html body.realdark-chat-active .chat-message.private .message-header {
-    border-bottom: 1px solid var(--realdark-color-whisper) !important;
-    color: var(--realdark-text-light) !important;
-}
-
-html body.realdark-chat-active .chat-message.whisper hr,
-html body.realdark-chat-active .chat-message.whisper.private hr {
-    border-top: 1px solid var(--realdark-color-whisper) !important;
-    border-bottom: none !important;
-}
-
-/* BLIND (Accent Theme Color) -> Hardcoded RED -> Configurable Blind Color */
-html body.realdark-chat-active .chat-message.blind .message-header,
-html body.realdark-chat-active .chat-message.whisper.blind .message-header {
-    border-bottom: 1px solid var(--realdark-color-blind) !important;
-    color: var(--realdark-text-light) !important;
-}
-
-html body.realdark-chat-active .chat-message.blind hr,
-html body.realdark-chat-active .chat-message.whisper.blind hr {
-    border-top: 1px solid var(--realdark-color-blind) !important;
-    border-bottom: none !important;
-}
-
-/* Fix Damage Instance Text Wrapping */
-/* Fix Damage Instance Text Wrapping (SPANS ONLY to avoid breaking tooltips) */
-/* Fix Damage Instance Text Wrapping (SPANS ONLY to avoid breaking tooltips) */
-html body .window-app.realdark-theme-window span.damage.instance,
-html body.realdark-chat-active .chat-message span.damage.instance {
-    white-space: normal !important;
-    /* Allow normal wrap */
-    word-break: break-word !important;
-    overflow-wrap: break-word !important;
-    display: inline-block !important;
-    /* Restore inline flow */
-    width: auto !important;
-    line-height: 1.4 !important;
-}
-
-/* ======================================================================== */
-/* 16. CHAT CARD TOOLTIP FIXES                                              */
-/* ======================================================================== */
-
-html body.realdark-chat-active .dice-tooltip {
-    background: var(--realdark-sheet-bg) !important;
-    border: 1px solid var(--realdark-gold-dim) !important;
-    color: var(--realdark-text-light) !important;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8) !important;
-}
-
-html body.realdark-chat-active .dice-tooltip .dice .part-header {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
-}
-
-html body.realdark-chat-active .dice-tooltip .dice .part-header .part-formula {
-    color: var(--realdark-text-light) !important;
-}
-
-html body.realdark-chat-active .dice-tooltip .dice .part-header .part-total {
-    color: var(--realdark-gold) !important;
-    font-weight: bold;
-}
-
-html body.realdark-chat-active .dice-tooltip .dice .dice-rolls .roll {
-    background: rgba(0, 0, 0, 0.5) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    color: white !important;
-}
-
-html body.realdark-chat-active .dice-tooltip .dice .dice-rolls .roll.max {
-    color: #40ff40 !important;
-    /* Green for max */
-    border-color: #40ff40 !important;
-}
-
-html body.realdark-chat-active .dice-tooltip .dice .dice-rolls .roll.min {
-    /* Red for min */
-    border-color: #ff4040 !important;
-}
-
-/* ======================================================================== */
-/* MISC ICONS (PFS, etc)                                                    */
-/* ======================================================================== */
-html body.realdark-theme-active .pfs-icon,
-html body.realdark-theme-active .pfs-icon svg {
-    /* If 'fill' fails, we use filters to force the color shift */
-    fill: var(--realdark-gold) !important;
-
-    /* FILTER HACK: Invert Black to White -> Sepia -> Tint to Gold */
-    /* This specific filter stack approximates the #ffbd4a gold color */
-    filter: invert(86%) sepia(23%) saturate(705%) hue-rotate(359deg) brightness(107%) contrast(106%) !important;
-}
-
-/* ======================================================================== */
-/* FINAL PFS ICON FIX (DROP SHADOW HACK)                                    */
-/* ======================================================================== */
-/* ======================================================================== */
-/* FINAL PFS ICON FIX (INHERITANCE STRATEGY)                                */
-/* ======================================================================== */
-/* 
-   Strategy: Force the parent Anchor to be Gold. 
-   Then force the SVG/Path to use 'currentColor' (standard method).
-   Also included a direct override just in case.
-*/
-
-/* 1. Target the Anchor (Parent) */
-html body.realdark-theme-active a.item[data-tab="pfs"],
-html body.realdark-theme-active #sidebar-tabs a.item[data-tab="pfs"] {
-    color: var(--realdark-gold) !important;
-}
-
-/* 2. Target the Icon (Child) - Force Inheritance */
-html body.realdark-theme-active a.item[data-tab="pfs"] .pfs-icon,
-html body.realdark-theme-active a.item[data-tab="pfs"] svg,
-html body.realdark-theme-active a.item[data-tab="pfs"] path,
-html body.realdark-theme-active .pfs-icon {
-    fill: currentColor !important;
-    color: inherit !important;
-    stroke: currentColor !important;
-    -webkit-text-fill-color: currentColor !important;
-
-    /* Reset any previous hacks */
-    filter: none !important;
-    transform: none !important;
-    opacity: 1 !important;
-}
-
-/* ======================================================================== */
-/* 20. OMEGA FIX FOR SPANS (Effect Areas, inline-checks)                    */
-/* ======================================================================== */
-/* ======================================================================== */
-/* UNIVERSAL SELECTOR MODE: IGNORING PARENTS */
-span[data-pf2-effect-area],
-span.with-repost {
-    background: var(--realdark-input-bg) !important;
-    background-color: var(--realdark-input-bg) !important;
-    color: var(--realdark-gold) !important;
-    -webkit-text-fill-color: var(--realdark-gold) !important;
-    border: 1px solid rgba(130, 130, 130, 0.3) !important;
-    box-shadow: none !important;
-    text-shadow: none !important;
-    display: inline-block !important;
-    isolation: isolate !important;
-    padding: 2px 5px !important;
-    border-radius: 4px !important;
-    white-space: nowrap !important;
-}
-
-span[data-pf2-effect-area] *,
-span.with-repost * {
-    color: inherit !important;
-    background: transparent !important;
-    -webkit-text-fill-color: inherit !important;
-    text-shadow: none !important;
-}
-
-span[data-pf2-effect-area] i,
-span.with-repost i {
-    margin-left: 3px;
-    opacity: 0.8;
-}
-/* ======================================================================== */
-/* 21. FIX FOR CHAT CARD LISTS (Currency, Inventory)                        */
-/* ======================================================================== */
-/* Targetting generic lists inside chat cards that contain images and labels */
-html body .chat-message ul li {
-    background: transparent !important;
-    background-color: transparent !important;
     color: var(--realdark-text) !important;
     border-color: rgba(130, 130, 130, 0.2) !important;
 }
 
-/* Specific fix for currency/loot items with labels and small text */
-html body .chat-message ul li label {
-    color: var(--realdark-gold) !important;
+.window-app.realdark-theme-window table.pf2e.remaster th {
+    background: rgba(0, 0, 0, 0.4) !important;
+    color: var(--realdark-primary) !important;
+}
+
+/* Coinage & Encumbrance */
+.window-app.realdark-theme-window .coinage,
+.window-app.realdark-theme-window .encumbrance {
+    background: var(--realdark-input-bg) !important;
+    color: var(--realdark-primary) !important;
+    border-color: rgba(130, 130, 130, 0.2) !important;
+}
+
+/* Tags & Badges (Color only, preserve native sizes) */
+.window-app.realdark-theme-window .sheet.actor li.tag,
+.window-app.realdark-theme-window .sheet.actor span.tag,
+.window-app.realdark-theme-window .sheet.actor .tags .tag,
+.window-app.realdark-theme-window .sheet.actor .trait,
+.window-app.realdark-theme-window .tag {
+    background: rgba(0, 0, 0, 0.7) !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
+    color: var(--realdark-text) !important;
+}
+
+/* ======================================================================== */
+/* CONTENT LINKS / CONDITION PILLS / INLINE CHECKS (Pure Color Overrides)   */
+/* ======================================================================== */
+
+body.realdark-theme-active a.content-link,
+body.realdark-theme-active a.content-link *,
+body.realdark-theme-active span.content-link,
+body.realdark-theme-active span.content-link *,
+body.realdark-theme-active a.inline-check,
+body.realdark-theme-active a.inline-check *,
+body.realdark-theme-active a.inline-roll,
+body.realdark-theme-active a.inline-roll *,
+body.realdark-theme-active a.entity-link,
+body.realdark-theme-active a.entity-link *,
+body.realdark-theme-active a[data-uuid],
+body.realdark-theme-active a[data-uuid] *,
+body.realdark-theme-active a[data-action],
+body.realdark-theme-active a[data-action] *,
+body.realdark-theme-active a[data-pf2-condition],
+body.realdark-theme-active a[data-pf2-condition] *,
+body.realdark-theme-active .crb-style a.content-link,
+body.realdark-theme-active .crb-style a.content-link *,
+body.realdark-theme-active .journal-sheet a.content-link,
+body.realdark-theme-active .journal-sheet a.content-link *,
+body.realdark-theme-active .journal-entry-pages a.content-link,
+body.realdark-theme-active .journal-entry-pages a.content-link *,
+body.realdark-theme-active .journal-page-content a.content-link,
+body.realdark-theme-active .journal-page-content a.content-link *,
+body.realdark-theme-active .journal-entry-content a.content-link,
+body.realdark-theme-active .journal-entry-content a.content-link *,
+body.realdark-chat-active .chat-message a.content-link,
+body.realdark-chat-active .chat-message a.content-link *,
+body.realdark-chat-active .chat-message a.inline-check,
+body.realdark-chat-active .chat-message a.inline-check *,
+body.realdark-chat-active .chat-message a.inline-roll,
+body.realdark-chat-active .chat-message a.inline-roll *,
+body.realdark-chat-active .chat-message a.entity-link,
+body.realdark-chat-active .chat-message a.entity-link *,
+body.realdark-chat-active .chat-message a[data-uuid],
+body.realdark-chat-active .chat-message a[data-uuid] *,
+body.realdark-chat-active .chat-message a[data-pf2-condition],
+body.realdark-chat-active .chat-message a[data-pf2-condition] * {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    fill: #ffffff !important;
+    text-shadow: 0 0 2px black !important;
+}
+
+body.realdark-theme-active a.content-link,
+body.realdark-theme-active span.content-link,
+body.realdark-theme-active a.inline-check,
+body.realdark-theme-active a.inline-roll,
+body.realdark-theme-active a.entity-link,
+body.realdark-theme-active a[data-uuid],
+body.realdark-theme-active a[data-action],
+body.realdark-theme-active a[data-pf2-condition],
+body.realdark-theme-active .journal-sheet a.content-link,
+body.realdark-theme-active .journal-entry-pages a.content-link,
+body.realdark-theme-active .journal-page-content a.content-link,
+body.realdark-theme-active .journal-entry-content a.content-link,
+body.realdark-chat-active .chat-message a.content-link,
+body.realdark-chat-active .chat-message a.inline-check,
+body.realdark-chat-active .chat-message a.inline-roll,
+body.realdark-chat-active .chat-message a.entity-link,
+body.realdark-chat-active .chat-message a[data-uuid],
+body.realdark-chat-active .chat-message a[data-pf2-condition] {
+    background-color: rgba(0, 0, 0, 0.75) !important;
+    border-color: rgba(255, 255, 255, 0.35) !important;
+}
+
+body.realdark-theme-active a.content-link:hover,
+body.realdark-theme-active a.content-link:hover *,
+body.realdark-theme-active span.content-link:hover,
+body.realdark-theme-active span.content-link:hover *,
+body.realdark-theme-active a.inline-check:hover,
+body.realdark-theme-active a.inline-check:hover *,
+body.realdark-theme-active a.inline-roll:hover,
+body.realdark-theme-active a.inline-roll:hover *,
+body.realdark-theme-active a.entity-link:hover,
+body.realdark-theme-active a.entity-link:hover *,
+body.realdark-theme-active a[data-uuid]:hover,
+body.realdark-theme-active a[data-uuid]:hover *,
+body.realdark-chat-active .chat-message a.content-link:hover,
+body.realdark-chat-active .chat-message a.content-link:hover * {
+    background-color: var(--realdark-secondary) !important;
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
+    fill: #000000 !important;
     text-shadow: none !important;
 }
 
-html body .chat-message ul li small {
-    color: var(--realdark-text-dim) !important;
+/* Optional Skill Override */
+body.realdark-override-skills .window-app.realdark-theme-window .skill-proficiency,
+body.realdark-override-skills .window-app.realdark-theme-window .pf-rank {
+    background: var(--realdark-input-bg) !important;
+    color: var(--realdark-primary) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
 }
 
-/* Ensure no white background on the UL itself */
-html body .chat-message ul {
-    background: transparent !important;
+/* High Contrast Fallback for Light Background Elements */
+body.realdark-theme-active [style*="background: white"],
+body.realdark-theme-active [style*="background: #fff"],
+body.realdark-theme-active [style*="background-color: white"],
+body.realdark-theme-active [style*="background-color: #fff"],
+body.realdark-chat-active .chat-message [style*="background: white"],
+body.realdark-chat-active .chat-message [style*="background: #fff"],
+body.realdark-chat-active .chat-message [style*="background-color: white"],
+body.realdark-chat-active .chat-message [style*="background-color: #fff"] {
+    background-color: rgba(0, 0, 0, 0.8) !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
 }
-
 
 /* ======================================================================== */
-/* UNIVERSAL THIRD-PARTY COMPATIBILITY (AUTO-THEMING)                       */
+/* CHAT MESSAGES (Pure Color Theme - Strict Zero Geometry Override)          */
 /* ======================================================================== */
 
-/* 1. GREEDY BUTTONS & INPUTS
-   Force ANY button or input inside our windows to adopt the theme,
-   even if it comes from another module.
-*/
-.window-app.realdark-theme-window button,
-.window-app.realdark-theme-window .btn,
-.window-app.realdark-theme-window .button,
-.window-app.realdark-theme-window input[type="text"],
-.window-app.realdark-theme-window input[type="number"],
-.window-app.realdark-theme-window select,
-.window-app.realdark-theme-window textarea {
-    background-color: var(--realdark-input-bg) !important;
-    color: var(--realdark-gold) !important;
-    /* border: 1px solid rgba(255, 255, 255, 0.2) !important; -> Moved to hover or specific */
-    border: 1px solid transparent !important; /* Preserve size but hide unless needed */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important; /* Minimal aesthetic */
-    box-sizing: border-box !important; /* Prevent size jumps */
-    box-shadow: none !important;
-    text-shadow: var(--realdark-text-shadow) !important;
-}
-
-/* Hover States for Greedy Buttons */
-.window-app.realdark-theme-window button:hover,
-.window-app.realdark-theme-window .btn:hover,
-.window-app.realdark-theme-window .button:hover {
-    border-color: var(--realdark-gold) !important;
-    box-shadow: 0 0 5px var(--realdark-gold) !important;
-    color: white !important;
-}
-
-/* 2. THE BRIGHT KILLER
-   Aggressively target elements with inline styles attempting to be white.
-   We catch specific inline style strings.
-*/
-.window-app.realdark-theme-window [style*="background: white"],
-.window-app.realdark-theme-window [style*="background: #fff"],
-.window-app.realdark-theme-window [style*="background-color: white"],
-.window-app.realdark-theme-window [style*="background-color: #fff"],
-.window-app.realdark-theme-window [style*="background:white"],
-.window-app.realdark-theme-window [style*="background:#fff"] {
+body.realdark-chat-active .chat-message {
     background: var(--realdark-sheet-bg) !important;
-    background-color: var(--realdark-sheet-bg) !important;
-    color: var(--realdark-text-light) !important;
+    border-color: rgba(130, 130, 130, 0.3) !important;
+    color: var(--realdark-text);
+    box-shadow: 0 0 5px #000;
 }
 
-/* 3. GENERIC CONTAINERS
-   Modules often use .card, .panel, .box for layout.
-*/
-.window-app.realdark-theme-window .card,
-.window-app.realdark-theme-window .panel,
-.window-app.realdark-theme-window .box {
-    background: rgba(0, 0, 0, 0.2) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    color: var(--realdark-text-light) !important;
+body.realdark-chat-active .chat-message .message-header {
+    color: var(--realdark-secondary) !important;
+    border-bottom-color: rgba(130, 130, 130, 0.2) !important;
 }
 
-/* 4. CHAT CARD AUTO-THEMING
-   Scopes to chat messages if Chat Theming is enabled.
-*/
-body.realdark-chat-active .chat-message .card-content,
-body.realdark-chat-active .chat-message .chat-card,
-body.realdark-chat-active .chat-message .table-draw {
-    background: transparent !important;
-    background-color: transparent !important;
-    border-color: transparent !important; /* Hide color, dont strip border width */
-    box-shadow: none !important;
+body.realdark-chat-active .chat-message .message-sender {
+    color: var(--realdark-primary) !important;
+    text-shadow: 0 0 2px black;
 }
 
-/* Ensure text in chat cards is readable */
+body.realdark-chat-active .chat-message .message-content,
+body.realdark-chat-active .chat-message .card-content {
+    color: var(--realdark-text);
+}
+
 body.realdark-chat-active .chat-message h3,
 body.realdark-chat-active .chat-message h4,
 body.realdark-chat-active .chat-message strong {
-    color: var(--realdark-gold) !important;
+    color: var(--realdark-primary);
 }
 
-/* Fix for modules simply dumping black text */
-body.realdark-chat-active .chat-message {
-    color: var(--realdark-text-light); /* Fallback text color */
+/* Chat Flavor Text / Traits */
+body.realdark-chat-active .chat-message .flavor-text,
+body.realdark-chat-active .chat-message .flavor-text *,
+body.realdark-chat-active .chat-message .tags .tag,
+body.realdark-chat-active .chat-message .tag,
+body.realdark-chat-active .chat-message .card-header .type,
+body.realdark-chat-active .chat-message .degree-of-success {
+    color: var(--realdark-text) !important;
+    text-shadow: none !important;
 }
 
-/* 6. CHARACTER HEADER SPECIFIC FIXES (Level, XP, Name) */
-/* Restore seamless look for header inputs */
-/* SPECIFICITY WARS: We must beat the global rule (0-5-1) which uses 3 :not() selectors.
-   We append the same :not() chain + .char-level to ensure we win (0-6-1). */
-.window-app.realdark-theme-window .char-header input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
-.window-app.realdark-theme-window .char-details input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
-.window-app.realdark-theme-window .char-level input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
-.window-app.realdark-theme-window .char-level .exp-input input:not([type="checkbox"]):not([type="radio"]):not([type="range"]) {
+body.realdark-chat-active .chat-message .tags .tag,
+body.realdark-chat-active .chat-message .tag {
+    background-color: rgba(0, 0, 0, 0.7) !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+/* Target DC (RK 16 17) & Delta (um +11) - Color Only, Keep Native Geometry */
+body.realdark-chat-active .chat-message .target-dc,
+body.realdark-chat-active .chat-message .target-dc *,
+body.realdark-chat-active .chat-message .degree-of-success-delta,
+body.realdark-chat-active .chat-message .degree-of-success-delta *,
+body.realdark-chat-active .chat-message .dc-value,
+body.realdark-chat-active .chat-message .dc-value *,
+body.realdark-chat-active .chat-message span.target-dc,
+body.realdark-chat-active .chat-message span.target-dc *,
+body.realdark-chat-active .chat-message span.degree-of-success-delta,
+body.realdark-chat-active .chat-message span.degree-of-success-delta *,
+body.realdark-chat-active .chat-message span[class*="target-dc"],
+body.realdark-chat-active .chat-message span[class*="target-dc"] *,
+body.realdark-chat-active .chat-message span[class*="degree-of-success"],
+body.realdark-chat-active .chat-message span[class*="degree-of-success"] * {
+    background-color: rgba(0, 0, 0, 0.75) !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* GM Visibility / Opposer in Chat - Color Only (Never add border or padding to inline text!) */
+body.realdark-chat-active .chat-message [data-visibility="gm"],
+body.realdark-chat-active .chat-message [data-visibility="owner"],
+body.realdark-chat-active .chat-message [data-whose="opposer"],
+body.realdark-chat-active .chat-message .gm-only,
+body.realdark-chat-active .chat-message span[data-visibility="gm"],
+body.realdark-chat-active .chat-message span[data-whose="opposer"] {
+    color: #6ef886 !important;
+    -webkit-text-fill-color: #6ef886 !important;
     background: transparent !important;
-    background-color: transparent !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important; /* Restore subtle border per user request */
-    border-radius: 2px !important;
-    box-shadow: none !important;
-    padding: 0 !important; /* Remove global padding to fix alignment */
-}
-
-/* SPECIFIC: Level and XP inputs only (Constraints) */
-.window-app.realdark-theme-window .char-level input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
-.window-app.realdark-theme-window .char-level .exp-input input:not([type="checkbox"]):not([type="radio"]):not([type="range"]) {
-    text-align: center !important; /* Restore centering per user feedback ("Standard" look) */
-    width: 40px !important; /* Constrain width so bar doesn't extend too far */
-}
-
-/* Fix spacing between Level and XP blocks */
-.window-app.realdark-theme-window .char-level {
-    gap: 0.5rem !important; /* CSS Grid/Flex gap */
-}
-
-.window-app.realdark-theme-window .char-level .level {
-    margin-right: 0.5rem !important; /* Legacy margin fallback */
-}
-
-/* 7. PROGRESS BAR ALIGNMENT FIX */
-/* Remove forced width per user request - restore standard sizing */
-/* .window-app.realdark-theme-window .char-level .exp-data {
-    min-width: auto !important;
-    flex-basis: auto !important;
-} */
-/* Actually, just deleting the block is cleaner, but commenting out preserves the logic history if needed. 
-   I will remove the constraints entirely as requested. */
-
-/* Force the progress bar to fill the container exactly, suppressing any left-shift */
-.window-app.realdark-theme-window .char-level progress,
-.window-app.realdark-theme-window .char-level .exp-data progress {
-    width: 100% !important;
+    border: none !important;
+    padding: 0 !important;
     margin: 0 !important;
-    left: 0 !important; /* Reset positioning */
-    transform: none !important;
+    box-shadow: none !important;
 }
 
+body.realdark-chat-active .chat-message [data-visibility="gm"] *,
+body.realdark-chat-active .chat-message [data-visibility="owner"] *,
+body.realdark-chat-active .chat-message [data-whose="opposer"] *,
+body.realdark-chat-active .chat-message .gm-only * {
+    color: #6ef886 !important;
+    -webkit-text-fill-color: #6ef886 !important;
+}
 
+/* Degrees of Success */
+body.realdark-chat-active .chat-message .success,
+body.realdark-chat-active .chat-message .outcome.success {
+    color: #6eb4f8 !important;
+    text-shadow: 0 0 2px #000;
+}
+
+body.realdark-chat-active .chat-message .critical-success,
+body.realdark-chat-active .chat-message .outcome.critical-success {
+    color: #6ef886 !important;
+    text-shadow: 0 0 2px #000;
+}
+
+body.realdark-chat-active .chat-message .failure,
+body.realdark-chat-active .chat-message .outcome.failure {
+    color: #f86e6e !important;
+    text-shadow: 0 0 2px #000;
+}
+
+body.realdark-chat-active .chat-message .critical-failure,
+body.realdark-chat-active .chat-message .outcome.critical-failure {
+    color: #ff3333 !important;
+    text-shadow: 0 0 2px #000;
+}
+
+/* Whisper and Blind Chat Variants */
+body.realdark-chat-active .chat-message.whisper,
+body.realdark-chat-active .chat-message.private {
+    border-color: var(--realdark-color-whisper) !important;
+    border-left-color: var(--realdark-color-whisper) !important;
+}
+
+body.realdark-chat-active .chat-message.blind,
+body.realdark-chat-active .chat-message.whisper.blind {
+    border-color: var(--realdark-color-blind) !important;
+    border-left-color: var(--realdark-color-blind) !important;
+}
+
+/* Dice Total */
+body.realdark-chat-active .chat-message .dice-roll .dice-total {
+    background-color: var(--realdark-input-bg) !important;
+    color: var(--realdark-primary) !important;
+    border-color: rgba(130, 130, 130, 0.4) !important;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.6) !important;
+    text-shadow: 0 0 5px black;
+}
+
+/* Dice Formula and Damage Formula (Color only) */
+body.realdark-chat-active .chat-message .dice-roll .dice-formula,
+body.realdark-chat-active .chat-message .dice-roll .dice-formula *,
+body.realdark-chat-active .chat-message .dice-result .dice-formula,
+body.realdark-chat-active .chat-message .dice-result .dice-formula *,
+body.realdark-chat-active .chat-message .damage-formula,
+body.realdark-chat-active .chat-message .damage-formula *,
+body.realdark-chat-active .chat-message .formula,
+body.realdark-chat-active .chat-message .formula *,
+body.realdark-chat-active .chat-message .dice-breakdown,
+body.realdark-chat-active .chat-message .dice-breakdown * {
+    background-color: rgba(0, 0, 0, 0.6) !important;
+    color: var(--realdark-primary) !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+/* Damage card breakdown rows and damage types */
+body.realdark-chat-active .chat-message .dice-tooltip,
+body.realdark-chat-active .chat-message .dice-tooltip *,
+body.realdark-chat-active .chat-message .dice-tooltip .dice,
+body.realdark-chat-active .chat-message .dice-tooltip .dice *,
+body.realdark-chat-active .chat-message .dice-tooltip .part-formula,
+body.realdark-chat-active .chat-message .dice-tooltip .part-formula *,
+body.realdark-chat-active .chat-message .dice-tooltip .part-header,
+body.realdark-chat-active .chat-message .dice-tooltip .part-header *,
+body.realdark-chat-active .chat-message .dice-tooltip .dice-rolls,
+body.realdark-chat-active .chat-message .dice-tooltip .dice-rolls .roll,
+body.realdark-chat-active .chat-message .instances,
+body.realdark-chat-active .chat-message .instances *,
+body.realdark-chat-active .chat-message .instances .instance,
+body.realdark-chat-active .chat-message .instances .instance *,
+body.realdark-chat-active .chat-message .instances .instance .formula,
+body.realdark-chat-active .chat-message .damage-tag,
+body.realdark-chat-active .chat-message .damage-tags {
+    color: var(--realdark-text) !important;
+}
+
+body.realdark-chat-active .chat-message .dice-tooltip .part-header .damage-type,
+body.realdark-chat-active .chat-message .dice-tooltip .part-header .part-flavor,
+body.realdark-chat-active .chat-message .dice-tooltip .part-header .instance-name,
+body.realdark-chat-active .chat-message .instances .instance .icon {
+    color: var(--realdark-primary) !important;
+}
+
+body.realdark-chat-active .chat-message .dice-tooltip .dice .part-total,
+body.realdark-chat-active .chat-message .dice-tooltip .dice .part-total *,
+body.realdark-chat-active .chat-message .instances .instance .total,
+body.realdark-chat-active .chat-message .instances .instance .total * {
+    background-color: var(--realdark-input-bg) !important;
+    color: var(--realdark-primary) !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+/* Chat Buttons (Standard, Damage Applications & Actions) - Color Only, Keep Native Geometry */
+body.realdark-chat-active .chat-message .damage-application,
+body.realdark-chat-active .chat-message .target-damage,
+body.realdark-chat-active .chat-message .chat-damage-buttons {
+    background: transparent !important;
+}
+
+body.realdark-chat-active .chat-message button,
+body.realdark-chat-active .chat-message button *,
+body.realdark-chat-active .chat-message .damage-application button,
+body.realdark-chat-active .chat-message .damage-application button *,
+body.realdark-chat-active .chat-message .target-damage button,
+body.realdark-chat-active .chat-message .target-damage button *,
+body.realdark-chat-active .chat-message button.damage,
+body.realdark-chat-active .chat-message button.damage *,
+body.realdark-chat-active .chat-message button.half-damage,
+body.realdark-chat-active .chat-message button.half-damage *,
+body.realdark-chat-active .chat-message button.double-damage,
+body.realdark-chat-active .chat-message button.double-damage *,
+body.realdark-chat-active .chat-message button.triple-damage,
+body.realdark-chat-active .chat-message button.triple-damage *,
+body.realdark-chat-active .chat-message button.shield-block,
+body.realdark-chat-active .chat-message button.shield-block *,
+body.realdark-chat-active .chat-message button.heal,
+body.realdark-chat-active .chat-message button.heal *,
+body.realdark-chat-active .chat-message button[data-action],
+body.realdark-chat-active .chat-message button[data-action] * {
+    color: var(--realdark-primary) !important;
+    text-shadow: none !important;
+}
+
+body.realdark-chat-active .chat-message button,
+body.realdark-chat-active .chat-message .damage-application button,
+body.realdark-chat-active .chat-message .target-damage button,
+body.realdark-chat-active .chat-message button.damage,
+body.realdark-chat-active .chat-message button.half-damage,
+body.realdark-chat-active .chat-message button.double-damage,
+body.realdark-chat-active .chat-message button.triple-damage,
+body.realdark-chat-active .chat-message button.shield-block,
+body.realdark-chat-active .chat-message button.heal,
+body.realdark-chat-active .chat-message button[data-action] {
+    background-color: var(--realdark-input-bg) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+body.realdark-chat-active .chat-message button:hover,
+body.realdark-chat-active .chat-message .damage-application button:hover,
+body.realdark-chat-active .chat-message .target-damage button:hover,
+body.realdark-chat-active .chat-message button[data-action]:hover {
+    background-color: var(--realdark-secondary) !important;
+    color: #000 !important;
+    border-color: var(--realdark-primary) !important;
+}
+
+body.realdark-chat-active .chat-message button:hover *,
+body.realdark-chat-active .chat-message .damage-application button:hover *,
+body.realdark-chat-active .chat-message .target-damage button:hover *,
+body.realdark-chat-active .chat-message button[data-action]:hover * {
+    color: #000 !important;
+}
+
+/* Target Header in Damage Application Cards */
+body.realdark-chat-active .chat-message .target-damage .target,
+body.realdark-chat-active .chat-message .damage-application .target {
+    color: var(--realdark-text) !important;
+}
+
+/* Protect Custom Colored Buttons */
+body.realdark-chat-active .chat-message button[style*="background"],
+body.realdark-chat-active .chat-message button.btn-primary,
+body.realdark-chat-active .chat-message button.btn-success,
+body.realdark-chat-active .chat-message button.btn-danger {
+    color: #ffffff !important;
+}
+
+body.realdark-chat-active .chat-message a.inline-roll,
+body.realdark-chat-active .chat-message a.inline-check,
+body.realdark-chat-active .chat-message span[data-pf2-effect-area],
+body.realdark-chat-active .chat-message span.with-repost {
+    background-color: var(--realdark-input-bg) !important;
+    color: var(--realdark-primary) !important;
+    border-color: rgba(130, 130, 130, 0.3) !important;
+}

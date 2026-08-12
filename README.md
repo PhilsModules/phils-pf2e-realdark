@@ -2,14 +2,13 @@
 
 # Phil's PF2e RealDark 🌑
 
-![Foundry v13 Compatible](https://img.shields.io/badge/Foundry-v13-brightgreen?style=flat-square) ![Foundry v12 Compatible](https://img.shields.io/badge/Foundry-v12-green?style=flat-square) ![System](https://img.shields.io/badge/System-PF2e-blue?style=flat-square)
-![License](https://img.shields.io/badge/License-GPLv3_%2F_CC_BY--NC--ND-blue?style=flat-square) [![Version](https://img.shields.io/badge/Version-1.6.0-orange?style=flat-square)](https://github.com/PhilsModules/phils-pf2e-realdark/releases) [![Patreon](https://img.shields.io/badge/SUPPORT-Patreon-ff424d?style=flat-square&logo=patreon)](https://www.patreon.com/PhilsModules)
+![Foundry v12-v14 Compatible](https://img.shields.io/badge/Foundry-v12--v14-brightgreen?style=flat-square) ![System](https://img.shields.io/badge/System-PF2e-blue?style=flat-square) ![Latest Release](https://img.shields.io/badge/release-v2.0.0-orange?style=flat-square) [![Patreon](https://img.shields.io/badge/SUPPORT-Patreon-ff424d?style=flat-square&logo=patreon)](https://www.patreon.com/PhilsModules)
 
 <br>
 
-**A true dark mode for Pathfinder 2e on Foundry VTT.**
+**A true, customizable dark mode for Pathfinder 2e on Foundry VTT.**
 <br>
-_Ein echter Dark Mode für Pathfinder 2e auf Foundry VTT._
+*Ein echter, anpassbarer Dark Mode für Pathfinder 2e auf Foundry VTT.*
 
 <br>
 
@@ -25,49 +24,43 @@ _Ein echter Dark Mode für Pathfinder 2e auf Foundry VTT._
 
 <br>
 
-<br>
-
 ---
 
 <br>
 
 # <img src="https://flagcdn.com/48x36/gb.png" width="28" height="21" alt="EN"> English Instructions
 
-**Get rid of the parchment. Embrace the darkness.**
+**Get rid of the bright parchment. Embrace the darkness.**
 
-Phil's PF2e RealDark is a comprehensive theme overhaul for the Pathfinder 2e system in Foundry VTT. It replaces the default bright parchment textures with high-quality dark backgrounds, softens harsh borders, and improves readability for long night sessions.
+**Phil's PF2e RealDark** transforms the default bright parchment interface of Pathfinder 2e into a sleek, immersive dark theme. Designed for maximum readability and comfort during long night sessions, it styles sheets, journals, and chat messages without altering their native layouts or interfering with other modules.
 
 ## 🚀 Key Features
 
-- **🌑 True Dark Mode**: Replaces all system journals, character sheets, and item sheets with dark, eye-friendly textures.
-- **✨ Live Preview Wizard**: A powerful configuration tool with a real-time preview of your changes. See exactly how your theme looks before you save.
-- **🎨 30+ Premium Presets**: Comes with a massive collection of themes including **Ebony, Relic, Velvet, Weave, Frost, Crimson, Mystic Waters, Celestial Nightfall**, and classics like **Leather, Wood, Stone, and Dragon**.
-- **👁️ Softened UI**: Aggressively removes standard hard gold/red borders and replaces them with soft, translucent edges for a modern look.
-- **🔧 Deep Customization**: Tweak primary colors, accent colors, sidebar opacity, and input field darkness to your detailed preferences.
-- **📜 Journal Fixes**: Eliminates the "white flash" when opening journals and ensures consistent dark backgrounds for all text content.
-- **🎲 Dice So Nice Integration**: Includes custom 3D dice presets that match your chosen theme. _You can select them in the Dice So Nice settings (e.g., RealDark - Dragon)._
+- **🌑 Complete Dark Theme**: Replaces bright backgrounds across character sheets, NPC sheets, item sheets, journal entries, compendiums, and chat cards with rich dark textures.
+- **✨ Live Preview Theme Wizard**: An intuitive configuration window with a real-time side-by-side preview. See your color changes immediately before saving.
+- **🎨 30+ Handcrafted Presets**: Instantly switch between popular styles such as **Ebony, Velvet, Relic, Frost, Crimson, Mystic Waters**, and classic textures like **Leather, Wood, Stone, and Dragon**.
+- **👁️ Crystal Clear Readability**: High-contrast damage rolls, dice formulas, condition pills, and GM-secret badges designed to remain perfectly legible in every scenario.
+- **🛡️ 100% Layout & Module Friendly**: Focuses strictly on color and contrast styling. Native element sizes, spacings, and third-party module buttons remain completely untouched.
+- **🎲 3D Dice Integration**: Includes matching 3D dice textures for the *Dice So Nice* module that complement your active theme.
 
 ## 📦 Installation
 
-1.  Open Foundry VTT.
-2.  Go to **Add-on Modules**.
-3.  Click **Install Module**.
-4.  Paste the following **Manifest URL** at the bottom:
-    ```text
-    https://github.com/PhilsModules/phils-pf2e-realdark/releases/latest/download/module.json
-    ```
-5.  Click **Install**.
+1. Open **Foundry VTT**.
+2. Navigate to the **Add-on Modules** tab.
+3. Click **Install Module**.
+4. Enter the following **Manifest URL**:
+   ```text
+   https://github.com/PhilsModules/phils-pf2e-realdark/releases/latest/download/module.json
+   ```
+5. Click **Install**.
 
 ## 📖 How to Use
 
-1.  **Open Config**: Go to `Game Settings` -> `Phil's PF2e RealDark` -> `Theme Configuration`.
-2.  **Choose a Preset**: Click on one of the presets (e.g., **STONE** or **DRAGON**) at the top to instantly load a curated look.
-3.  **Customize**:
-    - **Colors**: Adjust the Sidebar, Gold elements, Dim accents, and Text colors.
-    - **Opacity**: Use the slider to control how transparent your sidebar background is.
-    - **Live Preview**: Watch the right side of the window! It updates instantly to show you a mock character sheet with your new settings.
-    - **Dice Colors**: If you manually changed the dice text color and want to reset it to "Auto", simply clear the input field and save.
-4.  **Save**: Click "Save Changes" to apply the theme globally.
+1. **Open Settings**: Go to `Game Settings` ➔ `Phil's PF2e RealDark` ➔ `Theme Configuration`.
+2. **Select a Preset**: Click any preset button at the top to instantly load a curated palette.
+3. **Fine-Tune**: Adjust primary colors, secondary accents, text brightness, and sidebar opacity to your liking using the interactive color pickers.
+4. **Live Preview**: Inspect your changes directly on the preview sheet on the right.
+5. **Save**: Click **Save Changes** to apply your theme across Foundry.
 
 <br>
 
@@ -77,67 +70,34 @@ Phil's PF2e RealDark is a comprehensive theme overhaul for the Pathfinder 2e sys
 
 # <img src="https://flagcdn.com/48x36/de.png" width="28" height="21" alt="DE"> Deutsche Anleitung
 
-**Weg mit dem Pergament. Her mit der Dunkelheit.**
+**Schluss mit grellem Pergament. Willkommen in der Dunkelheit.**
 
-Phil's PF2e RealDark ist eine umfassende Design-Überarbeitung für das Pathfinder 2e System in Foundry VTT. Es ersetzt die hellen Standard-Pergament-Texturen durch hochwertige dunkle Hintergründe, weicht harte Kanten auf und verbessert die Lesbarkeit für lange Nächte.
+**Phil's PF2e RealDark** verwandelt die helle Standardoberfläche von Pathfinder 2e in ein edles, augenfreundliches Dark-Theme. Entwickelt für erstklassige Lesbarkeit und optimalen Komfort bei langen Spielabenden, dunkelt es Charakterbögen, Journale und Chatnachrichten ab, ohne das gewohnte Layout zu verändern oder andere Module zu beeinträchtigen.
 
-## 🚀 Funktionen
+## 🚀 Highlights & Funktionen
 
-- **🌑 Echter Dark Mode**: Ersetzt alle System-Journale, Charakterbögen und Item-Sheets durch dunkle, augenfreundliche Texturen.
-- **✨ Live Preview Wizard**: Ein mächtiges Konfigurationstool mit Echtzeit-Vorschau. Sieh genau, wie dein Theme aussieht, bevor du speicherst.
-- **🎨 30+ Premium Presets**: Enthält eine riesige Sammlung an Themes, inklusive **Ebenholz, Relikt, Samt, Gewebe, Frost, Karmesin, Mystische Gewässer, Himmelsstein** und Klassikern wie **Leder, Holz, Stein und Drache**.
-- **👁️ Sanftes UI**: Entfernt aggressiv die harten Gold/Rot-Ränder des Standardsystems und ersetzt sie durch weiche, transluzente Kanten.
-- **🔧 Tiefgreifende Anpassung**: Stelle Primärfarben, Akzentfarben, Sidebar-Transparenz und die Dunkelheit der Eingabefelder genau nach deinen Wünschen ein.
-- **📜 Journal Fixes**: Eliminiert das "weiße Aufblitzen" beim Öffnen von Journalen und sorgt für konsistent dunkle Hintergründe.
-- **🎲 Dice So Nice Integration**: Enthält spezielle 3D-Würfel-Presets passend zu den Themes. _Du kannst sie in den Dice So Nice Einstellungen auswählen (z.B. RealDark - Dragon)._
+- **🌑 Vollwertiger Dark Mode**: Dunkelt Charakterbögen, NSC-Bögen, Gegenstände, Journale, Kompendien und Chatkarten in stimmungsvollen, dunklen Texturen ab.
+- **✨ Live-Vorschau-Assistent**: Ein komfortables Konfigurationsmenü mit direkter Echtzeit-Vorschau. Sieh sofort, wie deine Anpassungen aussehen, noch bevor du speicherst.
+- **🎨 Über 30 kuratierte Presets**: Wähle auf Knopfdruck aus einer großen Themen-Auswahl wie **Ebenholz, Samt, Relikt, Frost, Karmesin, Mystik** oder Klassikern wie **Leder, Holz, Stein und Drache**.
+- **👁️ Perfektionierte Lesbarkeit**: Gestochen scharfe Kontraste für Schadenswürfe, Würfelformeln, Zustands-Verlinkungen und Spielleiter-Hinweise.
+- **🛡️ 100 % Layout- und Modul-freundlich**: Verändert ausschließlich Farben und Kontraste. Alle nativen Schaltflächen, Abstände und Buttons von Drittmodulen bleiben in ihrer Originalgröße erhalten.
+- **🎲 3D-Würfel-Unterstützung**: Bringt passende Texturen für das *Dice So Nice*-Modul mit, die sich nahtlos an dein gewähltes Thema anpassen.
 
 ## 📦 Installation
 
-1.  Öffne Foundry VTT.
-2.  Gehe zum Reiter **Add-on Modules**.
-3.  Klicke auf **Install Module**.
-4.  Füge die folgende **Manifest URL** unten ein:
-    ```text
-    https://github.com/PhilsModules/phils-pf2e-realdark/releases/latest/download/module.json
-    ```
-5.  Klicke auf **Install**.
+1. Öffne **Foundry VTT**.
+2. Gehe in den Reiter **Add-on Modules**.
+3. Klicke auf **Install Module**.
+4. Füge die folgende **Manifest-URL** unten ein:
+   ```text
+   https://github.com/PhilsModules/phils-pf2e-realdark/releases/latest/download/module.json
+   ```
+5. Klicke auf **Install**.
 
-## 📖 Bedienung
+## 📖 Bedienung & Anpassung
 
-1.  **Konfiguration öffnen**: Gehe zu `Einstellungen` -> `Phil's PF2e RealDark` -> `Theme Konfiguration`.
-2.  **Preset wählen**: Klicke oben auf ein Preset (z.B. **STONE** oder **DRAGON**), um sofort einen kuratierten Look zu laden.
-3.  **Anpassen**:
-    - **Farben**: Passe Sidebar, Gold-Elemente, Dim-Akzente und Textfarben an.
-    - **Deckkraft**: Nutze den Slider, um die Transparenz der Sidebar zu steuern.
-    - **Live Vorschau**: Schau auf die rechte Seite! Sie aktualisiert sich sofort und zeigt dir einen Beispiel-Charakterbogen mit deinen neuen Einstellungen.
-    - **Würfelfarben**: Wenn du die Textfarbe der Würfel manuell geändert hast und zurück auf "Automatisch" willst, leere einfach das Eingabefeld und speichere.
-4.  **Speichern**: Klicke auf "Save Changes", um das Theme global anzuwenden.
-
-<br>
-
----
-
-## 📜 License
-
-This module uses a dual license structure.
-
-- **Code:** GNU GPLv3
-- **Assets:** CC BY-NC-ND 4.0
-
-See `LICENSE` file for details.
-
-<br>
-
-<div align="center">
-    <h2>❤️ Support the Development</h2>
-    <p>If you enjoy this module and want to support open source development for Foundry VTT check out my Patreon.</p>
-    <p>Gefällt dir das Modul? Unterstütze die Weiterentwicklung auf Patreon.</p>
-    <a href="https://www.patreon.com/PhilsModules">
-        <img src="https://c5.patreon.com/external/logo/become_a_patron_button.png" alt="Become a Patron" width="200" />
-    </a>
-    <br><br>
-    <p><i>Made with ❤️ for the Foundry VTT Community</i></p>
-</div>
-
-
-
+1. **Assistent öffnen**: Gehe zu `Spiel-Einstellungen` ➔ `Phil's PF2e RealDark` ➔ `Theme-Konfiguration`.
+2. **Preset wählen**: Klicke auf eine der Vorlagen oben, um ein abgestimmtes Farbschema zu laden.
+3. **Individuell anpassen**: Passe Primärfarben, Akzente, Textfarben und die Deckkraft der Seitenleiste mit den Farbwählern flexibel an.
+4. **Live-Vorschau**: Betrachte das Ergebnis sofort auf dem integrierten Vorschaubogen auf der rechten Seite.
+5. **Speichern**: Klicke auf **Änderungen speichern**, um das Theme spielweit zu aktivieren.

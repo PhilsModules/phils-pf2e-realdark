@@ -1,218 +1,81 @@
+# 2.0.0 - Next-Gen Theme Release & Major Contrast Overhaul
+
+### 🌟 Highlights & New Features
+
+- **Redesigned Live Preview Theme Wizard:**
+  - Complete overhaul of the configuration wizard with a smooth, responsive side-by-side live preview.
+  - See changes to primary colors, secondary accents, text brightness, and backgrounds immediately on a simulated character sheet before saving.
+  - Modernized color controls with synchronized color pickers and hex inputs for precise fine-tuning.
+
+- **Superior Contrast & Readability:**
+  - **Damage Chat Cards:** Complete contrast overhaul ensuring damage formulas, breakdown rows, dice instances, and action buttons (*Damage, Half, Double, Triple, Block*) are crystal clear and easy to read.
+  - **Condition & Content Links:** Re-styled inline links and condition badges in journal sheets and character sheets so they stand out boldly across all backgrounds.
+  - **GM Secrets & Target Information:** Secret GM notices and opponent target DCs now feature dedicated high-contrast styling while maintaining clean, single-line text formatting.
+
+- **Strict Layout Fidelity & Module Compatibility:**
+  - RealDark now focuses strictly on color, background, and contrast adjustments.
+  - Eliminated all artificial sizing, spacing, and padding overrides to preserve 100% of Foundry's and PF2e's native element dimensions.
+  - Full compatibility with third-party module buttons, custom action triggers, and active toggle states.
+
+- **Curated Preset Collection:**
+  - Instant one-click access to over 30 handcrafted theme styles, including *Ebony, Velvet, Relic, Frost, Crimson, Mystic Waters*, and classics like *Leather, Wood, Stone*, and *Dragon*.
+
+- **Expanded System & Version Support:**
+  - Fully verified and optimized for Foundry V12 through V14 on the latest Pathfinder 2e system versions.
+
+---
+
+# 1.6.1 - UI & Module Compatibility Fixes
+
+- **Fix:** Fixed an issue where the Elite/Weak toggle buttons on the NPC sheet were not dynamically updating their visual active state.
+- **Fix:** Improved compatibility with chat cards from other modules by removing aggressive background overrides that made text unreadable.
+- **Style:** Chat message links now have a subtle dark badge background to ensure they remain readable across various card styles.
+
+---
+
 # 1.6.0 - Skill Styling Override
 
-- **Feature:** Added **"Override Skill Styling"** option to the settings/wizard.
-  - Defaults to **ON**: Forces **all** proficiency indicators (Skills, Defenses, Spells, Class DC) to match the dark theme (Gold text/borders on dark background).
-  - When **OFF**: Restores the colorful standard system badges (Blue, Green, Red, Purple backgrounds) for all these elements.
-- **Localization:** Added translations for the new setting.
+- **Feature:** Added **"Override Skill Styling"** option to the settings and wizard.
+  - Defaults to **ON**: Matches all proficiency indicators (Skills, Defenses, Spells, Class DC) to the dark theme.
+  - When **OFF**: Restores the colorful standard system badges (Blue, Green, Red, Purple) for all proficiency elements.
+- **Localization:** Added full English and German translations for the setting.
+
+---
 
 # 1.5.7 - Styling Fix (Proficiency Dropdowns)
 
-- **Fix:** Fixed a persistent issue where **Skill Proficiency Dropdowns** (Trained, Expert, etc.) were displaying with a dark grey background/text instead of the system's colored badges (Blue, Gold, Red).
-  - Investigated and removed multiple high-specificity CSS overrides in `realdark-theme.css`.
-  - Added targeted exclusions for `.skill-proficiency` and `.pf-rank` to generic select styling rules.
-  - Ensured the dropdown menu options (`<option>`) also respect the system's color coding by reverting their background styles.
-  - Removed "nuclear" global reset rules that were inadvertently stripping system colors.
+- **Fix:** Resolved an issue where Skill Proficiency Dropdowns (Trained, Expert, Master, Legendary) displayed with inconsistent colors.
+- **Style:** Ensured dropdown menus and options respect system color coding while blending seamlessly into the dark theme.
+
+---
 
 # 1.5.6 - Dice Visibility Final
 
 - **Fix:** Fixed visibility issues with dice icons in the Player Character sheet.
-  - **Skills:** Dice icons are now a soft off-white (Grey) by default and turn bright white on hover, removing the confusing gold glare.
-  - **Speeds:** Movement speed dice icons are now Gold by default (fixing the "too dark" issue) and turn bright white on hover.
-- **Polish:** Removed intense "drop-shadow" glows from all sidebar dice to ensure a cleaner, flatter look.
+  - **Skills:** Dice icons are a soft off-white by default and brighten on hover.
+  - **Speeds:** Movement speed dice icons use the theme's primary highlight color.
+- **Polish:** Softened intense glows across sidebar dice for a cleaner, modern look.
+
+---
 
 # 1.5.5 - Console & Wizard Polish
 
-- **Fix:** Fixed a console deprecation warning regarding the V1 Application framework.
-- **Fix:** Fixed an error where the Wizard's color picker would fail when the "Auto" (empty) color was selected for Dice Text.
+- **Fix:** Updated application lifecycle calls to meet the latest Foundry standards.
+- **Fix:** Fixed an issue where the color picker would fail when selecting automatic colors for dice numbers.
+
+---
 
 # 1.5.4 - High-Res Texture Fix
 
-- **Fix:** Fixed a critical issue where dice textures would disappear (black faces) during longer sessions.
-- **Optimization:** Separated dice textures from background assets.
-  - Dice now use optimized 512x512 textures for maximum stability and atlas compatibility.
-  - Background defaults remain high-resolution.
-- **Maintenance:** Updated unit tests to prevent regression of texture settings.
-- **UI Fix:** Fixed the "Shield Block" button not showing its active state (toggle visibility).
-- **UI Fix:** Fixed the "Double Damage" button icon being invisible (black on dark). It is now correctly gold.
-- **UI Style:** Refined the "Half Damage" button to use a vertical gold/transparent split for better clarity.
+- **Fix:** Resolved a texture issue where dice faces could become dark during longer gaming sessions.
+- **Optimization:** Optimized dice textures for maximum stability and atlas compatibility.
+- **UI Fix:** Fixed the "Shield Block" and "Double Damage" button icon visibility in damage cards.
 
-# 1.5.3 - Dice So Nice Optional
-
-- **Feature:** Made "Dice So Nice" an optional dependency. The module now works seamlessly without it.
-- **Cleanup:** Removed the "Dice So Nice Integration" setting as it is now handled automatically.
-
-# 1.5.2
-
-- Manifest cleanup and normalization.
-
-# 1.5.1 - Code Cleanup
-
-- **Refactoring:** Comprehensive code cleanup and optimization of the settings logic.
-- **Fix:** Resolved potential syntax errors and removed redundant logic loops.
-- **Maintenance:** Removed unused backup files to reduce module size.
+---
 
 # 1.5.0 - Dice So Nice Integration
 
-## Features
-
-- **Dice So Nice Support:** Added a comprehensive integration with the "Dice So Nice" module.
+- **Dice So Nice Support:** Comprehensive integration with the *Dice So Nice* module.
   - **30+ Custom Textures:** High-quality textures matching every RealDark theme (Bamboo, Leather, Inferno, Frost, etc.).
   - **Smart Presets:** Selecting a UI theme automatically suggests the matching dice preset.
-  - **Signal Colors:** Dice numbers automatically use the theme's "signal/accent" color for maximum readability and style.
-- **Wizard Extension:**
-  - Added **"Dice Color"** setting to the configuration wizard.
-  - Allows users to override the default theme color with any custom color for dice numbers.
-
-## Fixes
-
-- Fixed localization keys for Wizard logic.
-- Improved Dice text readability by ensuring high contrast on all textures.
-- Removed white edges/wireframes from custom dice models.
-
-<br>
-<br>
-
-# 1.4.1
-
-- **Localization:** Corrected missing German translation for "Presets" (now "Voreinstellungen").
-- **New Feature:** Added custom "RealDark" specific dice presets to Dice So Nice. You can now choose standard dice that match every specific RealDark theme (Leather, Ore, Stars, etc.) in the Dice So Nice settings.
-- **UI Polish:** Centered section headers ("Voreinstellungen", "Colors") and the Save button for a cleaner layout.
-
-# 1.4.0
-
-**Major Content & UI Update (01.01.2026)**
-
-- **New Presets:** Added 17 new premium themes including Ebony, Relic, Velvet, Weave, Frost & Gilded, Crimson & Amber, Mystic Waters, and more.
-- **Color Logic:** Implemented high-contrast text and complementary accent colors for all new presets.
-- **Readability:** Enhanced text-shadow logic to ensure legibility on busy backgrounds.
-- **Wizard UI:** Completely redesigned configuration wizard with a cleaner, compact grid layout and categorized controls.
-- **Localization:** Added German translations for all new presets and UI elements.
-
-# 1.3.0
-
-**Major Update: Auto-Theming, Configurable Colors & Polish (31.12.2025)**
-
-- **Feature:** "Whisper" and "Blind" chat card colors are now fully configurable in the wizard.
-  - You can now choose any color for your Whisper (Private) and Blind (Secret) messages.
-  - Defaults remain Blue (Whisper) and Red (Blind).
-  - These settings are now independent of the chosen theme accent color.
-- **Feature:** Added "Auto-Theming" engine ("Greedy Mode"). Third-party module buttons, inputs, and panels now automatically adopt the RealDark theme.
-- **Feature:** Implemented a "Bright Killer" system that aggressively overrides hardcoded white backgrounds in other modules to ensure they blend in.
-- **UX:** Complete overhaul of the Configuration Wizard labels (Semantic names & Refined German translations).
-- **Fix:** Fixed an issue where Blind rolls would appear Green in certain themes.
-- **Fix:** Fixed a missing translation key for "Enable on Actors".
-- **Layout Fix:** Adjusted XP bar styling to ensure the progress bar and input numbers form a cohesive, aligned unit with sufficient width.
-- **Layout Fix:** Ensured "Auto-Themed" form controls utilize `box-sizing: border-box` to prevent 2px layout shifts when borders are applied.
-
-# 1.2.13
-
-- **Fix:** Context menus now correctly appear above chat cards (z-index adjustment).
-- **Fix:** Corrected styling for "Effect Area" indicators (e.g. Burst/Cone) in chat cards to match the dark theme, removing the bright white background.
-- **Fix:** Updated styling for chat card lists (e.g. inventory/currency items) to ensure they have transparent backgrounds and readable text.
-
-# 1.2.12
-
-- **UI Improvements:** Styled the "GM Notes" editor field to be distinct from normal inputs. It now features a dark background and a dashed border to clearly indicate its "Secret/GM Only" status, removing the previous bright white background.
-- **Bug Fix:** Fixed an issue where Item Rarity tags (Common, Rare, etc.) were incorrectly styled as red "Tags" instead of preserving their system-defined colors.
-- **UI Polish:** Dropdowns now utilize the native system/browser layout to ensure perfect alignment and consistency across all field types (including Rarity). The custom dark color theme is applied without altering the structural rendering of the inputs.
-
-# 1.2.11
-
-- **Critical Fix:** Removed an overly aggressive "Button Icon" fix that was causing Effect buttons (and others) in chat to display incorrectly (visual artifacts) and potentially causing layout spacing issues.
-
-# 1.2.10
-
-- **Bug Fix:** Fixed an issue where "Effect" links and other content links in chat cards were rendered with a solid black background. They are now standard transparent links with a subtle underline to match the theme better.
-
-# 1.2.9
-
-- **Feature:** Added a "Chat Header Color Bar" setting which injects a colored bar at the top of chat messages matching the player's color for easier identification.
-- **Bug Fixes:** Various backend optimizations and stability improvements for cleaner rendering.
-
-## 1.2.8
-
-- **Fix:** Fixed the Pathfinder Society (PFS) icon appearing black. It now correctly uses the theme's gold color via a CSS mask strategy.
-- **Fix:** Excluded Skill Proficiency selectors from global styling to ensure they retain their system-defined colors (untrained/trained/etc).
-- **Update:** Switched PFS icon color to use "Primary Gold" to better match other navigation icons in certain presets.
-- **Performance:** Removed temporary JavaScript fixes for the icon to ensure zero performance impact.
-
-## 1.2.7
-
-**Date:** 2025-12-14
-
-### Bug Fixes
-
-- **Wizard Color Save**: Fixed an issue where the background color setting in the Wizard would revert to default upon saving, ignoring user input.
-- **Window Sizing**: Resolved a bug where certain dialog windows (e.g., Damage Roll, Roll Modifiers) opened with incorrect initial height and squashy layout.
-- **Chat Sidebar**: Fixed an issue where the chat sidebar was transparent on the system tab, now correctly applying the dark theme background to the content area.
-
-### Improvements
-
-- **Chat Card Styling**: comprehensive update to "Blind" and "Whisper" chat card styling:
-  - Removed distracting solid background colors (Pink/Blue) and inset glows.
-  - Cards now feature a clean, transparent dark background.
-  - Added distinct 2px outer borders that dynamically match the Active Theme (e.g., Teal for Whispers in Perry theme, Orange for Blind rolls).
-  - Neutralized internal system dividers (headers and horizontal rules) to match the border color, creating a unified look.
-
-## [1.2.6] - 2025-12-13
-
-### Bug Fix
-
-- **External Consistency**: Fixed an issue where "Attribute Builder" and "Language Selector" windows appeared light on external connections/browsers.
-- **Explicit Hooks**: Added specific code hooks for `AttributeBuilder`, `TagSelector`, `DamageDialog`, and `RollModifiersDialog` to guarantee theme application.
-
-## [1.2.5] - 2025-12-13
-
-### Improvements
-
-- **Invested Icon**: Fixed visibility of the "Invested" (Gem) icon on the dark background. It is now Light Gray when inactive and Theme Gold when active, ensuring it doesn't disappear into the void.
-
-## [1.2.4] - 2025-12-13
-
-### Bug Fix
-
-- **Persistent Backgrounds**: Fixed an issue where the dark theme background would persist on Actor and Journal sheets even when the theme was disabled for those scopes in the wizard.
-
-## [1.2.1] - 2025-12-13
-
-### UI Polish & Remaster Support
-
-- **Remaster Tables**: Fixed styling for new PF2e Remaster-style tables to match the dark theme (removed white backgrounds).
-- **Item Sheets**: Removed the large custom logo from Item/Spell/Feat sheets to fix layout and scaling issues. Special thanks to Tiatan for reporting this!
-- **Dark Content Links**: Fixed "bright field" issues for dragged content links, inline checks, and GM-visibility elements.
-
-## [1.2.0] - 2025-12-12
-
-### AppV2 & File Picker Update
-
-- **Native Import**: Theme Import now uses your operating system's native file picker for a faster workflow.
-- **ApplicationV2**: Migrated the Import Dialog to Foundry's V2 API, resolving "deprecated" warnings.
-- **Localization**: Added missing translations for Import/Export buttons in English and German.
-- **Bug Fixes**: General stability improvements for the Wizard.
-
-## [1.1.1] - 2025-12-12
-
-### Bug Fix: Tag Styling
-
-- **Tag Fixes**: Correctly styles all tags (languages, traits, etc.) with a dark background and correct text color.
-- **Dynamic Detection**: Implemented robust detection for lazily-loaded tags to ensure they are always styled correctly.
-
-## [1.1.0] - 2025-12-12
-
-### Performance & Polish Update
-
-- **Optimized Performance**: Significant improvements to rendering speed by removing heavy DOM scanning and implementing smoother frame scheduling.
-- **Unified Backgrounds**: The "Background Color" setting now universally controls Character Sheets, Chat Cards, and Journal Entries.
-- **New "Void" Preset**: Added a pure black preset with no texture for a cleaner, high-contrast look.
-- **Code Cleanup**: Removed legacy styling logic and duplicate CSS for a smaller module footprint.
-
-## [1.0.0] - 2025-12-11
-
-### Initial Release
-
-- **True Dark Mode**: Complete overhaul of the Pathfinder 2e UI to a dark, immersive theme.
-- **Live Preview Wizard**: Configuration tool with real-time preview of theme settings.
-- **Presets**: Includes Leather, Wood, Stone, Dragon, Stars, Moon, Moss, Bamboo, Croc, Paper, Roses, and Perry themes.
-- **Optimized Assets**: High-performance WebP assets.
-- **Softened UI**: Modernized UI with transparent borders and improved readability.
-- **Bug Fixes**: Solved Journal Flash (FOUC), Character Sheet, and Chat Message rendering issues.
+- **Wizard Extension:** Added dice color settings directly into the configuration wizard.

@@ -34,7 +34,7 @@ Hooks.once('diceSoNiceReady', (dice3d) => {
     ];
 
     const promises = PRESETS.map(p => dice3d.addTexture(`rd_${p.id}`, {
-        name: `RealDark - ${p.name}`, composite: "source-over", source: `${PATH}/${p.id}.webp`, no_atlas: true
+        name: `RealDark - ${p.name}`, composite: "source-over", source: `${PATH}/dice/${p.id}_final.webp`, bump: `${PATH}/dice/${p.id}_final.webp`
     }).catch(e => console.error(`RealDark Texture Error: ${p.name}`, e)));
 
     Promise.all(promises).then(() => {
